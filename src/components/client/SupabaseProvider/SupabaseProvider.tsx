@@ -1,14 +1,14 @@
 "use client";
 
 import { createContext, useContext, useState } from "react";
-import type { Session } from "@supabase/auth-helpers-nextjs";
+import type { Session, SupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { createBrowserClient } from "@/lib/supabase-browser";
-import type { TypedSupabaseClient } from "@/app/layout";
+import { Database } from "@/lib/supabase-db-types";
 
 type MaybeSession = Session | null;
 
 type SupabaseContext = {
-  supabase: TypedSupabaseClient;
+  supabase: SupabaseClient<Database>;
   session: MaybeSession;
 };
 

@@ -160,8 +160,8 @@ create function public.handle_new_user()
 returns trigger as
 $$
 begin
-  insert into public.profiles (id, name, email, image_url)
-  values (new.id, new.raw_user_meta_data->>'name', newm.email, new.raw_user_meta_data->>'image_url');
+  insert into public.profiles (id, name, email, avatar_url)
+  values (new.id, new.raw_user_meta_data->>'name', new.email, new.raw_user_meta_data->>'avatar_url');
   return new;
 end;
 $$ language plpgsql security definer;

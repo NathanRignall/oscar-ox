@@ -1,13 +1,8 @@
 import "server-only";
 
 import "./globals.css";
-import type { SupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { createServerClient } from "@/lib/supabase-server";
-import type { Database } from "@/lib/supabase-db-types";
 import { SupabaseListener, SupabaseProvider } from "@/components/client";
-
-// create a typed supabase client
-export type TypedSupabaseClient = SupabaseClient<Database>;
 
 // do not cache this layout
 export const revalidate = 0;
@@ -33,7 +28,7 @@ export default async function RootLayout({
     <html lang="en">
       <head />
 
-      <body>
+      <body className="bg-slate-50">
         <SupabaseProvider session={session}>
           <SupabaseListener serverAccessToken={session?.access_token} />
           {children}
