@@ -76,7 +76,7 @@ export default async function Account() {
             ))}
           </ul>
 
-          <div className="mt-4">
+          <div className="mt-4 space-x-1">
             <Button>Logout</Button>
             <Button>Edit</Button>
             <Button>View Public </Button>
