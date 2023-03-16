@@ -21,7 +21,7 @@ export default async function BareLayout({
   return (
     <>
       <Navbar loggedIn={session != null} />
-      <main className="mt-20 container mx-auto py-8 px-4">{children}</main>
+      <div className="mt-20">{children}</div>
     </>
   );
 }

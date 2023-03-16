@@ -1,20 +1,22 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { createServerClient } from "@/lib/supabase-server";
-import {  Tag } from "@/components/ui";
+import { Button, Tag } from "@/components/ui";
+
+// do not cache this page
+export const revalidate = 0;
 
 // page
-export default async function Account({
-  params: { id },
-}: {
-  params: { id: string };
-}) {
+export default async function Account() {
   const supabase = createServerClient();
 
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   const { data: profile } = await supabase
     .from("profiles")
     .select()
-    .match({ id: id })
+    .match({ id: user?.id })
     .single();
 
   if (!profile) {
@@ -24,11 +26,13 @@ export default async function Account({
   // list of tags
   const tags = [
     {
+      id : "0",
       text: "00Productions",
       href: "/productions",
       color: "#00AEA9",
     },
     {
+      id : "1",
       text: "NHGS",
       href: "/nhgs",
       color: "#BE1723",
@@ -38,18 +42,21 @@ export default async function Account({
   // list of productions
   const productions = [
     {
+      id: "1",
       date: "January 2021",
       title: "The Tempest",
       role: "Lighting Designer",
       location: "Theatre Royal",
     },
     {
+      id: "2",
       date: "February 2021",
       title: "The Tempest",
       role: "Lighting Designer",
       location: "Theatre Royal",
     },
     {
+      id: "3",
       date: "March 2021",
       title: "The Tempest",
       role: "Lighting Designer",
@@ -68,11 +75,18 @@ export default async function Account({
 
           <ul className="flex flex-wrap gap-2">
             {tags.map((tag) => (
-              <li key={tag.text}>
+              <li key={tag.id}>
                 <Tag {...tag} />
               </li>
             ))}
           </ul>
+
+          <div className="mt-4 space-x-1">
+            <Button>Logout</Button>
+            <Button>Edit</Button>
+            <Button>View Public </Button>
+            <Button>Manage Companies</Button>
+          </div>
         </div>
 
         <div className="flex-initial">
@@ -102,7 +116,7 @@ export default async function Account({
           <ul className="mt-4 grid sm:grid-cols-2 gap-4">
             {productions.map((production) => (
               <li
-                key={production.title}
+                key={production.id}
                 className=" bg-white rounded-lg border-2 border-slate-200 p-6"
               >
                 <p className="text-xl font-bold text-slate-900 uppercase">

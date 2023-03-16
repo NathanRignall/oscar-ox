@@ -1,22 +1,20 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { createServerClient } from "@/lib/supabase-server";
-import { Button, Tag } from "@/components/ui";
-
-// do not cache this page
-export const revalidate = 0;
+import { Tag } from "@/components/ui";
 
 // page
-export default async function Account() {
+export default async function Account({
+  params: { id },
+}: {
+  params: { id: string };
+}) {
   const supabase = createServerClient();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
   const { data: profile } = await supabase
     .from("profiles")
     .select()
-    .match({ id: user?.id })
+    .match({ id: id })
     .single();
 
   if (!profile) {
@@ -75,13 +73,6 @@ export default async function Account() {
               </li>
             ))}
           </ul>
-
-          <div className="mt-4 space-x-1">
-            <Button>Logout</Button>
-            <Button>Edit</Button>
-            <Button>View Public </Button>
-            <Button>Manage Companies</Button>
-          </div>
         </div>
 
         <div className="flex-initial">

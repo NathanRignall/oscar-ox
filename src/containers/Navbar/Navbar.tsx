@@ -35,7 +35,7 @@ const links = [
 // Navbar component
 export const Navbar = ({ loggedIn }: NavbarProps) => {
   return (
-    <div className="fixed top-0 left-0 right-0 bg-white border-b-2  border-slate-200 ">
+    <div className="fixed top-0 left-0 right-0 z-40 bg-white border-b-2 border-slate-200 ">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 sm:py-2 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           <div className="right-0 flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
