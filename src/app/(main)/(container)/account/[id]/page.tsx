@@ -21,6 +21,8 @@ export default async function Account({
     notFound();
   }
 
+  await new Promise(r => setTimeout(r, 2000));
+
   // list of tags
   const tags = [
     {

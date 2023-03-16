@@ -23,16 +23,18 @@ export default async function Account() {
     notFound();
   }
 
+  await new Promise(r => setTimeout(r, 2000));
+
   // list of tags
   const tags = [
     {
-      id : "0",
+      id: "0",
       text: "00Productions",
       href: "/productions",
       color: "#00AEA9",
     },
     {
-      id : "1",
+      id: "1",
       text: "NHGS",
       href: "/nhgs",
       color: "#BE1723",
