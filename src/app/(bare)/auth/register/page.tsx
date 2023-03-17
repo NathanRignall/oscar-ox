@@ -129,7 +129,7 @@ export default function Register() {
     <>
       <div className="flex flex-1 flex-col items-center justify-center pt-12 pb-16">
         <div className="mb-2.5 text-5xl font-bold text-slate-900 ">
-          Oscar Ox
+          <Link href="/">Oscar Ox</Link>
         </div>
         <div className="mb-8 text-lg font-medium text-slate-600 ">
           Authenticate

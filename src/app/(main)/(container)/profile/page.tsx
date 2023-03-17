@@ -1,7 +1,8 @@
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { createServerClient } from "@/lib/supabase-server";
 import { Button, Tag } from "@/components/ui";
+import { BlurImage } from "@/components/client";
+import { ButtonLink } from "@/components/ui/ButtonLink/ButtonLink";
 
 // do not cache this page
 export const revalidate = 0;
@@ -13,6 +14,7 @@ export default async function Account() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
+
   const { data: profile } = await supabase
     .from("profiles")
     .select()
@@ -22,8 +24,6 @@ export default async function Account() {
   if (!profile) {
     notFound();
   }
-
-  await new Promise(r => setTimeout(r, 2000));
 
   // list of tags
   const tags = [
@@ -84,21 +84,15 @@ export default async function Account() {
           </ul>
 
           <div className="mt-4 space-x-1">
-            <Button>Logout</Button>
-            <Button>Edit</Button>
-            <Button>View Public </Button>
-            <Button>Manage Companies</Button>
+            <Button>Edit Profile</Button>
+            <ButtonLink href={`/profile/${encodeURIComponent(profile.id)}`}>
+              View Public
+            </ButtonLink>
           </div>
         </div>
 
-        <div className="flex-initial">
-          <Image
-            src={"/IMG_0447.jpeg"}
-            alt="Picture of the author"
-            width={150}
-            height={150}
-            className="rounded-lg object-cover aspect-square"
-          ></Image>
+        <div className="w-[150px]">
+          <BlurImage image={{ imageSrc: `avatars/${profile.avatar_url}` }} />
         </div>
       </header>
 

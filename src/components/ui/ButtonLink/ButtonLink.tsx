@@ -1,37 +1,34 @@
 import clsx from "clsx";
+import Link from "next/link";
 
-export type ButtonProps = {
+export type ButtonLink = {
   className?: string;
   variant?: "primary" | "secondary";
   display?: "inline" | "block";
-  onClick?: () => void;
-  disabled?: boolean;
+  href: string;
   children: React.ReactNode;
 };
 
-export const Button = ({
+export const ButtonLink = ({
   className,
   variant = "primary",
   display = "inline",
-  onClick,
-  disabled = false,
+  href,
   children,
-}: ButtonProps) => {
+}: ButtonLink) => {
   return (
-    <button
+    <Link
       className={clsx(
         className,
         variant === "primary" && "text-slate-900 bg-white border-slate-200 hover:bg-slate-200 hover:border-slate-400",
         variant === "secondary" && "text-white bg-slate-900 border-slate-700 hover:bg-slate-700 hover:border-slate-500",
         display == "inline",
         display == "block" && "w-full",
-        disabled && "cursor-not-allowed opacity-50",
-        "text-sm font-medium rounded-lg px-5 py-3 border-2"
+        "text-sm font-medium rounded-lg px-5 py-3 border-2 inline-block"
       )}
-      onClick={onClick}
-      disabled={disabled}
+      href={href}
     >
       {children}
-    </button>
+    </Link>
   );
 };

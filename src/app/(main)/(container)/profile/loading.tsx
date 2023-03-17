@@ -1,6 +1,3 @@
-import clsx from "clsx";
-import Image from "next/image";
-
 import { Button } from "@/components/ui";
 
 export default function Loading() {
@@ -13,21 +10,13 @@ export default function Loading() {
           <div className="bg-slate-300 rounded-lg h-7 animate-pulse max-w-[150px]"></div>
 
           <div className="mt-4 space-x-1">
-            <Button>Logout</Button>
-            <Button>Edit</Button>
+            <Button>Edit Profile</Button>
             <Button>View Public </Button>
-            <Button>Manage Companies</Button>
           </div>
         </div>
 
-        <div className="flex-initial">
-          <Image
-            src={"/IMG_0447.jpeg"}
-            alt="Picture of the author"
-            width={150}
-            height={150}
-            className="rounded-lg object-cover aspect-square"
-          ></Image>
+        <div className="w-[150px]">
+          <div className="bg-gray-200 rounded-lg animate-pulse w-full aspect-w-1 aspect-h-1"></div>
         </div>
       </header>
 

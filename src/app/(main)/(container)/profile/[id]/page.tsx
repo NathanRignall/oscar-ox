@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { createServerClient } from "@/lib/supabase-server";
 import { Tag } from "@/components/ui";
+import { BlurImage } from "@/components/client";
 
 // page
 export default async function Account({
@@ -20,8 +20,6 @@ export default async function Account({
   if (!profile) {
     notFound();
   }
-
-  await new Promise(r => setTimeout(r, 2000));
 
   // list of tags
   const tags = [
@@ -77,14 +75,8 @@ export default async function Account({
           </ul>
         </div>
 
-        <div className="flex-initial">
-          <Image
-            src={"/IMG_0447.jpeg"}
-            alt="Picture of the author"
-            width={150}
-            height={150}
-            className="rounded-lg object-cover aspect-square"
-          ></Image>
+        <div className="w-[150px]">
+          <BlurImage image={{ imageSrc: `avatars/${profile.avatar_url}` }} />
         </div>
       </header>
 

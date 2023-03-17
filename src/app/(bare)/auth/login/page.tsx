@@ -38,7 +38,7 @@ const EmailLoginForm = () => {
     if (error) {
       helpers.setErrors({ email: error.message });
     } else {
-      router.push("/account");
+      router.push("/profile");
     }
   };
 
@@ -99,7 +99,7 @@ export default function Login() {
     <>
       <div className="flex flex-1 flex-col items-center justify-center pt-12 pb-16">
         <div className="mb-2.5 text-5xl font-bold text-slate-900 ">
-          Oscar Ox
+          <Link href="/">Oscar Ox</Link>
         </div>
         <div className="mb-8 text-lg font-medium text-slate-600 ">
           Authenticate
@@ -110,7 +110,10 @@ export default function Login() {
       <div className="flex items-center justify-center">
         <div className="text-lg font-medium ">
           No Account?{" "}
-          <Link href="/register" className="underline hover:text-slate-700">
+          <Link
+            href="/auth/register"
+            className="underline hover:text-slate-700"
+          >
             Register
           </Link>
         </div>
