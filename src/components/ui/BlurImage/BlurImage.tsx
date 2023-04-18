@@ -11,9 +11,7 @@ export function BlurImage({ image }: { image: BlurImage }) {
       <Image
         alt=""
         src={image.imageSrc}
-        className={clsx(
-          "duration-200 ease-in-out rounded-lg",
-        )}
+        className={clsx("duration-200 ease-in-out rounded-lg")}
         width={150}
         height={150}
         priority

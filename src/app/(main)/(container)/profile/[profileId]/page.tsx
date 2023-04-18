@@ -7,12 +7,12 @@ import { Button, ButtonLink, Tag, BlurImage } from "@/components/ui";
 export const revalidate = 0;
 
 // page
-export default async function Account() {
+export default async function Account({
+  params,
+}: {
+  params: { profileId: string };
+}) {
   const supabase = createServerClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
 
   const { data: _profile } = await supabase
     .from("profiles")
@@ -33,7 +33,7 @@ export default async function Account() {
           )
       `
     )
-    .match({ id: user?.id })
+    .match({ id: params.profileId })
     .single();
 
   if (!_profile) notFound();
@@ -69,7 +69,7 @@ export default async function Account() {
       )
     `
     )
-    .match({ profile_id: user?.id });
+    .match({ id: params.profileId });
 
   const participants = getArray(_participants).map((participant: any) => ({
     id: participant.id,
@@ -106,13 +106,6 @@ export default async function Account() {
               </li>
             ))}
           </ul>
-
-          <div className="mt-4 space-x-1">
-            <Button>Edit Profile</Button>
-            <ButtonLink href={`/profile/${encodeURIComponent(profile.id)}`}>
-              View Public
-            </ButtonLink>
-          </div>
         </div>
 
         <div className="w-[150px]">
