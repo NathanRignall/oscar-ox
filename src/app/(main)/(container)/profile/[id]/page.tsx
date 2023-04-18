@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import { createServerClient } from "@/lib/supabase-server";
-import { Tag } from "@/components/ui";
-import { BlurImage } from "@/components/client";
+import { Tag, BlurImage } from "@/components/ui";
 
 // page
 export default async function Account({

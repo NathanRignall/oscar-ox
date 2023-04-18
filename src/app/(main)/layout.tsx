@@ -21,7 +21,7 @@ export default async function BareLayout({
   return (
     <>
       <Navbar loggedIn={session != null} />
-      <div className="mt-20">{children}</div>
+      <div className="grow">{children}</div>
     </>
   );
 }

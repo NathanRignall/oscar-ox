@@ -15,13 +15,13 @@ export default function AdminLayout({
 }) {
   return (
     <div className="flex">
-      <aside className="flex-none w-64">
-        <div className="overflow-y-auto bg-white border-r-2 border-slate-200">
+      <aside className="flex-none w-64 h-full">
+        <div className="flex flex-col overflow-y-auto bg-white border-r-2 border-slate-200 h-full">
           <h2 className="text-lg px-7 py-6 border-b-2 border-slate-200">
             Production Name
           </h2>
 
-          <ul className="px-3 py-4 border-b-2 border-slate-200 space-y-2">
+          <ul className="flex-1 px-3 py-4 border-b-2 border-slate-200 space-y-2">
             {Links.map((link) => (
               <li key={link.href}>
                 <Link
@@ -35,6 +35,7 @@ export default function AdminLayout({
               </li>
             ))}
           </ul>
+
           <ul className="px-3 py-4 border-b-2 border-slate-200 space-y-2">
             <li>
               <Link className="px-4 py-1 block rounded-lg text-lg" href="/some">
@@ -47,6 +48,7 @@ export default function AdminLayout({
               </Link>
             </li>
           </ul>
+
         </div>
       </aside>
 

@@ -37,7 +37,7 @@ export default function Home() {
               </tr>
             </thead>
 
-            <tbody className="divide-y divide-solid divide-red-700">
+            <tbody className="divide-y-2 divide-solid divide-slate-200">
 
               {inbox.map((item) => (
                 <tr
@@ -56,7 +56,7 @@ export default function Home() {
                       href="#"
                       className="font-medium text-blue-600 hover:underline"
                     >
-                      Edit
+                      Process
                     </a>
                   </td>
 

@@ -17,7 +17,7 @@ create table profiles (
 
 -- create table for venues
 create table public.venues (
-  id uuid primary key,
+  id uuid primary key default uuid_generate_v4(),
   title text not null,
   description text not null,
   image_url text,
@@ -31,7 +31,7 @@ create table public.venues (
 
 -- create table for roles
 create table public.roles (
-  id uuid primary key,
+  id uuid primary key default uuid_generate_v4(),
   title text not null,
   description text not null,
   image_url text,
@@ -42,7 +42,7 @@ create table public.roles (
 
 -- create table for categories
 create table public.categories (
-  id uuid primary key,
+  id uuid primary key default uuid_generate_v4(),
   title text not null,
   inserted_at timestamp with time zone default timezone('utc'::text, now()) not null,
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null
@@ -50,7 +50,7 @@ create table public.categories (
 
 -- create table for subscriptions
 create table public.subscriptions (
-  id uuid primary key,
+  id uuid primary key default uuid_generate_v4(),
   profile_id uuid references public.profiles on delete cascade not null,
   category_id uuid references public.categories on delete cascade not null,
   inserted_at timestamp with time zone default timezone('utc'::text, now()) not null,
@@ -59,7 +59,7 @@ create table public.subscriptions (
 
 -- create table for companies
 create table public.companies (
-  id uuid primary key,
+  id uuid primary key default uuid_generate_v4(),
   name text not null,
   description text not null,
   main_colour text not null default '#000000',
@@ -69,7 +69,7 @@ create table public.companies (
 
 -- create table for company members
 create table public.company_members (
-  id uuid primary key,
+  id uuid primary key default uuid_generate_v4(),
   company_id uuid references public.companies on delete cascade not null,
   profile_id uuid references public.profiles on delete cascade not null,
   role public.company_role not null default 'moderator',
@@ -79,7 +79,7 @@ create table public.company_members (
 
 -- create table for productions
 create table public.productions (
-  id uuid primary key,
+  id uuid primary key default uuid_generate_v4(),
   company_id uuid references public.companies on delete cascade not null,
   title text not null,
   description text not null,
@@ -90,7 +90,7 @@ create table public.productions (
 
 -- create table for events
 create table public.events (
-  id uuid primary key,
+  id uuid primary key default uuid_generate_v4(),
   production_id uuid references public.productions on delete cascade not null,
   venue_id uuid references public.venues on delete cascade not null,
   start_time timestamp with time zone not null,
@@ -103,7 +103,7 @@ create table public.events (
 
 -- create table for participants
 create table public.participants (
-  uuid uuid primary key,
+  id uuid primary key default uuid_generate_v4(),
   profile_id uuid references public.profiles on delete cascade not null,
   production_id uuid references public.productions on delete cascade not null,
   role_id uuid references public.roles,
@@ -114,7 +114,7 @@ create table public.participants (
 
 -- create table for vacancies
 create table public.vacancies (
-  id uuid primary key,
+  id uuid primary key default uuid_generate_v4(),
   company_id uuid references public.companies on delete cascade not null,
   title text not null,
   description text not null,
@@ -127,14 +127,14 @@ create table public.vacancies (
 
 -- create table for vacancy categories
 create table public.vacancy_categories (
-  id uuid primary key,
+  id uuid primary key default uuid_generate_v4(),
   vacancy_id uuid references public.vacancies on delete cascade not null,
   category_id uuid references public.categories on delete cascade not null
 );
 
 -- create table for responenses
 create table public.responses (
-  id uuid primary key,
+  id uuid primary key default uuid_generate_v4(),
   vacancy_id uuid references public.vacancies on delete cascade not null,
   profile_id uuid references public.profiles on delete cascade not null,
   message text not null,
@@ -145,7 +145,7 @@ create table public.responses (
 
 -- create table for pages
 create table public.pages (
-  id uuid primary key,
+  id uuid primary key default uuid_generate_v4(),
   company_id uuid references public.companies on delete cascade not null,
   url text not null,
   title text not null,
