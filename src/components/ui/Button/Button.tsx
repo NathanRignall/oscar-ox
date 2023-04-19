@@ -5,6 +5,7 @@ export type ButtonProps = {
   variant?: "primary" | "secondary";
   display?: "inline" | "block";
   onClick?: () => void;
+  type?: "button" | "submit" | "reset";
   disabled?: boolean;
   children: React.ReactNode;
 };
@@ -14,6 +15,7 @@ export const Button = ({
   variant = "primary",
   display = "inline",
   onClick,
+  type = "button",
   disabled = false,
   children,
 }: ButtonProps) => {
@@ -31,6 +33,7 @@ export const Button = ({
         "text-sm font-medium rounded-lg px-5 py-3 border-2"
       )}
       onClick={onClick}
+      type={type}
       disabled={disabled}
     >
       {children}

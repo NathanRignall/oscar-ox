@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
 import { createServerClient } from "@/lib/supabase-server";
 import { getArray, getSingle } from "@/lib/supabase-type-convert";
-import { Button, ButtonLink, Tag, BlurImage } from "@/components/ui";
+import { ButtonLink, Tag, BlurImage } from "@/components/ui";
+import { EditProfileModal } from "./EditProfileModal";
 
 // do not cache this page
 export const revalidate = 0;
@@ -107,8 +108,8 @@ export default async function Account() {
             ))}
           </ul>
 
-          <div className="mt-4 space-x-1">
-            <Button>Edit Profile</Button>
+          <div className="mt-4">
+            <EditProfileModal name={profile.name} biography={profile.biography}  /> {" "}
             <ButtonLink href={`/profile/${encodeURIComponent(profile.id)}`}>
               View Public
             </ButtonLink>

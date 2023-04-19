@@ -1,17 +1,30 @@
+import { createServerClient } from "@/lib/supabase-server";
+import { getSingle } from "@/lib/supabase-type-convert";
 import { Button, ButtonLink } from "@/components/ui";
 
+// do not cache this page
+export const revalidate = 0;
+
 // Page
-export default function Admin() {
-  const companies = [
-    {
-      id: "1",
-      name: "00 Productions",
-    },
-    {
-      id: "2",
-      name: "NHGS",
-    },
-  ];
+export default async function Admin() {
+  const supabase = createServerClient();
+
+  const { data } = await supabase.from("company_members").select(
+    `
+    id,
+    company:companies (
+      id,
+      name
+    )
+    `
+  );
+
+  const members = data
+    ? data.map((item) => ({
+        id: item.id,
+        company: getSingle(item.company),
+      }))
+    : [];
 
   return (
     <div className="container mx-auto py-6 px-8">
@@ -25,22 +38,24 @@ export default function Admin() {
 
       <section className="max-w-3xl mx-auto mt-4">
         <ul className="mt-4 grid gap-4">
-          {companies.map((company) => (
+          {members.map((member) => (
             <li
-              key={company.id}
-              className="flex justify-between items-center bg-white rounded-lg border-2 border-slate-200 p-4"
+              key={member.id}
+              className="flex justify-between items-center bg-white rounded-lg border-2 border-slate-200 py-5 px-4"
             >
               <h2 className="text-lg font-bold text-slate-900">
-                {company.name}
+                {member.company.name}
               </h2>
-              <ButtonLink href={`/admin/${encodeURIComponent(company.id)}`}>
+              <ButtonLink
+                href={`/admin/${encodeURIComponent(member.company.id)}`}
+              >
                 Edit
               </ButtonLink>
             </li>
           ))}
         </ul>
       </section>
-      
+
       <div className="fixed bottom-0 right-0 m-8">
         <Button>Create</Button>
       </div>
