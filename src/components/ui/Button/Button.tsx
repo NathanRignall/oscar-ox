@@ -4,6 +4,7 @@ export type ButtonProps = {
   className?: string;
   variant?: "primary" | "secondary";
   display?: "inline" | "block";
+  size?: "sm" | "md" | "lg";
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
@@ -14,6 +15,7 @@ export const Button = ({
   className,
   variant = "primary",
   display = "inline",
+  size = "md",
   onClick,
   type = "button",
   disabled = false,
@@ -29,8 +31,11 @@ export const Button = ({
           "text-white bg-slate-900 border-slate-700 hover:bg-slate-700 hover:border-slate-500",
         display == "inline",
         display == "block" && "w-full",
+        size === "sm" && "text-xs px-3 py-2",
+        size === "md" && "text-sm px-5 py-3",
+        size === "lg" && "text-lg px-6 py-4",
         disabled && "cursor-not-allowed opacity-50",
-        "text-sm font-medium rounded-lg px-5 py-3 border-2"
+        "font-medium rounded-lg border-2"
       )}
       onClick={onClick}
       type={type}

@@ -1,5 +1,5 @@
 // Page
-export default function Home() {
+export default function Company() {
   // list for inbox
   const inbox = [
     {
@@ -25,7 +25,6 @@ export default function Home() {
 
         <div className="mt-4 border-2 border-slate-200 rounded-lg overflow-hidden">
           <table className="w-full text-left divide-y divide-gray-200">
-
             <thead className="text-xs font-semibold text-gray-500 bg-slate-50 uppercase">
               <tr>
                 <th scope="col" className="px-4 py-4">
@@ -38,12 +37,8 @@ export default function Home() {
             </thead>
 
             <tbody className="divide-y-2 divide-solid divide-slate-200">
-
               {inbox.map((item) => (
-                <tr
-                  key={item.id}
-                  className="bg-white hover:bg-gray-50"
-                >
+                <tr key={item.id} className="bg-white hover:bg-gray-50">
                   <th
                     scope="row"
                     className="px-4 py-4 font-medium text-gray-900 whitespace-nowrap"
@@ -56,13 +51,11 @@ export default function Home() {
                       href="#"
                       className="font-medium text-blue-600 hover:underline"
                     >
-                      Process
+                      Edit
                     </a>
                   </td>
-
                 </tr>
               ))}
-
             </tbody>
           </table>
         </div>
