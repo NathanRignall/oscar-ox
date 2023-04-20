@@ -4,7 +4,7 @@ import { useState, useTransition } from "react";
 import { useRouter } from 'next/navigation';
 import { useSupabase } from "@/components/client";
 import { object, string } from "yup";
-import { FormikProps, FormikHelpers, Formik, Field, Form } from "formik";
+import { FormikProps, Formik, Field, Form } from "formik";
 import { Button } from "@/components/ui";
 
 type EditProfileModalProps = {
@@ -22,7 +22,7 @@ export const EditProfileModal = ({
   const [isPending, startTransition] = useTransition();
 
   const [isOpen, setIsOpen] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [formError, setFormError] = useState<string | null>(null);
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
@@ -39,8 +39,8 @@ export const EditProfileModal = ({
   };
 
   const validationSchema = object({
-    name: string().min(3, "Must be at least 3 characters").required("Required"),
-    biography: string().required("Required"),
+    name: string().min(3, "Must be at least 3 characters").required("Name is Required"),
+    biography: string(),
   });
 
   const onSubmit = async (
@@ -52,7 +52,7 @@ export const EditProfileModal = ({
       .match({ id: session?.user?.id });
 
     if (error) {
-      setError(error.message);
+      setFormError(error.message);
     } else {
       toggleModal();
 
@@ -117,7 +117,7 @@ export const EditProfileModal = ({
                           name="name"
                           autoComplete="name"
                           placeholder="Full Name"
-                          className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-lg text-slate-900 placeholder-slate-400"
+                          className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
                         />
 
                         {errors.name && touched.name ? (
@@ -138,7 +138,7 @@ export const EditProfileModal = ({
                           name="biography"
                           autoComplete="biography"
                           placeholder="Your personal biography..."
-                          className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-lg text-slate-900 placeholder-slate-400"
+                          className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
                         />
                         {errors.biography && touched.biography ? (
                           <p className="mt-2 text-sm text-slate-600">
@@ -149,7 +149,7 @@ export const EditProfileModal = ({
                         )}
                       </div>
 
-                      <label className="relative inline-flex items-center mb-6 cursor-pointer">
+                      <label className="relative inline-flex items-center mb-10 cursor-pointer">
                         <input
                           type="checkbox"
                           value=""
@@ -172,9 +172,9 @@ export const EditProfileModal = ({
                         </Button>
 
                         <div className="text-center">
-                          {error ? (
+                          {formError ? (
                             <p className="mt-2 text-sm text-slate-600">
-                              {error}
+                              {formError}
                             </p>
                           ) : (
                             <div className="mt-2 h-5" />

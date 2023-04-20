@@ -1,10 +1,8 @@
 import { notFound } from "next/navigation";
 import { createServerClient } from "@/lib/supabase-server";
 import { getArray, getSingle } from "@/lib/supabase-type-convert";
-import { Button, ButtonLink, Tag, BlurImage } from "@/components/ui";
-
-// do not cache this page
-export const revalidate = 0;
+import { Tag } from "@/components/ui";
+import { ProfilePicture } from "@/containers";
 
 // page
 export default async function Account({
@@ -43,8 +41,8 @@ export default async function Account({
     name: _profile.name,
     email: _profile.email,
     biography: _profile.biography,
-    avatar_url: _profile.avatar_url,
-    tags: getArray(_profile.tags).map((tag: any) => ({
+    avatar_url: _profile.avatar_url || "default.jpg",
+    tags: getArray(_profile.tags).map((tag) => ({
       id: tag.id,
       company: getSingle(tag.company),
     })),
@@ -100,7 +98,7 @@ export default async function Account({
               <li key={tag.id}>
                 <Tag
                   text={tag.company.name}
-                  href={`/company/${encodeURIComponent(tag.company.id)}`}
+                  href={`/companies/${encodeURIComponent(tag.company.id)}`}
                   color={tag.company.main_colour}
                 />
               </li>
@@ -109,7 +107,7 @@ export default async function Account({
         </div>
 
         <div className="w-[150px]">
-          <BlurImage image={{ imageSrc: `avatars/${profile.avatar_url}` }} />
+          <ProfilePicture src={`profiles/public/${profile.avatar_url}`} />
         </div>
       </header>
 
