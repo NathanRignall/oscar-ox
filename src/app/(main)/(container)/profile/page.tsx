@@ -113,10 +113,15 @@ export default async function Account() {
             <EditProfileModal
               name={profile.name}
               biography={profile.biography}
-            />{" "}
-            <ButtonLink href={`/profile/${encodeURIComponent(profile.id)}`}>
+            />
+            <ButtonLink href={`/profile/${encodeURIComponent(profile.id)}`} className="ml-2">
               View Public
             </ButtonLink>
+            {profile.tags.length > 0 && (
+              <ButtonLink href={`/admin`} className="ml-2">
+                Admin Panel
+              </ButtonLink>
+            )}
           </div>
         </div>
 

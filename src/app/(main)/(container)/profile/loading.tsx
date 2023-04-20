@@ -9,9 +9,9 @@ export default function Loading() {
           <div className="mb-3 bg-slate-200 rounded-lg h-7 animate-pulse max-w-[350px]"></div>
           <div className="bg-slate-200 rounded-lg h-7 animate-pulse max-w-[150px]"></div>
 
-          <div className="mt-4 space-x-1">
+          <div className="mt-4">
             <Button>Edit Profile</Button>
-            <Button>View Public </Button>
+            <Button className="ml-2">View Public </Button>
           </div>
         </div>
 

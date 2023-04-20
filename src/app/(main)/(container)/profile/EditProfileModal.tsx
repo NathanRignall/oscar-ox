@@ -56,7 +56,6 @@ export const EditProfileModal = ({
     } else {
       toggleModal();
 
-      // Refresh the page to get the new data
       startTransition(() => {
         router.refresh();
       });
