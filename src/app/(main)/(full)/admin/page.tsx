@@ -1,6 +1,7 @@
+import Link from "next/link";
 import { createServerClient } from "@/lib/supabase-server";
 import { getSingle } from "@/lib/supabase-type-convert";
-import { Button, ButtonLink } from "@/components/ui";
+import { AddCompanyModal } from "./AddCompanyModal";
 
 // do not cache this page
 export const revalidate = 0;
@@ -36,28 +37,25 @@ export default async function Admin() {
         </p>
       </header>
 
-      <section className="max-w-3xl mx-auto mt-4">
+      <section className="max-w-xl mx-auto mt-4">
         <ul className="mt-4 grid gap-4">
           {members.map((member) => (
             <li
               key={member.id}
-              className="flex justify-between items-center bg-white rounded-lg border-2 border-slate-200 py-5 px-4"
+              className="text-center bg-white rounded-lg border-2 border-slate-200 py-5 px-4"
             >
-              <h2 className="text-lg font-bold text-slate-900">
+              <Link href={`/admin/${encodeURIComponent(member.company.id)}`}>
+              <h2 className="text-lg font-bold text-slate-900 underline">
                 {member.company.name}
               </h2>
-              <ButtonLink
-                href={`/admin/${encodeURIComponent(member.company.id)}`}
-              >
-                Edit
-              </ButtonLink>
+              </Link>
             </li>
           ))}
         </ul>
       </section>
 
       <div className="fixed bottom-0 right-0 m-8">
-        <Button>Create</Button>
+        <AddCompanyModal/>
       </div>
     </div>
   );

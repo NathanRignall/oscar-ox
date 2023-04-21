@@ -2,8 +2,11 @@ import Link from "next/link";
 import { createServerClient } from "@/lib/supabase-server";
 import { notFound } from "next/navigation";
 
+// do not cache this page
+export const revalidate = 0;
+
 const Links = [
-  { href: "/", text: "Dashboard", active: true },
+  { href: "/", text: "Dashboard", active: false },
   { href: "/productions", text: "Productions", active: false },
   { href: "/vacancies", text: "Vacancies", active: false },
   { href: "/pages", text: "Pages", active: false },
@@ -36,7 +39,24 @@ export default async function AdminLayout({
     <div className="flex">
       <aside className="flex-none w-64 h-full">
         <div className="flex flex-col overflow-y-auto bg-white border-r-2 border-slate-200 h-full">
-          <h2 className="text-lg px-7 py-6 border-b-2 border-slate-200">
+          <h2 className="flex items-center text-lg px-7 py-6 border-b-2 border-slate-200">
+            <Link href={`/admin`}>
+              <svg
+                className="h-3 w-3 mr-2"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={4}
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.75 19.5L8.25 12l7.5-7.5"
+                />
+              </svg>
+            </Link>
             {company.name}
           </h2>
 
@@ -57,12 +77,12 @@ export default async function AdminLayout({
 
           <ul className="px-3 py-4 border-b-2 border-slate-200 space-y-2">
             <li>
-              <Link className="px-4 py-1 block rounded-lg text-lg" href="/some">
+              <Link className="px-4 py-1 block rounded-lg text-lg" href="/">
                 Documentation
               </Link>
             </li>
             <li>
-              <Link className="px-4 py-1 block rounded-lg text-lg" href="/some">
+              <Link className="px-4 py-1 block rounded-lg text-lg" href="/">
                 Help
               </Link>
             </li>
