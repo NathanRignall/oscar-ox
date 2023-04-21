@@ -4,6 +4,10 @@ import { createServerClient } from "@/lib/supabase-server";
 import { getArray, getSingle } from "@/lib/supabase-type-convert";
 import { AddEventModal } from "./AddEventModal";
 import { Button, Tag } from "@/components/ui";
+import { EditProductionModal } from "./EditProductionModal";
+
+// do not cache this page
+export const revalidate = 0;
 
 // Page
 export default async function Production({
@@ -88,7 +92,7 @@ export default async function Production({
           {production.title}
         </h1>
 
-        <p className="mb-3 text-xl text-slate-600 ">{production.description}</p>
+        <p className="mb-3 text-xl text-slate-600 ">{production.description} <EditProductionModal/></p>
       </header>
 
       <section className="mt-6">

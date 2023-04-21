@@ -4,6 +4,9 @@ import { getArray } from "@/lib/supabase-type-convert";
 import { AddProductionModal } from "./AddProductionModal";
 import { Tag } from "@/components/ui";
 
+// do not cache this page
+export const revalidate = 0;
+
 // Page
 export default async function Productions({
   params,

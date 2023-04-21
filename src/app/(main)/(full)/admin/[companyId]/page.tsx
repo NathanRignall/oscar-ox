@@ -1,3 +1,6 @@
+// do not cache this page
+export const revalidate = 0;
+
 // Page
 export default function Company() {
   // list for inbox
