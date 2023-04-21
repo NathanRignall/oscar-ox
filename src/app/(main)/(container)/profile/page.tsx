@@ -92,10 +92,16 @@ export default async function Account() {
     <>
       <header className="flex max-w-3xl mx-auto mb-8">
         <div className="flex-1">
-          <h1 className="mb-3 text-6xl font-extrabold text-slate-900">
+          <h1 className="mb-1 text-6xl font-extrabold text-slate-900">
             {profile.name}
           </h1>
-          <p className="mb-3 text-xl text-slate-600 ">{profile.biography}</p>
+          <p className="mb-3 text-xl text-slate-600 ">
+            {profile.biography}
+            <EditProfileModal
+              name={profile.name}
+              biography={profile.biography}
+            />
+          </p>
 
           <ul className="flex flex-wrap gap-2">
             {profile.tags.map((tag) => (
@@ -110,18 +116,12 @@ export default async function Account() {
           </ul>
 
           <div className="mt-4">
-            <EditProfileModal
-              name={profile.name}
-              biography={profile.biography}
-            />
-            <ButtonLink href={`/profile/${encodeURIComponent(profile.id)}`} className="ml-2">
+            <ButtonLink href={`/profile/${encodeURIComponent(profile.id)}`}>
               View Public
             </ButtonLink>
-            {profile.tags.length > 0 && (
-              <ButtonLink href={`/admin`} className="ml-2">
-                Admin Panel
-              </ButtonLink>
-            )}
+            <ButtonLink href={`/admin`} className="ml-2">
+              Admin Panel
+            </ButtonLink>
           </div>
         </div>
 

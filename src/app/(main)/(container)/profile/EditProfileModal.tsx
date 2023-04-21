@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import { useSupabase } from "@/components/client";
 import { object, string } from "yup";
 import { FormikProps, Formik, Field, Form } from "formik";
@@ -39,13 +39,13 @@ export const EditProfileModal = ({
   };
 
   const validationSchema = object({
-    name: string().min(3, "Must be at least 3 characters").required("Name is Required"),
+    name: string()
+      .min(3, "Must be at least 3 characters")
+      .required("Name is Required"),
     biography: string(),
   });
 
-  const onSubmit = async (
-    values: FormValues,
-  ) => {
+  const onSubmit = async (values: FormValues) => {
     const { error } = await supabase
       .from("profiles")
       .update({ name: values.name, biography: values.biography })
@@ -63,7 +63,28 @@ export const EditProfileModal = ({
   };
   return (
     <>
-      <Button onClick={toggleModal}>Edit Profile</Button>
+      <button
+        type="button"
+        className="text-slate-900 bg-white border-2 border-slate-200 hover:bg-slate-200 hover:border-slate-400 rounded-lg text-sm p-1.5 ml-4"
+        data-modal-hide="defaultModal"
+        onClick={toggleModal}
+      >
+        <svg
+          className="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={1.5}
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
+          />
+        </svg>
+      </button>
 
       {isOpen && (
         <div className="fixed z-30 inset-0 overflow-y-auto">
@@ -164,7 +185,6 @@ export const EditProfileModal = ({
                         <Button
                           variant="secondary"
                           display="block"
-                          onClick={submitForm}
                           type="submit"
                         >
                           Save
