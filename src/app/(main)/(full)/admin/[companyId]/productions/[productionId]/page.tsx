@@ -92,6 +92,8 @@ export default async function Production({
           {production.title}
         </h1>
 
+        {production.is_published ? <Tag text="Published" variant="green"/> : <Tag text="Draft" variant="blue"/>}
+
         <p className="mb-3 text-xl text-slate-600 ">{production.description} <EditProductionModal/></p>
       </header>
 

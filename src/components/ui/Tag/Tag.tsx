@@ -3,6 +3,7 @@ import clsx from "clsx";
 
 export type TagProps = {
   className?: string;
+  variant?: "primary" | "secondary" | "blue" | "green" | "red" | "yellow";
   color?: string;
   text: string;
   href?: string;
@@ -10,7 +11,8 @@ export type TagProps = {
 
 export const Tag = ({
   className,
-  color = "rgb(15 23 42 / var(--tw-text-opacity))",
+  variant,
+  color,
   text,
   href,
 }: TagProps) => {
@@ -19,9 +21,15 @@ export const Tag = ({
       <span
         className={clsx(
           className,
-          "text-sm text-slate-100 bg-slate-900 px-3 py-1 rounded-lg inline-block"
+          variant == "primary" && "text-slate-900 bg-white",
+          variant == "secondary" && "text-white bg-slate-900",
+          variant == "blue" && "text-blue-900 bg-blue-100",
+          variant == "green" && "text-green-900 bg-green-100",
+          variant == "red" && "text-red-900 bg-red-100",
+          variant == "yellow" && "text-yellow-900 bg-yellow-100",
+          "text-sm  px-3 py-0.5 rounded-lg inline-block"
         )}
-        style={{ backgroundColor: color }}
+        style={{ backgroundColor: color, color: "white" }}
       >
         {text}
       </span>
