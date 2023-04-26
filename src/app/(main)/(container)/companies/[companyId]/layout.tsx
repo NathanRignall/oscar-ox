@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createServerClient } from "@/lib/supabase-server";
+import { getArray } from "@/lib/supabase-type-convert";
 import fontColorContrast from "font-color-contrast";
 
 // layout
@@ -13,32 +14,42 @@ export default async function CompanyLayout({
 }) {
   const supabase = createServerClient();
 
-  const { data: company } = await supabase
+  const { data: _company } = await supabase
     .from("companies")
     .select(
       `
         id,
         name,
         description,
-        main_colour
+        main_colour,
+        pages (
+          id,
+          url,
+          title
+        )
         `
     )
     .match({ id: params.companyId })
     .single();
 
-  if (!company) notFound();
+  if (!_company) notFound();
+
+  const company = {
+    id: _company.id,
+    name: _company.name,
+    description: _company.description,
+    main_colour: _company.main_colour,
+    pages: getArray(_company.pages),
+  };
 
   return (
     <>
-      <header>
-        <div
-          className="fixed top-20 left-0 w-full h-48"
-          style={{
-            backgroundColor: company.main_colour,
-          }}
-        />
-
-        <div className="relative">
+      <header
+        style={{
+          backgroundColor: company.main_colour,
+        }}
+      >
+        <div>
           <h1
             className="mb-4 text-5xl font-extrabold"
             style={{
@@ -67,11 +78,17 @@ export default async function CompanyLayout({
             <Link href={`/companies/${encodeURIComponent(company.id)}`}>
               <li className="text-lg px-2 py-2">Home</li>
             </Link>
-            <Link
-              href={`/companies/${encodeURIComponent(company.id)}/vacancies`}
-            >
-              <li className="text-lg px-4 py-2">Vacancies</li>
-            </Link>
+
+            {company.pages.map((page) => (
+              <Link
+                key={page.id}
+                href={`/companies/${encodeURIComponent(
+                  company.id
+                )}/${encodeURIComponent(page.url)}`}
+              >
+                <li className="text-lg px-4 py-2">{page.title}</li>
+              </Link>
+            ))}
           </ul>
         </nav>
       </header>

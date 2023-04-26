@@ -1,5 +1,6 @@
 import Link from "next/link";
 import clsx from "clsx";
+import fontColorContrast from "font-color-contrast";
 
 export type TagProps = {
   className?: string;
@@ -29,7 +30,7 @@ export const Tag = ({
           variant == "yellow" && "text-yellow-900 bg-yellow-100",
           "text-sm  px-3 py-0.5 rounded-lg inline-block"
         )}
-        style={{ backgroundColor: color, color: "white" }}
+        style={{ backgroundColor: color, color: color && fontColorContrast(color), }}
       >
         {text}
       </span>
