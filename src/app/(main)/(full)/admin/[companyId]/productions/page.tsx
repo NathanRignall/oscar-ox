@@ -100,7 +100,7 @@ export default async function Productions({
                   </td>
 
                   <td className="px-4 text-right">
-                    {item.is_published ? <Tag text="Published" color="green"/> : <Tag text="Draft" color="blue"/>}
+                    {item.is_published ? <Tag text="Published" variant="green"/> : <Tag text="Draft" variant="blue"/>}
                   </td>
                 </tr>
               ))}
