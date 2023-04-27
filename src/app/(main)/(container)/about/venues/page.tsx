@@ -18,6 +18,7 @@ export default async function Venues() {
     title,
     slug,
     image_url,
+    location,
     latitude,
     longitude
     `
@@ -47,7 +48,7 @@ export default async function Venues() {
                     {venue.title}
                   </h3>
                 </Link>
-                <p className="text-sm text-slate-600 ">Some extra text</p>
+                <p className="text-sm text-slate-600 ">{venue.location}</p>
               </div>
 
               <div className="h-full aspect-1 relative bg-slate-300 rounded-r-md overflow-hidden">
