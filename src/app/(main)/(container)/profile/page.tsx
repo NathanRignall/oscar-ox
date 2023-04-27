@@ -95,13 +95,13 @@ export default async function Account() {
           <h1 className="mb-1 text-6xl font-extrabold text-slate-900">
             {profile.name}
           </h1>
-          <p className="mb-3 text-xl text-slate-600 ">
-            {profile.biography}
+          <div>
+            <p className="mb-3 text-xl text-slate-600 inline-block">{profile.biography}</p>
             <EditProfileModal
               name={profile.name}
               biography={profile.biography}
             />
-          </p>
+          </div>
 
           <ul className="flex flex-wrap gap-2">
             {profile.tags.map((tag) => (

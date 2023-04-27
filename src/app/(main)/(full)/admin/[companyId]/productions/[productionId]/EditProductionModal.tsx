@@ -8,13 +8,17 @@ import { FormikProps, Formik, Field, Form } from "formik";
 import { Button } from "@/components/ui";
 
 type EditProductionModalProps = {
-  name?: string | null;
-  biography?: string | null;
+  productionId: string;
+  title?: string | null;
+  description?: string | null;
+  is_published?: boolean | null;
 };
 
 export const EditProductionModal = ({
-  name,
-  biography,
+  productionId,
+  title,
+  description,
+  is_published,
 }: EditProductionModalProps) => {
   const { supabase, session } = useSupabase();
 
@@ -29,27 +33,29 @@ export const EditProductionModal = ({
   };
 
   interface FormValues {
-    name: string;
-    biography: string;
+    title: string;
+    description: string;
+    is_published: boolean;
   }
 
   const initialValues: FormValues = {
-    name: name || "",
-    biography: biography || "",
+    title: title || "",
+    description: description || "",
+    is_published: is_published || false,
   };
 
   const validationSchema = object({
-    name: string()
+    title: string()
       .min(3, "Must be at least 3 characters")
-      .required("Name is Required"),
-    biography: string(),
+      .required("Title is Required"),
+    description: string(),
   });
 
   const onSubmit = async (values: FormValues) => {
     const { error } = await supabase
-      .from("profiles")
-      .update({ name: values.name, biography: values.biography })
-      .match({ id: session?.user?.id });
+      .from("productions")
+      .update({ title: values.title, description: values.description })
+      .match({ id: productionId });
 
     if (error) {
       setFormError(error.message);
@@ -65,7 +71,7 @@ export const EditProductionModal = ({
     <>
       <button
         type="button"
-        className="text-slate-900 bg-white border-2 border-slate-200 hover:bg-slate-200 hover:border-slate-400 rounded-lg text-sm p-1.5 ml-4"
+        className="text-slate-900 bg-white border-2 border-slate-200 hover:bg-slate-200 hover:border-slate-400 rounded-lg text-sm p-1.5 inline-block ml-4"
         data-modal-hide="defaultModal"
         onClick={toggleModal}
       >
@@ -91,7 +97,7 @@ export const EditProductionModal = ({
           <div className="flex items-center justify-center min-h-screen pt-5 px-5 sm:p-0">
             <div className="fixed inset-0 bg-slate-500 opacity-70" />
 
-            <div className="bg-white rounded-lg overflow-hidden z-40 w-full max-w-lg">
+            <div className="bg-white rounded-lg overflow-hidden z-40 w-full max-w-2xl">
               <div className="px-10 py-8">
                 <div className="flex items-end justify-between rounded-t mb-4">
                   <button
@@ -132,17 +138,16 @@ export const EditProductionModal = ({
                     <Form>
                       <div className="mb-4">
                         <Field
-                          id="name"
+                          id="title"
                           type="text"
-                          name="name"
-                          autoComplete="name"
-                          placeholder="Full Name"
+                          name="title"
+                          placeholder="Title..."
                           className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
                         />
 
-                        {errors.name && touched.name ? (
+                        {errors.title && touched.title ? (
                           <p className="mt-2 text-sm text-slate-600">
-                            {errors.name}
+                            {errors.title}
                           </p>
                         ) : (
                           <div className="mt-2 h-5" />
@@ -152,17 +157,17 @@ export const EditProductionModal = ({
                       <div className="mb-4">
                         <Field
                           component="textarea"
-                          id="biography"
+                          id="description"
                           type="text"
                           rows={4}
-                          name="biography"
-                          autoComplete="biography"
-                          placeholder="Your personal biography..."
+                          name="description"
+                          autoComplete="description"
+                          placeholder="Description..."
                           className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
                         />
-                        {errors.biography && touched.biography ? (
+                        {errors.description && touched.description ? (
                           <p className="mt-2 text-sm text-slate-600">
-                            {errors.biography}
+                            {errors.description}
                           </p>
                         ) : (
                           <div className="mt-2 h-5" />
@@ -177,7 +182,7 @@ export const EditProductionModal = ({
                         />
                         <div className="w-11 h-6 bg-slate-200 rounded-full peer  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-slate-800"></div>
                         <span className="ml-3 text-md font-medium text-slate-900">
-                          Public Profile
+                          Published
                         </span>
                       </label>
 

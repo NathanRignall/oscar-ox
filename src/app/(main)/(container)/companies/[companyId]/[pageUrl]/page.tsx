@@ -6,7 +6,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 export default async function Company({
   params,
 }: {
-  params: { companyId: string, pageUrl: string };
+  params: { companyId: string; pageUrl: string };
 }) {
   const supabase = createServerClient();
 
@@ -19,12 +19,13 @@ export default async function Company({
         title
         `
     )
-    .match({ company_id: params.companyId, url: params.pageUrl }).single();
+    .match({ company_id: params.companyId, url: params.pageUrl })
+    .single();
 
   if (!page) notFound();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SUPABASE_URL}storage/v1/object/public/pages/${params.companyId}/${params.pageUrl}/index.mdx`
+    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/pages/${params.companyId}/${params.pageUrl}/index.mdx`
   );
 
   const markdown = await res.text();

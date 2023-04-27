@@ -92,9 +92,23 @@ export default async function Production({
           {production.title}
         </h1>
 
-        {production.is_published ? <Tag text="Published" variant="green"/> : <Tag text="Draft" variant="blue"/>}
+        {production.is_published ? (
+          <Tag text="Published" variant="green" />
+        ) : (
+          <Tag text="Draft" variant="blue" />
+        )}
 
-        <p className="mb-3 text-xl text-slate-600 ">{production.description} <EditProductionModal/></p>
+        <div>
+          <p className="mb-3 text-xl text-slate-600 inline-block">
+            {production.description}{" "}
+          </p>
+          <EditProductionModal
+            productionId={params.productionId}
+            title={production.title}
+            description={production.description}
+            is_published={production.is_published}
+          />
+        </div>
       </header>
 
       <section className="mt-6">
@@ -178,7 +192,11 @@ export default async function Production({
                     scope="row"
                     className="px-4 py-4 font-bold text-gray-900 underline"
                   >
-                    <Link href={`/admin/${params.companyId}/vacancies/${vacancy.id}`}>{vacancy.title}</Link>
+                    <Link
+                      href={`/admin/${params.companyId}/vacancies/${vacancy.id}`}
+                    >
+                      {vacancy.title}
+                    </Link>
                   </th>
 
                   <td className="px-4 py-4 text-gray-500">

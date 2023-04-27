@@ -65,7 +65,7 @@ export const EditProfileModal = ({
     <>
       <button
         type="button"
-        className="text-slate-900 bg-white border-2 border-slate-200 hover:bg-slate-200 hover:border-slate-400 rounded-lg text-sm p-1.5 ml-4"
+        className="text-slate-900 bg-white border-2 border-slate-200 hover:bg-slate-200 hover:border-slate-400 rounded-lg text-sm p-1.5 inline-block ml-4"
         data-modal-hide="defaultModal"
         onClick={toggleModal}
       >

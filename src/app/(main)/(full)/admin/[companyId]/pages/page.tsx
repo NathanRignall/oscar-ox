@@ -57,19 +57,19 @@ export default async function Pages({
                     className="px-4 py-4 font-bold text-gray-900 underline"
                   >
                     <Link
-                      href={`/admin/${params.companyId}/vacancies/${page.id}`}
+                      href={`/admin/${params.companyId}/pages/${page.id}`}
                     >
                       {page.title}
                     </Link>
                   </th>
 
-                  <td className="px-4 py-4">{page.url}</td>
+                  <td className="px-4 py-4">/{page.url}</td>
 
                   <td className="px-4 text-right">
                     {page.is_published ? (
-                      <Tag text="Published" color="green" />
+                      <Tag text="Published" variant="green" />
                     ) : (
-                      <Tag text="Draft" color="blue" />
+                      <Tag text="Draft" variant="blue" />
                     )}
                   </td>
                 </tr>
