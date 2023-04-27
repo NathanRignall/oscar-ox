@@ -1,7 +1,7 @@
 // Loading
 export default async function Loading() {
   return (
-    <>
+    <div className="container mx-auto py-6 px-8">
       <form className="flex justify-end w-full">
         <label htmlFor="simple-search" className="sr-only">
           Search
@@ -33,13 +33,15 @@ export default async function Loading() {
         </div>
       </form>
 
-      <div className="grid grid-cols-3 gap-4 mt-4">
-        <div className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg bg-slate-300 animate-pulse" />
-        <div className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg bg-slate-300 animate-pulse" />
-        <div className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg bg-slate-300 animate-pulse" />
-        <div className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg bg-slate-300 animate-pulse" />
-        <div className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg bg-slate-300 animate-pulse" />
-      </div>
-    </>
+      <main>
+        <section className="grid grid-cols-3 gap-4 mt-4">
+          <div className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg bg-slate-300 animate-pulse" />
+          <div className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg bg-slate-300 animate-pulse" />
+          <div className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg bg-slate-300 animate-pulse" />
+          <div className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg bg-slate-300 animate-pulse" />
+          <div className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg bg-slate-300 animate-pulse" />
+        </section>
+      </main>
+    </div>
   );
 }

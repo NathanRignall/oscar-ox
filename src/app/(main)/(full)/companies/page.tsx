@@ -18,7 +18,7 @@ export default async function Companies() {
   const companies = getArray(data);
 
   return (
-    <>
+    <div className="container mx-auto py-6 px-8">
       <form className="flex justify-end w-full">
         <label htmlFor="simple-search" className="sr-only">
           Search
@@ -50,24 +50,28 @@ export default async function Companies() {
         </div>
       </form>
 
-      <div className="grid grid-cols-3 gap-4 mt-4">
-        {companies.map((company) => (
-          <Link
-            key={company.id}
-            href={`/companies/${encodeURIComponent(company.id)}`}
-          >
-            <div
-              className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg"
-              style={{
-                backgroundColor: company.main_colour,
-                color: fontColorContrast(company.main_colour),
-              }}
+      <main>
+        <section className="grid grid-cols-3 gap-4 mt-4">
+          {companies.map((company) => (
+            <Link
+              key={company.id}
+              href={`/companies/${encodeURIComponent(company.id)}`}
             >
-              <h2 className="text-4xl font-bold text-center">{company.name}</h2>
-            </div>
-          </Link>
-        ))}
-      </div>
-    </>
+              <div
+                className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg"
+                style={{
+                  backgroundColor: company.main_colour,
+                  color: fontColorContrast(company.main_colour),
+                }}
+              >
+                <h2 className="text-4xl font-bold text-center">
+                  {company.name}
+                </h2>
+              </div>
+            </Link>
+          ))}
+        </section>
+      </main>
+    </div>
   );
 }
