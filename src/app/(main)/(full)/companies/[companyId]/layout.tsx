@@ -24,7 +24,7 @@ export default async function CompanyLayout({
         main_colour,
         pages (
           id,
-          url,
+          slug,
           title
         )
         `
@@ -83,7 +83,7 @@ export default async function CompanyLayout({
                   key={page.id}
                   href={`/companies/${encodeURIComponent(
                     company.id
-                  )}/${encodeURIComponent(page.url)}`}
+                  )}/${encodeURIComponent(page.slug)}`}
                 >
                   <li className="text-lg px-4 py-2">{page.title}</li>
                 </Link>

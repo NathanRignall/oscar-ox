@@ -19,7 +19,7 @@ export default async function Pages({
     .select(
       `
       id,
-      url,
+      slug,
       title,
       is_published
       `
@@ -63,7 +63,7 @@ export default async function Pages({
                     </Link>
                   </th>
 
-                  <td className="px-4 py-4">/{page.url}</td>
+                  <td className="px-4 py-4">/{page.slug}</td>
 
                   <td className="px-4 text-right">
                     {page.is_published ? (

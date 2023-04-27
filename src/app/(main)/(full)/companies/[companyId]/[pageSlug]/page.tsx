@@ -3,10 +3,10 @@ import { createServerClient } from "@/lib/supabase-server";
 import { MDXRemote } from "next-mdx-remote/rsc";
 
 // Page
-export default async function Company({
+export default async function Page({
   params,
 }: {
-  params: { companyId: string; pageUrl: string };
+  params: { companyId: string; pageSlug: string };
 }) {
   const supabase = createServerClient();
 
@@ -15,17 +15,16 @@ export default async function Company({
     .select(
       `
         id,
-        url,
         title
         `
     )
-    .match({ company_id: params.companyId, url: params.pageUrl })
+    .match({ company_id: params.companyId, slug: params.pageSlug })
     .single();
 
   if (!page) notFound();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/pages/${params.companyId}/${params.pageUrl}/index.mdx`
+    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/pages/${params.companyId}/${params.pageSlug}/index.mdx`
   );
 
   const markdown = await res.text();

@@ -30,6 +30,7 @@ const links = [
   { href: "/", text: "Calander" },
   { href: "/search", text: "Search" },
   { href: "/companies", text: "Companies" },
+  { href: "/about", text: "About" },
 ];
 
 // Navbar component

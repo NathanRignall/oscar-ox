@@ -148,9 +148,9 @@ export interface Database {
           id: string
           inserted_at: string
           is_published: boolean
+          slug: string
           title: string
           updated_at: string
-          url: string
         }
         Insert: {
           company_id: string
@@ -158,9 +158,9 @@ export interface Database {
           id?: string
           inserted_at?: string
           is_published: boolean
+          slug: string
           title: string
           updated_at?: string
-          url: string
         }
         Update: {
           company_id?: string
@@ -168,9 +168,9 @@ export interface Database {
           id?: string
           inserted_at?: string
           is_published?: boolean
+          slug?: string
           title?: string
           updated_at?: string
-          url?: string
         }
       }
       participants: {
@@ -296,6 +296,7 @@ export interface Database {
           image_url: string | null
           inserted_at: string
           is_published: boolean
+          slug: string
           title: string
           updated_at: string
         }
@@ -305,6 +306,7 @@ export interface Database {
           image_url?: string | null
           inserted_at?: string
           is_published?: boolean
+          slug: string
           title: string
           updated_at?: string
         }
@@ -314,6 +316,7 @@ export interface Database {
           image_url?: string | null
           inserted_at?: string
           is_published?: boolean
+          slug?: string
           title?: string
           updated_at?: string
         }
@@ -401,7 +404,10 @@ export interface Database {
           inserted_at: string
           is_published: boolean
           is_useradded: boolean
+          latitude: number
           location: string
+          longitude: number
+          slug: string
           title: string
           updated_at: string
           website: string | null
@@ -413,7 +419,10 @@ export interface Database {
           inserted_at?: string
           is_published?: boolean
           is_useradded?: boolean
+          latitude: number
           location: string
+          longitude: number
+          slug: string
           title: string
           updated_at?: string
           website?: string | null
@@ -425,7 +434,10 @@ export interface Database {
           inserted_at?: string
           is_published?: boolean
           is_useradded?: boolean
+          latitude?: number
           location?: string
+          longitude?: number
+          slug?: string
           title?: string
           updated_at?: string
           website?: string | null

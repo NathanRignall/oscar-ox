@@ -7,7 +7,7 @@ import fontColorContrast from "font-color-contrast";
 export default async function Companies() {
   const supabase = createServerClient();
 
-  const { data } = await supabase.from("companies").select(
+  const { data: _companies } = await supabase.from("companies").select(
     `
     id,
     name,
@@ -15,7 +15,7 @@ export default async function Companies() {
     `
   );
 
-  const companies = getArray(data);
+  const companies = getArray(_companies);
 
   return (
     <div className="container mx-auto py-6 px-8">
