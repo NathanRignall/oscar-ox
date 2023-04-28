@@ -86,12 +86,12 @@ export default async function Account({
 
   return (
     <>
-      <header className="flex max-w-3xl mx-auto mb-8">
+      <header className="sm:flex max-w-3xl mx-auto mb-8">
         <div className="flex-1">
-          <h1 className="mb-3 text-6xl font-extrabold text-slate-900">
+          <h1 className="mb-1 text-5xl sm:text-6xl font-extrabold text-slate-900">
             {profile.name}
           </h1>
-          <p className="mb-3 text-xl text-slate-600 ">{profile.biography}</p>
+          <p className="mb-3 text-xl text-slate-600 mt-2">{profile.biography}</p>
 
           <ul className="flex flex-wrap gap-2">
             {profile.tags.map((tag) => (
@@ -106,7 +106,7 @@ export default async function Account({
           </ul>
         </div>
 
-        <div className="w-[150px]">
+        <div className="sm:w-[150px] w-[200px]">
           <ProfilePicture src={`profiles/${profile.avatar_url}`} />
         </div>
       </header>
@@ -114,7 +114,7 @@ export default async function Account({
       <main className="max-w-3xl mx-auto">
         {participants && (
           <section>
-            <div className="flex justify-between items-center">
+            <div className="sm:flex justify-between items-center">
               <div>
                 <h2 className="text-4xl font-bold text-slate-900">
                   Productions

@@ -90,13 +90,15 @@ export default async function Account() {
 
   return (
     <>
-      <header className="flex max-w-3xl mx-auto mb-8">
+      <header className="sm:flex max-w-3xl mx-auto mb-8">
         <div className="flex-1">
-          <h1 className="mb-1 text-6xl font-extrabold text-slate-900">
+          <h1 className="mb-1 text-5xl sm:text-6xl font-extrabold text-slate-900">
             {profile.name}
           </h1>
-          <div>
-            <p className="mb-3 text-xl text-slate-600 inline-block">{profile.biography}</p>
+          <div className="mb-3" >
+            <p className="text-xl text-slate-600 inline-block">
+              {profile.biography}
+            </p>
             <EditProfileModal
               name={profile.name}
               biography={profile.biography}
@@ -115,7 +117,7 @@ export default async function Account() {
             ))}
           </ul>
 
-          <div className="mt-4">
+          <div>
             <ButtonLink href={`/profile/${encodeURIComponent(profile.id)}`}>
               View Public
             </ButtonLink>
@@ -125,18 +127,15 @@ export default async function Account() {
           </div>
         </div>
 
-        <div className="w-[150px]">
-          <ProfilePicture
-            src={`profiles/${profile.avatar_url}`}
-            edit={true}
-          />
+        <div className="sm:w-[150px] w-[200px] sm:p-0 pt-3 pb-3">
+          <ProfilePicture src={`profiles/${profile.avatar_url}`} edit={true} />
         </div>
       </header>
 
       <main className="max-w-3xl mx-auto">
         {participants && (
           <section>
-            <div className="flex justify-between items-center">
+            <div className="sm:flex justify-between items-center">
               <div>
                 <h2 className="text-4xl font-bold text-slate-900">
                   Productions
