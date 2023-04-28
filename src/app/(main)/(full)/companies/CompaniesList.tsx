@@ -48,7 +48,6 @@ export const CompaniesList = ({ _companies }: CompaniesListProps) => {
           throw error;
         }
       } catch (error) {
-        alert("Error loading data!");
         console.log(error);
       } finally {
         setLoading(false);
@@ -87,36 +86,38 @@ export const CompaniesList = ({ _companies }: CompaniesListProps) => {
             className="w-full rounded-lg border-2 border-slate-200 pl-10 pr-4 py-3 text-md text-slate-900 placeholder-slate-400"
             placeholder="Search Companies"
             required
-            // update the state when a user types in the search bar
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
       </form>
 
       <main>
-        <section className="grid grid-cols-3 gap-4 mt-4">
-          {companies.map((company) => (
-            <Link
-              key={company.id}
-              href={`/companies/${encodeURIComponent(company.id)}`}
-            >
-              <div
-                className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg"
-                style={{
-                  backgroundColor: company.main_colour,
-                  color: fontColorContrast(company.main_colour),
-                }}
+        {!loading ? (
+          <section className="grid grid-cols-3 gap-4 mt-4">
+            {companies.map((company) => (
+              <Link
+                key={company.id}
+                href={`/companies/${encodeURIComponent(company.id)}`}
               >
-                <h2 className="text-4xl font-bold text-center">
-                  {company.name}
-                </h2>
-              </div>
-            </Link>
-          ))}
-        </section>
-
-        {companies.length === 0 && !loading && (
-          <p>No companies found. Try another search.</p>
+                <div
+                  className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg"
+                  style={{
+                    backgroundColor: company.main_colour,
+                    color: fontColorContrast(company.main_colour),
+                  }}
+                >
+                  <h2 className="text-4xl font-bold text-center">
+                    {company.name}
+                  </h2>
+                </div>
+              </Link>
+            ))}
+          </section>
+        ) : (
+          <section className="grid grid-cols-3 gap-4 mt-4">
+            <div className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg bg-slate-300 animate-pulse" />
+            <div className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg bg-slate-300 animate-pulse" />
+          </section>
         )}
       </main>
     </>
