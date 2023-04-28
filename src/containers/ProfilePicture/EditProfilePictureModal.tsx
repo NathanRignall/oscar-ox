@@ -51,7 +51,7 @@ export const EditProfilePictureModal = ({
 
     const { data: data1, error: error1 } = await supabase.storage
       .from("profiles")
-      .upload(`public/${filename}`, file, {
+      .upload(filename, file, {
         cacheControl: "3600",
         upsert: false,
       });

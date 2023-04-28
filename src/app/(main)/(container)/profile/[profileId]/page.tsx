@@ -107,7 +107,7 @@ export default async function Account({
         </div>
 
         <div className="w-[150px]">
-          <ProfilePicture src={`profiles/public/${profile.avatar_url}`} />
+          <ProfilePicture src={`profiles/${profile.avatar_url}`} />
         </div>
       </header>
 
