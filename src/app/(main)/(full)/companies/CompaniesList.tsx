@@ -19,7 +19,7 @@ export type CompaniesListProps = {
 export const CompaniesList = ({ _companies }: CompaniesListProps) => {
   const [companies, setCompanies] = useState<Company[]>(_companies);
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
 
   const { supabase } = useSupabase();
