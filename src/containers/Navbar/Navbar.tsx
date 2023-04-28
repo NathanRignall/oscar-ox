@@ -1,5 +1,5 @@
-import React from "react";
 import Link from "next/link";
+import { Tag } from "@/components/ui";
 
 // Navbar types
 interface NavbarProps {
@@ -40,12 +40,25 @@ export const Navbar = ({ loggedIn }: NavbarProps) => {
       <div className="mx-auto max-w-7xl px-2 md:px-6 md:py-2 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           <div className="right-0 flex flex-1 items-center justify-center md:items-stretch md:justify-start">
-            <div className="text-4xl font-bold text-slate-900">Oscar Ox</div>
+            <div className="text-4xl font-bold text-slate-900 content-center">
+              Oscar Ox
+            </div>
+            <div className="flex items-center ml-2">
+              {process.env.NEXT_PUBLIC_STAGE === "dev" && (
+                <Tag variant="red" text="Dev" />
+              )}
+              {process.env.NEXT_PUBLIC_STAGE === "alpha" && (
+                <Tag variant="green" text="Alpha" />
+              )}
+              {process.env.NEXT_PUBLIC_STAGE === "beta" && (
+                <Tag variant="blue" text="Beta" />
+              )}
+            </div>
           </div>
 
-          <div className="absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0">
-            <div className="hidden md:ml-6 md:block">
-              <div className="flex space-x-4">
+          <div className="absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:pr-0">
+            <div className="hidden md:block">
+              <div className="flex space-x-2">
                 {links.map((link) => (
                   <NavbarLink
                     key={link.href}

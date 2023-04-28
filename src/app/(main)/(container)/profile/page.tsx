@@ -105,17 +105,19 @@ export default async function Account() {
             />
           </div>
 
-          <ul className="flex flex-wrap gap-2">
-            {profile.tags.map((tag) => (
-              <li key={tag.id}>
-                <Tag
-                  text={tag.company.name}
-                  href={`/companies/${encodeURIComponent(tag.company.id)}`}
-                  color={tag.company.main_colour}
-                />
-              </li>
-            ))}
-          </ul>
+          {profile.tags.length > 0 && (
+            <ul className="flex flex-wrap gap-2 mb-3">
+              {profile.tags.map((tag) => (
+                <li key={tag.id}>
+                  <Tag
+                    text={tag.company.name}
+                    href={`/companies/${encodeURIComponent(tag.company.id)}`}
+                    color={tag.company.main_colour}
+                  />
+                </li>
+              ))}
+            </ul>
+          )}
 
           <div>
             <ButtonLink href={`/profile/${encodeURIComponent(profile.id)}`}>

@@ -91,19 +91,23 @@ export default async function Account({
           <h1 className="mb-1 text-5xl sm:text-6xl font-extrabold text-slate-900">
             {profile.name}
           </h1>
-          <p className="mb-3 text-xl text-slate-600 mt-2">{profile.biography}</p>
+          <p className="mb-3 text-xl text-slate-600 mt-2">
+            {profile.biography}
+          </p>
 
-          <ul className="flex flex-wrap gap-2">
-            {profile.tags.map((tag) => (
-              <li key={tag.id}>
-                <Tag
-                  text={tag.company.name}
-                  href={`/companies/${encodeURIComponent(tag.company.id)}`}
-                  color={tag.company.main_colour}
-                />
-              </li>
-            ))}
-          </ul>
+          {profile.tags.length > 0 && (
+            <ul className="flex flex-wrap gap-2 mb-3">
+              {profile.tags.map((tag) => (
+                <li key={tag.id}>
+                  <Tag
+                    text={tag.company.name}
+                    href={`/companies/${encodeURIComponent(tag.company.id)}`}
+                    color={tag.company.main_colour}
+                  />
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         <div className="sm:w-[150px] w-[200px]">
