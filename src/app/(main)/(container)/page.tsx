@@ -1,9 +1,11 @@
+import clsx from "clsx";
+
 // event component props
 type CalenderEventProps = {
   title: string;
   time: string;
   location: string;
-  color: string;
+  variant: "red" | "orange" | "yellow" | "green" | "blue" | "pink" | "purple";
 };
 
 // event component
@@ -11,13 +13,63 @@ const CalenderEvent = ({
   title,
   time,
   location,
-  color,
+  variant,
 }: CalenderEventProps) => {
   return (
-    <div className="bg-red-100 rounded-lg border-l-[3px] border-red-900 px-3 py-1 mb-3">
-      <p className="text-red-900 text-xs font-bold">{time}</p>
-      <p className="text-red-900 text-sm font-medium">{title}</p>
-      <p className="text-red-800 text-xs font-base">{location}</p>
+    <div
+      className={clsx(
+        variant == "red" && "bg-red-100 border-red-900",
+        variant == "orange" && "bg-orange-100 border-orange-900",
+        variant == "yellow" && "bg-yellow-100 border-yellow-900",
+        variant == "green" && "bg-green-100 border-green-900",
+        variant == "blue" && "bg-blue-100 border-blue-900",
+        variant == "pink" && "bg-pink-100 border-pink-900",
+        variant == "purple" && "bg-purple-100 border-purple-900",
+        "rounded-lg border-l-[3px]  px-3 py-1 mb-3"
+      )}
+    >
+      <p
+        className={clsx(
+          variant == "red" && "text-red-900",
+          variant == "orange" && "text-orange-900",
+          variant == "yellow" && "text-yellow-900",
+          variant == "green" && "text-green-900",
+          variant == "blue" && "text-blue-900",
+          variant == "pink" && "text-pink-900",
+          variant == "purple" && "text-purple-900",
+          "text-xs font-bold"
+        )}
+      >
+        {time}
+      </p>
+      <p
+        className={clsx(
+          variant == "red" && "text-red-900",
+          variant == "orange" && "text-orange-900",
+          variant == "yellow" && "text-yellow-900",
+          variant == "green" && "text-green-900",
+          variant == "blue" && "text-blue-900",
+          variant == "pink" && "text-pink-900",
+          variant == "purple" && "text-purple-900",
+          " text-sm font-medium"
+        )}
+      >
+        {title}
+      </p>
+      <p
+        className={clsx(
+          variant == "red" && "text-red-800",
+          variant == "orange" && "text-orange-800",
+          variant == "yellow" && "text-yellow-800",
+          variant == "green" && "text-green-800",
+          variant == "blue" && "text-blue-800",
+          variant == "pink" && "text-pink-800",
+          variant == "purple" && "text-purple-800",
+          "text-xs font-base"
+        )}
+      >
+        {location}
+      </p>
     </div>
   );
 };
@@ -133,19 +185,19 @@ export default function Home() {
                   title="Mary Poppins"
                   time="17:00"
                   location="The Playhouse"
-                  color="red"
+                  variant="red"
                 />
                 <CalenderEvent
                   title="American in Paris"
                   time="19:30"
                   location="Oxford Theatre"
-                  color="green"
+                  variant="green"
                 />
                 <CalenderEvent
                   title="The thwarting of Baron Bolligrew"
                   time="19:30"
                   location="The Auditorium"
-                  color="amber"
+                  variant="orange"
                 />
               </div>
             </div>
@@ -159,13 +211,13 @@ export default function Home() {
                   title="Matilda"
                   time="18:00"
                   location="The Playhouse"
-                  color="purple"
+                  variant="purple"
                 />
                 <CalenderEvent
                   title="American in Paris"
                   time="19:30"
                   location="Oxford Theatre"
-                  color="green"
+                  variant="green"
                 />
               </div>
             </div>
@@ -179,13 +231,13 @@ export default function Home() {
                   title="Matilda"
                   time="18:00"
                   location="The Playhouse"
-                  color="purple"
+                  variant="purple"
                 />
                 <CalenderEvent
                   title="The thwarting of Baron Bolligrew"
                   time="19:30"
                   location="The Auditorium"
-                  color="amber"
+                  variant="orange"
                 />
               </div>
             </div>
@@ -206,7 +258,7 @@ export default function Home() {
                   title="Mary Poppins"
                   time="17:00"
                   location="The Playhouse"
-                  color="red"
+                  variant="red"
                 />
               </div>
             </div>
@@ -220,19 +272,19 @@ export default function Home() {
                   title="Mary Poppins"
                   time="17:00"
                   location="The Playhouse"
-                  color="red"
+                  variant="red"
                 />
                 <CalenderEvent
                   title="American in Paris"
                   time="19:30"
                   location="Oxford Theatre"
-                  color="green"
+                  variant="green"
                 />
                 <CalenderEvent
                   title="Joseph and the Amazing Technicolor Dreamcoat"
                   time="19:30"
                   location="The Auditorium"
-                  color="pink"
+                  variant="pink"
                 />
               </div>
             </div>
@@ -246,13 +298,13 @@ export default function Home() {
                   title="Mary Poppins"
                   time="17:00"
                   location="The Playhouse"
-                  color="red"
+                  variant="red"
                 />
                 <CalenderEvent
                   title="American in Paris"
                   time="19:30"
                   location="Oxford Theatre"
-                  color="green"
+                  variant="green"
                 />
               </div>
             </div>

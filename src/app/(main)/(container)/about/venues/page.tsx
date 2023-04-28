@@ -54,7 +54,7 @@ export default async function Venues() {
               <div className="h-full aspect-1 relative bg-slate-300 rounded-r-md overflow-hidden">
                 <Image
                   alt=""
-                  src={`images/public/venues/${venue.image_url}`}
+                  src={`media/images/venues/${venue.image_url}`}
                   className={"duration-200 ease-in-out rounded-r-md"}
                   fill
                   priority
