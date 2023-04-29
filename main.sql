@@ -54,11 +54,11 @@ create table public.categories (
 
 -- create table for subscriptions
 create table public.subscriptions (
-  id uuid primary key default uuid_generate_v4(),
   profile_id uuid references public.profiles on delete cascade not null,
   category_id uuid references public.categories on delete cascade not null,
   inserted_at timestamp with time zone default timezone('utc'::text, now()) not null,
-  updated_at timestamp with time zone default timezone('utc'::text, now()) not null
+  updated_at timestamp with time zone default timezone('utc'::text, now()) not null,
+  primary key (profile_id, category_id)
 );
 
 -- create table for companies
@@ -73,12 +73,12 @@ create table public.companies (
 
 -- create table for company members
 create table public.company_members (
-  id uuid primary key default uuid_generate_v4(),
   company_id uuid references public.companies on delete cascade not null,
   profile_id uuid references public.profiles on delete cascade not null,
   role public.company_role not null default 'moderator',
   inserted_at timestamp with time zone default timezone('utc'::text, now()) not null,
-  updated_at timestamp with time zone default timezone('utc'::text, now()) not null
+  updated_at timestamp with time zone default timezone('utc'::text, now()) not null,
+  primary key (company_id, profile_id)
 );
 
 -- create table for productions
@@ -131,9 +131,9 @@ create table public.vacancies (
 
 -- create table for vacancy categories
 create table public.vacancy_categories (
-  id uuid primary key default uuid_generate_v4(),
   vacancy_id uuid references public.vacancies on delete cascade not null,
-  category_id uuid references public.categories on delete cascade not null
+  category_id uuid references public.categories on delete cascade not null,
+  primary key (vacancy_id, category_id)
 );
 
 -- create table for responenses
@@ -153,7 +153,6 @@ create table public.pages (
   company_id uuid references public.companies on delete cascade not null,
   slug text not null unique,
   title text not null,
-  content text not null,
   is_published boolean not null,
   inserted_at timestamp with time zone default timezone('utc'::text, now()) not null,
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null

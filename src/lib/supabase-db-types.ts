@@ -83,7 +83,6 @@ export interface Database {
       company_members: {
         Row: {
           company_id: string
-          id: string
           inserted_at: string
           profile_id: string
           role: Database["public"]["Enums"]["company_role"]
@@ -91,7 +90,6 @@ export interface Database {
         }
         Insert: {
           company_id: string
-          id?: string
           inserted_at?: string
           profile_id: string
           role?: Database["public"]["Enums"]["company_role"]
@@ -99,7 +97,6 @@ export interface Database {
         }
         Update: {
           company_id?: string
-          id?: string
           inserted_at?: string
           profile_id?: string
           role?: Database["public"]["Enums"]["company_role"]
@@ -144,7 +141,6 @@ export interface Database {
       pages: {
         Row: {
           company_id: string
-          content: string
           id: string
           inserted_at: string
           is_published: boolean
@@ -154,7 +150,6 @@ export interface Database {
         }
         Insert: {
           company_id: string
-          content: string
           id?: string
           inserted_at?: string
           is_published: boolean
@@ -164,7 +159,6 @@ export interface Database {
         }
         Update: {
           company_id?: string
-          content?: string
           id?: string
           inserted_at?: string
           is_published?: boolean
@@ -324,21 +318,18 @@ export interface Database {
       subscriptions: {
         Row: {
           category_id: string
-          id: string
           inserted_at: string
           profile_id: string
           updated_at: string
         }
         Insert: {
           category_id: string
-          id?: string
           inserted_at?: string
           profile_id: string
           updated_at?: string
         }
         Update: {
           category_id?: string
-          id?: string
           inserted_at?: string
           profile_id?: string
           updated_at?: string
@@ -382,17 +373,14 @@ export interface Database {
       vacancy_categories: {
         Row: {
           category_id: string
-          id: string
           vacancy_id: string
         }
         Insert: {
           category_id: string
-          id?: string
           vacancy_id: string
         }
         Update: {
           category_id?: string
-          id?: string
           vacancy_id?: string
         }
       }

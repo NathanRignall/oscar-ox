@@ -18,7 +18,6 @@ export default async function Settings({
     .from("company_members")
     .select(
       `
-      id,
       role,
       user:profiles (
         id,
@@ -31,7 +30,6 @@ export default async function Settings({
     .match({ company_id: params.companyId });
 
   const members = getArray(_members).map((member) => ({
-    id: member.id,
     role: member.role,
     user: getSingle(member.user),
   }));
@@ -66,7 +64,7 @@ export default async function Settings({
 
             <tbody className="divide-y-2 divide-solid divide-slate-200">
               {members.map((member) => (
-                <tr key={member.id} className="bg-white hover:bg-slate-50">
+                <tr key={member.user.id} className="bg-white hover:bg-slate-50">
                   <th scope="row" className="px-4 py-4">
                     {member.user.name}
                   </th>

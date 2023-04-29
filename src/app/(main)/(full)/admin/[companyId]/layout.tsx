@@ -36,7 +36,7 @@ export default async function AdminLayout({
   if (!company) notFound();
 
   return (
-    <div className="flex">
+    <div className="flex h-full">
       <aside className="flex-none w-64 h-full">
         <div className="flex flex-col overflow-y-auto bg-white border-r-2 border-slate-200 h-full">
           <h2 className="flex items-center text-lg px-7 py-6 border-b-2 border-slate-200">

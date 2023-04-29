@@ -12,7 +12,7 @@ export default async function Admin() {
 
   const { data } = await supabase.from("company_members").select(
     `
-    id,
+    role,
     company:companies (
       id,
       name
@@ -22,7 +22,7 @@ export default async function Admin() {
 
   const members = data
     ? data.map((item) => ({
-        id: item.id,
+        role: item.role,
         company: getSingle(item.company),
       }))
     : [];
@@ -41,7 +41,7 @@ export default async function Admin() {
         <ul className="mt-4 grid gap-4">
           {members.map((member) => (
             <li
-              key={member.id}
+              key={member.company.id}
               className="text-center bg-white rounded-lg border-2 border-slate-200 py-5 px-4"
             >
               <Link href={`/admin/${encodeURIComponent(member.company.id)}`}>

@@ -22,7 +22,6 @@ export default async function Account({
           biography,
           avatar_url,
           tags:company_members (
-            id,
             company:companies (
               id,
               name,
@@ -42,10 +41,7 @@ export default async function Account({
     email: _profile.email,
     biography: _profile.biography,
     avatar_url: _profile.avatar_url || "default.jpg",
-    tags: getArray(_profile.tags).map((tag) => ({
-      id: tag.id,
-      company: getSingle(tag.company),
-    })),
+    tags: getArray(_profile.tags).map((tag) => getSingle(tag.company)),
   };
 
   const { data: _participants } = await supabase
@@ -100,9 +96,9 @@ export default async function Account({
               {profile.tags.map((tag) => (
                 <li key={tag.id}>
                   <Tag
-                    text={tag.company.name}
-                    href={`/companies/${encodeURIComponent(tag.company.id)}`}
-                    color={tag.company.main_colour}
+                    text={tag.name}
+                    href={`/companies/${encodeURIComponent(tag.id)}`}
+                    color={tag.main_colour}
                   />
                 </li>
               ))}
