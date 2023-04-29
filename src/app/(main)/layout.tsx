@@ -2,6 +2,7 @@ import "server-only";
 
 import { Navbar } from "@/containers";
 import { createServerClient } from "@/lib/supabase-server";
+import OnboardModal from "./OnboardModal";
 
 // do not cache this layout
 export const revalidate = 0;
@@ -15,13 +16,15 @@ export default async function BareLayout({
   const supabase = createServerClient();
 
   const {
-    data: { session },
-  } = await supabase.auth.getSession();
+    data: { user },
+  } = await supabase.auth.getUser();
 
   return (
     <>
-      <Navbar loggedIn={session != null} />
+      <Navbar loggedIn={user != null} />
       <div className="grow">{children}</div>
+
+      {user && !user.user_metadata.finished_onboarding && <OnboardModal />}
     </>
   );
 }
