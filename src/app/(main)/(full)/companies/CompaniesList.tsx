@@ -38,7 +38,10 @@ export const CompaniesList = ({ _companies }: CompaniesListProps) => {
           main_colour
           `
           )
-          .textSearch("name", search);
+          .textSearch("name", search, {
+            type: "websearch",
+            config: "english",
+          });
 
         const formatedData = getArray(data);
 
@@ -93,7 +96,7 @@ export const CompaniesList = ({ _companies }: CompaniesListProps) => {
 
       <main>
         {!loading ? (
-          <section className="grid grid-cols-3 gap-4 mt-4">
+          <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
             {companies.map((company) => (
               <Link
                 key={company.id}
@@ -114,7 +117,7 @@ export const CompaniesList = ({ _companies }: CompaniesListProps) => {
             ))}
           </section>
         ) : (
-          <section className="grid grid-cols-3 gap-4 mt-4">
+          <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
             <div className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg bg-slate-300 animate-pulse" />
             <div className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg bg-slate-300 animate-pulse" />
           </section>
