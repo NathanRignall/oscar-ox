@@ -93,9 +93,7 @@ export default async function CompanyLayout({
         </div>
       </header>
 
-      <div className="container mx-auto py-6 px-8">
-        <main>{children}</main>
-      </div>
+      <div className="container mx-auto py-6 px-8">{children}</div>
     </>
   );
 }

@@ -7,7 +7,7 @@ export default async function Company({
   params: { companyId: string };
 }) {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/pages/${params.companyId}/index.mdx`
+    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/companies/${params.companyId}/pages/home/index.mdx`
   );
 
   const markdown = await res.text();
@@ -15,8 +15,11 @@ export default async function Company({
   return (
     <>
       <h1 className="text-4xl font-bold text-slate-900">About</h1>
-      {/* @ts-expect-error */}
-      <MDXRemote source={markdown} />
+
+      <main className="mt-4">
+        {/* @ts-expect-error */}
+        <MDXRemote source={markdown} />
+      </main>
     </>
   );
 }
