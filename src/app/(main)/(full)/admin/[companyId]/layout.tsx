@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { createServerClient } from "@/lib/supabase-server";
 import { notFound } from "next/navigation";
 
@@ -21,6 +22,12 @@ export default async function AdminLayout({
   params: { companyId: string };
 }) {
   const supabase = createServerClient();
+
+  // get user and redirect if not logged in
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) redirect("/auth/login");
 
   const { data: company } = await supabase
     .from("companies")

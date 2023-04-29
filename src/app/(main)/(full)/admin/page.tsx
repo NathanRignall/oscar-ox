@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { createServerClient } from "@/lib/supabase-server";
 import { getSingle } from "@/lib/supabase-type-convert";
 import { AddCompanyModal } from "./AddCompanyModal";
@@ -9,6 +10,12 @@ export const revalidate = 0;
 // Page
 export default async function Admin() {
   const supabase = createServerClient();
+
+  // get user and redirect if not logged in
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) redirect("/auth/login");
 
   const { data } = await supabase.from("company_members").select(
     `
@@ -45,9 +52,9 @@ export default async function Admin() {
               className="text-center bg-white rounded-lg border-2 border-slate-200 py-5 px-4"
             >
               <Link href={`/admin/${encodeURIComponent(member.company.id)}`}>
-              <h2 className="text-lg font-bold text-slate-900 underline">
-                {member.company.name}
-              </h2>
+                <h2 className="text-lg font-bold text-slate-900 underline">
+                  {member.company.name}
+                </h2>
               </Link>
             </li>
           ))}
@@ -55,7 +62,7 @@ export default async function Admin() {
       </section>
 
       <div className="fixed bottom-0 right-0 m-8">
-        <AddCompanyModal/>
+        <AddCompanyModal />
       </div>
     </div>
   );

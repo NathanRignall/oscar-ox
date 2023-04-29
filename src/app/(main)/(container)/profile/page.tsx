@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { redirect } from 'next/navigation';
 import { createServerClient } from "@/lib/supabase-server";
 import { getArray, getSingle } from "@/lib/supabase-type-convert";
 import { ButtonLink, Tag } from "@/components/ui";
@@ -37,7 +37,8 @@ export default async function Account() {
     .match({ id: user?.id })
     .single();
 
-  if (!_profile) notFound();
+  // if no profile, redirect to login
+  if (!_profile) redirect('/auth/login');
 
   const profile = {
     id: _profile.id,
