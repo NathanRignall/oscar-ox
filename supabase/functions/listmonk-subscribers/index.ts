@@ -20,7 +20,7 @@ const api = Deno.env.get('LISTMONK_API');
 
 const headers = {
   "Content-Type": "application/json",
-  Authorization: Deno.env.get('LISTMONK_API_AUTHORIZATION'),
+  Authorization: Deno.env.get('LISTMONK_API_AUTHORIZATION') as string,
 };
 
 serve(async (req) => {
