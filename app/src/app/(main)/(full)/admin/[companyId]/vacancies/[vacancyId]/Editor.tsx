@@ -14,11 +14,12 @@ const MDPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
 
 export type EditorProps = {
   vacancyId: string;
+  intialContent?: string;
   preview?: boolean;
 };
 
-export const Editor = ({ vacancyId, preview = false }: EditorProps) => {
-  const [value, setValue] = useState<string | undefined>("**Hello world!!!**");
+export const Editor = ({ vacancyId, preview, intialContent }: EditorProps) => {
+  const [content, setContent] = useState<string | undefined>(intialContent);
 
   const { supabase } = useSupabase();
 
@@ -26,22 +27,22 @@ export const Editor = ({ vacancyId, preview = false }: EditorProps) => {
     const saveContent = async () => {
       const { data, error } = await supabase
         .from("vacancies")
-        .update({ content: value })
+        .update({ content })
         .eq("id", vacancyId);
     };
 
     saveContent();
-  }, [supabase, vacancyId, value]);
+  }, [supabase, vacancyId, content]);
 
   return (
     <>
       {preview ? (
         <div className="px-6 py-4 bg-white rounded-md">
-          <MDPreview source={value} />
+          <MDPreview source={content} />
         </div>
       ) : (
         <div>
-          <MDEditor value={value} onChange={setValue} />
+          <MDEditor value={content} onChange={setContent} />
           <PublishVacancyModal vacancyId={vacancyId} />
         </div>
       )}

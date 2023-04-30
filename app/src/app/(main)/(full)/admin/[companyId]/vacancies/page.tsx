@@ -102,7 +102,7 @@ export default async function Vacancies({
                     {vacancy.responses}
                   </td>
 
-                  <td className="px-4 py-4 text-gray-500">
+                  <td className="px-4 py-4 text-gray-500 whitespace-nowrap space-x-1">
                     {vacancy.categories.map((category) => (
                       <Tag
                         key={category.id}

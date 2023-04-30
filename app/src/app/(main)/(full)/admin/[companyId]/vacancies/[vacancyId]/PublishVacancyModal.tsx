@@ -54,7 +54,7 @@ export const PublishVacancyModal = ({
     const loadContent = async () => {
       const { data, error } = await supabase
         .from("vacancies")
-        .select("content")
+        .select("title, content")
         .eq("id", vacancyId)
         .single();
 
@@ -103,15 +103,25 @@ export const PublishVacancyModal = ({
                   </button>
                 </div>
 
-                <div className="text-3xl text-slate-900 font-bold mb-8">
+                <div className="text-3xl text-slate-900 font-bold mb-1">
                   Publish Vacancy
                 </div>
 
-                <div className="mb-4 bg-slate-200">
+                <p className="text-lg text-slate-600 mb-8">
+                  You are about to publish this vacancy. 
+                  Are you sure you want to proceed?
+                </p>
+
+                <div className="mb-4 px-6 py-4 bg-white rounded-md border-slate-200 border-2">
                   <MDEditor source={value} />
                 </div>
 
-                <Button onClick={onSubmit} className="mt-4">
+                <Button
+                  onClick={onSubmit}
+                  className="mt-4 mb-6"
+                  display="block"
+                  variant="secondary"
+                >
                   Publish
                 </Button>
               </div>
