@@ -121,7 +121,7 @@ create table public.vacancies (
   id uuid primary key default uuid_generate_v4(),
   company_id uuid references public.companies on delete cascade not null,
   title text not null,
-  description text not null,
+  content text,
   is_open boolean not null default true,
   is_published boolean not null default false,
   production_id uuid references public.productions,

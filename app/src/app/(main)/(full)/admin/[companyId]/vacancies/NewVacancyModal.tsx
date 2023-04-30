@@ -7,11 +7,11 @@ import { object, string } from "yup";
 import { FormikProps, Formik, Field, Form } from "formik";
 import { Button } from "@/components/ui";
 
-type AddProductionModalProps = {
+type NewVacancyModalProps = {
   company_id: string;
 };
 
-export const AddProductionModal = ({ company_id }: AddProductionModalProps) => {
+export const NewVacancyModal = ({ company_id }: NewVacancyModalProps) => {
   const { supabase, session } = useSupabase();
 
   const router = useRouter();
@@ -26,28 +26,22 @@ export const AddProductionModal = ({ company_id }: AddProductionModalProps) => {
 
   interface FormValues {
     title: string;
-    description: string;
   }
 
   const initialValues: FormValues = {
     title: "",
-    description: "",
   };
 
   const validationSchema = object({
     title: string()
       .min(3, "Must be at least 3 characters")
       .required("Title is Required"),
-    description: string()
-      .min(3, "Must be at least 3 characters")
-      .required("Description is Required"),
   });
 
   const onSubmit = async (values: FormValues) => {
-    const { error } = await supabase.from("productions").insert({
+    const { error } = await supabase.from("vacancies").insert({
       company_id: company_id,
       title: values.title,
-      description: values.description,
     });
 
     if (error) {
@@ -62,7 +56,7 @@ export const AddProductionModal = ({ company_id }: AddProductionModalProps) => {
   };
   return (
     <>
-      <Button onClick={toggleModal}>Add Production</Button>
+      <Button onClick={toggleModal}>New Vacancy</Button>
 
       {isOpen && (
         <div className="fixed z-30 inset-0 overflow-y-auto">
@@ -94,7 +88,7 @@ export const AddProductionModal = ({ company_id }: AddProductionModalProps) => {
                 </div>
 
                 <div className="text-3xl text-slate-900 font-bold mb-8">
-                  Add Production
+                  New Vacnacy
                 </div>
 
                 <Formik
@@ -114,33 +108,13 @@ export const AddProductionModal = ({ company_id }: AddProductionModalProps) => {
                           type="text"
                           name="title"
                           autoComplete="title"
-                          placeholder="Production title.."
+                          placeholder="Vacancy title..."
                           className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
                         />
 
                         {errors.title && touched.title ? (
                           <p className="mt-2 text-sm text-slate-600">
                             {errors.title}
-                          </p>
-                        ) : (
-                          <div className="mt-2 h-5" />
-                        )}
-                      </div>
-
-                      <div className="mb-4">
-                        <Field
-                          component="textarea"
-                          id="description"
-                          type="text"
-                          rows={5}
-                          name="description"
-                          autoComplete="description"
-                          placeholder="Production description..."
-                          className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
-                        />
-                        {errors.description && touched.description ? (
-                          <p className="mt-2 text-sm text-slate-600">
-                            {errors.description}
                           </p>
                         ) : (
                           <div className="mt-2 h-5" />

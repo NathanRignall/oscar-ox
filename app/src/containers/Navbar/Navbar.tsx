@@ -64,7 +64,7 @@ export const Navbar = ({ loggedIn }: NavbarProps) => {
             <span className="self-center text-3xl md:text-4xl font-bold whitespace-nowrap text-slate-900">
               Oscar Ox
             </span>
-            <div className="flex items-center ml-2">
+            <div className="ml-2">
               {process.env.NEXT_PUBLIC_STAGE === "dev" && (
                 <Tag variant="red" text="Dev" />
               )}
@@ -144,15 +144,11 @@ export const Navbar = ({ loggedIn }: NavbarProps) => {
 
       <div
         className={clsx(
-          show ? "flex" : "hidden",
-          "z-30 inset-0 overflow-y-auto md:hidden"
+          show ? "block" : "hidden",
+          "z-30 fixed inset-0 bg-slate-500 opacity-70"
         )}
         onClick={toggleShow}
-      >
-        <div className="flex items-center justify-center min-h-screen pt-5 px-5 sm:p-0">
-          <div className="fixed inset-0 bg-slate-500 opacity-70" />
-        </div>
-      </div>
+      />
     </>
   );
 };

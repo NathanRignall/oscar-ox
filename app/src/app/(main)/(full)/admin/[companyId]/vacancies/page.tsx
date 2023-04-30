@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { createServerClient } from "@/lib/supabase-server";
 import { getArray } from "@/lib/supabase-type-convert";
-import { AddProductionModal } from "./AddProductionModal";
+import { NewVacancyModal } from "./NewVacancyModal";
 import { Tag } from "@/components/ui";
 
 // do not cache this page
@@ -43,7 +43,7 @@ export default async function Vacancies({
       <h1 className="text-4xl font-bold text-slate-900">Vacancies</h1>
 
       <section className="mt-4">
-        <AddProductionModal company_id={params.companyId} />
+        <NewVacancyModal company_id={params.companyId} />
 
         <div className="mt-4 border-2 border-slate-200 rounded-lg overflow-hidden">
           <table className="w-full text-left divide-y-2 divide-gray-200">
@@ -89,9 +89,9 @@ export default async function Vacancies({
 
                   <td className="px-4 text-right">
                     {vacancy.is_published ? (
-                      <Tag text="Published" color="green" />
+                      <Tag text="Published" variant="green" />
                     ) : (
-                      <Tag text="Draft" color="blue" />
+                      <Tag text="Draft" variant="blue" />
                     )}
                   </td>
                 </tr>

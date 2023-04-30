@@ -77,7 +77,7 @@ serve(async (req) => {
           lists: listIds,
           type: "regular",
           content_type: "markdown",
-          body: payload.record.description,
+          body: payload.record.content,
           template_id: 1,
         }),
       });

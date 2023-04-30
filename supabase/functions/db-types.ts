@@ -338,7 +338,7 @@ export interface Database {
       vacancies: {
         Row: {
           company_id: string
-          description: string
+          content: string | null
           id: string
           inserted_at: string
           is_open: boolean
@@ -349,7 +349,7 @@ export interface Database {
         }
         Insert: {
           company_id: string
-          description: string
+          content?: string | null
           id?: string
           inserted_at?: string
           is_open?: boolean
@@ -360,7 +360,7 @@ export interface Database {
         }
         Update: {
           company_id?: string
-          description?: string
+          content?: string | null
           id?: string
           inserted_at?: string
           is_open?: boolean
