@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { createServerClient } from "@/lib/supabase-server";
-import { getArray } from "@/lib/supabase-type-convert";
+import { getArray, getSingle } from "@/lib/supabase-type-convert";
 import { NewVacancyModal } from "./NewVacancyModal";
 import { Tag } from "@/components/ui";
 
@@ -23,7 +23,14 @@ export default async function Vacancies({
       title,
       is_open,
       is_published,
-      inserted_at
+      inserted_at,
+      responses(
+        id
+      ),
+      categories(
+        id,
+        title
+      )
       `
     )
     .match({ company_id: params.companyId });
@@ -35,6 +42,8 @@ export default async function Vacancies({
       is_open: vacancy.is_open,
       is_published: vacancy.is_published,
       inserted_at: vacancy.inserted_at,
+      responses: getArray(vacancy.responses).length,
+      categories: getArray(vacancy.categories),
     };
   });
 
@@ -72,26 +81,43 @@ export default async function Vacancies({
                 <tr key={vacancy.id} className="bg-white hover:bg-gray-50">
                   <th
                     scope="row"
-                    className="px-4 py-4 font-bold text-gray-900 underline"
+                    className="px-4 py-4 font-bold text-gray-900 whitespace-nowrap underline"
                   >
-                    <Link href={`/admin/${params.companyId}/vacancies/${vacancy.id}`}>{vacancy.title}</Link>
+                    <Link
+                      href={`/admin/${params.companyId}/vacancies/${vacancy.id}`}
+                    >
+                      {vacancy.title}
+                    </Link>
                   </th>
 
-                  <td className="px-4 py-4 text-gray-500">
-                    {vacancy.inserted_at}
+                  <td className="px-4 py-4 text-gray-500 whitespace-nowrap">
+                    {new Date(vacancy.inserted_at).toLocaleDateString("en-GB", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })}
                   </td>
 
-                  <td className="px-4 py-4 text-gray-500">10</td>
+                  <td className="px-4 py-4 text-gray-500">
+                    {vacancy.responses}
+                  </td>
 
                   <td className="px-4 py-4 text-gray-500">
-                    <Tag text="Crew" />
+                    {vacancy.categories.map((category) => (
+                      <Tag
+                        key={category.id}
+                        text={category.title}
+                        variant="secondary"
+                        size="sm"
+                      />
+                    ))}
                   </td>
 
                   <td className="px-4 text-right">
                     {vacancy.is_published ? (
-                      <Tag text="Published" variant="green" />
+                      <Tag text="Published" variant="green" size="sm"/>
                     ) : (
-                      <Tag text="Draft" variant="blue" />
+                      <Tag text="Draft" variant="blue" size="sm"/>
                     )}
                   </td>
                 </tr>
