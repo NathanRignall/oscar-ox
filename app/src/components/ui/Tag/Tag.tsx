@@ -5,7 +5,7 @@ import fontColorContrast from "font-color-contrast";
 export type TagProps = {
   className?: string;
   variant?: "primary" | "secondary" | "blue" | "green" | "red" | "yellow";
-  size: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg";
   color?: string;
   text: string;
   href?: string;

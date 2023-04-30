@@ -42,7 +42,7 @@ export const EditProfileModal = ({
     name: string()
       .min(3, "Must be at least 3 characters")
       .required("Name is Required"),
-    biography: string(),
+    biography: string().required(),
   });
 
   const onSubmit = async (values: FormValues) => {
@@ -61,6 +61,7 @@ export const EditProfileModal = ({
       });
     }
   };
+  
   return (
     <>
       <button
@@ -115,7 +116,7 @@ export const EditProfileModal = ({
                   </button>
                 </div>
 
-                <div className="text-3xl text-slate-900 font-bold mb-8">
+                <div className="text-3xl text-slate-900 font-bold mb-6">
                   Edit your profile
                 </div>
 
@@ -130,7 +131,7 @@ export const EditProfileModal = ({
                     submitForm,
                   }: FormikProps<FormValues>) => (
                     <Form>
-                      <div className="mb-4">
+                      <div className="mb-2">
                         <Field
                           id="name"
                           type="text"
@@ -149,7 +150,7 @@ export const EditProfileModal = ({
                         )}
                       </div>
 
-                      <div className="mb-4">
+                      <div className="mb-3">
                         <Field
                           component="textarea"
                           id="biography"
@@ -169,7 +170,7 @@ export const EditProfileModal = ({
                         )}
                       </div>
 
-                      <label className="relative inline-flex items-center mb-10 cursor-pointer">
+                      <label className="relative inline-flex items-center mb-8 cursor-pointer">
                         <input
                           type="checkbox"
                           value=""
@@ -181,7 +182,7 @@ export const EditProfileModal = ({
                         </span>
                       </label>
 
-                      <div className="mb-6">
+                      <div>
                         <Button
                           variant="secondary"
                           display="block"
