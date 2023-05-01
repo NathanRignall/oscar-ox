@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { createServerClient } from "@/lib/supabase-server";
 import { getArray, getSingle } from "@/lib/supabase-type-convert";
 import { AddEventModal } from "./AddEventModal";
@@ -71,43 +72,57 @@ export default async function Production({
   return (
     <>
       <header>
-        <h1 className="flex items-center text-4xl font-bold text-slate-900 mb-3">
-          <Link href={`/admin/${params.companyId}/productions`}>
-            <svg
-              className="h-5 w-5 mr-4"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={4}
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.75 19.5L8.25 12l7.5-7.5"
-              />
-            </svg>
-          </Link>
-          {production.title}
-        </h1>
+        <div className="flex items-center">
+          <h1 className="flex items-center text-4xl font-bold text-slate-900 mb-3">
+            <Link href={`/admin/${params.companyId}/productions`}>
+              <svg
+                className="h-5 w-5 mr-4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={4}
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.75 19.5L8.25 12l7.5-7.5"
+                />
+              </svg>
+            </Link>
+            {production.title}
+          </h1>
 
-        {production.is_published ? (
-          <Tag text="Published" variant="green" />
-        ) : (
-          <Tag text="Draft" variant="blue" />
-        )}
+          {production.is_published ? (
+            <Tag text="Published" variant="green" className="ml-2" size="sm" />
+          ) : (
+            <Tag text="Draft" variant="blue" className="ml-2" size="sm" />
+          )}
+        </div>
 
-        <div>
-          <p className="mb-3 text-xl text-slate-600 inline-block">
-            {production.description}{" "}
-          </p>
-          <EditProductionModal
-            productionId={params.productionId}
-            title={production.title}
-            description={production.description}
-            is_published={production.is_published}
-          />
+        <div className="sm:flex">
+          <div className="flex-1">
+            <p className="mb-3 text-xl text-slate-600 inline-block">
+              {production.description}{" "}
+            </p>
+            <EditProductionModal
+              productionId={params.productionId}
+              title={production.title}
+              description={production.description}
+              is_published={production.is_published}
+            />
+          </div>
+
+          <div className="h-full aspect-1 relative bg-slate-300 rounded-md overflow-hidden min-w-[200px]">
+            <Image
+              alt=""
+              src={`media/companies/${params.companyId}/productions/${params.productionId}/main.jpeg`}
+              className={"duration-200 ease-in-out rounded-lg"}
+              fill
+              priority
+            />
+          </div>
         </div>
       </header>
 
@@ -139,7 +154,16 @@ export default async function Production({
                     scope="row"
                     className="px-4 py-4 font-medium text-gray-900"
                   >
-                    {event.start_time}
+                    {new Date(event.start_time).toLocaleDateString("en-GB", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })}
+                    {" - "}
+                    {new Date(event.start_time).toLocaleTimeString("en-GB", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
                   </th>
                   <td className="px-4 py-4 text-gray-500">
                     {event.venue.title}

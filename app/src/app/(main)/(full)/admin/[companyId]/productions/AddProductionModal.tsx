@@ -105,7 +105,6 @@ export const AddProductionModal = ({ company_id }: AddProductionModalProps) => {
                   {({
                     errors,
                     touched,
-                    submitForm,
                   }: FormikProps<FormValues>) => (
                     <Form>
                       <div className="mb-4">

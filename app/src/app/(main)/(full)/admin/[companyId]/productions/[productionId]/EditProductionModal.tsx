@@ -133,7 +133,6 @@ export const EditProductionModal = ({
                   {({
                     errors,
                     touched,
-                    submitForm,
                   }: FormikProps<FormValues>) => (
                     <Form>
                       <div className="mb-4">

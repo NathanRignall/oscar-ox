@@ -25,6 +25,7 @@
     "next": "^13.3.1",
     "next-mdx-remote": "^4.4.1",
     "react": "^18.2.0",
+    "react-datepicker": "^4.11.0",
     "react-dom": "^18.2.0",
     "react-leaflet": "^4.2.1",
     "server-only": "^0.0.1",
@@ -35,6 +36,7 @@
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@types/leaflet": "^1.9.3",
+    "@types/react-datepicker": "^4.11.2",
     "@types/uuid": "^9.0.1",
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.21",

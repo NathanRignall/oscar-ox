@@ -1,13 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/components/ui";
-import Autocomplete from "./Auto"
 
 // Page
 export default function Companies() {
-  const [selectedOption, setSelectedOption] = useState("");
-
   return (
     <>
       <header className="text-center">
@@ -60,11 +56,6 @@ export default function Companies() {
           </form>
         </section>
       </main>
-
-      <Autocomplete options={['Chennai', 'Mumbai', 'Bangalore']} 
-        value={selectedOption}
-        onChange={setSelectedOption}
-      />
     </>
   );
 }

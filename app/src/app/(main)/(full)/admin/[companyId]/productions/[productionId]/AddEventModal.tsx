@@ -3,17 +3,18 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { useSupabase } from "@/components/client";
-import { object, string } from "yup";
-import { FormikProps, Formik, Field, Form } from "formik";
+import { object, string, date } from "yup";
+import { FormikProps, Formik, Form } from "formik";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { Button } from "@/components/ui";
+import Autocomplete from "./Auto";
 
 type AddEventModalProps = {
   productionId: string;
 };
 
-export const AddEventModal = ({
-  productionId,
-}: AddEventModalProps) => {
+export const AddEventModal = ({ productionId }: AddEventModalProps) => {
   const { supabase, session } = useSupabase();
 
   const router = useRouter();
@@ -27,41 +28,38 @@ export const AddEventModal = ({
   };
 
   interface FormValues {
-    title: string;
-    description: string;
+    venueId: string;
+    datetime: Date;
   }
 
   const initialValues: FormValues = {
-    title: "",
-    description: "",
+    venueId: "",
+    datetime: new Date(),
   };
 
   const validationSchema = object({
-    title: string()
-      .min(3, "Must be at least 3 characters")
-      .required("Title is Required"),
-    description: string()
-      .min(3, "Must be at least 3 characters")
-      .required("Description is Required"),
+    venueId: string().required("Valid venue is required"),
+    datetime: date(),
   });
 
   const onSubmit = async (values: FormValues) => {
-    // const { error } = await supabase.from("events").insert({
-    //   production_id: productionId,
-    //   title: values.title,
-    //   description: values.description,
-    // });
+    const { error } = await supabase.from("events").insert({
+      production_id: productionId,
+      venue_id: values.venueId,
+      start_time: values.datetime.toISOString(),
+    });
 
-    // if (error) {
-    //   setFormError(error.message);
-    // } else {
-    //   toggleModal();
+    if (error) {
+      setFormError(error.message);
+    } else {
+      toggleModal();
 
-    //   startTransition(() => {
-    //     router.refresh();
-    //   });
-    // }
+      startTransition(() => {
+        router.refresh();
+      });
+    }
   };
+
   return (
     <>
       <Button onClick={toggleModal}>Add Event</Button>
@@ -107,22 +105,16 @@ export const AddEventModal = ({
                   {({
                     errors,
                     touched,
-                    submitForm,
+                    values,
+                    setFieldValue,
                   }: FormikProps<FormValues>) => (
                     <Form>
                       <div className="mb-4">
-                        <Field
-                          id="title"
-                          type="text"
-                          name="title"
-                          autoComplete="title"
-                          placeholder="Production title.."
-                          className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
-                        />
+                        <Autocomplete />
 
-                        {errors.title && touched.title ? (
+                        {errors.venueId && touched.venueId ? (
                           <p className="mt-2 text-sm text-slate-600">
-                            {errors.title}
+                            {errors.venueId}
                           </p>
                         ) : (
                           <div className="mt-2 h-5" />
@@ -130,19 +122,23 @@ export const AddEventModal = ({
                       </div>
 
                       <div className="mb-4">
-                        <Field
-                          component="textarea"
-                          id="description"
-                          type="text"
-                          rows={5}
-                          name="description"
-                          autoComplete="description"
-                          placeholder="Production description..."
+                        <DatePicker
+                          id="datetime"
+                          name="datetime"
+                          selected={values.datetime}
+                          onChange={(datetime) =>
+                            setFieldValue("datetime", datetime)
+                          }
+                          showTimeSelect
+                          timeFormat="HH:mm"
+                          timeIntervals={15}
+                          dateFormat="MM/dd/yyyy HH:mm"
                           className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
                         />
-                        {errors.description && touched.description ? (
+
+                        {errors.datetime && touched.datetime ? (
                           <p className="mt-2 text-sm text-slate-600">
-                            {errors.description}
+                            null
                           </p>
                         ) : (
                           <div className="mt-2 h-5" />
