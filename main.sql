@@ -3,6 +3,9 @@
 -- create enum for company roles
 create type public.company_role as enum ('admin', 'moderator');
 
+-- create enum for responses
+create type public.response_type as enum ('platform', 'email', 'phone');
+
 -- Create a table for public profiles
 create table profiles (
   id uuid references auth.users on delete cascade not null primary key,
@@ -122,6 +125,8 @@ create table public.vacancies (
   company_id uuid references public.companies on delete cascade not null,
   title text not null,
   content text,
+  response_type public.response_type not null default 'platform',
+  response_deadline timestamp with time zone,
   is_open boolean not null default true,
   is_published boolean not null default false,
   production_id uuid references public.productions,

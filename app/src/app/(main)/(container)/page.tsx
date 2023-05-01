@@ -2,6 +2,7 @@ import Link from "next/link";
 import { createServerClient } from "@/lib/supabase-server";
 import { getArray, getSingle } from "@/lib/supabase-type-convert";
 import clsx from "clsx";
+import Vacancies from "./Vacancies";
 
 // event component props
 type CalenderEventProps = {
@@ -177,7 +178,7 @@ export default async function Home() {
       </header>
 
       <main>
-        <div className="sm:flex justify-between  w-full mb-4">
+        <div className="sm:flex justify-between w-full mb-4">
           <nav className="flex px-5 py-3 text-gray-700 border-2 border-slate-200 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700">
             <ol className="inline-flex items-center space-x-1 md:space-x-3">
               <li>
@@ -262,7 +263,7 @@ export default async function Home() {
           </form>
         </div>
 
-        <div className="bg-white rounded-lg border-2 border-slate-200 w-full overflow-hidden">
+        <div className="bg-white rounded-lg border-2 border-slate-200 w-full overflow-hidden ">
           <div className="grid grid-cols-1 lg:grid-cols-7">
             {days.map((dayEvents, index) => {
               const day = new Date();
@@ -309,6 +310,9 @@ export default async function Home() {
             })}
           </div>
         </div>
+
+        {/* @ts-expect-error Server Component */}
+        <Vacancies />
       </main>
     </>
   );

@@ -344,6 +344,8 @@ export interface Database {
           is_open: boolean
           is_published: boolean
           production_id: string | null
+          response_deadline: string | null
+          response_type: Database["public"]["Enums"]["response_type"]
           title: string
           updated_at: string
         }
@@ -355,6 +357,8 @@ export interface Database {
           is_open?: boolean
           is_published?: boolean
           production_id?: string | null
+          response_deadline?: string | null
+          response_type?: Database["public"]["Enums"]["response_type"]
           title: string
           updated_at?: string
         }
@@ -366,6 +370,8 @@ export interface Database {
           is_open?: boolean
           is_published?: boolean
           production_id?: string | null
+          response_deadline?: string | null
+          response_type?: Database["public"]["Enums"]["response_type"]
           title?: string
           updated_at?: string
         }
@@ -446,6 +452,7 @@ export interface Database {
     }
     Enums: {
       company_role: "admin" | "moderator"
+      response_type: "platform" | "email" | "phone"
     }
     CompositeTypes: {
       [_ in never]: never
