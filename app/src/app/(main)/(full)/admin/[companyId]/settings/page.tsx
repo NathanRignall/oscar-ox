@@ -40,7 +40,7 @@ export default async function Settings({
 
       <section className="mt-4">
         <h2 className="text-2xl font-bold text-slate-900 mb-4">Members</h2>
-        <div className="mt-4 border-2 border-slate-200 rounded-lg overflow-hidden">
+        <div className="mt-4 border-2 border-slate-200 rounded-lg">
           <table className="w-full text-left divide-y-2 divide-gray-200">
             <thead className="text-xs font-semibold text-slate-500 bg-slate-50 uppercase">
               <tr>
@@ -65,13 +65,15 @@ export default async function Settings({
             <tbody className="divide-y-2 divide-solid divide-slate-200">
               {members.map((member) => (
                 <tr key={member.user.id} className="bg-white hover:bg-slate-50">
-                  <th scope="row" className="px-4 py-4">
+                  <th scope="row" className="px-4 py-4 whitespace-nowrap">
                     {member.user.name}
                   </th>
 
-                  <td className="px-4 py-4">{member.user.email}</td>
+                  <td className="px-4 py-4 whitespace-nowrap">
+                    {member.user.email}
+                  </td>
 
-                  <td className="px-4 py-4 text-gray-500">
+                  <td className="px-4 py-4 text-gray-500 whitespace-nowrap">
                     {new Date(member.user.inserted_at).toLocaleDateString(
                       "en-GB",
                       {
@@ -83,14 +85,14 @@ export default async function Settings({
                   </td>
 
                   {/* red if admin */}
-                  <td className="px-4 py-4">
+                  <td className="px-4 py-4 whitespace-nowrap">
                     <Tag
                       variant={member.role === "admin" ? "red" : "green"}
                       text={member.role}
                     />
                   </td>
 
-                  <td className="px-4 text-right">
+                  <td className="px-4 text-right whitespace-nowrap">
                     <Button size="sm">Edit</Button>{" "}
                     <Button size="sm">Remove</Button>
                   </td>

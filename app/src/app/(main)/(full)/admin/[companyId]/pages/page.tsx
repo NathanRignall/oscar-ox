@@ -33,7 +33,7 @@ export default async function Pages({
       <h1 className="text-4xl font-bold text-slate-900">Pages</h1>
 
       <section className="mt-4">
-        <div className="mt-4 border-2 border-slate-200 rounded-lg overflow-hidden">
+        <div className="mt-4 border-2 border-slate-200 rounded-lg">
           <table className="w-full text-left divide-y-2 divide-gray-200">
             <thead className="text-xs font-semibold text-slate-500 bg-slate-50 uppercase">
               <tr>
@@ -54,7 +54,7 @@ export default async function Pages({
                 <tr key={page.id} className="bg-white hover:bg-gray-50">
                   <th
                     scope="row"
-                    className="px-4 py-4 font-bold text-gray-900 underline"
+                    className="px-4 py-4 font-bold text-gray-900 whitespace-nowrap underline"
                   >
                     <Link
                       href={`/admin/${params.companyId}/pages/${page.id}`}
@@ -63,9 +63,9 @@ export default async function Pages({
                     </Link>
                   </th>
 
-                  <td className="px-4 py-4">/{page.slug}</td>
+                  <td className="px-4 py-4 whitespace-nowrap">/{page.slug}</td>
 
-                  <td className="px-4 text-right">
+                  <td className="px-4 text-right whitespace-nowrap">
                     {page.is_published ? (
                       <Tag text="Published" variant="green" />
                     ) : (

@@ -51,7 +51,7 @@ export default async function Productions({
       <section className="mt-4">
         <AddProductionModal company_id={params.companyId} />
 
-        <div className="mt-4 border-2 border-slate-200 rounded-lg overflow-hidden">
+        <div className="mt-4 border-2 border-slate-200 rounded-lg">
           <table className="w-full text-left divide-y-2 divide-gray-200">
             <thead className="text-xs font-semibold text-slate-500 bg-slate-50 uppercase">
               <tr>
@@ -83,23 +83,23 @@ export default async function Productions({
                     <Link href={`/admin/${params.companyId}/productions/${item.id}`}>{item.title}</Link>
                   </th>
 
-                  <td className="px-4 py-4 max-w-md">
+                  <td className="px-4 py-4 max-w-sm whitespace-nowrap">
                     <p className="text-sm text-slate-500 truncate">{item.description}</p>
                   </td>
 
-                  <td className="px-4 py-4 text-right">
+                  <td className="px-4 py-4 text-right whitespace-nowrap">
                     <span className="text-sm text-slate-500">
                       {item.events}
                     </span>
                   </td>
 
-                  <td className="px-4 py-4 text-right">
+                  <td className="px-4 py-4 text-right whitespace-nowrap">
                     <span className="text-sm text-slate-500">
                       {item.vacancies}
                     </span>
                   </td>
 
-                  <td className="px-4 text-right">
+                  <td className="px-4 text-right whitespace-nowrap">
                     {item.is_published ? <Tag text="Published" variant="green"/> : <Tag text="Draft" variant="blue"/>}
                   </td>
                 </tr>

@@ -97,7 +97,7 @@ export default async function AdminLayout({
         </div>
       </aside>
 
-      <main className="flex-1 py-6 px-8">{children}</main>
+      <main className="flex-1 py-6 px-8 overflow-x-auto">{children}</main>
     </div>
   );
 }
