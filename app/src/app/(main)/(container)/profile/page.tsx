@@ -94,7 +94,7 @@ export default async function Account() {
           </h1>
           <div className="mb-3">
             <p className="text-xl text-slate-600 inline-block">
-              {profile.biography}
+              {profile.biography ? profile.biography : "No biography yet."}
             </p>
             <EditProfileModal
               name={profile.name}
