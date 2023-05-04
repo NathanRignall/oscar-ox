@@ -17,15 +17,18 @@ export default async function Admin() {
   } = await supabase.auth.getUser();
   if (!user) redirect("/auth/login");
 
-  const { data } = await supabase.from("company_members").select(
-    `
+  const { data } = await supabase
+    .from("company_members")
+    .select(
+      `
     role,
     company:companies (
       id,
       name
     )
     `
-  );
+    )
+    .eq("profile_id", user.id);
 
   const members = data
     ? data.map((item) => ({
