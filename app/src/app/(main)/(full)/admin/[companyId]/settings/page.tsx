@@ -1,7 +1,8 @@
-import Link from "next/link";
 import { createServerClient } from "@/lib/supabase-server";
 import { getArray, getSingle } from "@/lib/supabase-type-convert";
-import { Button, Tag } from "@/components/ui";
+import { Tag } from "@/components/ui";
+import { AddMemberModal } from "./AddMemberModal";
+import { DeleteMemberModal } from "./DeleteMemberModal";
 
 // do not cache this page
 export const revalidate = 0;
@@ -40,6 +41,9 @@ export default async function Settings({
 
       <section className="mt-4">
         <h2 className="text-2xl font-bold text-slate-900 mb-4">Members</h2>
+
+        <AddMemberModal companyId={params.companyId} />
+        
         <div className="mt-4 border-2 border-slate-200 rounded-lg">
           <table className="w-full text-left divide-y-2 divide-gray-200">
             <thead className="text-xs font-semibold text-slate-500 bg-slate-50 uppercase">
@@ -84,7 +88,6 @@ export default async function Settings({
                     )}
                   </td>
 
-                  {/* red if admin */}
                   <td className="px-4 py-4 whitespace-nowrap">
                     <Tag
                       variant={member.role === "admin" ? "red" : "green"}
@@ -93,8 +96,12 @@ export default async function Settings({
                   </td>
 
                   <td className="px-4 text-right whitespace-nowrap">
-                    <Button size="sm">Edit</Button>{" "}
-                    <Button size="sm">Remove</Button>
+                    <DeleteMemberModal
+                      companyId={params.companyId}
+                      profileId={member.user.id}
+                      name={member.user.name}
+                      email={member.user.email}
+                    />
                   </td>
                 </tr>
               ))}
