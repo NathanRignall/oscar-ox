@@ -13,6 +13,7 @@ create table profiles (
   email text not null,
   biography text,
   avatar_url text,
+  is_public boolean not null default true,
   inserted_at timestamp with time zone default timezone('utc'::text, now()) not null,
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null,
   constraint name_length check (char_length(name) >= 3)
@@ -70,6 +71,7 @@ create table public.companies (
   name text not null,
   description text not null,
   main_colour text not null default '#000000',
+  is_public boolean not null default true,
   inserted_at timestamp with time zone default timezone('utc'::text, now()) not null,
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null
 );
@@ -115,6 +117,7 @@ create table public.participants (
   production_id uuid references public.productions on delete cascade not null,
   role_id uuid references public.roles,
   category_id uuid references public.categories,
+  is_published boolean not null default false,
   inserted_at timestamp with time zone default timezone('utc'::text, now()) not null,
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null
 );
@@ -158,7 +161,7 @@ create table public.pages (
   company_id uuid references public.companies on delete cascade not null,
   slug text not null unique,
   title text not null,
-  is_published boolean not null,
+  is_published boolean not null default false,
   inserted_at timestamp with time zone default timezone('utc'::text, now()) not null,
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null
 );
@@ -201,6 +204,332 @@ end;
 $$ language plpgsql security definer;
 
 GRANT execute ON FUNCTION public.create_company() TO authenticated;
+
+-- authorize company member
+create function public.authorize_company_member(
+  company_id uuid,
+  profile_id uuid,
+  role public.company_role
+)
+returns boolean as
+$$
+  declare
+    bind_permissions int;
+  begin
+    select
+      count(*)
+    from public.company_members
+    where
+      company_members.company_id = authorize_company_member.company_id and
+      company_members.profile_id = authorize_company_member.profile_id and
+      company_members.role = authorize_company_member.role
+    into bind_permissions;
+
+    return bind_permissions > 0;
+  end;
+$$
+language plpgsql security definer;
+
+GRANT execute ON FUNCTION public.authorize_company_member(company_id uuid, profile_id uuid, role public.company_role) TO PUBLIC;
+
+-- authorize company production member
+create function public.authorize_company_production_member(
+  production_id uuid,
+  profile_id uuid,
+  role public.company_role
+)
+returns boolean as
+$$
+  declare
+    bind_permissions int;
+  begin
+    select
+      count(*)
+    from public.company_members
+    join public.productions on productions.company_id = company_members.company_id
+    where
+      productions.id = authorize_company_production_member.production_id and
+      company_members.profile_id = authorize_company_production_member.profile_id and
+      company_members.role = authorize_company_production_member.role
+    into bind_permissions;
+
+    return bind_permissions > 0;
+  end;
+$$
+language plpgsql security definer;
+
+GRANT execute ON FUNCTION public.authorize_company_production_member(production_id uuid, profile_id uuid, role public.company_role) TO PUBLIC;
+
+-- authorize company vacancy member
+create function public.authorize_company_vacancy_member(
+  vacancy_id uuid,
+  profile_id uuid,
+  role public.company_role
+)
+returns boolean as
+$$
+  declare
+    bind_permissions int;
+  begin
+    select
+      count(*)
+    from public.company_members
+    join public.vacancies on vacancies.company_id = company_members.company_id
+    where
+      vacancies.id = authorize_company_vacancy_member.vacancy_id and
+      company_members.profile_id = authorize_company_vacancy_member.profile_id and
+      company_members.role = authorize_company_vacancy_member.role
+    into bind_permissions;
+
+    return bind_permissions > 0;
+  end;
+$$
+language plpgsql security definer;
+
+GRANT execute ON FUNCTION public.authorize_company_vacancy_member(vacancy_id uuid, profile_id uuid, role public.company_role) TO PUBLIC;
+
+-- authorize company public
+create function public.authorize_company_public(
+  company_id uuid
+)
+returns boolean as
+$$
+  declare
+    bind_permissions int;
+  begin
+    select
+      count(*)
+    from public.companies
+    where
+      companies.id = authorize_company_public.company_id and
+      companies.is_public = true
+    into bind_permissions;
+
+    return bind_permissions > 0;
+  end;
+$$
+language plpgsql security definer;
+
+GRANT execute ON FUNCTION public.authorize_company_public(company_id uuid) TO PUBLIC;
+
+-- authorize production public
+create function public.authorize_production_public(
+  production_id uuid
+)
+returns boolean as
+$$
+  declare
+    bind_permissions int;
+  begin
+    select
+      count(*)
+    from public.productions
+    join public.companies on companies.id = productions.company_id
+    where
+      productions.id = authorize_production_public.production_id and
+      productions.is_published = true and
+      companies.is_public = true
+    into bind_permissions;
+
+    return bind_permissions > 0;
+  end;
+$$
+language plpgsql security definer;
+
+GRANT execute ON FUNCTION public.authorize_production_public(production_id uuid) TO PUBLIC;
+
+-- authorize vacancy public
+create function public.authorize_vacancy_public(
+  vacancy_id uuid
+)
+returns boolean as
+$$
+  -- join on company
+  declare
+    bind_permissions int;
+  begin
+    select
+      count(*)
+    from public.vacancies
+    join public.companies on companies.id = vacancies.company_id
+    where
+      vacancies.id = authorize_vacancy_public.vacancy_id and
+      vacancies.is_published = true and
+      companies.is_public = true
+    into bind_permissions;
+
+    return bind_permissions > 0;
+  end;
+$$
+language plpgsql security definer;
+
+GRANT execute ON FUNCTION public.authorize_vacancy_public(vacancy_id uuid) TO PUBLIC;
+
+
+alter table productions
+  enable row level security;
+alter table profiles
+  enable row level security;
+create policy "Public profiles are viewable by everyone." on profiles
+  for select using (is_public);
+create policy "Users can view their own profile." on profiles
+  for select using (auth.uid() = id);
+create policy "Users can insert their own profile." on profiles
+  for insert with check (auth.uid() = id);
+create policy "Users can update own profile." on profiles
+  for update using (auth.uid() = id);
+
+alter table venues
+  enable row level security;
+create policy "Venues that are published are iewable by everyone." on venues
+  for select using (is_published);
+
+alter table roles
+  enable row level security;
+create policy "Roles that are published are viewable by everyone." on roles
+  for select using (is_published);
+
+alter table categories
+  enable row level security;
+create policy "Categories are viewable by everyone." on categories
+  for select using (true);
+
+alter table subscriptions
+  enable row level security;
+create policy "Users can view their own subscriptions." on subscriptions
+  for select using (auth.uid() = profile_id);
+create policy "Users can insert their own subscriptions." on subscriptions
+  for insert with check (auth.uid() = profile_id);
+create policy "Users can update their own subscriptions." on subscriptions
+  for update using (auth.uid() = profile_id);
+create policy "Users can delete their own subscriptions." on subscriptions
+  for delete using (auth.uid() = profile_id);
+
+alter table companies
+  enable row level security;
+create policy "Public companies are viewable by everyone." on companies
+  for select using (is_public);
+create policy "Company moderators can view their own company." on companies
+  for select using (authorize_company_member(id, auth.uid(), 'moderator'));
+create policy "Company admins can view their own company." on companies
+  for select using (authorize_company_member(id, auth.uid(), 'admin'));
+create policy "Company admins can update their own company." on companies
+  for update using (authorize_company_member(id, auth.uid(), 'admin'));
+
+alter table company_members
+  enable row level security;
+create policy "Public company members are viewable by everyone." on company_members
+  for select using (authorize_company_public(company_id));
+create policy "Company moderators can view their own company members." on company_members
+  for select using (authorize_company_member(company_id, auth.uid(), 'moderator'));
+create policy "Company admins can view their own company members." on company_members
+  for select using (authorize_company_member(company_id, auth.uid(), 'admin'));
+create policy "Company admins can insert their own company members." on company_members
+  for insert with check (authorize_company_member(company_id, auth.uid(), 'admin'));
+create policy "Company admins can update their own company members." on company_members
+  for update using (authorize_company_member(company_id, auth.uid(), 'admin'));
+create policy "Company admins can delete their own company members." on company_members
+  for delete using (authorize_company_member(company_id, auth.uid(), 'admin'));
+
+create policy "Public productions are viewable by everyone." on productions
+  for select using (is_published);
+create policy "Company moderators can view their own productions." on productions
+  for select using (authorize_company_member(company_id, auth.uid(), 'moderator'));
+create policy "Company admins can view their own productions." on productions
+  for select using (authorize_company_member(company_id, auth.uid(), 'admin'));
+create policy "Company admins can insert their own productions." on productions
+  for insert with check (authorize_company_member(company_id, auth.uid(), 'admin'));
+create policy "Company admins can update their own productions." on productions
+  for update using (authorize_company_member(company_id, auth.uid(), 'admin'));
+create policy "Company admins can delete their own productions." on productions
+  for delete using (authorize_company_member(company_id, auth.uid(), 'admin'));
+
+alter table events
+  enable row level security;
+create policy "Public events are viewable by everyone." on events
+  for select using (is_published and authorize_production_public(production_id));
+create policy "Company moderators can view their own events." on events
+  for select using (authorize_company_production_member(production_id, auth.uid(), 'moderator'));
+create policy "Company admins can view their own events." on events
+  for select using (authorize_company_production_member(production_id, auth.uid(), 'admin'));
+create policy "Company admins can insert their own events." on events
+  for insert with check (authorize_company_production_member(production_id, auth.uid(), 'admin'));
+create policy "Company admins can update their own events." on events
+  for update using (authorize_company_production_member(production_id, auth.uid(), 'admin'));
+create policy "Company admins can delete their own events." on events
+  for delete using (authorize_company_production_member(production_id, auth.uid(), 'admin'));
+
+alter table participants
+  enable row level security;
+create policy "Public participants are viewable by everyone." on participants
+  for select using (is_published and authorize_production_public(production_id));
+create policy "Company moderators can view their own participants." on participants
+  for select using (authorize_company_production_member(production_id, auth.uid(), 'moderator'));
+create policy "Company admins can view their own participants." on participants
+  for select using (authorize_company_production_member(production_id, auth.uid(), 'admin'));
+create policy "Company admins can insert their own participants." on participants
+  for insert with check (authorize_company_production_member(production_id, auth.uid(), 'admin'));
+create policy "Company admins can update their own participants." on participants
+  for update using (authorize_company_production_member(production_id, auth.uid(), 'admin'));
+create policy "Company admins can delete their own participants." on participants
+  for delete using (authorize_company_production_member(production_id, auth.uid(), 'admin'));
+
+alter table vacancies
+  enable row level security;
+create policy "Public vacancies are viewable by everyone." on vacancies
+  for select using (is_published and authorize_company_public(company_id));
+create policy "Company moderators can view their own vacancies." on vacancies
+  for select using (authorize_company_member(company_id, auth.uid(), 'moderator'));
+create policy "Company admins can view their own vacancies." on vacancies
+  for select using (authorize_company_member(company_id, auth.uid(), 'admin'));
+create policy "Company admins can insert their own vacancies." on vacancies
+  for insert with check (authorize_company_member(company_id, auth.uid(), 'admin'));
+create policy "Company admins can update their own vacancies." on vacancies
+  for update using (authorize_company_member(company_id, auth.uid(), 'admin'));
+create policy "Company admins can delete their own vacancies." on vacancies
+  for delete using (authorize_company_member(company_id, auth.uid(), 'admin'));
+
+alter table vacancy_categories
+  enable row level security;
+create policy "Public vacancy categories are viewable by everyone." on vacancy_categories
+  for select using (authorize_vacancy_public(vacancy_id));
+create policy "Company moderators can view their own vacancy categories." on vacancy_categories
+  for select using (authorize_company_vacancy_member(vacancy_id, auth.uid(), 'moderator'));
+create policy "Company admins can view their own vacancy categories." on vacancy_categories
+  for select using (authorize_company_vacancy_member(vacancy_id, auth.uid(), 'admin'));
+create policy "Company admins can insert their own vacancy categories." on vacancy_categories
+  for insert with check (authorize_company_vacancy_member(vacancy_id, auth.uid(), 'admin'));
+create policy "Company admins can update their own vacancy categories." on vacancy_categories
+  for update using (authorize_company_vacancy_member(vacancy_id, auth.uid(), 'admin'));
+create policy "Company admins can delete their own vacancy categories." on vacancy_categories
+  for delete using (authorize_company_vacancy_member(vacancy_id, auth.uid(), 'admin'));
+
+alter table responses
+  enable row level security;
+create policy "Users can view their own responses." on responses
+  for select using (profile_id = auth.uid());
+create policy "Users can insert their own responses." on responses
+  for insert with check (profile_id = auth.uid() and authorize_vacancy_public(vacancy_id));
+create policy "Company moderators can view their own responses." on responses
+  for select using (authorize_company_vacancy_member(vacancy_id, auth.uid(), 'moderator'));
+create policy "Company admins can view their own responses." on responses
+  for select using (authorize_company_vacancy_member(vacancy_id, auth.uid(), 'admin'));
+
+alter table pages
+  enable row level security;
+create policy "Public pages are viewable by everyone." on pages
+  for select using (is_published and authorize_company_public(company_id));
+create policy "Company moderators can view their own pages." on pages
+  for select using (authorize_company_member(company_id, auth.uid(), 'moderator'));
+create policy "Company admins can view their own pages." on pages
+  for select using (authorize_company_member(company_id, auth.uid(), 'admin'));
+create policy "Company admins can insert their own pages." on pages
+  for insert with check (authorize_company_member(company_id, auth.uid(), 'admin'));
+create policy "Company admins can update their own pages." on pages
+  for update using (authorize_company_member(company_id, auth.uid(), 'admin'));
+create policy "Company admins can delete their own pages." on pages
+  for delete using (authorize_company_member(company_id, auth.uid(), 'admin'));
+
 
 -- -- Set up storage -- --
 

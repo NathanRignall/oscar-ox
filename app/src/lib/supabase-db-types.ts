@@ -59,6 +59,7 @@ export interface Database {
           description: string
           id: string
           inserted_at: string
+          is_public: boolean
           main_colour: string
           name: string
           updated_at: string
@@ -67,6 +68,7 @@ export interface Database {
           description: string
           id?: string
           inserted_at?: string
+          is_public?: boolean
           main_colour?: string
           name: string
           updated_at?: string
@@ -75,6 +77,7 @@ export interface Database {
           description?: string
           id?: string
           inserted_at?: string
+          is_public?: boolean
           main_colour?: string
           name?: string
           updated_at?: string
@@ -152,7 +155,7 @@ export interface Database {
           company_id: string
           id?: string
           inserted_at?: string
-          is_published: boolean
+          is_published?: boolean
           slug: string
           title: string
           updated_at?: string
@@ -172,6 +175,7 @@ export interface Database {
           category_id: string | null
           id: string
           inserted_at: string
+          is_published: boolean | null
           production_id: string
           profile_id: string
           role_id: string | null
@@ -181,6 +185,7 @@ export interface Database {
           category_id?: string | null
           id?: string
           inserted_at?: string
+          is_published?: boolean | null
           production_id: string
           profile_id: string
           role_id?: string | null
@@ -190,6 +195,7 @@ export interface Database {
           category_id?: string | null
           id?: string
           inserted_at?: string
+          is_published?: boolean | null
           production_id?: string
           profile_id?: string
           role_id?: string | null
@@ -232,6 +238,7 @@ export interface Database {
           email: string
           id: string
           inserted_at: string
+          is_public: boolean
           name: string
           updated_at: string
         }
@@ -241,6 +248,7 @@ export interface Database {
           email: string
           id: string
           inserted_at?: string
+          is_public?: boolean
           name: string
           updated_at?: string
         }
@@ -250,6 +258,7 @@ export interface Database {
           email?: string
           id?: string
           inserted_at?: string
+          is_public?: boolean
           name?: string
           updated_at?: string
         }
@@ -442,6 +451,48 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
+      authorize_company_member: {
+        Args: {
+          company_id: string
+          profile_id: string
+          role: Database["public"]["Enums"]["company_role"]
+        }
+        Returns: boolean
+      }
+      authorize_company_production_member: {
+        Args: {
+          production_id: string
+          profile_id: string
+          role: Database["public"]["Enums"]["company_role"]
+        }
+        Returns: boolean
+      }
+      authorize_company_public: {
+        Args: {
+          company_id: string
+        }
+        Returns: boolean
+      }
+      authorize_company_vacancy_member: {
+        Args: {
+          vacancy_id: string
+          profile_id: string
+          role: Database["public"]["Enums"]["company_role"]
+        }
+        Returns: boolean
+      }
+      authorize_production_public: {
+        Args: {
+          production_id: string
+        }
+        Returns: boolean
+      }
+      authorize_vacancy_public: {
+        Args: {
+          vacancy_id: string
+        }
+        Returns: boolean
+      }
       create_company: {
         Args: {
           name: string
