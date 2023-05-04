@@ -150,6 +150,9 @@ serve(async (req) => {
               subscriber_email: newEmail,
               template_id: 3,
               data: {
+                subject: "Welcome to Oscar Ox!",
+                title: "Welcome to Oscar Ox!",
+                lead: "Hello,",
                 message,
               },
             }),
