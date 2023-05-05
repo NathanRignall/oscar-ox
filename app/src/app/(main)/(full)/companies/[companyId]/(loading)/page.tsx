@@ -19,7 +19,7 @@ export default async function Company({
 }) {
   const supabase = createServerClient();
 
-  const { data: _company } = await supabase
+  const { data: company } = await supabase
     .from("companies")
     .select(
       `
@@ -29,11 +29,7 @@ export default async function Company({
     .match({ id: params.companyId })
     .single();
 
-  if (!_company) notFound();
-
-  const company = {
-    theme: _company.theme,
-  };
+  if (!company) notFound();
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/media/companies/${params.companyId}/pages/index.mdx`
