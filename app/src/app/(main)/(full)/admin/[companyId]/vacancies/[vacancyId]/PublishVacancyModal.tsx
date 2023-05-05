@@ -1,12 +1,13 @@
 "use client";
 
-import "@uiw/react-md-editor/markdown-editor.css";
-import "@uiw/react-markdown-preview/markdown.css";
-import dynamic from "next/dynamic";
 import { useEffect, useState, useTransition } from "react";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { useSupabase } from "@/components/client";
-import { Button } from "@/components/ui";
+import { getArray } from "@/lib/supabase-type-convert";
+import "@uiw/react-md-editor/markdown-editor.css";
+import "@uiw/react-markdown-preview/markdown.css";
+import { Button, Modal, Tag } from "@/components/ui";
 
 const MDEditor = dynamic(() => import("@uiw/react-markdown-preview"), {
   ssr: false,
@@ -27,7 +28,9 @@ export const PublishVacancyModal = ({
   const [isOpen, setIsOpen] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
 
-  const [value, setValue] = useState<string | undefined>("**Hello world!!!**");
+  const [title, setTitle] = useState<string>("");
+  const [content, setContent] = useState<string | null>("");
+  const [categories, setCategories] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const toggleModal = () => {
@@ -52,16 +55,32 @@ export const PublishVacancyModal = ({
 
   useEffect(() => {
     const loadContent = async () => {
-      const { data, error } = await supabase
+      const { data: _vacancy, error } = await supabase
         .from("vacancies")
-        .select("title, content")
+        .select(
+          `
+          title,
+          content,
+          categories(
+            id,
+            title
+          )
+          `
+        )
         .eq("id", vacancyId)
         .single();
 
-      if (!data || !data.content) return;
+      if (!_vacancy) return;
 
-      setValue(data.content);
+      const vacancy = {
+        title: _vacancy.title,
+        content: _vacancy.content,
+        categories: getArray(_vacancy.categories),
+      };
 
+      setTitle(vacancy.title);
+      setContent(vacancy.content);
+      setCategories(vacancy.categories);
       setIsLoading(false);
     };
 
@@ -69,66 +88,47 @@ export const PublishVacancyModal = ({
   }, [supabase, vacancyId, isOpen]);
 
   return (
-    <>
-      <Button onClick={toggleModal} className="mt-4">
-        Preview
-      </Button>
+    <Modal isOpen={isOpen} setIsOpen={setIsOpen} button="Publish">
+      <div className="text-3xl text-slate-900 font-bold mb-1">
+        Publish Vacancy
+      </div>
 
-      {isOpen && (
-        <div className="fixed z-30 inset-0 overflow-y-auto">
-          <div className="flex items-center justify-center min-h-screen pt-5 px-5 sm:p-0">
-            <div className="fixed inset-0 bg-slate-500 opacity-70" />
+      <p className="text-lg text-slate-600 mb-6">
+        You are about to publish this vacancy. Are you sure you want to proceed?
+      </p>
 
-            <div className="bg-white rounded-lg overflow-hidden z-40 w-full max-w-2xl">
-              <div className="px-10 py-8">
-                <div className="flex items-end justify-between rounded-t mb-4">
-                  <button
-                    type="button"
-                    className="text-slate-400 bg-transparent hover:bg-slate-200 hover:text-slate-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center "
-                    data-modal-hide="defaultModal"
-                    onClick={toggleModal}
-                  >
-                    <svg
-                      className="w-5 h-5"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                        clipRule="evenodd"
-                      ></path>
-                    </svg>
-                  </button>
-                </div>
+      <p className="text-2xl text-slate-900 font-semibold mb-1">{title}</p>
 
-                <div className="text-3xl text-slate-900 font-bold mb-1">
-                  Publish Vacancy
-                </div>
-
-                <p className="text-lg text-slate-600 mb-8">
-                  You are about to publish this vacancy. 
-                  Are you sure you want to proceed?
-                </p>
-
-                <div className="mb-4 px-6 py-4 bg-white rounded-md border-slate-200 border-2">
-                  <MDEditor source={value} />
-                </div>
-
-                <Button
-                  onClick={onSubmit}
-                  className="mt-4 mb-6"
-                  display="block"
-                  variant="secondary"
-                >
-                  Publish
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
+      {categories.length != 0 ? (
+        <ul className="flex flex-wrap gap-2 mb-3">
+          {categories.map((category) => (
+            <li key={category.id}>
+              <Tag
+                text={category.title}
+                href={`/search?category=${encodeURIComponent(category.id)}`}
+                variant="secondary"
+                size="sm"
+              />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="mt-2 text-sm text-slate-600">No categories</p>
       )}
-    </>
+
+      <div className="mb-4 px-6 py-4 bg-white rounded-md border-slate-200 border-2">
+        <MDEditor source={content || ""} />
+      </div>
+
+      <Button
+        onClick={onSubmit}
+        className="mt-4 mb-6"
+        display="block"
+        variant="secondary"
+        disabled={isLoading || categories.length === 0}
+      >
+        Publish
+      </Button>
+    </Modal>
   );
 };
