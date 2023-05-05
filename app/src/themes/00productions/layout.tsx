@@ -53,6 +53,7 @@ export default function Layout({ children, company }: LayoutProps) {
                   href={`/companies/${encodeURIComponent(
                     company.id
                   )}/${encodeURIComponent(page.slug)}`}
+                  className="flex-1"
                 >
                   <li className="text-sm px-2 py-2 text-center hover:bg-gray-400 hover:text-white uppercase">
                     {page.title}
