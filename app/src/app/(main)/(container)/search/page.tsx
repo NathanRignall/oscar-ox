@@ -1,12 +1,13 @@
 "use client";
 
-import { Button } from "@/components/ui";
+import { Button, Tag } from "@/components/ui";
 
 // Page
 export default function Companies() {
   return (
     <>
       <header className="text-center">
+      <Tag text="** Interface Only **" variant="red"/>
         <h1 className="mb-3 text-5xl font-extrabold text-slate-900">Search</h1>
         <p className="mb-3 text-xl text-slate-600 inline-block">
           Search for filter anything
@@ -22,7 +23,6 @@ export default function Companies() {
       </header>
 
       <main className="max-w-3xl mx-auto">
-        {/* search */}
         <section className="mt-6">
           <form className="flex justify-center w-full">
             <label htmlFor="simple-search" className="sr-only">

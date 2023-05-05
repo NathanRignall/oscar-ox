@@ -83,19 +83,29 @@ const CalenderEvent = ({
 };
 
 // Page
-export default async function Home() {
+export default async function Home({ searchParams }: { searchParams: { date: string } }) {
   const supabase = createServerClient();
 
-  // get todays date at midnight
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const todayString = today.toISOString();
+  // create a date using date (structure DD-MM-YYYY)
+  const thisWeek = searchParams.date ? new Date(searchParams.date) : new Date();
+  thisWeek.setHours(0, 0, 0, 0);
+  const thisWeekString = thisWeek.toISOString();
 
   // get date 7 days from now at midnight
-  const nextWeek = new Date();
-  nextWeek.setDate(nextWeek.getDate() + 7);
+  const nextWeek = new Date(thisWeek);
+  nextWeek.setDate(thisWeek.getDate() + 7);
   nextWeek.setHours(0, 0, 0, 0);
   const nextWeekString = nextWeek.toISOString();
+
+  // get one day back
+  const previousDay = new Date(thisWeek);
+  previousDay.setDate(thisWeek.getDate() - 1);
+  previousDay.setHours(0, 0, 0, 0);
+
+  // get one day forward
+  const nextDay = new Date(thisWeek);
+  nextDay.setDate(thisWeek.getDate() + 2);
+  nextDay.setHours(0, 0, 0, 0);
 
   // get the events
   const { data: _events } = await supabase
@@ -119,7 +129,7 @@ export default async function Home() {
       end_time
     `
     )
-    .gte("start_time", todayString)
+    .gte("start_time", thisWeekString)
     .lte("start_time", nextWeekString);
 
   const events = getArray(_events).map((event) => {
@@ -163,8 +173,8 @@ export default async function Home() {
   // form a list of events separated by day
   const days = [];
   for (let i = 1; i <= 7; i++) {
-    const day = new Date();
-    day.setDate(today.getDate() + i);
+    const day = new Date(thisWeek);
+    day.setDate(thisWeek.getDate() + i);
     day.setHours(0, 0, 0, 0);
 
     const dayEvents = events.filter(
@@ -190,52 +200,55 @@ export default async function Home() {
           <nav className="flex px-5 py-3 text-gray-700 border-2 border-slate-200 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700">
             <ol className="inline-flex items-center space-x-1 md:space-x-3">
               <li>
-                <div className="flex items-center">
-                  <span className="mr-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">
-                    Back
-                  </span>
-                  <svg
-                    className="w-6 h-6 text-gray-400"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                      clipRule="evenodd"
-                    ></path>
-                  </svg>
-                </div>
+                <Link href={`/?date=${previousDay.toISOString().slice(0, 10)}`}>
+                  <div className="flex items-center">
+                    <span className="mr-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">
+                      Back
+                    </span>
+                    <svg
+                      className="w-6 h-6 text-gray-400"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                  </div>
+                </Link>
               </li>
               <li>
                 <div className="flex items-center">
-                  <a
-                    href="#"
-                    className="text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white"
-                  >
-                    10/5/2021
-                  </a>
+                  {thisWeek.toLocaleDateString("en-GB", {
+                    day: "numeric",
+                    month: "numeric",
+                    year: "numeric",
+                  })}
                 </div>
               </li>
               <li>
-                <div className="flex items-center">
-                  <svg
-                    className="w-6 h-6 text-gray-400"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                      clipRule="evenodd"
-                    ></path>
-                  </svg>
-                  <span className="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">
-                    Next
-                  </span>
-                </div>
+                <Link href={`/?date=${nextDay.toISOString().slice(0, 10)}`}>
+                  <div className="flex items-center">
+                    <svg
+                      className="w-6 h-6 text-gray-400"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                    <span className="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">
+                      Next
+                    </span>
+                  </div>
+                </Link>
               </li>
             </ol>
           </nav>
@@ -274,8 +287,8 @@ export default async function Home() {
         <div className="bg-white rounded-lg border-2 border-slate-200 w-full overflow-hidden ">
           <div className="grid grid-cols-1 lg:grid-cols-7">
             {days.map((dayEvents, index) => {
-              const day = new Date();
-              day.setDate(today.getDate() + index);
+              const day = new Date(thisWeek);
+              day.setDate(thisWeek.getDate() + index);
               day.setHours(0, 0, 0, 0);
 
               return (
