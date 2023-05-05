@@ -55,7 +55,7 @@ export const Modal = ({
           <div className="flex items-center justify-center min-h-screen pt-5 px-5 sm:p-0">
             <div className="fixed inset-0 bg-slate-500 opacity-70" />
 
-            <div className="bg-green-200 rounded-lg overflow-hidden z-40 w-full max-w-2xl">
+            <div className="bg-white rounded-lg overflow-hidden z-40 w-full max-w-2xl">
               <div className="px-10 py-8">
                 <div className="flex items-end justify-between rounded-t mb-4">
                   <button
