@@ -9,6 +9,7 @@ export default async function Companies() {
   const { data: _companies } = await supabase.from("companies").select(
     `
     id,
+    slug,
     name,
     main_colour
     `

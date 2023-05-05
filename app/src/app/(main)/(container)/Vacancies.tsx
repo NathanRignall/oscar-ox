@@ -13,6 +13,7 @@ export default async function Vacancies() {
       id,
       company: companies (
         id,
+        slug,
         name,
         main_colour
       ),
@@ -98,7 +99,7 @@ export default async function Vacancies() {
               key={vacancy.id}
               className=" bg-white rounded-lg border-2 border-slate-200 p-6"
             >
-              <Link href={`/companies/${vacancy.company.id}`}>
+              <Link href={`/companies/${vacancy.company.slug}`}>
                 <h3 className="text-lg font-bold text-slate-900 underline mb-2">
                   {vacancy.title}
                 </h3>
@@ -124,7 +125,7 @@ export default async function Vacancies() {
                   <Tag
                     text={vacancy.company.name}
                     href={`/companies/${encodeURIComponent(
-                      vacancy.company.id
+                      vacancy.company.slug
                     )}`}
                     color={vacancy.company.main_colour}
                     size="sm"

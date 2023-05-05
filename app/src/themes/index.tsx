@@ -2,6 +2,7 @@ export type LayoutProps = {
   children: React.ReactNode;
   company: {
     id: string;
+    slug: string;
     name: string;
     description: string;
     main_colour: string;

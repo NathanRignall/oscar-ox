@@ -18,7 +18,7 @@ export default async function CompanyLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: { companyId: string };
+  params: { companySlug: string };
 }) {
   const supabase = createServerClient();
 
@@ -27,6 +27,7 @@ export default async function CompanyLayout({
     .select(
       `
         id,
+        slug,
         name,
         description,
         main_colour,
@@ -38,13 +39,14 @@ export default async function CompanyLayout({
         )
         `
     )
-    .match({ id: params.companyId })
+    .match({ slug: params.companySlug })
     .single();
 
   if (!_company) notFound();
 
   const company = {
     id: _company.id,
+    slug: _company.slug,
     name: _company.name,
     description: _company.description,
     main_colour: _company.main_colour,

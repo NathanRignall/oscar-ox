@@ -39,7 +39,7 @@ export default function Layout({ children, company }: LayoutProps) {
               }}
             >
               <Link
-                href={`/companies/${encodeURIComponent(company.id)}`}
+                href={`/companies/${encodeURIComponent(company.slug)}`}
                 className="flex-1"
               >
                 <li className="text-sm px-2 py-2 text-center hover:bg-gray-400 hover:text-white uppercase">
@@ -51,7 +51,7 @@ export default function Layout({ children, company }: LayoutProps) {
                 <Link
                   key={page.id}
                   href={`/companies/${encodeURIComponent(
-                    company.id
+                    company.slug
                   )}/${encodeURIComponent(page.slug)}`}
                   className="flex-1"
                 >

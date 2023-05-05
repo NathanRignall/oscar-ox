@@ -62,6 +62,7 @@ export interface Database {
           is_public: boolean
           main_colour: string
           name: string
+          slug: string
           theme: Database["public"]["Enums"]["page_theme"]
           updated_at: string
         }
@@ -72,6 +73,7 @@ export interface Database {
           is_public?: boolean
           main_colour?: string
           name: string
+          slug: string
           theme?: Database["public"]["Enums"]["page_theme"]
           updated_at?: string
         }
@@ -82,6 +84,7 @@ export interface Database {
           is_public?: boolean
           main_colour?: string
           name?: string
+          slug?: string
           theme?: Database["public"]["Enums"]["page_theme"]
           updated_at?: string
         }
@@ -498,6 +501,7 @@ export interface Database {
       }
       create_company: {
         Args: {
+          slug: string
           name: string
           description: string
         }

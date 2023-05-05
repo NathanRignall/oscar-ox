@@ -28,6 +28,7 @@ export default async function Account() {
           tags:company_members (
             company:companies (
               id,
+              slug,
               name,
               main_colour
               )
@@ -108,7 +109,7 @@ export default async function Account() {
                 <li key={tag.id}>
                   <Tag
                     text={tag.name}
-                    href={`/companies/${encodeURIComponent(tag.id)}`}
+                    href={`/companies/${encodeURIComponent(tag.slug)}`}
                     color={tag.main_colour}
                   />
                 </li>

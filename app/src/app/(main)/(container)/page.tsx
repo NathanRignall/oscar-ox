@@ -106,7 +106,10 @@ export default async function Home() {
       production: productions (
         id,
         title,
-        company_id
+        company: companies (
+          id,
+          slug
+        )
       ),
       venue: venues (
         id,
@@ -120,9 +123,14 @@ export default async function Home() {
     .lte("start_time", nextWeekString);
 
   const events = getArray(_events).map((event) => {
+    const production = getSingle(event.production);
     return {
       id: event.id,
-      production: getSingle(event.production),
+      production: {
+        id: production.id,
+        title: production.title,
+        company: getSingle(production.company),
+      },
       venue: getSingle(event.venue),
       start_time: event.start_time,
       end_time: event.end_time,
@@ -300,7 +308,7 @@ export default async function Home() {
                           variant={productionColoursMap.get(
                             event.production.id
                           )}
-                          href={`/companies/${event.production.company_id}`}
+                          href={`/companies/${event.production.company.slug}`}
                         />
                       );
                     })}

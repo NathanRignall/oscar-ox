@@ -71,6 +71,7 @@ create table public.subscriptions (
 -- create table for companies
 create table public.companies (
   id uuid primary key default uuid_generate_v4(),
+  slug text not null unique,
   name text not null,
   description text not null,
   main_colour text not null default '#000000',
@@ -190,14 +191,14 @@ create trigger on_auth_user_created
 GRANT execute ON FUNCTION public.handle_new_user() TO PUBLIC;
 
 -- create company function
-create function public.create_company(name text, description text)
+create function public.create_company(slug text, name text, description text)
 returns uuid as
 $$
 declare
   new_company_id uuid;
 begin
-  insert into companies (name, description)
-  values (create_company.name, create_company.description)
+  insert into companies (slug, name, description)
+  values (create_company.slug, create_company.name, create_company.description)
   returning id into new_company_id;
 
   insert into company_members (company_id, profile_id, role)
@@ -207,7 +208,7 @@ begin
 end;
 $$ language plpgsql security definer;
 
-GRANT execute ON FUNCTION public.create_company() TO authenticated;
+GRANT execute ON FUNCTION public.create_company(slug text, name text, description text) TO authenticated;
 
 -- authorize company member
 create function public.authorize_company_member(

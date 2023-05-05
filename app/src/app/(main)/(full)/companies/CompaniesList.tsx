@@ -8,6 +8,7 @@ import fontColorContrast from "font-color-contrast";
 
 type Company = {
   id: string;
+  slug: string;
   name: string;
   main_colour: string;
 };
@@ -34,6 +35,7 @@ export const CompaniesList = ({ _companies }: CompaniesListProps) => {
           .select(
             `
           id,
+          slug,
           name,
           main_colour
           `
@@ -100,7 +102,7 @@ export const CompaniesList = ({ _companies }: CompaniesListProps) => {
             {companies.map((company) => (
               <Link
                 key={company.id}
-                href={`/companies/${encodeURIComponent(company.id)}`}
+                href={`/companies/${encodeURIComponent(company.slug)}`}
               >
                 <div
                   className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg"

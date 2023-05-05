@@ -15,7 +15,7 @@ const Themes = {
 export default async function Company({
   params,
 }: {
-  params: { companyId: string };
+  params: { companySlug: string };
 }) {
   const supabase = createServerClient();
 
@@ -23,21 +23,22 @@ export default async function Company({
     .from("companies")
     .select(
       `
+        id,
         theme
       `
     )
-    .match({ id: params.companyId })
+    .match({ slug: params.companySlug })
     .single();
 
   if (!company) notFound();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/media/companies/${params.companyId}/pages/index.mdx`
+    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/media/companies/${company.id}/pages/index.mdx`
   );
 
   const markdown = await res.text();
 
   const Page = Themes[company.theme];
 
-  return <Page source={markdown} companyId={params.companyId} />;
+  return <Page source={markdown} companyId={company.id} />;
 }
