@@ -62,6 +62,7 @@ export interface Database {
           is_public: boolean
           main_colour: string
           name: string
+          theme: Database["public"]["Enums"]["page_theme"]
           updated_at: string
         }
         Insert: {
@@ -71,6 +72,7 @@ export interface Database {
           is_public?: boolean
           main_colour?: string
           name: string
+          theme?: Database["public"]["Enums"]["page_theme"]
           updated_at?: string
         }
         Update: {
@@ -80,6 +82,7 @@ export interface Database {
           is_public?: boolean
           main_colour?: string
           name?: string
+          theme?: Database["public"]["Enums"]["page_theme"]
           updated_at?: string
         }
       }
@@ -503,6 +506,7 @@ export interface Database {
     }
     Enums: {
       company_role: "admin" | "moderator"
+      page_theme: "default" | "00productions"
       response_type: "platform" | "email" | "phone"
     }
     CompositeTypes: {

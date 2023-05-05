@@ -6,6 +6,9 @@ create type public.company_role as enum ('admin', 'moderator');
 -- create enum for responses
 create type public.response_type as enum ('platform', 'email', 'phone');
 
+-- create enum for themes
+create type public.page_theme as enum ('default', '00productions');
+
 -- Create a table for public profiles
 create table profiles (
   id uuid references auth.users on delete cascade not null primary key,
@@ -71,6 +74,7 @@ create table public.companies (
   name text not null,
   description text not null,
   main_colour text not null default '#000000',
+  theme public.page_theme not null default 'default',
   is_public boolean not null default true,
   inserted_at timestamp with time zone default timezone('utc'::text, now()) not null,
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null

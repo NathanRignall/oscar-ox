@@ -1,8 +1,16 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import dynamic from "next/dynamic";
 import { createServerClient } from "@/lib/supabase-server";
 import { getArray } from "@/lib/supabase-type-convert";
-import fontColorContrast from "font-color-contrast";
+import { LayoutProps } from "@/themes";
+
+// import all themes
+const Themes = {
+  default: dynamic<LayoutProps>(() => import("@/themes/default/layout")),
+  "00productions": dynamic<LayoutProps>(
+    () => import("@/themes/00productions/layout")
+  ),
+};
 
 // layout
 export default async function CompanyLayout({
@@ -22,6 +30,7 @@ export default async function CompanyLayout({
         name,
         description,
         main_colour,
+        theme,
         pages (
           id,
           slug,
@@ -39,61 +48,11 @@ export default async function CompanyLayout({
     name: _company.name,
     description: _company.description,
     main_colour: _company.main_colour,
+    theme: _company.theme,
     pages: getArray(_company.pages),
   };
 
-  return (
-    <>
-      <header
-        style={{
-          backgroundColor: company.main_colour,
-        }}
-      >
-        <div className="container mx-auto py-6 px-8">
-          <h1
-            className="mb-4 text-5xl font-extrabold"
-            style={{
-              color: fontColorContrast(company.main_colour),
-            }}
-          >
-            {company.name}
-          </h1>
-          <p
-            className="mb-4 text-xl"
-            style={{
-              color: fontColorContrast(company.main_colour),
-            }}
-          >
-            {company.description}
-          </p>
+  const Layout = Themes[company.theme];
 
-          <nav className="relative">
-            <ul
-              className=" flex space-x-4"
-              style={{
-                color: fontColorContrast(company.main_colour),
-              }}
-            >
-              <Link href={`/companies/${encodeURIComponent(company.id)}`}>
-                <li className="text-lg px-2 py-2">Home</li>
-              </Link>
-
-              {company.pages.map((page) => (
-                <Link
-                  key={page.id}
-                  href={`/companies/${encodeURIComponent(
-                    company.id
-                  )}/${encodeURIComponent(page.slug)}`}
-                >
-                  <li className="text-lg px-4 py-2">{page.title}</li>
-                </Link>
-              ))}
-            </ul>
-          </nav>
-        </div>
-      </header>
-
-      <div className="container mx-auto py-6 px-8">{children}</div>
-    </>
-  );
+  return <Layout company={company}>{children}</Layout>;
 }
