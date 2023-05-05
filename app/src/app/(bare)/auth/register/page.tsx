@@ -30,7 +30,9 @@ const EmailLoginForm = ({ complete }: EmailLoginFormProps) => {
   };
 
   const validationSchema = object({
-    name: string().min(3, "Must be at least 3 characters").required("Name is Required"),
+    name: string()
+      .min(3, "Must be at least 3 characters")
+      .required("Name is Required"),
     email: string().email("Invalid email").required("Email is required"),
     password: string().required("Password is required"),
   });

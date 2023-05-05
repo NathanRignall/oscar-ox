@@ -35,7 +35,10 @@ export const Tag = ({
           size == "lg" && "text-sm px-4 py-1.5",
           "rounded-lg inline-block"
         )}
-        style={{ backgroundColor: color, color: color && fontColorContrast(color), }}
+        style={{
+          backgroundColor: color,
+          color: color && fontColorContrast(color),
+        }}
       >
         {text}
       </span>
@@ -56,7 +59,10 @@ export const Tag = ({
           size == "lg" && "text-sm px-4 py-1.5",
           "text-sm rounded-lg inline-block"
         )}
-        style={{ backgroundColor: color, color: color && fontColorContrast(color), }}
+        style={{
+          backgroundColor: color,
+          color: color && fontColorContrast(color),
+        }}
         href={href}
       >
         {text}

@@ -79,7 +79,11 @@ export default async function Production({
           {vacnacy.is_published ? "Preview" : "Editor"}
         </h2>
 
-        <Editor vacancyId={params.vacancyId} intialContent={vacnacy.content || undefined} preview={vacnacy.is_published}/>
+        <Editor
+          vacancyId={params.vacancyId}
+          intialContent={vacnacy.content || undefined}
+          preview={vacnacy.is_published}
+        />
       </section>
     </>
   );

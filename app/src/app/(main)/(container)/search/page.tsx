@@ -12,12 +12,12 @@ export default function Companies() {
           Search for filter anything
         </p>
 
-        <div className="flex justify-center space-x-3 ">
-          <Button>Companies</Button>
-          <Button>Productions</Button>
-          <Button>Profiles</Button>
-          <Button>Vacancies</Button>
-          <Button>Venues</Button>
+        <div className="flex flex-wrap justify-center space-x-3">
+          <Button className="mb-2">Companies</Button>
+          <Button className="mb-2">Productions</Button>
+          <Button className="mb-2">Profiles</Button>
+          <Button className="mb-2">Vacancies</Button>
+          <Button className="mb-2">Venues</Button>
         </div>
       </header>
 

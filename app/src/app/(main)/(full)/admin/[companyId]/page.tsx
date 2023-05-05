@@ -14,7 +14,6 @@ export default async function Pages({
 }) {
   const supabase = createServerClient();
 
-
   return (
     <>
       <h1 className="text-4xl font-bold text-slate-900">Home</h1>

@@ -43,7 +43,7 @@ export default async function Settings({
         <h2 className="text-2xl font-bold text-slate-900 mb-4">Members</h2>
 
         <AddMemberModal companyId={params.companyId} />
-        
+
         <div className="mt-4 border-2 border-slate-200 rounded-lg">
           <table className="w-full text-left divide-y-2 divide-gray-200">
             <thead className="text-xs font-semibold text-slate-500 bg-slate-50 uppercase">

@@ -224,7 +224,11 @@ export default async function Production({
                   </th>
 
                   <td className="px-4 py-4 text-gray-500">
-                    {vacancy.inserted_at}
+                    {new Date(vacancy.inserted_at).toLocaleDateString("en-GB", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })}
                   </td>
 
                   <td className="px-4 py-4 text-gray-500">10</td>

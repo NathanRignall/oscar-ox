@@ -115,9 +115,9 @@ export default async function Vacancies({
 
                   <td className="px-4 text-right">
                     {vacancy.is_published ? (
-                      <Tag text="Published" variant="green" size="sm"/>
+                      <Tag text="Published" variant="green" size="sm" />
                     ) : (
-                      <Tag text="Draft" variant="blue" size="sm"/>
+                      <Tag text="Draft" variant="blue" size="sm" />
                     )}
                   </td>
                 </tr>

@@ -51,13 +51,12 @@ export default function OnboardModal() {
   };
 
   const onSubmit = async (values: FormValues) => {
-
     // check if user is logged in
     if (!session?.user?.id) return;
 
     // add subscriptions
-    const subscriptionsPayload : Subscription[] = [];
-    
+    const subscriptionsPayload: Subscription[] = [];
+
     values.categories.map((category) => {
       if (category && category.length > 0) {
         subscriptionsPayload.push({
@@ -67,7 +66,9 @@ export default function OnboardModal() {
       }
     });
 
-    const { error: errorSubscriptions } = await supabase.from("subscriptions").insert(subscriptionsPayload);
+    const { error: errorSubscriptions } = await supabase
+      .from("subscriptions")
+      .insert(subscriptionsPayload);
 
     if (errorSubscriptions) {
       setFormError(errorSubscriptions.message);

@@ -56,9 +56,7 @@ export default async function Pages({
                     scope="row"
                     className="px-4 py-4 font-bold text-gray-900 whitespace-nowrap underline"
                   >
-                    <Link
-                      href={`/admin/${params.companyId}/pages/${page.id}`}
-                    >
+                    <Link href={`/admin/${params.companyId}/pages/${page.id}`}>
                       {page.title}
                     </Link>
                   </th>

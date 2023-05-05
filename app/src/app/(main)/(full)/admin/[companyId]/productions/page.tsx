@@ -80,11 +80,17 @@ export default async function Productions({
                     scope="row"
                     className="px-4 py-4 font-bold text-slate-900 whitespace-nowrap underline"
                   >
-                    <Link href={`/admin/${params.companyId}/productions/${item.id}`}>{item.title}</Link>
+                    <Link
+                      href={`/admin/${params.companyId}/productions/${item.id}`}
+                    >
+                      {item.title}
+                    </Link>
                   </th>
 
                   <td className="px-4 py-4 max-w-sm whitespace-nowrap">
-                    <p className="text-sm text-slate-500 truncate">{item.description}</p>
+                    <p className="text-sm text-slate-500 truncate">
+                      {item.description}
+                    </p>
                   </td>
 
                   <td className="px-4 py-4 text-right whitespace-nowrap">
@@ -100,7 +106,11 @@ export default async function Productions({
                   </td>
 
                   <td className="px-4 text-right whitespace-nowrap">
-                    {item.is_published ? <Tag text="Published" variant="green"/> : <Tag text="Draft" variant="blue"/>}
+                    {item.is_published ? (
+                      <Tag text="Published" variant="green" />
+                    ) : (
+                      <Tag text="Draft" variant="blue" />
+                    )}
                   </td>
                 </tr>
               ))}

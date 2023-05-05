@@ -61,7 +61,7 @@ export const EditProfileModal = ({
       });
     }
   };
-  
+
   return (
     <>
       <button
