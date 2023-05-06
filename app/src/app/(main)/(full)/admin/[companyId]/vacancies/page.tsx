@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { createServerClient } from "@/lib/supabase-server";
-import { getArray, getSingle } from "@/lib/supabase-type-convert";
-import { NewVacancyModal } from "./NewVacancyModal";
+import { getArray } from "@/lib/supabase-type-convert";
+import { NewVacancyButton } from "./NewVacancyButton";
 import { Tag } from "@/components/ui";
 
 // do not cache this page
@@ -52,9 +52,9 @@ export default async function Vacancies({
       <h1 className="text-4xl font-bold text-slate-900">Vacancies</h1>
 
       <section className="mt-4">
-        <NewVacancyModal company_id={params.companyId} />
+        <NewVacancyButton company_id={params.companyId} />
 
-        <div className="mt-4 border-2 border-slate-200 rounded-lg">
+        <div className="mt-4 border-2 border-slate-200 rounded-lg overflow-hidden">
           <table className="w-full text-left divide-y-2 divide-gray-200">
             <thead className="text-xs font-semibold text-slate-500 bg-slate-50 uppercase">
               <tr>

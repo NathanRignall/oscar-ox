@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { createServerClient } from "@/lib/supabase-server";
-import { Tag } from "@/components/ui";
+import { getArray, getSingle } from "@/lib/supabase-type-convert";
 import { Editor } from "./Editor";
 
 // do not cache this page
@@ -24,7 +24,21 @@ export default async function Production({
       content,
       is_open,
       is_published,
-      inserted_at
+      inserted_at,
+      responses(
+        id,
+        message,
+        inserted_at,
+        profile: profiles (
+          id,
+          name,
+          email
+        )
+      ),
+      categories(
+        id,
+        title
+      )
       `
     )
     .match({ id: params.vacancyId })
@@ -39,13 +53,20 @@ export default async function Production({
     is_open: _vacancy.is_open,
     is_published: _vacancy.is_published,
     inserted_at: _vacancy.inserted_at,
+    responses: getArray(_vacancy.responses).map((response) => ({
+      id: response.id,
+      message: response.message,
+      inserted_at: response.inserted_at,
+      profile: getSingle(response.profile),
+    })),
+    categories: getArray(_vacancy.categories),
   };
 
   return (
     <>
       <header>
         <div className="flex items-center">
-          <h1 className="flex items-center text-4xl font-bold text-slate-900 mb-3">
+          <h1 className="flex items-center text-4xl font-bold text-slate-900">
             <Link href={`/admin/${params.companyId}/vacancies`}>
               <svg
                 className="h-5 w-5 mr-4"
@@ -63,27 +84,29 @@ export default async function Production({
                 />
               </svg>
             </Link>
-            {vacnacy.title}
+            Vacancies
           </h1>
-
-          {vacnacy.is_published ? (
-            <Tag text="Published" variant="green" className="ml-2" size="sm" />
-          ) : (
-            <Tag text="Draft" variant="blue" className="ml-2" size="sm" />
-          )}
         </div>
       </header>
 
-      <section className="mt-6">
-        <h2 className="text-2xl font-bold text-slate-900 mb-4">
-          {vacnacy.is_published ? "Preview" : "Editor"}
-        </h2>
+      <section className="mt-4">
+        <Editor vacancy={vacnacy} />
+      </section>
 
-        <Editor
-          vacancyId={params.vacancyId}
-          intialContent={vacnacy.content || undefined}
-          preview={vacnacy.is_published}
-        />
+      <section className="mt-4">
+        <h2 className="text-2xl font-bold text-slate-900">Responses</h2>
+
+        {vacnacy.responses.map((response) => (
+          <div key={response.id} className="mt-4">
+            {response.id}
+            <br/>
+            {response.message}
+            <br/>
+            {response.inserted_at}
+            <br/>
+            {response.profile.name} - {response.profile.email}
+          </div>
+        ))}
       </section>
     </>
   );
