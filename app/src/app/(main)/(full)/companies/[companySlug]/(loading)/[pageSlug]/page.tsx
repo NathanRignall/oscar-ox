@@ -41,11 +41,11 @@ export default async function Page({
         title
         `
     )
-    .match({ company_id: params.companySlug, slug: params.pageSlug })
+    .match({ company_id: company.id, slug: params.pageSlug })
     .single();
 
   if (!page) notFound();
-
+  
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/media/companies/${company.id}/pages/${page.id}.mdx`
   );
@@ -54,5 +54,5 @@ export default async function Page({
 
   const Page = Themes[company.theme];
 
-  return <Page source={markdown} companyId={params.companySlug} />;
+  return <Page source={markdown} companyId={company.id} />;
 }

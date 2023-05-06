@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { PageProps } from "@/themes";
+import OpenVacancies from "../default/components/OpenVacancies";
 
 const Hero = ({
   companyId,
@@ -26,6 +27,8 @@ const components = (companyId: string) => {
   return {
     // @ts-expect-error
     Hero: (props) => <Hero {...props} companyId={companyId} />,
+    // @ts-expect-error
+    OpenVacancies: (props) => <OpenVacancies {...props} companyId={companyId} />,
   };
 };
 
