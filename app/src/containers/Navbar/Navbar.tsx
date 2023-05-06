@@ -60,7 +60,7 @@ export const Navbar = ({ loggedIn }: NavbarProps) => {
     <>
       <nav className="z-40 bg-white border-b-2 border-slate-200">
         <div className="max-w-7xl flex flex-wrap items-center justify-between mx-auto px-4 py-3 md:px-6 md:py-2 lg:px-8 h-16 md:h-20">
-          <a href="https://flowbite.com/" className="flex items-center">
+          <Link href="/" className="flex items-center">
             <span className="self-center text-3xl md:text-4xl font-bold whitespace-nowrap text-slate-900">
               Oscar Ox
             </span>
@@ -75,7 +75,7 @@ export const Navbar = ({ loggedIn }: NavbarProps) => {
                 <Tag variant="blue" text="Beta" />
               )}
             </div>
-          </a>
+          </Link>
 
           <button
             data-collapse-toggle="navbar-default"

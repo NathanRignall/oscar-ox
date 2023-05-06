@@ -33,7 +33,7 @@ export default async function Pages({
       <h1 className="text-4xl font-bold text-slate-900">Pages</h1>
 
       <section className="mt-4">
-        <div className="mt-4 border-2 border-slate-200 rounded-lg">
+        <div className="mt-4 border-2 border-slate-200 rounded-lg overflow-hidden">
           <table className="w-full text-left divide-y-2 divide-gray-200">
             <thead className="text-xs font-semibold text-slate-500 bg-slate-50 uppercase">
               <tr>
