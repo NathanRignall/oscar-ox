@@ -19,7 +19,6 @@ const Hero = ({
         fill
         alt={text}
       />
-      <div className="text-6xl text-white z-10">{text}</div>
     </div>
   );
 };

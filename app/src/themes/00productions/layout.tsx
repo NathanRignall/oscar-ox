@@ -24,7 +24,7 @@ export default function Layout({ children, company }: LayoutProps) {
             />
             <div className="flex flex-col justify-center ml-2">
               <h1
-                className={`mb-0 text-6xl font-extrabold ${interFont.className}`}
+                className={`mb-0 text-3xl sm:text-6xl font-extrabold ${interFont.className}`}
               >
                 Productions
               </h1>
