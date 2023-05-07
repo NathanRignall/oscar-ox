@@ -28,7 +28,7 @@ export const getMaybeSingle = <T>(input: T[] | T | null) => {
 
 export const getArray = <T>(input: T[] | T | null) => {
   if (input === null) {
-    throw new Error("Input is null");
+    return [];
   }
 
   if (Array.isArray(input)) {
