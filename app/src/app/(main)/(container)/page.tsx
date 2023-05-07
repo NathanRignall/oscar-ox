@@ -131,7 +131,7 @@ export default async function Home({ searchParams }: { searchParams: { date: str
     )
     .gte("start_time", thisWeekString)
     .lte("start_time", nextWeekString)
-    .eq("is_published", true);
+    .eq("production.is_published", true);
 
   const events = getArray(_events).map((event) => {
     const production = getSingle(event.production);

@@ -117,7 +117,6 @@ export interface Database {
           end_time: string | null
           id: string
           inserted_at: string
-          is_published: boolean
           production_id: string
           start_time: string
           ticket_link: string | null
@@ -128,7 +127,6 @@ export interface Database {
           end_time?: string | null
           id?: string
           inserted_at?: string
-          is_published?: boolean
           production_id: string
           start_time: string
           ticket_link?: string | null
@@ -139,7 +137,6 @@ export interface Database {
           end_time?: string | null
           id?: string
           inserted_at?: string
-          is_published?: boolean
           production_id?: string
           start_time?: string
           ticket_link?: string | null
@@ -195,7 +192,6 @@ export interface Database {
           category_id: string | null
           id: string
           inserted_at: string
-          is_published: boolean | null
           production_id: string
           profile_id: string
           updated_at: string
@@ -204,7 +200,6 @@ export interface Database {
           category_id?: string | null
           id?: string
           inserted_at?: string
-          is_published?: boolean | null
           production_id: string
           profile_id: string
           updated_at?: string
@@ -213,7 +208,6 @@ export interface Database {
           category_id?: string | null
           id?: string
           inserted_at?: string
-          is_published?: boolean | null
           production_id?: string
           profile_id?: string
           updated_at?: string

@@ -6,6 +6,7 @@ import { getArray, getSingle } from "@/lib/supabase-type-convert";
 import { AddEventModal } from "./AddEventModal";
 import { Button, Tag } from "@/components/ui";
 import { EditProductionModal } from "./EditProductionModal";
+import { NewVacancyButton } from "../../vacancies/NewVacancyButton";
 
 // do not cache this page
 export const revalidate = 0;
@@ -40,7 +41,14 @@ export default async function Production({
         title,
         is_open,
         is_published,
-        inserted_at
+        inserted_at,
+        responses(
+          id
+        ),
+        categories(
+          id,
+          title
+        )
       )
       `
     )
@@ -66,6 +74,8 @@ export default async function Production({
       is_open: vacancy.is_open,
       is_published: vacancy.is_published,
       inserted_at: vacancy.inserted_at,
+      responses: getArray(vacancy.responses).length,
+      categories: getArray(vacancy.categories),
     })),
   };
 
@@ -169,7 +179,7 @@ export default async function Production({
                     {event.venue.title}
                   </td>
 
-                  <td className="px-4 py-4 text-right">
+                  <td className="px-4 text-right">
                     <Button size="sm">Edit</Button>{" "}
                     <Button size="sm">Delete</Button>
                   </td>
@@ -185,7 +195,7 @@ export default async function Production({
           Linked Vacancies
         </h2>
 
-        <AddEventModal productionId={params.productionId} />
+        <NewVacancyButton companyId={params.companyId} productionId={params.productionId} />
 
         <div className="mt-4 border-2 border-slate-200 rounded-lg overflow-hidden">
           <table className="w-full text-left divide-y-2 divide-gray-200">
@@ -214,7 +224,7 @@ export default async function Production({
                 <tr key={vacancy.id} className="bg-white hover:bg-gray-50">
                   <th
                     scope="row"
-                    className="px-4 py-4 font-bold text-gray-900 underline"
+                    className="px-4 py-4 font-bold text-gray-900 whitespace-nowrap underline"
                   >
                     <Link
                       href={`/admin/${params.companyId}/vacancies/${vacancy.id}`}
@@ -223,7 +233,7 @@ export default async function Production({
                     </Link>
                   </th>
 
-                  <td className="px-4 py-4 text-gray-500">
+                  <td className="px-4 py-4 text-gray-500 whitespace-nowrap">
                     {new Date(vacancy.inserted_at).toLocaleDateString("en-GB", {
                       year: "numeric",
                       month: "short",
@@ -231,17 +241,26 @@ export default async function Production({
                     })}
                   </td>
 
-                  <td className="px-4 py-4 text-gray-500">10</td>
-
                   <td className="px-4 py-4 text-gray-500">
-                    <Tag text="Crew" />
+                    {vacancy.responses}
+                  </td>
+
+                  <td className="px-4 py-4 text-gray-500 whitespace-nowrap space-x-1">
+                    {vacancy.categories.map((category) => (
+                      <Tag
+                        key={category.id}
+                        text={category.title}
+                        variant="secondary"
+                        size="sm"
+                      />
+                    ))}
                   </td>
 
                   <td className="px-4 text-right">
                     {vacancy.is_published ? (
-                      <Tag text="Published" color="green" />
+                      <Tag text="Published" variant="green" />
                     ) : (
-                      <Tag text="Draft" color="blue" />
+                      <Tag text="Draft" variant="blue" />
                     )}
                   </td>
                 </tr>
@@ -249,6 +268,13 @@ export default async function Production({
             </tbody>
           </table>
         </div>
+      </section>
+
+      <section className="mt-6">
+        <h2 className="text-2xl font-bold text-slate-900 mb-4">Participants</h2>
+
+
+        <Button>Add Participant</Button>
       </section>
     </>
   );

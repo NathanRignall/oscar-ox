@@ -110,7 +110,6 @@ create table public.events (
   start_time timestamp with time zone not null,
   end_time timestamp with time zone,
   ticket_link text,
-  is_published boolean not null default false,
   inserted_at timestamp with time zone default timezone('utc'::text, now()) not null,
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null
 );
@@ -121,7 +120,6 @@ create table public.participants (
   profile_id uuid references public.profiles on delete cascade not null,
   production_id uuid references public.productions on delete cascade not null,
   category_id uuid references public.categories,
-  is_published boolean not null default false,
   inserted_at timestamp with time zone default timezone('utc'::text, now()) not null,
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null
 );
@@ -394,7 +392,6 @@ $$
     join public.companies on companies.id = productions.company_id
     where
       participants.id = authorize_participant_public.participant_id and
-      participants.is_published = true and
       productions.is_published = true and
       companies.is_public = true
     into bind_permissions;
@@ -515,7 +512,7 @@ create policy "Company admins can delete their own productions." on productions
 alter table events
   enable row level security;
 create policy "Public events are viewable by everyone." on events
-  for select using (is_published and authorize_production_public(production_id));
+  for select using (authorize_production_public(production_id));
 create policy "Company moderators can view their own events." on events
   for select using (authorize_company_production_member(production_id, auth.uid(), 'moderator'));
 create policy "Company admins can view their own events." on events
@@ -530,7 +527,7 @@ create policy "Company admins can delete their own events." on events
 alter table participants
   enable row level security;
 create policy "Public participants are viewable by everyone." on participants
-  for select using (is_published and authorize_production_public(production_id));
+  for select using (authorize_production_public(production_id));
 create policy "Company moderators can view their own participants." on participants
   for select using (authorize_company_production_member(production_id, auth.uid(), 'moderator'));
 create policy "Company admins can view their own participants." on participants

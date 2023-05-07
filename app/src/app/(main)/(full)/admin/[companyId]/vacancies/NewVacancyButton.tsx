@@ -7,10 +7,11 @@ import { v4 as uuidv4 } from 'uuid';
 import { Button } from "@/components/ui";
 
 type NewVacancyButtonProps = {
-  company_id: string;
+  companyId: string;
+  productionId?: string;
 };
 
-export const NewVacancyButton = ({ company_id }: NewVacancyButtonProps) => {
+export const NewVacancyButton = ({ companyId, productionId }: NewVacancyButtonProps) => {
   const { supabase } = useSupabase();
 
   const router = useRouter();
@@ -25,7 +26,8 @@ export const NewVacancyButton = ({ company_id }: NewVacancyButtonProps) => {
 
     const { data, error } = await supabase.from("vacancies").insert({
       id: id,
-      company_id: company_id,
+      company_id: companyId,
+      production_id: productionId,
       title: "New Vacancy",
     });
 
@@ -35,7 +37,7 @@ export const NewVacancyButton = ({ company_id }: NewVacancyButtonProps) => {
     } else {
       startTransition(() => {
         router.refresh();
-        router.push(`/admin/${company_id}/vacancies/${id}`);
+        router.push(`/admin/${companyId}/vacancies/${id}`);
       });
     }
   };

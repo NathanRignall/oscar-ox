@@ -52,7 +52,7 @@ export default async function Vacancies({
       <h1 className="text-4xl font-bold text-slate-900">Vacancies</h1>
 
       <section className="mt-4">
-        <NewVacancyButton company_id={params.companyId} />
+        <NewVacancyButton companyId={params.companyId} />
 
         <div className="mt-4 border-2 border-slate-200 rounded-lg overflow-hidden">
           <table className="w-full text-left divide-y-2 divide-gray-200">
