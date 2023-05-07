@@ -1,7 +1,5 @@
 import { notFound } from "next/navigation";
 import { createServerClient } from "@/lib/supabase-server";
-import { MDXRemote } from "next-mdx-remote/rsc";
-
 // Page
 export default async function Roles({
   params,
@@ -15,8 +13,10 @@ export default async function Roles({
     .select(
       `
         id,
-        title
-        `
+        title,
+        description,
+        image_url
+      `
     )
     .match({ slug: params.roleSlug })
     .single();
@@ -25,7 +25,13 @@ export default async function Roles({
 
   return (
     <>
-      <h1 className="text-4xl font-bold text-slate-900 mb-4">{role.title}</h1>
+      <header className="flex max-w-3xl mx-auto mb-8">
+        <h1 className="text-4xl font-bold text-slate-900">{role.title}</h1>
+      </header>
+
+      <main className="max-w-3xl mx-auto">
+        <p className="text-slate-600">{role.description}</p>
+      </main>
     </>
   );
 }
