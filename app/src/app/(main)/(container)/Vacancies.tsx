@@ -34,6 +34,7 @@ export default async function Vacancies() {
       `
     )
     .eq("is_open", true)
+    .eq("is_published", true)
     .order("inserted_at", { ascending: false });
 
   const vacancies = getArray(_vacancies).map((vacancy) => {
