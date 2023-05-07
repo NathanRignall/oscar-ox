@@ -1,14 +1,12 @@
 "use client";
 
-import { useEffect, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { useSupabase } from "@/components/client";
-import { object, string } from "yup";
 import { FormikProps, Formik, Field, Form } from "formik";
 import { Button } from "@/components/ui";
-import { getArray } from "@/lib/supabase-type-convert";
 
-type Category = {
+export type Category = {
   id: string;
   title: string;
 };
@@ -18,29 +16,17 @@ type Subscription = {
   category_id: string;
 };
 
-export default function OnboardModal() {
+export type OnboardModalProps = {
+  categories: Category[];
+};
+
+export default function OnboardModal({ categories }: OnboardModalProps) {
   const { supabase, session } = useSupabase();
 
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
   const [formError, setFormError] = useState<string | null>(null);
-
-  const [categories, setCategories] = useState<Category[]>([]);
-
-  useEffect(() => {
-    const getCategories = async () => {
-      const { data: _categories } = await supabase
-        .from("categories")
-        .select(`id, title`);
-
-      const categories = getArray(_categories);
-
-      setCategories(categories);
-    };
-
-    getCategories();
-  }, [supabase]);
 
   interface FormValues {
     categories: string[];
