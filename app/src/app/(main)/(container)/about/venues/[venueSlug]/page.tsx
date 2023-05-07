@@ -1,9 +1,10 @@
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import { createServerClient } from "@/lib/supabase-server";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import dynamic from "next/dynamic";
 
-const MapWithNoSSR = dynamic(() => import("./Map"), {
+const MapWithNoSSR = dynamic(() => import("../Map"), {
   ssr: false,
 });
 
@@ -20,8 +21,13 @@ export default async function Venue({
     .select(
       `
         id,
-        title
-        `
+        title,
+        description,
+        image_url,
+        location,
+        latitude,
+        longitude
+      `
     )
     .match({ slug: params.venueSlug })
     .single();
@@ -30,11 +36,32 @@ export default async function Venue({
 
   return (
     <>
-      <h1 className="text-4xl font-bold text-slate-900 mb-4">{venue.title}</h1>
+      <header className="flex max-w-3xl mx-auto mb-8">
+        <h1 className="text-4xl font-bold text-slate-900">{venue.title}</h1>
+      </header>
 
-      <main>
-        <div className="w-full aspect-[2/1] bg-slate-600">
-          <MapWithNoSSR />
+      <main className="max-w-3xl mx-auto">
+
+        <div className="sm:flex sm:space-x-4 mb-4">
+          <div className="basis-2/3">
+            <p className="text-slate-600">{venue.description}</p>
+          </div>
+          <div className="relative basis-1/3">
+            <div className="relative aspect-1 bg-slate-300 rounded-md overflow-hidden">
+            <Image
+              alt=""
+              src={`media/venues/${venue.image_url}`}
+              className={"duration-200 ease-in-out"}
+              fill
+              priority
+            />
+            </div>
+          </div>
+        </div>
+
+
+        <div className="w-full aspect-[2/1] bg-slate-600 rounded-md overflow-hidden">
+          <MapWithNoSSR points={[venue]} center={[venue.latitude, venue.longitude]} zoom={15} />
         </div>
       </main>
     </>

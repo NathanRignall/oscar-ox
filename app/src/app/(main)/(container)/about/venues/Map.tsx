@@ -10,11 +10,15 @@ type point = {
   longitude: number;
 };
 
+type center = [number, number];
+
 export type MapProps = {
   points: point[];
+  center?: center;
+  zoom?: number;
 };
 
-export default function Map({ points }: MapProps) {
+export default function Map({ points, center, zoom }: MapProps) {
   const myIcon = new L.Icon({
     iconRetinaUrl: "/leaflet/images/marker-icon-2x.png",
     iconUrl: "/leaflet/images/marker-icon.png",
@@ -24,8 +28,8 @@ export default function Map({ points }: MapProps) {
 
   return (
     <MapContainer
-      center={[51.752, -1.2577]}
-      zoom={13}
+      center={center || [51.752, -1.2577]}
+      zoom={zoom || 13}
       className="w-full h-full"
     >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />

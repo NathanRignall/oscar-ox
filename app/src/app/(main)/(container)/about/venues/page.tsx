@@ -33,7 +33,7 @@ export default async function Venues() {
       </header>
 
       <main className="max-w-3xl mx-auto">
-        <div className="w-full aspect-[2/1] bg-slate-600">
+        <div className="w-full aspect-[2/1] bg-slate-600 rounded-md overflow-hidden">
           <MapWithNoSSR points={venues} />
         </div>
         <ul className="mt-8 grid sm:grid-cols-2 gap-4">
@@ -54,7 +54,7 @@ export default async function Venues() {
               <div className="h-full aspect-1 relative bg-slate-300 rounded-r-md overflow-hidden">
                 <Image
                   alt=""
-                  src={`media/images/venues/${venue.image_url}`}
+                  src={`media/venues/${venue.image_url}`}
                   className={"duration-200 ease-in-out rounded-r-md"}
                   fill
                   priority
