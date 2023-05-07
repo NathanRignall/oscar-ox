@@ -151,7 +151,6 @@ serve(async (req) => {
               template_id: 3,
               data: {
                 subject: "Welcome to Oscar Ox!",
-                title: "Welcome to Oscar Ox!",
                 lead: "Hello,",
                 message,
               },

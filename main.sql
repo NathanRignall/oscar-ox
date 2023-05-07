@@ -120,11 +120,17 @@ create table public.participants (
   id uuid primary key default uuid_generate_v4(),
   profile_id uuid references public.profiles on delete cascade not null,
   production_id uuid references public.productions on delete cascade not null,
-  role_id uuid references public.roles,
   category_id uuid references public.categories,
   is_published boolean not null default false,
   inserted_at timestamp with time zone default timezone('utc'::text, now()) not null,
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+-- create table for participant roles
+create table public.participant_roles (
+  participant_id uuid references public.participants on delete cascade not null,
+  role_id uuid references public.roles on delete cascade not null,
+  primary key (participant_id, role_id)
 );
 
 -- create table for vacancies
@@ -265,6 +271,35 @@ language plpgsql security definer;
 
 GRANT execute ON FUNCTION public.authorize_company_production_member(production_id uuid, profile_id uuid, role public.company_role) TO PUBLIC;
 
+-- authorize company participant member
+create function public.authorize_company_participant_member(
+  participant_id uuid,
+  profile_id uuid,
+  role public.company_role
+)
+returns boolean as
+$$
+  declare
+    bind_permissions int;
+  begin
+    select
+      count(*)
+    from public.company_members
+    join public.productions on productions.company_id = company_members.company_id
+    join public.participants on participants.production_id = productions.id
+    where
+      participants.id = authorize_company_participant_member.participant_id and
+      company_members.profile_id = authorize_company_participant_member.profile_id and
+      company_members.role = authorize_company_participant_member.role
+    into bind_permissions;
+
+    return bind_permissions > 0;
+  end;
+$$
+language plpgsql security definer;
+
+GRANT execute ON FUNCTION public.authorize_company_participant_member(participant_id uuid, profile_id uuid, role public.company_role) TO PUBLIC;
+
 -- authorize company vacancy member
 create function public.authorize_company_vacancy_member(
   vacancy_id uuid,
@@ -342,6 +377,34 @@ $$
 language plpgsql security definer;
 
 GRANT execute ON FUNCTION public.authorize_production_public(production_id uuid) TO PUBLIC;
+
+-- authorize participant public
+create function public.authorize_participant_public(
+  participant_id uuid
+)
+returns boolean as
+$$
+  declare
+    bind_permissions int;
+  begin
+    select
+      count(*)
+    from public.participants
+    join public.productions on productions.id = participants.production_id
+    join public.companies on companies.id = productions.company_id
+    where
+      participants.id = authorize_participant_public.participant_id and
+      participants.is_published = true and
+      productions.is_published = true and
+      companies.is_public = true
+    into bind_permissions;
+
+    return bind_permissions > 0;
+  end;
+$$
+language plpgsql security definer;
+
+GRANT execute ON FUNCTION public.authorize_participant_public(participant_id uuid) TO PUBLIC;
 
 -- authorize vacancy public
 create function public.authorize_vacancy_public(
@@ -478,6 +541,21 @@ create policy "Company admins can update their own participants." on participant
   for update using (authorize_company_production_member(production_id, auth.uid(), 'admin'));
 create policy "Company admins can delete their own participants." on participants
   for delete using (authorize_company_production_member(production_id, auth.uid(), 'admin'));
+
+alter table participant_roles
+  enable row level security;
+create policy "Public participant roles are viewable by everyone." on participant_roles
+  for select using (authorize_participant_public(participant_id));
+create policy "Company moderators can view their own participant roles." on participant_roles
+  for select using (authorize_company_participant_member(participant_id, auth.uid(), 'moderator'));
+create policy "Company admins can view their own participant roles." on participant_roles
+  for select using (authorize_company_participant_member(participant_id, auth.uid(), 'admin'));
+create policy "Company admins can insert their own participant roles." on participant_roles
+  for insert with check (authorize_company_participant_member(participant_id, auth.uid(), 'admin'));
+create policy "Company admins can update their own participant roles." on participant_roles
+  for update using (authorize_company_participant_member(participant_id, auth.uid(), 'admin'));
+create policy "Company admins can delete their own participant roles." on participant_roles
+  for delete using (authorize_company_participant_member(participant_id, auth.uid(), 'admin'));
 
 alter table vacancies
   enable row level security;

@@ -176,6 +176,20 @@ export interface Database {
           updated_at?: string
         }
       }
+      participant_roles: {
+        Row: {
+          participant_id: string
+          role_id: string
+        }
+        Insert: {
+          participant_id: string
+          role_id: string
+        }
+        Update: {
+          participant_id?: string
+          role_id?: string
+        }
+      }
       participants: {
         Row: {
           category_id: string | null
@@ -184,7 +198,6 @@ export interface Database {
           is_published: boolean | null
           production_id: string
           profile_id: string
-          role_id: string | null
           updated_at: string
         }
         Insert: {
@@ -194,7 +207,6 @@ export interface Database {
           is_published?: boolean | null
           production_id: string
           profile_id: string
-          role_id?: string | null
           updated_at?: string
         }
         Update: {
@@ -204,7 +216,6 @@ export interface Database {
           is_published?: boolean | null
           production_id?: string
           profile_id?: string
-          role_id?: string | null
           updated_at?: string
         }
       }
@@ -465,6 +476,14 @@ export interface Database {
         }
         Returns: boolean
       }
+      authorize_company_participant_member: {
+        Args: {
+          participant_id: string
+          profile_id: string
+          role: Database["public"]["Enums"]["company_role"]
+        }
+        Returns: boolean
+      }
       authorize_company_production_member: {
         Args: {
           production_id: string
@@ -484,6 +503,12 @@ export interface Database {
           vacancy_id: string
           profile_id: string
           role: Database["public"]["Enums"]["company_role"]
+        }
+        Returns: boolean
+      }
+      authorize_participant_public: {
+        Args: {
+          participant_id: string
         }
         Returns: boolean
       }

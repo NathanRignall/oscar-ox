@@ -81,7 +81,6 @@ serve(async (req) => {
           template_id: 3,
           data: {
             subject,
-            title: "Oscar Ox",
             lead: `Hello ${name},`,
             message,
           },
@@ -135,7 +134,6 @@ serve(async (req) => {
           template_id: 3,
           data: {
             subject,
-            title: "Oscar Ox",
             lead: `Hello ${name},`,
             message,
           },
