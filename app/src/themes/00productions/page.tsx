@@ -13,7 +13,7 @@ const Hero = ({
   text: string;
 }) => {
   return (
-    <div className="w-screen h-[60vh] bg-slate-500 relative left-[50%] right-[50%] mx-[-50vw] mb-8">
+    <div className="w-screen h-[60vh] bg-slate-500 relative left-[50%] right-[50%] mx-[-50vw] -translate-y-6">
       <Image
         src={`media/companies/${companyId}/images/${src}`}
         fill

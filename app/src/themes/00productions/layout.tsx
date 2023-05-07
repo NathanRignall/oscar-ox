@@ -65,7 +65,7 @@ export default function Layout({ children, company }: LayoutProps) {
         </div>
       </header>
 
-      <div className="container mx-auto max-w-6xl px-8">{children}</div>
+      <div className="container mx-auto max-w-6xl py-6 px-8">{children}</div>
     </>
   );
 }

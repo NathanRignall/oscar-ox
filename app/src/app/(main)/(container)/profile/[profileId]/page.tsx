@@ -64,20 +64,19 @@ export default async function Account({
       )
     `
     )
-    .match({ id: params.profileId });
+    .match({ profile_id: params.profileId });
 
   const participants = getArray(_participants).map((participant: any) => ({
     id: participant.id,
     production: {
       id: getSingle(participant.production).id,
       title: getSingle(participant.production).title,
-      event: getSingle(getSingle(participant.production).events).map(
-        (event: any) => ({
-          id: event.id,
-          start_time: event.start_time,
-          venue: getSingle(event.venue),
-        })
-      ),
+      event: {
+        id: getSingle(getSingle(participant.production).events).id,
+        start_time: getSingle(getSingle(participant.production).events)
+          .start_time,
+        venue: getSingle(getSingle(getSingle(participant.production).events).venue).title,
+      }
     },
   }));
 
@@ -135,11 +134,11 @@ export default async function Account({
                   className=" bg-white rounded-lg border-2 border-slate-200 p-6"
                 >
                   <p className="text-xl font-bold text-slate-900 uppercase">
-                    {participant.production.event.start_time
-                      .split("T")[0]
-                      .split("-")
-                      .slice(1)
-                      .join(" ")}
+                    {new Date(
+                      participant.production.event.start_time).toLocaleString('default', { month: 'long' })}
+                    {" "}
+                    {new Date(
+                      participant.production.event.start_time).toLocaleString('default', { year: 'numeric' })}
                   </p>
                   <h3 className="text-lg font-bold text-slate-900">
                     {participant.production.title}
