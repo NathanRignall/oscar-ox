@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSupabase } from "@/components/client";
@@ -10,6 +11,13 @@ import { Button } from "@/components/ui";
 const InviteCompleteForm = () => {
   const router = useRouter();
   const { supabase, session } = useSupabase();
+
+  useEffect(() => {
+    console.log("session", session);
+    if (!session) {
+      router.push("/auth/register");
+    }
+  }, [router, session]);
 
   interface FormValues {
     password: string;
@@ -52,7 +60,7 @@ const InviteCompleteForm = () => {
               type="email"
               name="email"
               autoComplete="email"
-              value={session?.user.email || ""}
+              value={session?.user.email || "Loading..."}
               placeholder="Email Address"
               className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-lg text-center text-slate-900 placeholder-slate-600 disabled:text-slate-300"
               disabled
@@ -105,7 +113,7 @@ export default function Register() {
 
       <div className="flex items-center justify-center">
         <div className="text-lg font-medium ">
-          <Link href="/register" className="underline hover:text-slate-700">
+          <Link href="/auth/register" className="underline hover:text-slate-700">
             Privacy Policy
           </Link>
         </div>
