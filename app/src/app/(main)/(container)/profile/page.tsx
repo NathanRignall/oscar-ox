@@ -55,6 +55,7 @@ export default async function Account() {
     .select(
       `
       id,
+      title,
       production:productions (
         id,
         title,
@@ -73,6 +74,7 @@ export default async function Account() {
 
   const participants = getArray(_participants).map((participant: any) => ({
     id: participant.id,
+    title: participant.title,
     production: {
       id: getSingle(participant.production).id,
       title: getSingle(participant.production).title,
@@ -164,7 +166,7 @@ export default async function Account() {
                     {participant.production.title}
                   </h3>
                   <p className="text-sm text-slate-600 ">
-                    ROLE - {participant.production.event.venue}
+                    {participant.title} - {participant.production.event.venue}
                   </p>
                 </li>
               ))}

@@ -8,7 +8,7 @@ import { FormikProps, Formik, Form } from "formik";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Button, Modal } from "@/components/ui";
-import Autocomplete from "./Auto";
+import AutoCompleteVenue from "./AutoCompleteVenue";
 
 type AddEventModalProps = {
   productionId: string;
@@ -77,7 +77,7 @@ export const AddEventModal = ({ productionId }: AddEventModalProps) => {
         }: FormikProps<FormValues>) => (
           <Form>
             <div className="mb-4">
-              <Autocomplete />
+              <AutoCompleteVenue />
 
               {errors.venueId && touched.venueId ? (
                 <p className="mt-2 text-sm text-slate-600">{errors.venueId}</p>

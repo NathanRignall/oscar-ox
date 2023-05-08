@@ -7,6 +7,7 @@ import { AddEventModal } from "./AddEventModal";
 import { Button, Tag } from "@/components/ui";
 import { EditProductionModal } from "./EditProductionModal";
 import { NewVacancyButton } from "../../vacancies/NewVacancyButton";
+import { AddParticipantModal } from "./AddParticipantModal";
 
 // do not cache this page
 export const revalidate = 0;
@@ -273,8 +274,7 @@ export default async function Production({
       <section className="mt-6">
         <h2 className="text-2xl font-bold text-slate-900 mb-4">Participants</h2>
 
-
-        <Button>Add Participant</Button>
+        <AddParticipantModal productionId={params.productionId} />
       </section>
     </>
   );

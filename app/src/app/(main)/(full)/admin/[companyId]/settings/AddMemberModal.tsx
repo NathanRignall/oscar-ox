@@ -2,11 +2,10 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { useSupabase } from "@/components/client";
+import { useSupabase, AutoCompleteEmail } from "@/components/client";
 import { object, string } from "yup";
 import { FormikProps, Formik, Field, Form } from "formik";
 import { Button, Modal } from "@/components/ui";
-import AutoCompleteEmail from "./AutoCompleteEmail";
 
 type AddMemberModalProps = {
   companyId: string;

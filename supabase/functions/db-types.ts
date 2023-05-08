@@ -194,6 +194,7 @@ export interface Database {
           inserted_at: string
           production_id: string
           profile_id: string
+          title: string
           updated_at: string
         }
         Insert: {
@@ -202,6 +203,7 @@ export interface Database {
           inserted_at?: string
           production_id: string
           profile_id: string
+          title: string
           updated_at?: string
         }
         Update: {
@@ -210,6 +212,7 @@ export interface Database {
           inserted_at?: string
           production_id?: string
           profile_id?: string
+          title?: string
           updated_at?: string
         }
       }

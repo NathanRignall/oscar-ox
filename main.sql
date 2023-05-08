@@ -120,6 +120,7 @@ create table public.participants (
   profile_id uuid references public.profiles on delete cascade not null,
   production_id uuid references public.productions on delete cascade not null,
   category_id uuid references public.categories,
+  title text not null,
   inserted_at timestamp with time zone default timezone('utc'::text, now()) not null,
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null
 );

@@ -8,7 +8,7 @@ type Option = {
   title: string;
 };
 
-export default function Autocomplete() {
+export default function AutoCompleteVenue() {
   const { supabase } = useSupabase();
   const [field, meta, helpers] = useField("venueId");
 

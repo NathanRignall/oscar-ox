@@ -19,6 +19,10 @@ const Hero = ({
         fill
         alt={text}
       />
+      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-900 to-transparent h-1/2" />
+      <div className="absolute bottom-0 left-0 right-0 text-white text-7xl font-bold p-4 text-center">
+        {text}
+      </div>
     </div>
   );
 };
