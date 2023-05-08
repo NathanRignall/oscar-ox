@@ -9,6 +9,7 @@ export type TagProps = {
   color?: string;
   text: string;
   href?: string;
+  scroll?: boolean;
 };
 
 export const Tag = ({
@@ -18,6 +19,7 @@ export const Tag = ({
   color,
   text,
   href,
+  scroll = true,
 }: TagProps) => {
   if (!href) {
     return (
@@ -64,6 +66,7 @@ export const Tag = ({
           color: color && fontColorContrast(color),
         }}
         href={href}
+        scroll={scroll}
       >
         {text}
       </Link>

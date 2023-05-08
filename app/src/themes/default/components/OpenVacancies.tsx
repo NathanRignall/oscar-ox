@@ -2,6 +2,7 @@ import Link from "next/link";
 import { createServerClient } from "@/lib/supabase-server";
 import { getArray, getSingle } from "@/lib/supabase-type-convert";
 import { Button, Tag } from "@/components/ui";
+import { RespondVacancyModal } from "./RespondVacancyModal";
 
 export default async function Vacancies({ companyId }: { companyId: string }) {
   const supabase = createServerClient();
@@ -100,6 +101,7 @@ export default async function Vacancies({ companyId }: { companyId: string }) {
             <li
               key={vacancy.id}
               className=" bg-white rounded-lg border-2 border-slate-200 p-6"
+              id={vacancy.id}
             >
               <Link href={`/companies/${vacancy.company.slug}`}>
                 <h3 className="text-lg font-bold text-slate-900 underline mb-2">
@@ -140,9 +142,9 @@ export default async function Vacancies({ companyId }: { companyId: string }) {
               </p>
 
               <div className="flex mb-2 space-x-2">
-                <Button>
-                  Respond
-                </Button>
+                {vacancy.response_type == "platform" && (
+                  <RespondVacancyModal vacancyId={vacancy.id} />
+                )}
 
                 <Button>
                   View Production
