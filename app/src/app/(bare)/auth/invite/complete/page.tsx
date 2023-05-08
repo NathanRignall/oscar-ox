@@ -1,33 +1,34 @@
 "use client";
 
-import { useEffect } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
+
 import { useSupabase } from "@/components/client";
+
 import { object, string } from "yup";
 import { FormikProps, FormikHelpers, Formik, Field, Form } from "formik";
+
 import { Button } from "@/components/ui";
 
-const InviteCompleteForm = () => {
-  const router = useRouter();
+type EmailLoginFormProps = {
+  complete: () => void;
+};
+
+const EmailLoginForm = ({ complete }: EmailLoginFormProps) => {
   const { supabase, session } = useSupabase();
 
-  useEffect(() => {
-    console.log("session", session);
-    if (!session) {
-      router.push("/auth/invite/complete");
-    }
-  }, [router, session]);
-
   interface FormValues {
+    email: string;
     password: string;
   }
 
   const initialValues: FormValues = {
+    email: "",
     password: "",
   };
 
   const validationSchema = object({
+    email: string().email("Invalid email").required("Email is required"),
     password: string().required("Password is required"),
   });
 
@@ -35,14 +36,15 @@ const InviteCompleteForm = () => {
     values: FormValues,
     helpers: FormikHelpers<FormValues>
   ) => {
-    const { error } = await supabase.auth.updateUser({
+    const { error } = await supabase.auth.signUp({
+      email: values.email,
       password: values.password,
     });
 
     if (error) {
-      helpers.setErrors({ password: error.message });
+      helpers.setErrors({ email: error.message });
     } else {
-      router.push("/");
+      complete();
     }
   };
 
@@ -55,15 +57,13 @@ const InviteCompleteForm = () => {
       {({ errors, touched, submitForm }: FormikProps<FormValues>) => (
         <Form className="h-64 w-full max-w-sm">
           <div className="mb-2">
-            <input
+            <Field
               id="email"
               type="email"
               name="email"
               autoComplete="email"
-              value={session?.user.email || "Loading..."}
               placeholder="Email Address"
-              className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-lg text-center text-slate-900 placeholder-slate-600 disabled:text-slate-300"
-              disabled
+              className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-lg text-center text-slate-900 placeholder-slate-600"
             />
           </div>
 
@@ -88,6 +88,8 @@ const InviteCompleteForm = () => {
           </Button>
 
           <div className="h-32 text-center">
+            {touched.email && errors.email && <div>{errors.email}</div>}
+
             {touched.password && errors.password && (
               <div>{errors.password}</div>
             )}
@@ -99,6 +101,16 @@ const InviteCompleteForm = () => {
 };
 
 export default function Register() {
+  const [complete, setComplete] = useState<boolean>(false);
+
+  const finalComplete = (): void => {
+    setComplete(true);
+  };
+
+  const retryComplete = (): void => {
+    setComplete(false);
+  };
+
   return (
     <>
       <div className="flex flex-1 flex-col items-center justify-center pt-12 pb-16">
@@ -108,12 +120,28 @@ export default function Register() {
         <div className="mb-8 text-lg font-medium text-slate-600 ">
           Authenticate
         </div>
-        <InviteCompleteForm />
+
+        {!complete ? (
+          <EmailLoginForm complete={finalComplete} />
+        ) : (
+          <div className="h-64 w-full max-w-sm text-center ">
+            <div className="text-2xl">Check your email verification email</div>
+            <div className="mt-10 text-lg font-medium">
+              No email?{" "}
+              <div
+                className="inline cursor-pointer underline hover:text-slate-700"
+                onClick={retryComplete}
+              >
+                Retry
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="flex items-center justify-center">
         <div className="text-lg font-medium ">
-          <Link href="/auth/register" className="underline hover:text-slate-700">
+          <Link href="/register" className="underline hover:text-slate-700">
             Privacy Policy
           </Link>
         </div>
