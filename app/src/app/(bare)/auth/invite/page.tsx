@@ -12,13 +12,6 @@ const InviteCompleteForm = () => {
   const router = useRouter();
   const { supabase, session } = useSupabase();
 
-  useEffect(() => {
-    console.log("session", session);
-    if (!session) {
-      router.push("/auth/invite/complete");
-    }
-  }, [router, session]);
-
   interface FormValues {
     password: string;
   }
