@@ -4,10 +4,12 @@ import Image from "next/image";
 import { createServerClient } from "@/lib/supabase-server";
 import { getArray, getSingle } from "@/lib/supabase-type-convert";
 import { AddEventModal } from "./AddEventModal";
-import { Button, Tag } from "@/components/ui";
+import { Tag } from "@/components/ui";
 import { EditProductionModal } from "./EditProductionModal";
 import { NewVacancyButton } from "../../vacancies/NewVacancyButton";
 import { AddParticipantModal } from "./AddParticipantModal";
+import { RemoveEventModal } from "./RemoveEventModal";
+import { RemoveParticipantModal } from "./RemoveParticipantModal";
 
 // do not cache this page
 export const revalidate = 0;
@@ -50,6 +52,19 @@ export default async function Production({
           id,
           title
         )
+      ),
+      participants(
+        id,
+        profile:profiles (
+          id,
+          name,
+          email
+        ),
+        title,
+        category:categories (
+          id,
+          title
+        )
       )
       `
     )
@@ -77,6 +92,12 @@ export default async function Production({
       inserted_at: vacancy.inserted_at,
       responses: getArray(vacancy.responses).length,
       categories: getArray(vacancy.categories),
+    })),
+    participants: getArray(_production.participants).map((participant) => ({
+      id: participant.id,
+      profile: getSingle(participant.profile),
+      title: participant.title,
+      category: getSingle(participant.category),
     })),
   };
 
@@ -159,33 +180,33 @@ export default async function Production({
             </thead>
 
             <tbody className="divide-y-2 divide-solid divide-slate-200">
-              {production.events.map((event) => (
-                <tr key={event.id} className="bg-white hover:bg-gray-50">
-                  <th
-                    scope="row"
-                    className="px-4 py-4 font-medium text-gray-900"
-                  >
-                    {new Date(event.start_time).toLocaleDateString("en-GB", {
-                      year: "numeric",
-                      month: "short",
-                      day: "numeric",
-                    })}
-                    {" - "}
-                    {new Date(event.start_time).toLocaleTimeString("en-GB", {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
-                  </th>
-                  <td className="px-4 py-4 text-gray-500">
-                    {event.venue.title}
-                  </td>
+              {production.events.map((event) => {
+                const time = new Date(event.start_time).toLocaleDateString("en-GB", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                }) + " - " + new Date(event.start_time).toLocaleTimeString("en-GB", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                });
+                return (
+                  <tr key={event.id} className="bg-white hover:bg-gray-50">
+                    <th
+                      scope="row"
+                      className="px-4 py-4 font-medium text-gray-900"
+                    >
+                      {time}
+                    </th>
+                    <td className="px-4 py-4 text-gray-500">
+                      {event.venue.title}
+                    </td>
 
-                  <td className="px-4 text-right">
-                    <Button size="sm">Edit</Button>{" "}
-                    <Button size="sm">Delete</Button>
-                  </td>
-                </tr>
-              ))}
+                    <td className="px-4 text-right">
+                      <RemoveEventModal eventId={event.id} time={time} venue={event.venue.title} />
+                    </td>
+                  </tr>
+                )
+              })}
             </tbody>
           </table>
         </div>
@@ -275,6 +296,66 @@ export default async function Production({
         <h2 className="text-2xl font-bold text-slate-900 mb-4">Participants</h2>
 
         <AddParticipantModal productionId={params.productionId} />
+
+        <div className="mt-4 border-2 border-slate-200 rounded-lg overflow-hidden">
+          <table className="w-full text-left divide-y-2 divide-gray-200">
+            <thead className="text-xs font-semibold text-gray-500 bg-slate-50 uppercase">
+              <tr>
+                <th scope="col" className="px-4 py-4">
+                  Name
+                </th>
+                <th scope="col" className="px-4 py-4">
+                  Email
+                </th>
+                <th scope="col" className="px-4 py-4">
+                  Title
+                </th>
+                <th scope="col" className="px-4 py-4">
+                  Tags
+                </th>
+                <th scope="col" className="px-4 py-4 text-right">
+                  Actions
+                </th>
+              </tr>
+            </thead>
+
+            <tbody className="divide-y-2 divide-solid divide-slate-200">
+              {production.participants.map((participant) => (
+                <tr key={participant.id} className="bg-white hover:bg-gray-50">
+                  <th
+                    scope="row"
+                    className="px-4 py-4 font-bold text-gray-900 whitespace-nowrap"
+                  >
+                    {participant.profile.name}
+                  </th>
+
+                  <td className="px-4 py-4 text-gray-500 whitespace-nowrap">
+                    {participant.profile.email}
+                  </td>
+
+                  <td className="px-4 py-4 text-gray-500">
+                    {participant.title}
+                  </td>
+
+                  <td className="px-4 py-4 text-gray-500 whitespace-nowrap space-x-1">
+                    {participant.category && (
+                      <Tag
+                        key={participant.category.id}
+                        text={participant.category.title}
+                        variant="secondary"
+                        size="sm"
+                      />
+                    )}
+                  </td>
+
+                  <td className="px-4 text-right">
+                    <RemoveParticipantModal participantId={participant.id} name={participant.profile.name} email={participant.profile.email} title={participant.title} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </section>
     </>
   );
