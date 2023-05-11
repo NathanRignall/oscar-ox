@@ -3,13 +3,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { createServerClient } from "@/lib/supabase-server";
 import { getArray, getSingle } from "@/lib/supabase-type-convert";
-import { AddEventModal } from "./AddEventModal";
-import { EditEventModal } from "./EditEventModal";
+
 import { Tag } from "@/components/ui";
 import { EditProductionModal } from "./EditProductionModal";
+import { AddEventModal } from "./AddEventModal";
+import { EditEventModal } from "./EditEventModal";
+import { RemoveEventModal } from "./RemoveEventModal";
 import { NewVacancyButton } from "../../vacancies/NewVacancyButton";
 import { AddParticipantModal } from "./AddParticipantModal";
-import { RemoveEventModal } from "./RemoveEventModal";
+import { EditParticipantModal } from "./EditParticipantModal";
 import { RemoveParticipantModal } from "./RemoveParticipantModal";
 
 // do not cache this page
@@ -365,6 +367,8 @@ export default async function Production({
                   </td>
 
                   <td className="px-4 text-right">
+                    <EditParticipantModal participant={participant} />
+                    {" "}
                     <RemoveParticipantModal
                       participantId={participant.id}
                       name={`${participant.profile.given_name} ${participant.profile.family_name}`}

@@ -10,13 +10,17 @@ type Option = {
   family_name: string;
 };
 
-export const AutoCompleteEmail = () => {
+export type AutoCompleteEmailProps = {
+  initialSearch?: string;
+};
+
+export const AutoCompleteEmail = ({ initialSearch }: AutoCompleteEmailProps) => {
   const { supabase } = useSupabase();
   const [field, meta, helpers] = useField("profileId");
 
   const [showOptions, setShowOptions] = useState<boolean>(false);
   const [optionsList, setOptionsList] = useState<Option[]>([]);
-  const [search, setSearch] = useState<string>("");
+  const [search, setSearch] = useState<string>(initialSearch || "");
   const [cursor, setCursor] = useState(-1);
   const ref = useRef();
 
