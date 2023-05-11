@@ -73,8 +73,8 @@ export default async function Vacancies({ companyId }: { companyId: string }) {
             vacancy.response_type == "email"
               ? "by email"
               : vacancy.response_type == "phone"
-                ? "by phone"
-                : "on platform";
+              ? "by phone"
+              : "on platform";
           let responseMessage = `Please respond to this vacancy ${responseMessageType}`;
 
           if (vacancy.response_deadline) {
@@ -137,18 +137,14 @@ export default async function Vacancies({ companyId }: { companyId: string }) {
                 </li>
               </ul>
 
-              <p className="text-sm text-slate-600 mb-4">
-                {vacancy.content}
-              </p>
+              <p className="text-sm text-slate-600 mb-4">{vacancy.content}</p>
 
               <div className="flex mb-2 space-x-2">
                 {vacancy.response_type == "platform" && (
                   <RespondVacancyModal vacancyId={vacancy.id} />
                 )}
 
-                <Button>
-                  View Production
-                </Button>
+                <Button>View Production</Button>
               </div>
             </li>
           );

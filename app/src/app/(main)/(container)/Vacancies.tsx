@@ -100,7 +100,10 @@ export default async function Vacancies() {
               key={vacancy.id}
               className=" bg-white rounded-lg border-2 border-slate-200 p-6"
             >
-              <Link href={`/companies/${vacancy.company.slug}#${vacancy.id}`} scroll={false}>
+              <Link
+                href={`/companies/${vacancy.company.slug}#${vacancy.id}`}
+                scroll={false}
+              >
                 <h3 className="text-lg font-bold text-slate-900 underline mb-2">
                   {vacancy.title}
                 </h3>

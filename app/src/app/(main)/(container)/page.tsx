@@ -83,7 +83,11 @@ const CalenderEvent = ({
 };
 
 // Page
-export default async function Home({ searchParams }: { searchParams: { date: string } }) {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: { date: string };
+}) {
   const supabase = createServerClient();
 
   // create a date using date (structure DD-MM-YYYY)

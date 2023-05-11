@@ -37,7 +37,9 @@ export const Editor = ({ vacancy }: EditorProps) => {
   const [categories, setCategories] = useState<Category[]>([]);
 
   const [title, setTitle] = useState<string>(vacancy.title);
-  const [content, setContent] = useState<string | undefined>(vacancy.content || "");
+  const [content, setContent] = useState<string | undefined>(
+    vacancy.content || ""
+  );
   const [activeCategories, setActiveCategories] = useState<string[]>([]);
 
   useEffect(() => {
@@ -78,14 +80,12 @@ export const Editor = ({ vacancy }: EditorProps) => {
       if (error) {
         console.error(error);
       } else {
-        const { error } = await supabase
-          .from("vacancy_categories")
-          .insert(
-            activeCategories.map((category_id) => ({
-              vacancy_id: vacancy.id,
-              category_id,
-            }))
-          );
+        const { error } = await supabase.from("vacancy_categories").insert(
+          activeCategories.map((category_id) => ({
+            vacancy_id: vacancy.id,
+            category_id,
+          }))
+        );
 
         if (error) {
           console.error(error);
@@ -104,7 +104,11 @@ export const Editor = ({ vacancy }: EditorProps) => {
             <Tag variant="green" text="Published" />
 
             {vacancy.categories.map((category) => (
-              <Tag key={category.id} text={category.title} variant="secondary" />
+              <Tag
+                key={category.id}
+                text={category.title}
+                variant="secondary"
+              />
             ))}
           </div>
 
@@ -131,7 +135,6 @@ export const Editor = ({ vacancy }: EditorProps) => {
             />
           </div>
 
-
           <div className="mb-4">
             <MDEditor value={content} onChange={setContent} />
           </div>
@@ -146,8 +149,12 @@ export const Editor = ({ vacancy }: EditorProps) => {
                     className="sr-only peer"
                     checked={activeCategories.includes(category.id)}
                     onChange={(e) => {
-                      if (e.target.checked) setActiveCategories([...activeCategories, category.id]);
-                      else setActiveCategories(activeCategories.filter((id) => id !== category.id));
+                      if (e.target.checked)
+                        setActiveCategories([...activeCategories, category.id]);
+                      else
+                        setActiveCategories(
+                          activeCategories.filter((id) => id !== category.id)
+                        );
                     }}
                   />
                   <div className="w-11 h-6 bg-slate-200 rounded-full peer  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-slate-800"></div>

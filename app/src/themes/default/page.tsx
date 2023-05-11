@@ -5,16 +5,16 @@ import OpenVacancies from "./components/OpenVacancies";
 const components = (companyId: string) => {
   return {
     // @ts-expect-error
-    OpenVacancies: (props) => <OpenVacancies {...props} companyId={companyId} />,
+    OpenVacancies: (props) => ( <OpenVacancies {...props} companyId={companyId} /> ),
   };
 };
 
 export default function Page({ companyId, source }: PageProps) {
-  console.log(source)
+  console.log(source);
   return (
     <div>
       {/* @ts-expect-error */}
-      <MDXRemote source={source} components={components(companyId)}/>
+      <MDXRemote source={source} components={components(companyId)} />
     </div>
   );
 }

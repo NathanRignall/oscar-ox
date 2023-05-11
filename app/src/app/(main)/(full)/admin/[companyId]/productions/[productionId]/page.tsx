@@ -181,14 +181,17 @@ export default async function Production({
 
             <tbody className="divide-y-2 divide-solid divide-slate-200">
               {production.events.map((event) => {
-                const time = new Date(event.start_time).toLocaleDateString("en-GB", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                }) + " - " + new Date(event.start_time).toLocaleTimeString("en-GB", {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                });
+                const time =
+                  new Date(event.start_time).toLocaleDateString("en-GB", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  }) +
+                  " - " +
+                  new Date(event.start_time).toLocaleTimeString("en-GB", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  });
                 return (
                   <tr key={event.id} className="bg-white hover:bg-gray-50">
                     <th
@@ -202,10 +205,14 @@ export default async function Production({
                     </td>
 
                     <td className="px-4 text-right">
-                      <RemoveEventModal eventId={event.id} time={time} venue={event.venue.title} />
+                      <RemoveEventModal
+                        eventId={event.id}
+                        time={time}
+                        venue={event.venue.title}
+                      />
                     </td>
                   </tr>
-                )
+                );
               })}
             </tbody>
           </table>
@@ -217,7 +224,10 @@ export default async function Production({
           Linked Vacancies
         </h2>
 
-        <NewVacancyButton companyId={params.companyId} productionId={params.productionId} />
+        <NewVacancyButton
+          companyId={params.companyId}
+          productionId={params.productionId}
+        />
 
         <div className="mt-4 border-2 border-slate-200 rounded-lg overflow-hidden">
           <table className="w-full text-left divide-y-2 divide-gray-200">
@@ -349,7 +359,12 @@ export default async function Production({
                   </td>
 
                   <td className="px-4 text-right">
-                    <RemoveParticipantModal participantId={participant.id} name={participant.profile.name} email={participant.profile.email} title={participant.title} />
+                    <RemoveParticipantModal
+                      participantId={participant.id}
+                      name={participant.profile.name}
+                      email={participant.profile.email}
+                      title={participant.title}
+                    />
                   </td>
                 </tr>
               ))}

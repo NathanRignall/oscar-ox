@@ -17,7 +17,9 @@ type AddParticipantModalProps = {
   productionId: string;
 };
 
-export const AddParticipantModal = ({ productionId }: AddParticipantModalProps) => {
+export const AddParticipantModal = ({
+  productionId,
+}: AddParticipantModalProps) => {
   const { supabase } = useSupabase();
 
   const router = useRouter();
@@ -48,7 +50,7 @@ export const AddParticipantModal = ({ productionId }: AddParticipantModalProps) 
   }, [supabase]);
 
   interface FormValues {
-    title: string
+    title: string;
     profileId: string;
     categoryId: string;
   }
@@ -87,7 +89,9 @@ export const AddParticipantModal = ({ productionId }: AddParticipantModalProps) 
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen} button="Add Participant">
-      <div className="text-3xl text-slate-900 font-bold mb-8">Add Participant</div>
+      <div className="text-3xl text-slate-900 font-bold mb-8">
+        Add Participant
+      </div>
 
       <Formik
         initialValues={initialValues}
@@ -105,7 +109,9 @@ export const AddParticipantModal = ({ productionId }: AddParticipantModalProps) 
               <AutoCompleteEmail />
 
               {errors.profileId && touched.profileId ? (
-                <p className="mt-2 text-sm text-slate-600">{errors.profileId}</p>
+                <p className="mt-2 text-sm text-slate-600">
+                  {errors.profileId}
+                </p>
               ) : (
                 <div className="mt-2 h-5" />
               )}
@@ -139,7 +145,9 @@ export const AddParticipantModal = ({ productionId }: AddParticipantModalProps) 
               </Field>
 
               {errors.categoryId && touched.categoryId ? (
-                <p className="mt-2 text-sm text-slate-600">{errors.categoryId}</p>
+                <p className="mt-2 text-sm text-slate-600">
+                  {errors.categoryId}
+                </p>
               ) : (
                 <div className="mt-2 h-5" />
               )}

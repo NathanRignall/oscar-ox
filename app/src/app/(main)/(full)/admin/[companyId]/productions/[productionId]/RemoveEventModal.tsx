@@ -7,7 +7,7 @@ import { Button, Modal } from "@/components/ui";
 
 type RemoveEventModalProps = {
   eventId: string;
-  time: string
+  time: string;
   venue: string;
 };
 
@@ -51,9 +51,7 @@ export const RemoveEventModal = ({
       button="Remove"
       buttonSize="sm"
     >
-      <div className="text-3xl text-slate-900 font-bold mb-1">
-        Remove Event
-      </div>
+      <div className="text-3xl text-slate-900 font-bold mb-1">Remove Event</div>
 
       <p className="text-lg text-slate-600 mb-6">
         You are about to remove a event from the production. Are you sure you

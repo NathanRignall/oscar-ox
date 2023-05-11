@@ -41,27 +41,29 @@ export default async function Venue({
       </header>
 
       <main className="max-w-3xl mx-auto">
-
         <div className="sm:flex sm:space-x-4 mb-4">
           <div className="basis-2/3">
             <p className="text-slate-600">{venue.description}</p>
           </div>
           <div className="relative basis-1/3">
             <div className="relative aspect-1 bg-slate-300 rounded-md overflow-hidden">
-            <Image
-              alt=""
-              src={`media/venues/${venue.image_url}`}
-              className={"duration-200 ease-in-out"}
-              fill
-              priority
-            />
+              <Image
+                alt=""
+                src={`media/venues/${venue.image_url}`}
+                className={"duration-200 ease-in-out"}
+                fill
+                priority
+              />
             </div>
           </div>
         </div>
 
-
         <div className="w-full aspect-[2/1] bg-slate-600 rounded-md overflow-hidden">
-          <MapWithNoSSR points={[venue]} center={[venue.latitude, venue.longitude]} zoom={15} />
+          <MapWithNoSSR
+            points={[venue]}
+            center={[venue.latitude, venue.longitude]}
+            zoom={15}
+          />
         </div>
       </main>
     </>

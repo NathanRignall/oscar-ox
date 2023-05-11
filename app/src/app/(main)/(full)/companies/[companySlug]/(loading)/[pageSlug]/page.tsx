@@ -11,7 +11,6 @@ const Themes = {
   ),
 };
 
-
 // Page
 export default async function Page({
   params,
@@ -45,7 +44,7 @@ export default async function Page({
     .single();
 
   if (!page) notFound();
-  
+
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/media/companies/${company.id}/pages/${page.id}.mdx`
   );

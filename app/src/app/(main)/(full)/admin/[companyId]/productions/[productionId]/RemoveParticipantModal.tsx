@@ -7,7 +7,7 @@ import { Button, Modal } from "@/components/ui";
 
 type RemoveParticipantModalProps = {
   participantId: string;
-  name: string
+  name: string;
   email: string;
   title: string;
 };
@@ -16,7 +16,7 @@ export const RemoveParticipantModal = ({
   participantId,
   name,
   email,
-  title
+  title,
 }: RemoveParticipantModalProps) => {
   const { supabase } = useSupabase();
 
@@ -58,8 +58,8 @@ export const RemoveParticipantModal = ({
       </div>
 
       <p className="text-lg text-slate-600 mb-6">
-        You are about to remove a participant from the production. Are you sure you
-        would like to continue?
+        You are about to remove a participant from the production. Are you sure
+        you would like to continue?
       </p>
 
       <p className="text-lg text-slate-600 mb-6 italic">

@@ -34,7 +34,9 @@ export default async function BareLayout({
       <Navbar loggedIn={user != null} />
       <div className="grow">{children}</div>
 
-      {user && !user.user_metadata.finished_onboarding && <OnboardModal categories={categories} />}
+      {user && !user.user_metadata.finished_onboarding && (
+        <OnboardModal categories={categories} />
+      )}
     </>
   );
 }

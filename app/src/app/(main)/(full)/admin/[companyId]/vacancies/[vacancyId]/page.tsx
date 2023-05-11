@@ -99,11 +99,11 @@ export default async function Production({
         {vacnacy.responses.map((response) => (
           <div key={response.id} className="mt-4">
             {response.id}
-            <br/>
+            <br />
             {response.message}
-            <br/>
+            <br />
             {response.inserted_at}
-            <br/>
+            <br />
             {response.profile.name} - {response.profile.email}
           </div>
         ))}

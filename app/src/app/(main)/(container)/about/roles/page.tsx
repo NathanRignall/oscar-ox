@@ -7,23 +7,20 @@ import { getArray } from "@/lib/supabase-type-convert";
 export default async function Roles() {
   const supabase = createServerClient();
 
-  const { data: _roles } = await supabase
-    .from("roles")
-    .select(
-      `
+  const { data: _roles } = await supabase.from("roles").select(
+    `
         id,
         slug,
         title,
         description,
         image_url
         `
-    );
+  );
 
   const roles = getArray(_roles);
 
   return (
     <>
-
       <header className="flex max-w-3xl mx-auto mb-8">
         <h1 className="text-4xl font-bold text-slate-900">Roles</h1>
       </header>
@@ -54,11 +51,8 @@ export default async function Roles() {
               </div>
             </li>
           ))}
-
         </ul>
       </main>
-
     </>
-
-  )
+  );
 }

@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { useSupabase } from "@/components/client";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import { Button } from "@/components/ui";
 
 type NewVacancyButtonProps = {
@@ -11,7 +11,10 @@ type NewVacancyButtonProps = {
   productionId?: string;
 };
 
-export const NewVacancyButton = ({ companyId, productionId }: NewVacancyButtonProps) => {
+export const NewVacancyButton = ({
+  companyId,
+  productionId,
+}: NewVacancyButtonProps) => {
   const { supabase } = useSupabase();
 
   const router = useRouter();
@@ -42,6 +45,8 @@ export const NewVacancyButton = ({ companyId, productionId }: NewVacancyButtonPr
     }
   };
   return (
-    <Button onClick={onClick} disabled={isLoading}>New Vacancy</Button>
+    <Button onClick={onClick} disabled={isLoading}>
+      New Vacancy
+    </Button>
   );
 };
