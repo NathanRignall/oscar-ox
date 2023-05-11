@@ -1,9 +1,6 @@
 import { redirect } from "next/navigation";
 import { createServerClient } from "@/lib/supabase-server";
 import { getArray, getSingle } from "@/lib/supabase-type-convert";
-import { ButtonLink, Tag } from "@/components/ui";
-import { ProfileNavigation, ProfilePicture } from "@/containers";
-import { EditProfileModal } from "./EditProfileModal";
 
 // do not cache this page
 export const revalidate = 0;

@@ -1,7 +1,5 @@
-import { redirect } from "next/navigation";
 import { createServerClient } from "@/lib/supabase-server";
 import { getArray, getSingle } from "@/lib/supabase-type-convert";
-import { ProfileNavigation } from "@/containers";
 
 // do not cache this page
 export const revalidate = 0;
