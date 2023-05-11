@@ -88,6 +88,15 @@ export default async function Account() {
 
   return (
     <>
+      <header className="max-w-3xl mx-auto mb-8">
+        <h1 className="mb-3 text-5xl sm:text-6xl font-extrabold text-slate-900">
+          Settings
+        </h1>
+        <p className="mb-3 text-xl text-slate-600">
+          Profile Managament
+        </p>
+      </header>
+
       <main className="max-w-3xl mx-auto">
 
         Reset Password

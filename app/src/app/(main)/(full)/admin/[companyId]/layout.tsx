@@ -47,7 +47,7 @@ export default async function AdminLayout({
       <aside className="flex-none w-64 h-full">
         <div className="flex flex-col overflow-y-auto bg-white border-r-2 border-slate-200 h-full">
           <h2 className="flex items-center text-lg px-7 py-6 border-b-2 border-slate-200">
-            <Link href={`/admin`}>
+            <Link href={`/profile/admin`}>
               <svg
                 className="h-3 w-3 mr-2"
                 fill="none"
@@ -71,9 +71,8 @@ export default async function AdminLayout({
             {Links.map((link) => (
               <li key={link.href}>
                 <Link
-                  className={`px-4 py-3 block rounded-lg text-lg ${
-                    link.active ? "bg-slate-100" : ""
-                  }`}
+                  className={`px-4 py-3 block rounded-lg text-lg ${link.active ? "bg-slate-100" : ""
+                    }`}
                   href={`/admin/${encodeURIComponent(company.id)}/${link.href}`}
                 >
                   {link.text}

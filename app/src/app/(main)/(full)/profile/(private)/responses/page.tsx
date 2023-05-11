@@ -34,6 +34,15 @@ export default async function Account() {
 
   return (
     <>
+      <header className="max-w-3xl mx-auto mb-8">
+        <h1 className="mb-3 text-5xl sm:text-6xl font-extrabold text-slate-900">
+          Responses
+        </h1>
+        <p className="mb-3 text-xl text-slate-600">
+          Your Responses to Vacancies
+        </p>
+      </header>
+
       <main className="max-w-3xl mx-auto">
 
         Responses
