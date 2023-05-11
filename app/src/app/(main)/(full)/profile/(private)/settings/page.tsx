@@ -86,10 +86,12 @@ export default async function Account() {
     },
   }));
 
+  const { data, error } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel()
+
   return (
     <>
       <header className="max-w-3xl mx-auto mb-8">
-        <h1 className="mb-3 text-5xl sm:text-6xl font-extrabold text-slate-900">
+        <h1 className="mb-3 text-5xl font-extrabold text-slate-900">
           Settings
         </h1>
         <p className="mb-3 text-xl text-slate-600">
@@ -98,6 +100,12 @@ export default async function Account() {
       </header>
 
       <main className="max-w-3xl mx-auto">
+
+        <section>
+          <h2 className="text-4xl font-bold text-slate-900">
+            Security
+          </h2>
+        </section>
 
         Reset Password
 
@@ -112,6 +120,8 @@ export default async function Account() {
         <br />
 
         Manage Subsciptions
+
+        {JSON.stringify(data)}
 
       </main>
     </>

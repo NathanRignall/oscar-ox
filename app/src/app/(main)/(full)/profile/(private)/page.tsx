@@ -21,8 +21,9 @@ export default async function Account() {
     .select(
       `
           id,
-          name,
           email,
+          given_name,
+          family_name,
           biography,
           avatar_url,
           tags:company_members (
@@ -43,7 +44,8 @@ export default async function Account() {
 
   const profile = {
     id: _profile.id,
-    name: _profile.name,
+    given_name: _profile.given_name,
+    family_name: _profile.family_name,
     email: _profile.email,
     biography: _profile.biography,
     avatar_url: _profile.avatar_url || "default.jpg",
@@ -94,14 +96,14 @@ export default async function Account() {
       <header className="sm:flex max-w-3xl mx-auto mb-8">
         <div className="flex-1">
           <h1 className="mb-1 text-5xl sm:text-6xl font-extrabold text-slate-900">
-            {profile.name}
+            {`${profile.given_name} ${profile.family_name}`}
           </h1>
           <div className="mb-3">
             <p className="text-xl text-slate-600 inline-block">
               {profile.biography ? profile.biography : "No biography yet."}
             </p>
             <EditProfileModal
-              name={profile.name}
+              name={`${profile.given_name} ${profile.family_name}`}
               biography={profile.biography}
             />
           </div>

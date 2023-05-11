@@ -31,8 +31,9 @@ export default async function Production({
         inserted_at,
         profile: profiles (
           id,
-          name,
-          email
+          email,
+          given_name,
+          family_name
         )
       ),
       categories(
@@ -104,7 +105,7 @@ export default async function Production({
             <br />
             {response.inserted_at}
             <br />
-            {response.profile.name} - {response.profile.email}
+            {response.profile.family_name} - {response.profile.given_name} - {response.profile.email}
           </div>
         ))}
       </section>

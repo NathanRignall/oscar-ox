@@ -37,14 +37,14 @@ serve(async (req) => {
       // get the user's email
       const { data: profile } = await supabaseClient
         .from("profiles")
-        .select("email, name")
+        .select("email, given_name")
         .eq("id", profile_id)
         .single();
 
       if (!profile) throw new Error("No profile found");
 
       const email = profile.email;
-      const name = profile.name;
+      const given_name = profile.given_name;
 
       // get the details of the production joined with the company
       const { data: _production } = await supabaseClient
@@ -84,7 +84,7 @@ serve(async (req) => {
           template_id: 3,
           data: {
             subject,
-            lead: `Hello ${name},`,
+            lead: `Hello ${given_name},`,
             message,
           },
         }),

@@ -57,7 +57,8 @@ export default async function Production({
         id,
         profile:profiles (
           id,
-          name,
+          given_name,
+          family_name,
           email
         ),
         title,
@@ -336,7 +337,7 @@ export default async function Production({
                     scope="row"
                     className="px-4 py-4 font-bold text-gray-900 whitespace-nowrap"
                   >
-                    {participant.profile.name}
+                    {`${participant.profile.given_name} ${participant.profile.family_name}`}
                   </th>
 
                   <td className="px-4 py-4 text-gray-500 whitespace-nowrap">
@@ -361,7 +362,7 @@ export default async function Production({
                   <td className="px-4 text-right">
                     <RemoveParticipantModal
                       participantId={participant.id}
-                      name={participant.profile.name}
+                      name={`${participant.profile.given_name} ${participant.profile.family_name}`}
                       email={participant.profile.email}
                       title={participant.title}
                     />

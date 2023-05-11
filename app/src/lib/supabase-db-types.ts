@@ -250,30 +250,33 @@ export interface Database {
           avatar_url: string | null
           biography: string | null
           email: string
+          family_name: string
+          given_name: string
           id: string
           inserted_at: string
           is_public: boolean
-          name: string
           updated_at: string
         }
         Insert: {
           avatar_url?: string | null
           biography?: string | null
           email: string
+          family_name: string
+          given_name: string
           id: string
           inserted_at?: string
           is_public?: boolean
-          name: string
           updated_at?: string
         }
         Update: {
           avatar_url?: string | null
           biography?: string | null
           email?: string
+          family_name?: string
+          given_name?: string
           id?: string
           inserted_at?: string
           is_public?: boolean
-          name?: string
           updated_at?: string
         }
       }

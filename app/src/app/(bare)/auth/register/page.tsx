@@ -2,12 +2,9 @@
 
 import Link from "next/link";
 import { useState } from "react";
-
 import { useSupabase } from "@/components/client";
-
 import { object, string } from "yup";
-import { FormikProps, FormikHelpers, Formik, Field, Form } from "formik";
-
+import { FormikProps, Formik, Field, Form } from "formik";
 import { Button } from "@/components/ui";
 
 type EmailLoginFormProps = {
@@ -15,40 +12,38 @@ type EmailLoginFormProps = {
 };
 
 const EmailLoginForm = ({ complete }: EmailLoginFormProps) => {
-  const { supabase, session } = useSupabase();
+  const { supabase } = useSupabase();
+
+  const [formError, setFormError] = useState<string | null>(null);
 
   interface FormValues {
-    name: string;
+    givenName: string;
+    familyName: string;
     email: string;
-    password: string;
   }
 
   const initialValues: FormValues = {
-    name: "",
+    givenName: "",
+    familyName: "",
     email: "",
-    password: "",
   };
 
   const validationSchema = object({
-    name: string()
-      .min(3, "Must be at least 3 characters")
-      .required("Name is Required"),
+    givenName: string().required("First Name is required"),
+    familyName: string().required("Last Name is required"),
     email: string().email("Invalid email").required("Email is required"),
-    password: string().required("Password is required"),
   });
 
   const onSubmit = async (
     values: FormValues,
-    helpers: FormikHelpers<FormValues>
   ) => {
-    const { error } = await supabase.auth.signUp({
+    const { error } = await supabase.auth.signInWithOtp({
       email: values.email,
-      password: values.password,
-      options: { data: { name: values.name } },
+      options: { data: { given_name: values.givenName, family_name: values.familyName} },
     });
 
     if (error) {
-      helpers.setErrors({ email: error.message });
+      setFormError(error.message);
     } else {
       complete();
     }
@@ -61,38 +56,52 @@ const EmailLoginForm = ({ complete }: EmailLoginFormProps) => {
       onSubmit={onSubmit}
     >
       {({ errors, touched, submitForm }: FormikProps<FormValues>) => (
-        <Form className="h-64 w-full max-w-sm">
-          <div className="mb-2">
-            <Field
-              id="name"
-              type="text"
-              name="name"
-              autoComplete="name"
-              placeholder="Full Name"
-              className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-lg text-center text-slate-900 placeholder-slate-600"
-            />
+        <Form className="h-64 w-full max-w-lg">
+          <div className="flex space-x-2 w-full mb-4">
+            <div className="grow">
+              <Field
+                id="givenName"
+                type="text"
+                name="givenName"
+                autoComplete="given-name"
+                placeholder="First Name..."
+                className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
+              />
+
+              {errors.givenName && touched.givenName && (
+                <p className="mt-2 text-sm text-slate-600">{errors.givenName}</p>
+              )}
+            </div>
+
+            <div className="grow">
+              <Field
+                id="familyName"
+                type="text"
+                name="familyName"
+                autoComplete="family-name"
+                placeholder="Last Name..."
+                className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
+              />
+
+              {errors.familyName && touched.familyName && (
+                <p className="mt-2 text-sm text-slate-600">{errors.familyName}</p>
+              )}
+            </div>
           </div>
 
-          <div className="mb-2">
+          <div className="mb-4">
             <Field
               id="email"
               type="email"
               name="email"
               autoComplete="email"
-              placeholder="Email Address"
-              className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-lg text-center text-slate-900 placeholder-slate-600"
+              placeholder="Email Address..."
+              className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
             />
-          </div>
 
-          <div className="mb-4">
-            <Field
-              id="password"
-              type="password"
-              name="password"
-              autoComplete="new-password"
-              placeholder="Password"
-              className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-lg text-center text-slate-900 placeholder-slate-600"
-            />
+            {errors.email && touched.email && (
+              <p className="mt-2 text-sm text-slate-600">{errors.email}</p>
+            )}
           </div>
 
           <Button
@@ -101,14 +110,14 @@ const EmailLoginForm = ({ complete }: EmailLoginFormProps) => {
             display="block"
             onClick={submitForm}
           >
-            Register
+            Register with Email
           </Button>
 
-          <div className="h-32 text-center">
-            {touched.email && errors.email && <div>{errors.email}</div>}
-
-            {touched.password && errors.password && (
-              <div>{errors.password}</div>
+          <div className="text-center">
+            {formError ? (
+              <p className="mt-2 text-sm text-slate-600">{formError}</p>
+            ) : (
+              <div className="mt-2 h-5" />
             )}
           </div>
         </Form>
@@ -142,7 +151,7 @@ export default function Register() {
           <EmailLoginForm complete={finalComplete} />
         ) : (
           <div className="h-64 w-full max-w-sm text-center ">
-            <div className="text-2xl">Check your email for login link</div>
+            <div className="text-2xl">Check your email for Magic Link</div>
             <div className="mt-10 text-lg font-medium">
               No email?{" "}
               <div

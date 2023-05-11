@@ -22,8 +22,9 @@ export default async function Settings({
       role,
       user:profiles (
         id,
-        name,
         email,
+        given_name,
+        family_name,
         inserted_at
       )
       `
@@ -70,7 +71,7 @@ export default async function Settings({
               {members.map((member) => (
                 <tr key={member.user.id} className="bg-white hover:bg-slate-50">
                   <th scope="row" className="px-4 py-4 whitespace-nowrap">
-                    {member.user.name}
+                    {`${member.user.given_name} ${member.user.family_name}`}
                   </th>
 
                   <td className="px-4 py-4 whitespace-nowrap">
@@ -99,7 +100,7 @@ export default async function Settings({
                     <DeleteMemberModal
                       companyId={params.companyId}
                       profileId={member.user.id}
-                      name={member.user.name}
+                      name={`${member.user.given_name} ${member.user.family_name}`}
                       email={member.user.email}
                     />
                   </td>

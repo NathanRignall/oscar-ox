@@ -4,7 +4,8 @@ import { Database } from "../db-types.ts";
 
 type User = {
   email: string;
-  name: string;
+  given_name: string;
+  family_name: string;
 };
 
 interface Payload {
@@ -30,7 +31,8 @@ serve(async (req) => {
           user.email,
           {
             data: {
-              name: user.name,
+              given_name: user.given_name,
+              family_name: user.family_name,
             },
             redirectTo : "https://ox.nlr.app/auth/invite",
           }

@@ -5,8 +5,9 @@ import { useField } from "formik";
 
 type Option = {
   id: string;
-  name: string;
   email: string;
+  given_name: string;
+  family_name: string;
 };
 
 export const AutoCompleteEmail = () => {
@@ -20,7 +21,7 @@ export const AutoCompleteEmail = () => {
   const ref = useRef();
 
   const select = (index: number) => {
-    setSearch(optionsList[index].name);
+    setSearch(`${optionsList[index].given_name} ${optionsList[index].family_name}`);
     helpers.setValue(optionsList[index].id);
     setShowOptions(false);
   };
@@ -29,7 +30,7 @@ export const AutoCompleteEmail = () => {
     const getOptions = async () => {
       const { data, error } = await supabase
         .from("profiles")
-        .select("id, name, email")
+        .select("id, email, given_name, family_name")
         .ilike("name", `%${text}%`)
         .limit(10);
 
@@ -139,7 +140,7 @@ export const AutoCompleteEmail = () => {
                 key={option.id}
                 onClick={() => select(index)}
               >
-                {option.name} - {option.email}
+                {option.given_name} {option.family_name} - {option.email}
               </li>
             );
           })

@@ -44,7 +44,7 @@ serve(async (req) => {
         headers,
         body: JSON.stringify({
           email,
-          name: payload.record.raw_user_meta_data.name,
+          name: `${payload.record.raw_user_meta_data.name} ${payload.record.raw_user_meta_data.family_name}`, 
           status: "enabled",
           attribs: {
             source: "supabase",

@@ -39,8 +39,8 @@ export default async function Admin() {
 
   return (
     <>
-      <header className="max-w-3xl mx-auto mb-8">
-        <h1 className="mb-3 text-5xl sm:text-6xl font-extrabold text-slate-900">Admin</h1>
+      <header className="max-w-3xl mx-auto mb-4">
+        <h1 className="mb-3 text-5xl font-extrabold text-slate-900">Admin</h1>
 
         <p className="mb-3 text-xl text-slate-600">
           Your Companies to Configure
@@ -49,6 +49,8 @@ export default async function Admin() {
 
       <main className="max-w-3xl mx-auto mt-4">
         <section>
+          <AddCompanyModal />
+
           <ul className="mt-4 grid gap-4">
             {members.map((member) => (
               <li
@@ -67,7 +69,7 @@ export default async function Admin() {
       </main>
 
       <div className="fixed bottom-0 right-0 m-8">
-        <AddCompanyModal />
+
       </div>
     </>
   );

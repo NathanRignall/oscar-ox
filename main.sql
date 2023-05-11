@@ -12,14 +12,16 @@ create type public.page_theme as enum ('default', '00productions');
 -- Create a table for public profiles
 create table profiles (
   id uuid references auth.users on delete cascade not null primary key,
-  name text not null,
+  given_name text not null,
+  family_name text not null,
   email text not null,
   biography text,
   avatar_url text,
   is_public boolean not null default true,
   inserted_at timestamp with time zone default timezone('utc'::text, now()) not null,
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null,
-  constraint name_length check (char_length(name) >= 3)
+  constraint name_length check (char_length(given_name) >= 2),
+  constraint name_length check (char_length(family_name) >= 2)
 );
 
 -- create table for venues
@@ -183,8 +185,8 @@ create function public.handle_new_user()
 returns trigger as
 $$
 begin
-  insert into public.profiles (id, name, email)
-  values (new.id, new.raw_user_meta_data->>'name', new.email);
+  insert into public.profiles (id, given_name, family_name, email)
+  values (new.id, new.raw_user_meta_data->>'given_name', new.raw_user_meta_data->>'family_name', new.email);
   return new;
 end;
 $$ language plpgsql security definer;
