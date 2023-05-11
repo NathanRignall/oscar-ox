@@ -71,6 +71,7 @@ export const EditEventModal = ({ event }: EditEventModalProps) => {
       setFormError(error.message);
     } else {
       toggleModal();
+      setFormError(null);
 
       startTransition(() => {
         router.refresh();

@@ -47,6 +47,8 @@ export const PublishVacancyModal = ({
       setFormError(error.message);
     } else {
       toggleModal();
+      setFormError(null);
+
       startTransition(() => {
         router.refresh();
       });

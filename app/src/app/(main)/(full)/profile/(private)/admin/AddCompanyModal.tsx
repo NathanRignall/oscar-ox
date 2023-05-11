@@ -56,6 +56,7 @@ export const AddCompanyModal = () => {
       setFormError(error.message);
     } else {
       toggleModal();
+      setFormError(null);
 
       startTransition(() => {
         router.refresh();
@@ -120,12 +121,10 @@ export const AddCompanyModal = () => {
                           className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
                         />
 
-                        {errors.name && touched.name ? (
-                          <p className="mt-2 text-sm text-slate-600">
+                        {errors.name && touched.name && (
+                          <p className="mt-2 text-sm text-red-600">
                             {errors.name}
                           </p>
-                        ) : (
-                          <div className="mt-2 h-5" />
                         )}
                       </div>
 
@@ -138,12 +137,10 @@ export const AddCompanyModal = () => {
                           className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
                         />
 
-                        {errors.slug && touched.slug ? (
-                          <p className="mt-2 text-sm text-slate-600">
+                        {errors.slug && touched.slug && (
+                          <p className="mt-2 text-sm text-red-600">
                             {errors.slug}
                           </p>
-                        ) : (
-                          <div className="mt-2 h-5" />
                         )}
                       </div>
 
@@ -158,12 +155,10 @@ export const AddCompanyModal = () => {
                           placeholder="Company description..."
                           className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
                         />
-                        {errors.description && touched.description ? (
-                          <p className="mt-2 text-sm text-slate-600">
+                        {errors.description && touched.description && (
+                          <p className="mt-2 text-sm text-red-600">
                             {errors.description}
                           </p>
-                        ) : (
-                          <div className="mt-2 h-5" />
                         )}
                       </div>
 
@@ -178,7 +173,7 @@ export const AddCompanyModal = () => {
 
                         <div className="text-center">
                           {formError ? (
-                            <p className="mt-2 text-sm text-slate-600">
+                            <p className="mt-2 text-sm text-red-600">
                               {formError}
                             </p>
                           ) : (

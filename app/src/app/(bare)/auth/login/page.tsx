@@ -69,7 +69,7 @@ const MagicLoginForm = ({ setEmail, setIsMagicLogin, setIsComplete }: MagicLogin
             />
 
             {errors.email && touched.email && (
-              <p className="mt-2 text-sm text-slate-600">{errors.email}</p>
+              <p className="mt-2 text-sm text-red-600">{errors.email}</p>
             )}
           </div>
 
@@ -94,7 +94,7 @@ const MagicLoginForm = ({ setEmail, setIsMagicLogin, setIsComplete }: MagicLogin
 
           <div className="text-center">
             {formError ? (
-              <p className="mt-2 text-sm text-slate-600">{formError}</p>
+              <p className="mt-2 text-sm text-red-600">{formError}</p>
             ) : (
               <div className="mt-2 h-5" />
             )}
@@ -140,10 +140,10 @@ const PasswordLoginForm = ({ setIsMagicLogin, email }: PasswordLoginFormProps) =
     });
 
     if (error) {
-      console.log(error);
       setFormError(error.message);
     } else {
       router.push("/profile");
+      setFormError(null);
     }
   };
 
@@ -176,7 +176,7 @@ const PasswordLoginForm = ({ setIsMagicLogin, email }: PasswordLoginFormProps) =
             />
 
             {errors.email && touched.email && (
-              <p className="mt-2 text-sm text-slate-600">{errors.email}</p>
+              <p className="mt-2 text-sm text-red-600">{errors.email}</p>
             )}
           </div>
 
@@ -191,7 +191,7 @@ const PasswordLoginForm = ({ setIsMagicLogin, email }: PasswordLoginFormProps) =
             />
 
             {errors.password && touched.password && (
-              <p className="mt-2 text-sm text-slate-600">{errors.password}</p>
+              <p className="mt-2 text-sm text-red-600">{errors.password}</p>
             )}
           </div>
 
@@ -217,7 +217,7 @@ const PasswordLoginForm = ({ setIsMagicLogin, email }: PasswordLoginFormProps) =
               </Link>
             </div>
             {formError && (
-              <p className="mt-2 text-sm text-slate-600">{formError}</p>
+              <p className="mt-2 text-sm text-red-600">{formError}</p>
             )}
           </div>
         </Form>

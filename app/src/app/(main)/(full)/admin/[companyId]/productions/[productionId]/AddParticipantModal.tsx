@@ -63,7 +63,8 @@ export const AddParticipantModal = ({
 
   const validationSchema = object({
     title: string().required("Title is required"),
-    profileId: string().required("Valid venue is required"),
+    profileId: string().required("Valid person is required"),
+    categoryId: string().required("Category is required"),
   });
 
   const onSubmit = async (values: FormValues) => {
@@ -80,6 +81,7 @@ export const AddParticipantModal = ({
       setFormError(error.message);
     } else {
       toggleModal();
+      setFormError(null);
 
       startTransition(() => {
         router.refresh();
@@ -108,12 +110,10 @@ export const AddParticipantModal = ({
             <div className="mb-4">
               <AutoCompleteEmail />
 
-              {errors.profileId && touched.profileId ? (
-                <p className="mt-2 text-sm text-slate-600">
+              {errors.profileId && touched.profileId && (
+                <p className="mt-2 text-sm text-red-600">
                   {errors.profileId}
                 </p>
-              ) : (
-                <div className="mt-2 h-5" />
               )}
             </div>
 
@@ -127,10 +127,8 @@ export const AddParticipantModal = ({
                 className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
               />
 
-              {errors.title && touched.title ? (
-                <p className="mt-2 text-sm text-slate-600">{errors.title}</p>
-              ) : (
-                <div className="mt-2 h-5" />
+              {errors.title && touched.title && (
+                <p className="mt-2 text-sm text-red-600">{errors.title}</p>
               )}
             </div>
 
@@ -144,12 +142,10 @@ export const AddParticipantModal = ({
                 ))}
               </Field>
 
-              {errors.categoryId && touched.categoryId ? (
-                <p className="mt-2 text-sm text-slate-600">
+              {errors.categoryId && touched.categoryId && (
+                <p className="mt-2 text-sm text-red-600">
                   {errors.categoryId}
                 </p>
-              ) : (
-                <div className="mt-2 h-5" />
               )}
             </div>
 
@@ -160,7 +156,7 @@ export const AddParticipantModal = ({
 
               <div className="text-center">
                 {formError ? (
-                  <p className="mt-2 text-sm text-slate-600">{formError}</p>
+                  <p className="mt-2 text-sm text-red-600">{formError}</p>
                 ) : (
                   <div className="mt-2 h-5" />
                 )}

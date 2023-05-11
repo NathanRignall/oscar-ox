@@ -53,6 +53,7 @@ export const AddEventModal = ({ productionId }: AddEventModalProps) => {
       setFormError(error.message);
     } else {
       toggleModal();
+      setFormError(null);
 
       startTransition(() => {
         router.refresh();
@@ -79,10 +80,8 @@ export const AddEventModal = ({ productionId }: AddEventModalProps) => {
             <div className="mb-4">
               <AutoCompleteVenue />
 
-              {errors.venueId && touched.venueId ? (
-                <p className="mt-2 text-sm text-slate-600">{errors.venueId}</p>
-              ) : (
-                <div className="mt-2 h-5" />
+              {errors.venueId && touched.venueId && (
+                <p className="mt-2 text-sm text-red-600">{errors.venueId}</p>
               )}
             </div>
 
@@ -99,10 +98,8 @@ export const AddEventModal = ({ productionId }: AddEventModalProps) => {
                 className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
               />
 
-              {errors.datetime && touched.datetime ? (
-                <p className="mt-2 text-sm text-slate-600">null</p>
-              ) : (
-                <div className="mt-2 h-5" />
+              {errors.datetime && touched.datetime && (
+                <p className="mt-2 text-sm text-red-600">null</p>
               )}
             </div>
 
@@ -113,7 +110,7 @@ export const AddEventModal = ({ productionId }: AddEventModalProps) => {
 
               <div className="text-center">
                 {formError ? (
-                  <p className="mt-2 text-sm text-slate-600">{formError}</p>
+                  <p className="mt-2 text-sm text-red-600">{formError}</p>
                 ) : (
                   <div className="mt-2 h-5" />
                 )}

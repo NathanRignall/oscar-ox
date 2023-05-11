@@ -46,6 +46,7 @@ const EmailLoginForm = ({ complete }: EmailLoginFormProps) => {
       setFormError(error.message);
     } else {
       complete();
+      setFormError(null);
     }
   };
 
@@ -69,7 +70,7 @@ const EmailLoginForm = ({ complete }: EmailLoginFormProps) => {
               />
 
               {errors.givenName && touched.givenName && (
-                <p className="mt-2 text-sm text-slate-600">{errors.givenName}</p>
+                <p className="mt-2 text-sm text-red-600">{errors.givenName}</p>
               )}
             </div>
 
@@ -84,7 +85,7 @@ const EmailLoginForm = ({ complete }: EmailLoginFormProps) => {
               />
 
               {errors.familyName && touched.familyName && (
-                <p className="mt-2 text-sm text-slate-600">{errors.familyName}</p>
+                <p className="mt-2 text-sm text-red-600">{errors.familyName}</p>
               )}
             </div>
           </div>
@@ -100,7 +101,7 @@ const EmailLoginForm = ({ complete }: EmailLoginFormProps) => {
             />
 
             {errors.email && touched.email && (
-              <p className="mt-2 text-sm text-slate-600">{errors.email}</p>
+              <p className="mt-2 text-sm text-red-600">{errors.email}</p>
             )}
           </div>
 
@@ -115,7 +116,7 @@ const EmailLoginForm = ({ complete }: EmailLoginFormProps) => {
 
           <div className="text-center">
             {formError ? (
-              <p className="mt-2 text-sm text-slate-600">{formError}</p>
+              <p className="mt-2 text-sm text-red-600">{formError}</p>
             ) : (
               <div className="mt-2 h-5" />
             )}

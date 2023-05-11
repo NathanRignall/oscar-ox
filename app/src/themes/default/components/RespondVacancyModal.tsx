@@ -56,6 +56,7 @@ export const RespondVacancyModal = ({
       setFormError(error.message);
     } else {
       toggleModal();
+      setFormError(null);
 
       startTransition(() => {
         router.refresh();
@@ -86,10 +87,8 @@ export const RespondVacancyModal = ({
                 placeholder="Message..."
                 className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
               />
-              {errors.message && touched.message ? (
-                <p className="mt-2 text-sm text-slate-600">{errors.message}</p>
-              ) : (
-                <div className="mt-2 h-5" />
+              {errors.message && touched.message && (
+                <p className="mt-2 text-sm text-red-600">{errors.message}</p>
               )}
             </div>
 
@@ -100,7 +99,7 @@ export const RespondVacancyModal = ({
 
               <div className="text-center">
                 {formError ? (
-                  <p className="mt-2 text-sm text-slate-600">{formError}</p>
+                  <p className="mt-2 text-sm text-red-600">{formError}</p>
                 ) : (
                   <div className="mt-2 h-5" />
                 )}

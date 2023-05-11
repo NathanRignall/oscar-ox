@@ -118,7 +118,7 @@ export default function OnboardModal({ categories }: OnboardModalProps) {
 
                     <div className="text-center">
                       {formError ? (
-                        <p className="mt-2 text-sm text-slate-600">
+                        <p className="mt-2 text-sm text-red-600">
                           {formError}
                         </p>
                       ) : (

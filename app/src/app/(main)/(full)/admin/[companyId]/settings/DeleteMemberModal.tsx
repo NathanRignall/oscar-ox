@@ -55,6 +55,7 @@ export const DeleteMemberModal = ({
       setFormError(error.message);
     } else {
       toggleModal();
+      setFormError(null);
 
       startTransition(() => {
         router.refresh();
@@ -88,7 +89,7 @@ export const DeleteMemberModal = ({
 
         <div className="text-center">
           {formError ? (
-            <p className="mt-2 text-sm text-slate-600">{formError}</p>
+            <p className="mt-2 text-sm text-red-600">{formError}</p>
           ) : (
             <div className="mt-2 h-5" />
           )}

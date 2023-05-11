@@ -55,6 +55,7 @@ export const EditProfileModal = ({
       setFormError(error.message);
     } else {
       toggleModal();
+      setFormError(null);
 
       startTransition(() => {
         router.refresh();
@@ -141,12 +142,10 @@ export const EditProfileModal = ({
                           className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
                         />
 
-                        {errors.name && touched.name ? (
-                          <p className="mt-2 text-sm text-slate-600">
+                        {errors.name && touched.name && (
+                          <p className="mt-2 text-sm text-red-600">
                             {errors.name}
                           </p>
-                        ) : (
-                          <div className="mt-2 h-5" />
                         )}
                       </div>
 
@@ -161,12 +160,10 @@ export const EditProfileModal = ({
                           placeholder="Your personal biography..."
                           className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
                         />
-                        {errors.biography && touched.biography ? (
-                          <p className="mt-2 text-sm text-slate-600">
+                        {errors.biography && touched.biography && (
+                          <p className="mt-2 text-sm text-red-600">
                             {errors.biography}
                           </p>
-                        ) : (
-                          <div className="mt-2 h-5" />
                         )}
                       </div>
 
@@ -193,7 +190,7 @@ export const EditProfileModal = ({
 
                         <div className="text-center">
                           {formError ? (
-                            <p className="mt-2 text-sm text-slate-600">
+                            <p className="mt-2 text-sm text-red-600">
                               {formError}
                             </p>
                           ) : (

@@ -41,6 +41,7 @@ export const UpdatePasswordModal = () => {
       setFormError(error.message);
     } else {
       toggleModal();
+      setFormError(null);
     }
   };
 
@@ -66,7 +67,7 @@ export const UpdatePasswordModal = () => {
               />
 
               {errors.newPassword && touched.newPassword && (
-                <p className="mt-2 text-sm text-slate-600">{errors.newPassword}</p>
+                <p className="mt-2 text-sm text-red-600">{errors.newPassword}</p>
               )}
             </div>
 
@@ -81,7 +82,7 @@ export const UpdatePasswordModal = () => {
               />
 
               {errors.confirmPassword && touched.confirmPassword && (
-                <p className="mt-2 text-sm text-slate-600">{errors.confirmPassword}</p>
+                <p className="mt-2 text-sm text-red-600">{errors.confirmPassword}</p>
               )}
             </div>
 
@@ -96,7 +97,7 @@ export const UpdatePasswordModal = () => {
 
             <div className="text-center">
               {formError ? (
-                <p className="mt-2 text-sm text-slate-600">{formError}</p>
+                <p className="mt-2 text-sm text-red-600">{formError}</p>
               ) : (
                 <div className="mt-2 h-5" />
               )}

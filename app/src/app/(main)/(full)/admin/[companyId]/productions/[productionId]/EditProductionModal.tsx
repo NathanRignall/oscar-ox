@@ -61,6 +61,7 @@ export const EditProductionModal = ({
       setFormError(error.message);
     } else {
       toggleModal();
+      setFormError(null);
 
       startTransition(() => {
         router.refresh();
@@ -89,10 +90,8 @@ export const EditProductionModal = ({
                 className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
               />
 
-              {errors.title && touched.title ? (
-                <p className="mt-2 text-sm text-slate-600">{errors.title}</p>
-              ) : (
-                <div className="mt-2 h-5" />
+              {errors.title && touched.title && (
+                <p className="mt-2 text-sm text-red-600">{errors.title}</p>
               )}
             </div>
 
@@ -107,12 +106,10 @@ export const EditProductionModal = ({
                 placeholder="Description..."
                 className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
               />
-              {errors.description && touched.description ? (
-                <p className="mt-2 text-sm text-slate-600">
+              {errors.description && touched.description && (
+                <p className="mt-2 text-sm text-red-600">
                   {errors.description}
                 </p>
-              ) : (
-                <div className="mt-2 h-5" />
               )}
             </div>
 
@@ -131,7 +128,7 @@ export const EditProductionModal = ({
 
               <div className="text-center">
                 {formError ? (
-                  <p className="mt-2 text-sm text-slate-600">{formError}</p>
+                  <p className="mt-2 text-sm text-red-600">{formError}</p>
                 ) : (
                   <div className="mt-2 h-5" />
                 )}

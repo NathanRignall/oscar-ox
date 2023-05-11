@@ -66,25 +66,22 @@ export const EditParticipantModal = ({
 
   interface FormValues {
     title: string;
-    profileId: string;
     categoryId: string;
   }
 
   const initialValues: FormValues = {
     title: participant.title,
-    profileId: participant.profile.id,
     categoryId: participant.category.id,
   };
 
   const validationSchema = object({
     title: string().required("Title is required"),
-    profileId: string().required("Valid venue is required"),
+    categoryId: string().required("Category is required"),
   });
 
   const onSubmit = async (values: FormValues) => {
     const { error } = await supabase.from("participants").update({
       title: values.title,
-      profile_id: values.profileId,
       category_id: values.categoryId,
     }).match({ id: participant.id });
 
@@ -92,6 +89,7 @@ export const EditParticipantModal = ({
       setFormError(error.message);
     } else {
       toggleModal();
+      setFormError(null);
 
       startTransition(() => {
         router.refresh();
@@ -118,18 +116,6 @@ export const EditParticipantModal = ({
         }: FormikProps<FormValues>) => (
           <Form>
             <div className="mb-4">
-              <AutoCompleteEmail initialSearch={`${participant.profile.given_name} ${participant.profile.family_name}`} />
-
-              {errors.profileId && touched.profileId ? (
-                <p className="mt-2 text-sm text-slate-600">
-                  {errors.profileId}
-                </p>
-              ) : (
-                <div className="mt-2 h-5" />
-              )}
-            </div>
-
-            <div className="mb-4">
               <Field
                 id="title"
                 type="text"
@@ -139,10 +125,8 @@ export const EditParticipantModal = ({
                 className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
               />
 
-              {errors.title && touched.title ? (
-                <p className="mt-2 text-sm text-slate-600">{errors.title}</p>
-              ) : (
-                <div className="mt-2 h-5" />
+              {errors.title && touched.title && (
+                <p className="mt-2 text-sm text-red-600">{errors.title}</p>
               )}
             </div>
 
@@ -156,12 +140,10 @@ export const EditParticipantModal = ({
                 ))}
               </Field>
 
-              {errors.categoryId && touched.categoryId ? (
-                <p className="mt-2 text-sm text-slate-600">
+              {errors.categoryId && touched.categoryId && (
+                <p className="mt-2 text-sm text-red-600">
                   {errors.categoryId}
                 </p>
-              ) : (
-                <div className="mt-2 h-5" />
               )}
             </div>
 
@@ -172,7 +154,7 @@ export const EditParticipantModal = ({
 
               <div className="text-center">
                 {formError ? (
-                  <p className="mt-2 text-sm text-slate-600">{formError}</p>
+                  <p className="mt-2 text-sm text-red-600">{formError}</p>
                 ) : (
                   <div className="mt-2 h-5" />
                 )}

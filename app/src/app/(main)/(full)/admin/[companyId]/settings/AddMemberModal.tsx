@@ -49,6 +49,7 @@ export const AddMemberModal = ({ companyId }: AddMemberModalProps) => {
       setFormError(error.message);
     } else {
       toggleModal();
+      setFormError(null);
 
       startTransition(() => {
         router.refresh();
@@ -69,12 +70,10 @@ export const AddMemberModal = ({ companyId }: AddMemberModalProps) => {
             <div className="mb-4">
               <AutoCompleteEmail />
 
-              {errors.profileId && touched.profileId ? (
-                <p className="mt-2 text-sm text-slate-600">
+              {errors.profileId && touched.profileId && (
+                <p className="mt-2 text-sm text-red-600">
                   {errors.profileId}
                 </p>
-              ) : (
-                <div className="mt-2 h-5" />
               )}
             </div>
 
@@ -92,7 +91,7 @@ export const AddMemberModal = ({ companyId }: AddMemberModalProps) => {
 
               <div className="text-center">
                 {formError ? (
-                  <p className="mt-2 text-sm text-slate-600">{formError}</p>
+                  <p className="mt-2 text-sm text-red-600">{formError}</p>
                 ) : (
                   <div className="mt-2 h-5" />
                 )}
