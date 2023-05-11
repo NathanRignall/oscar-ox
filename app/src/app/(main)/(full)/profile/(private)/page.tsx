@@ -82,8 +82,10 @@ export default async function Account() {
         id: getSingle(getSingle(participant.production).events).id,
         start_time: getSingle(getSingle(participant.production).events)
           .start_time,
-        venue: getSingle(getSingle(getSingle(participant.production).events).venue).title,
-      }
+        venue: getSingle(
+          getSingle(getSingle(participant.production).events).venue
+        ).title,
+      },
     },
   }));
 
@@ -122,14 +124,14 @@ export default async function Account() {
             <ButtonLink href={`/profile/${encodeURIComponent(profile.id)}`}>
               View Public
             </ButtonLink>
-            <ButtonLink href={`/admin`} className="ml-2">
-              Admin Panel
-            </ButtonLink>
           </div>
         </div>
 
         <div className="sm:w-[150px] w-[200px] sm:p-0 pt-3 pb-3">
-          <ProfilePicture src={`profiles/${profile.avatar_url}`} edit={true} />
+          <ProfilePicture
+            src={`profiles/${profile.avatar_url}`}
+            edit={true}
+          />
         </div>
       </header>
 
@@ -157,10 +159,11 @@ export default async function Account() {
                 >
                   <p className="text-xl font-bold text-slate-900 uppercase">
                     {new Date(
-                      participant.production.event.start_time).toLocaleString('default', { month: 'long' })}
-                    {" "}
+                      participant.production.event.start_time
+                    ).toLocaleString("default", { month: "long" })}{" "}
                     {new Date(
-                      participant.production.event.start_time).toLocaleString('default', { year: 'numeric' })}
+                      participant.production.event.start_time
+                    ).toLocaleString("default", { year: "numeric" })}
                   </p>
                   <h3 className="text-lg font-bold text-slate-900">
                     {participant.production.title}
