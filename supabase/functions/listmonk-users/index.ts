@@ -44,7 +44,7 @@ serve(async (req) => {
         headers,
         body: JSON.stringify({
           email,
-          name: `${payload.record.raw_user_meta_data.name} ${payload.record.raw_user_meta_data.family_name}`, 
+          name: `${payload.record.raw_user_meta_data.name} ${payload.record.raw_user_meta_data.family_name}`,
           status: "enabled",
           attribs: {
             source: "supabase",
@@ -104,17 +104,16 @@ serve(async (req) => {
 
         // if the finished_onboarding is changed from false to true
         if (finishedOnboarding && !previousFinishedOnboarding) {
-          // get the subscriber id
-          const subscribersResponse = await fetch(
-            `${api}/subscribers?query=subscribers.email='${newEmail}'&page=1&per_page=1`,
-            {
-              method: "GET",
-              headers,
-            }
-          );
+          // get the user's name
+          const { data: profile } = await supabaseClient
+            .from("profiles")
+            .select("given_name")
+            .eq("email", newEmail)
+            .single();
 
-          const subscribers = await subscribersResponse.json();
-          const subscriber_id = subscribers.data.results[0].id;
+          if (!profile) throw new Error("No profile found");
+
+          const given_name = profile.given_name;
 
           // get subscriptions the subscriber is subscribed to
           const { data: _subscriptions } = await supabaseClient
@@ -151,7 +150,7 @@ serve(async (req) => {
               template_id: 3,
               data: {
                 subject: "Welcome to Oscar Ox!",
-                lead: "Hello,",
+                lead: `Hello, ${given_name}`,
                 message,
               },
             }),

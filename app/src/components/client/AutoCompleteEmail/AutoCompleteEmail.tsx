@@ -31,7 +31,7 @@ export const AutoCompleteEmail = () => {
       const { data, error } = await supabase
         .from("profiles")
         .select("id, email, given_name, family_name")
-        .ilike("name", `%${text}%`)
+        .ilike("email", `%${text}%`)
         .limit(10);
 
       if (error) {
