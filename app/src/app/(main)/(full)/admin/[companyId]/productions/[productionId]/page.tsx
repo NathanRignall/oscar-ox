@@ -4,6 +4,7 @@ import Image from "next/image";
 import { createServerClient } from "@/lib/supabase-server";
 import { getArray, getSingle } from "@/lib/supabase-type-convert";
 import { AddEventModal } from "./AddEventModal";
+import { EditEventModal } from "./EditEventModal";
 import { Tag } from "@/components/ui";
 import { EditProductionModal } from "./EditProductionModal";
 import { NewVacancyButton } from "../../vacancies/NewVacancyButton";
@@ -37,7 +38,8 @@ export default async function Production({
             title
         ),
         start_time,
-        end_time
+        end_time,
+        ticket_link
       ),
       vacancies(
         id,
@@ -84,6 +86,7 @@ export default async function Production({
       venue: getSingle(event.venue),
       start_time: event.start_time,
       end_time: event.end_time,
+      ticket_link: event.ticket_link,
     })),
     vacancies: getArray(_production.vacancies).map((vacancy) => ({
       id: vacancy.id,
@@ -206,6 +209,8 @@ export default async function Production({
                     </td>
 
                     <td className="px-4 text-right">
+                      <EditEventModal event={event} />
+                      {" "}
                       <RemoveEventModal
                         eventId={event.id}
                         time={time}
