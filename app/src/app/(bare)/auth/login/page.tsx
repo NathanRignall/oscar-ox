@@ -197,7 +197,7 @@ const PasswordLoginForm = ({ setIsMagicLogin, email }: PasswordLoginFormProps) =
 
           <div className="flex mb-4">
             <Button
-              variant="primary"
+              variant="secondary"
               display="block"
               onClick={submitForm}
             >
@@ -210,7 +210,7 @@ const PasswordLoginForm = ({ setIsMagicLogin, email }: PasswordLoginFormProps) =
             <div className="text-sm font-medium ">
               Forgot Password?{" "}
               <Link
-                href="/auth/register"
+                href="/auth/password-reset"
                 className="underline hover:text-slate-700"
               >
                 Reset

@@ -34,7 +34,7 @@ serve(async (req) => {
               given_name: user.given_name,
               family_name: user.family_name,
             },
-            redirectTo : "https://ox.nlr.app/auth/invite",
+            redirectTo : "https://ox.nlr.app/profile",
           }
         );
 

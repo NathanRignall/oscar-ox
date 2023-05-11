@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { createServerClient } from "@/lib/supabase-server";
 import { getArray, getSingle } from "@/lib/supabase-type-convert";
+import { UpdatePasswordModal } from "./UpdatePasswordModal";
 
 // do not cache this page
 export const revalidate = 0;
@@ -18,8 +19,9 @@ export default async function Account() {
     .select(
       `
           id,
-          name,
           email,
+          given_name,
+          family_name,
           biography,
           avatar_url,
           tags:company_members (
@@ -40,8 +42,9 @@ export default async function Account() {
 
   const profile = {
     id: _profile.id,
-    name: _profile.name,
     email: _profile.email,
+    given_name: _profile.given_name,
+    family_name: _profile.family_name,
     biography: _profile.biography,
     avatar_url: _profile.avatar_url || "default.jpg",
     tags: getArray(_profile.tags).map((tag) => getSingle(tag.company)),
@@ -107,7 +110,7 @@ export default async function Account() {
           </h2>
         </section>
 
-        Reset Password
+        <UpdatePasswordModal/>
 
         <br />
 
