@@ -38,27 +38,26 @@ export default function Layout({ children, company }: LayoutProps) {
                 color: fontColorContrast(company.main_colour),
               }}
             >
-              <Link
-                href={`/companies/${encodeURIComponent(company.slug)}`}
-                className="flex-1"
-              >
-                <li className="text-sm px-2 py-2 text-center hover:bg-gray-400 hover:text-white uppercase">
+              <li className="flex-1 text-center hover:bg-gray-400 hover:text-white uppercase">
+                <Link
+                  href={`/companies/${encodeURIComponent(company.slug)}`}
+                  className="inline-block text-sm px-2 py-2 "
+                >
                   Home
-                </li>
-              </Link>
+                </Link>
+              </li>
 
               {company.pages.map((page) => (
-                <Link
-                  key={page.id}
-                  href={`/companies/${encodeURIComponent(
-                    company.slug
-                  )}/${encodeURIComponent(page.slug)}`}
-                  className="flex-1"
-                >
-                  <li className="text-sm px-2 py-2 text-center hover:bg-gray-400 hover:text-white uppercase">
+                <li key={page.id} className="flex-1 text-center hover:bg-gray-400 hover:text-white uppercase">
+                  <Link
+                    href={`/companies/${encodeURIComponent(
+                      company.slug
+                    )}/${encodeURIComponent(page.slug)}`}
+                    className="inline-block flex-1 text-sm px-2 py-2"
+                  >
                     {page.title}
-                  </li>
-                </Link>
+                  </Link>
+                </li>
               ))}
             </ul>
           </nav>

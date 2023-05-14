@@ -44,9 +44,9 @@ export default async function Venues() {
             >
               <div className="p-6 flex-grow">
                 <Link href={`/about/venues/${venue.slug}`}>
-                  <h3 className="text-lg font-bold text-slate-900 underline">
+                  <h2 className="text-lg font-bold text-slate-900 underline">
                     {venue.title}
-                  </h3>
+                  </h2>
                 </Link>
                 <p className="text-sm text-slate-600 ">{venue.location}</p>
               </div>

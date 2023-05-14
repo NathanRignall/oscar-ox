@@ -17,6 +17,7 @@ const Hero = ({
       <Image
         src={`media/companies/${companyId}/images/${src}`}
         fill
+        priority
         alt={text}
       />
       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-900 to-transparent h-1/2" />

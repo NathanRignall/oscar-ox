@@ -34,9 +34,9 @@ export default async function Roles() {
             >
               <div className="p-6 flex-grow">
                 <Link href={`/about/roles/${role.slug}`}>
-                  <h3 className="text-lg font-bold text-slate-900 underline">
+                  <h2 className="text-lg font-bold text-slate-900 underline">
                     {role.title}
-                  </h3>
+                  </h2>
                 </Link>
                 <p className="text-sm text-slate-600 ">{role.description}</p>
               </div>
