@@ -9,12 +9,13 @@ import { useSupabase } from "@/components/client";
 import { Button } from "@/components/ui";
 
 type MagicLoginFormProps = {
-  setEmail: (email: string) => void;
   setIsMagicLogin: (isMagicLogin: boolean) => void;
-  setIsComplete: (isMagicLogin: boolean) => void;
+  setEmail: (email: string) => void;
+  email: string;
+  setIsComplete: (isComplete: boolean) => void;
 };
 
-const MagicLoginForm = ({ setEmail, setIsMagicLogin, setIsComplete }: MagicLoginFormProps) => {
+const MagicLoginForm = ({ setIsMagicLogin, setEmail, email, setIsComplete }: MagicLoginFormProps) => {
   const { supabase } = useSupabase();
 
   const [formError, setFormError] = useState<string | null>(null);
@@ -24,7 +25,7 @@ const MagicLoginForm = ({ setEmail, setIsMagicLogin, setIsComplete }: MagicLogin
   }
 
   const initialValues: FormValues = {
-    email: "",
+    email: email,
   };
 
   const validationSchema = object({
@@ -39,16 +40,9 @@ const MagicLoginForm = ({ setEmail, setIsMagicLogin, setIsComplete }: MagicLogin
       email: values.email,
     });
 
-    if (error) {
-      setFormError(error.message);
-    } else {
-      setIsComplete(true);
-    }
+    setIsComplete(true);
   };
 
-  const onClick = () => {
-    setIsMagicLogin(false);
-  }
 
   return (
     <Formik
@@ -56,61 +50,69 @@ const MagicLoginForm = ({ setEmail, setIsMagicLogin, setIsComplete }: MagicLogin
       validationSchema={validationSchema}
       onSubmit={onSubmit}
     >
-      {({ errors, touched, submitForm }: FormikProps<FormValues>) => (
-        <Form className="h-64 w-full max-w-lg">
-          <div className="mb-4">
-            <Field
-              id="email"
-              type="email"
-              name="email"
-              autoComplete="email"
-              placeholder="Email Address"
-              className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
-            />
+      {({ errors, touched, submitForm, values }: FormikProps<FormValues>) => {
+        const onPasswordLogin = () => {
+          setEmail(values.email);
+          setIsMagicLogin(false);
+        }
 
-            {errors.email && touched.email && (
-              <p className="mt-2 text-sm text-red-600">{errors.email}</p>
-            )}
-          </div>
+        return (
+          <Form className="h-64 w-full max-w-lg">
+            <div className="mb-4">
+              <Field
+                id="email"
+                type="email"
+                name="email"
+                autoComplete="email"
+                placeholder="Email Address"
+                className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
+              />
 
-          <div className="flex mb-4 space-x-2">
-            <Button
-              variant="primary"
-              display="block"
-              onClick={onClick}
-            >
-              Login with Password
-            </Button>
+              {errors.email && touched.email && (
+                <p className="mt-2 text-sm text-red-600">{errors.email}</p>
+              )}
+            </div>
 
-            <Button
-              variant="secondary"
-              display="block"
-              type="submit"
-            >
-              Send Magic Link
-            </Button>
-          </div>
+            <div className="flex mb-4 space-x-2">
+              <Button
+                variant="primary"
+                display="block"
+                onClick={onPasswordLogin}
+              >
+                Login with Password
+              </Button>
+
+              <Button
+                variant="secondary"
+                display="block"
+                type="submit"
+              >
+                Send Magic Link
+              </Button>
+            </div>
 
 
-          <div className="text-center">
-            {formError ? (
-              <p className="mt-2 text-sm text-red-600">{formError}</p>
-            ) : (
-              <div className="mt-2 h-5" />
-            )}
-          </div>
-        </Form>
-      )}
+            <div className="text-center">
+              {formError ? (
+                <p className="mt-2 text-sm text-red-600">{formError}</p>
+              ) : (
+                <div className="mt-2 h-5" />
+              )}
+            </div>
+          </Form>
+        )
+      }}
     </Formik>
   );
 };
 
 type PasswordLoginFormProps = {
   setIsMagicLogin: (isMagicLogin: boolean) => void;
+  setEmail: (email: string) => void;
   email: string;
 };
 
-const PasswordLoginForm = ({ setIsMagicLogin, email }: PasswordLoginFormProps) => {
+const PasswordLoginForm = ({ setIsMagicLogin, setEmail, email }: PasswordLoginFormProps) => {
   const router = useRouter();
   const { supabase } = useSupabase();
 
@@ -122,7 +124,7 @@ const PasswordLoginForm = ({ setIsMagicLogin, email }: PasswordLoginFormProps) =
   }
 
   const initialValues: FormValues = {
-    email: "",
+    email: email,
     password: "",
   };
 
@@ -146,82 +148,84 @@ const PasswordLoginForm = ({ setIsMagicLogin, email }: PasswordLoginFormProps) =
       setFormError(null);
     }
   };
-
-  const onClick = () => {
-    setIsMagicLogin(true);
-  }
-
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={onSubmit}
     >
-      {({ errors, touched, submitForm }: FormikProps<FormValues>) => (
-        <Form className="h-64 w-full max-w-lg relative">
-          <div className="absolute top-0 left-0 -translate-y-12">
-            <Button onClick={onClick} variant="secondary" size="sm">
-              Back
-            </Button>
-          </div>
+      {({ errors, touched, submitForm, values }: FormikProps<FormValues>) => {
+        const onMagicLogin = () => {
+          setEmail(values.email);
+          setIsMagicLogin(true);
+        }
 
-          <div className="mb-4">
-            <Field
-              id="email"
-              type="email"
-              name="email"
-              autoComplete="email"
-              placeholder="Email Address"
-              className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
-            />
-
-            {errors.email && touched.email && (
-              <p className="mt-2 text-sm text-red-600">{errors.email}</p>
-            )}
-          </div>
-
-          <div className="mb-4">
-            <Field
-              id="password"
-              type="password"
-              name="password"
-              autoComplete="password"
-              placeholder="Password"
-              className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
-            />
-
-            {errors.password && touched.password && (
-              <p className="mt-2 text-sm text-red-600">{errors.password}</p>
-            )}
-          </div>
-
-          <div className="flex mb-4">
-            <Button
-              variant="secondary"
-              display="block"
-              onClick={submitForm}
-            >
-              Login with Password
-            </Button>
-          </div>
-
-
-          <div className="text-center">
-            <div className="text-sm font-medium ">
-              Forgot Password?{" "}
-              <Link
-                href="/auth/password-reset"
-                className="underline hover:text-slate-700"
-              >
-                Reset
-              </Link>
+        return (
+          <Form className="h-64 w-full max-w-lg relative">
+            <div className="absolute top-0 left-0 -translate-y-12">
+              <Button onClick={onMagicLogin} variant="secondary" size="sm">
+                Back
+              </Button>
             </div>
-            {formError && (
-              <p className="mt-2 text-sm text-red-600">{formError}</p>
-            )}
-          </div>
-        </Form>
-      )}
+
+            <div className="mb-4">
+              <Field
+                id="email"
+                type="email"
+                name="email"
+                autoComplete="email"
+                placeholder="Email Address"
+                className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
+              />
+
+              {errors.email && touched.email && (
+                <p className="mt-2 text-sm text-red-600">{errors.email}</p>
+              )}
+            </div>
+
+            <div className="mb-4">
+              <Field
+                id="password"
+                type="password"
+                name="password"
+                autoComplete="password"
+                placeholder="Password"
+                className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
+              />
+
+              {errors.password && touched.password && (
+                <p className="mt-2 text-sm text-red-600">{errors.password}</p>
+              )}
+            </div>
+
+            <div className="flex mb-4">
+              <Button
+                variant="secondary"
+                display="block"
+                onClick={submitForm}
+              >
+                Login with Password
+              </Button>
+            </div>
+
+
+            <div className="text-center">
+              <div className="text-sm font-medium ">
+                Forgot Password?{" "}
+                <Link
+                  href="/auth/password-reset"
+                  className="underline hover:text-slate-700"
+                >
+                  Reset
+                </Link>
+              </div>
+              {formError && (
+                <p className="mt-2 text-sm text-red-600">{formError}</p>
+              )}
+            </div>
+          </Form>
+        )
+      }}
     </Formik>
   );
 };
@@ -246,9 +250,9 @@ export default function Login() {
         </div>
         {!isComplete ? (
           isMagicLogin ? (
-            <MagicLoginForm setEmail={setEmail} setIsMagicLogin={setIsMagicLogin} setIsComplete={setIsComplete} />
+            <MagicLoginForm setIsMagicLogin={setIsMagicLogin} setEmail={setEmail} email={email} setIsComplete={setIsComplete} />
           ) : (
-            <PasswordLoginForm email={email} setIsMagicLogin={setIsMagicLogin} />
+            <PasswordLoginForm setIsMagicLogin={setIsMagicLogin} setEmail={setEmail} email={email} />
           )) : (<div className="h-64 w-full max-w-sm text-center ">
             <div className="text-2xl">Check email for Magic Link</div>
             <div className="mt-10 text-lg font-medium">
