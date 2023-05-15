@@ -130,8 +130,12 @@ export default function Register() {
 
       <div className="flex items-center justify-center">
         <div className="text-lg font-medium ">
-          <Link href="/register" className="underline hover:text-slate-700">
-            Privacy Policy
+          No Account?{" "}
+          <Link
+            href="/auth/register"
+            className="underline hover:text-slate-700"
+          >
+            Register
           </Link>
         </div>
       </div>

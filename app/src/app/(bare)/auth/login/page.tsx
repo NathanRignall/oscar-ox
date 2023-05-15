@@ -40,7 +40,15 @@ const MagicLoginForm = ({ setIsMagicLogin, setEmail, email, setIsComplete }: Mag
       email: values.email,
     });
 
-    setIsComplete(true);
+    if (error) {
+      if (error.message.includes("violates not-null constraint")) {
+        setFormError("Email is not registered");
+      } else {
+        setFormError(error.message);
+      }
+    } else {
+      setIsComplete(true);
+    }
   };
 
 
@@ -163,7 +171,7 @@ const PasswordLoginForm = ({ setIsMagicLogin, setEmail, email }: PasswordLoginFo
         return (
           <Form className="h-64 w-full max-w-lg relative">
             <div className="absolute top-0 left-0 -translate-y-12">
-              <Button onClick={onMagicLogin} variant="secondary" size="sm">
+              <Button onClick={onMagicLogin} variant="primary" size="sm">
                 Back
               </Button>
             </div>

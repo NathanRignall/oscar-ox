@@ -5,6 +5,7 @@ export type ButtonLink = {
   className?: string;
   variant?: "primary" | "secondary";
   display?: "inline" | "block";
+  size?: "sm" | "md" | "lg";
   href: string;
   children: React.ReactNode;
 };
@@ -13,6 +14,7 @@ export const ButtonLink = ({
   className,
   variant = "primary",
   display = "inline",
+  size = "md",
   href,
   children,
 }: ButtonLink) => {
@@ -26,7 +28,10 @@ export const ButtonLink = ({
           "text-white bg-slate-900 border-slate-700 hover:bg-slate-700 hover:border-slate-500",
         display == "inline",
         display == "block" && "w-full",
-        "text-sm font-medium rounded-lg px-5 py-3 border-2 inline-block"
+        size === "sm" && "text-xs px-3 py-2",
+        size === "md" && "text-sm px-5 py-3",
+        size === "lg" && "text-lg px-6 py-4",
+        "font-medium rounded-lg border-2"
       )}
       href={href}
     >

@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useSupabase } from "@/components/client";
 import { object, string } from "yup";
 import { FormikProps, Formik, Field, Form } from "formik";
-import { Button } from "@/components/ui";
+import { Button, ButtonLink } from "@/components/ui";
 
 type EmailLoginFormProps = {
   complete: () => void;
@@ -39,7 +39,7 @@ const EmailLoginForm = ({ complete }: EmailLoginFormProps) => {
   ) => {
     const { error } = await supabase.auth.signInWithOtp({
       email: values.email,
-      options: { data: { given_name: values.givenName, family_name: values.familyName} },
+      options: { data: { given_name: values.givenName, family_name: values.familyName, privacy_policy: 0.1 } },
     });
 
     if (error) {
@@ -57,7 +57,13 @@ const EmailLoginForm = ({ complete }: EmailLoginFormProps) => {
       onSubmit={onSubmit}
     >
       {({ errors, touched, submitForm }: FormikProps<FormValues>) => (
-        <Form className="h-64 w-full max-w-lg">
+        <Form className="h-64 w-full max-w-lg relative">
+          <div className="absolute top-0 left-0 -translate-y-12">
+            <ButtonLink href="/auth/login" variant="primary" size="sm">
+              Login
+            </ButtonLink>
+          </div>
+
           <div className="flex space-x-2 w-full mb-4">
             <div className="grow">
               <Field
@@ -168,7 +174,7 @@ export default function Register() {
 
       <div className="flex items-center justify-center">
         <div className="text-lg font-medium ">
-          <Link href="/register" className="underline hover:text-slate-700">
+          <Link href="/about/privacy" className="underline hover:text-slate-700">
             Privacy Policy
           </Link>
         </div>

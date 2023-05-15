@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useSupabase } from "@/components/client";
 import { object, string, ref } from "yup";
 import { FormikProps, Formik, Field, Form } from "formik";
@@ -12,9 +13,21 @@ type EmailLoginFormProps = {
 };
 
 const EmailLoginForm = ({ complete }: EmailLoginFormProps) => {
-  const { supabase } = useSupabase();
+  const router = useRouter();
+  const { supabase, session } = useSupabase();
 
   const [formError, setFormError] = useState<string | null>(null);
+
+  // wait 1 seconds before redirecting to login if no session
+  useEffect(() => {
+     const timer = setTimeout(() => {
+        if (!session) {
+          router.push("/auth/login");
+        }
+      }, 1000);
+      return () => clearTimeout(timer);
+  }, [router, session]);
+
 
   interface FormValues {
     newPassword: string;
@@ -87,6 +100,7 @@ const EmailLoginForm = ({ complete }: EmailLoginFormProps) => {
             variant="secondary"
             display="block"
             onClick={submitForm}
+            disabled={session === null}
           >
             Update Password
           </Button>
@@ -145,8 +159,12 @@ export default function Register() {
 
       <div className="flex items-center justify-center">
         <div className="text-lg font-medium ">
-          <Link href="/register" className="underline hover:text-slate-700">
-            Privacy Policy
+          No Account?{" "}
+          <Link
+            href="/auth/register"
+            className="underline hover:text-slate-700"
+          >
+            Register
           </Link>
         </div>
       </div>
