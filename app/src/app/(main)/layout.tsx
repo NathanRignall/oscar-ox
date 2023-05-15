@@ -4,6 +4,7 @@ import { Navbar } from "@/containers";
 import { createServerClient } from "@/lib/supabase-server";
 import { getArray } from "@/lib/supabase-type-convert";
 import OnboardModal, { Category } from "./OnboardModal";
+import PrivacyModal from "./PrivacyModal";
 
 // do not cache this layout
 export const revalidate = 0;
@@ -35,7 +36,13 @@ export default async function BareLayout({
       <div className="grow">{children}</div>
 
       {user && !user.user_metadata.finished_onboarding && (
-        <OnboardModal categories={categories} />
+        <OnboardModal categories={categories} privacy={(user.user_metadata.privacy_version < 0.1 || !user.user_metadata.privacy_version)}/>
+      )}
+
+      {user && user.user_metadata.finished_onboarding && (user.user_metadata.privacy_version < 0.1 || !user.user_metadata.privacy_version) && (
+        <PrivacyModal
+          isNewUser={!user.user_metadata.finished_onboarding}
+        />
       )}
     </>
   );

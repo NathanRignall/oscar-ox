@@ -18,9 +18,10 @@ type Subscription = {
 
 export type OnboardModalProps = {
   categories: Category[];
+  privacy: boolean;
 };
 
-export default function OnboardModal({ categories }: OnboardModalProps) {
+export default function OnboardModal({ categories, privacy }: OnboardModalProps) {
   const { supabase, session } = useSupabase();
 
   const router = useRouter();
