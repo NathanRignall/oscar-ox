@@ -1,3 +1,2 @@
-export * from "./Navbar";
-export * from "./ProfileNavigation";
 export * from "./ProfilePicture";
+export * from "./PrivacyPolicy";

@@ -1,4 +1,4 @@
-import { ProfileNavigation } from "@/containers";
+import { ProfileNavigation } from "@/components/client";
 
 // layout
 export default function BareLayout({
