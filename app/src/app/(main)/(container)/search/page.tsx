@@ -8,7 +8,12 @@ import { Button, Tag } from "@/components/ui";
 import { Database } from "@/lib/supabase-db-types";
 
 type CompaniesRecord = Database["public"]["Tables"]["companies"]["Row"];
-type ProductionsRecord = Database["public"]["Tables"]["productions"]["Row"];
+type ProductionsRecord = Database["public"]["Tables"]["productions"]["Row"] & {
+  events: Database["public"]["Tables"]["events"]["Row"][] & {
+    venue: Database["public"]["Tables"]["venues"]["Row"];
+  }[];
+  company: Database["public"]["Tables"]["companies"]["Row"];
+};
 type ProfilesRecord = Database["public"]["Tables"]["profiles"]["Row"];
 type VacanciesRecord = Database["public"]["Tables"]["vacancies"]["Row"] & {
   company: Database["public"]["Tables"]["companies"]["Row"];
@@ -31,22 +36,78 @@ const Company = ({ company }: { company: CompaniesRecord }) => (
   </li>
 );
 
-const Production = ({ production }: { production: ProductionsRecord }) => (
-  <li className=" bg-white rounded-lg border-2 border-slate-200 flex">
-    <div className="p-6 flex-grow">
-      <Link href={`/productions/${production.id}`}>
-        <h2 className="text-lg font-bold text-slate-900 underline">{production.title}</h2>
-      </Link>
-    </div>
-  </li>
-);
+const Production = ({ production }: { production: ProductionsRecord }) => {
+  let timeMessage = "";
+
+  // get the total number of events
+  const totalEvents = production.events.length;
+
+  if (totalEvents == 0) {
+    timeMessage = "No events";
+  } else if (totalEvents == 1) {
+    const event = production.events[0];
+    const startTime = new Date(event.start_time);
+
+    timeMessage = `${startTime.toLocaleDateString("en-GB", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })} - ${event.venue.title}
+      `;
+  } else {
+    const firstEvent = production.events[0];
+    const lastEvent = production.events[totalEvents - 1];
+
+    const startTime = new Date(firstEvent.start_time);
+    const endTime = new Date(lastEvent.start_time);
+
+    const startDate = startTime.toLocaleDateString("en-GB", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+    const endDate = endTime.toLocaleDateString("en-GB", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+
+    timeMessage = `${startDate} - ${endDate} - ${firstEvent.venue.title}`;
+  }
+
+
+  return (
+    <li className=" bg-white rounded-lg border-2 border-slate-200 flex sm:col-span-2">
+      <div className="p-6 flex-grow">
+        <Link href={`/productions/${production.id}`}>
+          <h2 className="text-lg font-bold text-slate-900 underline mb-2">{production.title}</h2>
+        </Link>
+        <p className="text-sm text-slate-600 mb-2 ">{timeMessage}</p>
+
+        <ul className="flex flex-wrap gap-2 mb-3">
+          <li>
+            <Tag
+              text={production.company.name}
+              href={`/companies/${encodeURIComponent(production.company.slug)}`}
+              color={production.company.main_colour}
+              size="sm"
+            />
+          </li>
+        </ul>
+      </div>
+    </li>
+  )
+};
 
 const Profile = ({ profile }: { profile: ProfilesRecord }) => (
   <li className=" bg-white rounded-lg border-2 border-slate-200 flex">
     <div className="h-full aspect-1 relative bg-slate-300 rounded-l-md overflow-hidden">
       <Image
         alt=""
-        src={`profiles/${profile.avatar_url}`}
+        src={`profiles/${profile.avatar_url || "default.jpg"}`}
         className={"duration-200 ease-in-out rounded-l-md"}
         fill
         priority
@@ -95,7 +156,7 @@ const Vacancy = ({ vacancy }: { vacancy: VacanciesRecord }) => {
   }
 
   return (
-    <li className="bg-white rounded-lg border-2 border-slate-200 p-6 col-span-2">
+    <li className="bg-white rounded-lg border-2 border-slate-200 p-6 sm:col-span-2">
       <Link href={`/companies/${vacancy.company.slug}#${vacancy.id}`} scroll={false}>
         <h3 className="text-lg font-bold text-slate-900 underline mb-2">
           {vacancy.title}
@@ -163,11 +224,10 @@ export default function Search() {
 
   const { supabase } = useSupabase();
 
-  // only run when search is not rapidly changing
   useEffect(() => {
     async function actionSearch() {
       try {
-        
+
 
         const { data } = await supabase.functions.invoke("search", {
           body: JSON.stringify({
@@ -190,7 +250,7 @@ export default function Search() {
       setLoading(true);
       if (search != "") await actionSearch();
       setLoading(false);
-    }, 300);
+    }, 100);
 
     return () => clearTimeout(timeout);
   }, [supabase, search]);
@@ -198,7 +258,6 @@ export default function Search() {
   return (
     <>
       <header className="text-center">
-        <Tag text="** Interface Only **" variant="red" />
         <h1 className="mb-3 text-5xl font-extrabold text-slate-900">Search</h1>
         <p className="mb-3 text-xl text-slate-600 inline-block">
           Search for filter anything
@@ -247,7 +306,7 @@ export default function Search() {
             </div>
           </form>
 
-          <ul className="mt-8 grid sm:grid-cols-2 gap-4">
+          <ul className="mt-8 grid grid-flow-row-dense sm:grid-cols-2 gap-4">
             {searchResponse.map((record) => {
               switch (record.type) {
                 case "company":
