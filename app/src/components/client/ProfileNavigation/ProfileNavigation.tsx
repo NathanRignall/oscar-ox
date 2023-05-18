@@ -56,7 +56,8 @@ export const ProfileNavigation = () => {
             href="/profile"
             className={clsx(
               "/profile" == pathname && "bg-slate-200",
-              "inline-flex items-center w-full px-5 py-3 text-sm font-medium border-t-2 border-b border-x-2 sm:border-y-2 sm:border-l-2 sm:border-r xl:border-t-2 xl:border-b xl:border-x-2 text-slate-900 border-slate-200 hover:bg-slate-200 hover:border-slate-400 rounded-b-none rounded-lg sm:rounded-none sm:rounded-l-lg xl:rounded-b-none xl:rounded-lg")}
+              "inline-flex items-center w-full px-5 py-3 text-sm font-medium border-t-2 border-b border-x-2 sm:border-y-2 sm:border-l-2 sm:border-r xl:border-t-2 xl:border-b xl:border-x-2 text-slate-900 border-slate-200 hover:bg-slate-200 hover:border-slate-400 rounded-b-none rounded-lg sm:rounded-none sm:rounded-l-lg xl:rounded-b-none xl:rounded-lg"
+            )}
           >
             <svg
               aria-hidden="true"
@@ -79,7 +80,8 @@ export const ProfileNavigation = () => {
             href="/profile/responses"
             className={clsx(
               "/profile/responses" == pathname && "bg-slate-200",
-            "inline-flex items-center w-full px-5 py-3 text-sm font-medium border-y border-x-2 sm:border-y-2 sm:border-x xl:border-y xl:border-x-2 text-slate-900 border-slate-200 hover:bg-slate-200 hover:border-slate-400")}
+              "inline-flex items-center w-full px-5 py-3 text-sm font-medium border-y border-x-2 sm:border-y-2 sm:border-x xl:border-y xl:border-x-2 text-slate-900 border-slate-200 hover:bg-slate-200 hover:border-slate-400"
+            )}
           >
             <svg
               fill="none"
@@ -104,7 +106,8 @@ export const ProfileNavigation = () => {
             href="/profile/settings"
             className={clsx(
               "/profile/settings" == pathname && "bg-slate-200",
-            "inline-flex items-center w-full px-5 py-3 text-sm font-medium border-y border-x-2 sm:border-y-2 sm:border-x xl:border-y xl:border-x-2 text-slate-900 border-slate-200 hover:bg-slate-200 hover:border-slate-400")}
+              "inline-flex items-center w-full px-5 py-3 text-sm font-medium border-y border-x-2 sm:border-y-2 sm:border-x xl:border-y xl:border-x-2 text-slate-900 border-slate-200 hover:bg-slate-200 hover:border-slate-400"
+            )}
           >
             <svg
               fill="none"
@@ -129,7 +132,8 @@ export const ProfileNavigation = () => {
             href="/profile/admin"
             className={clsx(
               "/profile/admin" == pathname && "bg-slate-200",
-            "inline-flex items-center w-full px-5 py-3 text-sm font-medium border-t border-b-2 border-x-2 sm:border-y-2 sm:border-l sm:border-r-2 xl:border-t xl:border-b-2 xl:border-x-2 text-slate-900 border-slate-200 hover:bg-slate-200 hover:border-slate-400 rounded-t-none rounded-lg sm:rounded-none sm:rounded-r-lg xl:rounded-t-none xl:rounded-lg")}
+              "inline-flex items-center w-full px-5 py-3 text-sm font-medium border-t border-b-2 border-x-2 sm:border-y-2 sm:border-l sm:border-r-2 xl:border-t xl:border-b-2 xl:border-x-2 text-slate-900 border-slate-200 hover:bg-slate-200 hover:border-slate-400 rounded-t-none rounded-lg sm:rounded-none sm:rounded-r-lg xl:rounded-t-none xl:rounded-lg"
+            )}
           >
             <svg
               aria-hidden="true"

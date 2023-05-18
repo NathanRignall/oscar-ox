@@ -99,20 +99,21 @@ export default async function Production({
 
         <ul className="mt-4 grid 2xl:grid-cols-2 gap-4">
           {vacnacy.responses.map((response) => (
-            <li key={response.id} className="bg-white rounded-lg border-2 border-slate-200 p-6">
-              <Link
-                href={`/profile/${response.profile.id}`}
-                scroll={false}
-              >
+            <li
+              key={response.id}
+              className="bg-white rounded-lg border-2 border-slate-200 p-6"
+            >
+              <Link href={`/profile/${response.profile.id}`} scroll={false}>
                 <h3 className="text-lg font-bold text-slate-900 underline mb-1">
                   {`${response.profile.given_name} ${response.profile.family_name}`}
-                </h3></Link>
+                </h3>
+              </Link>
 
-              <p className="text-sm text-slate-600 mb-1 ">{response.profile.email}</p>
-
-              <p className="text-sm text-slate-600">
-                {response.message}
+              <p className="text-sm text-slate-600 mb-1 ">
+                {response.profile.email}
               </p>
+
+              <p className="text-sm text-slate-600">{response.message}</p>
             </li>
           ))}
         </ul>

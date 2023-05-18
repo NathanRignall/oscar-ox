@@ -36,12 +36,19 @@ export default async function BareLayout({
       <div className="grow">{children}</div>
 
       {user && !user.user_metadata.finished_onboarding && (
-        <OnboardModal categories={categories} privacy={(user.user_metadata.privacy_version < 0.1 || !user.user_metadata.privacy_version)}/>
+        <OnboardModal
+          categories={categories}
+          privacy={
+            user.user_metadata.privacy_version < 0.1 ||
+            !user.user_metadata.privacy_version
+          }
+        />
       )}
 
-      {user && user.user_metadata.finished_onboarding && (user.user_metadata.privacy_version < 0.1 || !user.user_metadata.privacy_version) && (
-        <PrivacyModal />
-      )}
+      {user &&
+        user.user_metadata.finished_onboarding &&
+        (user.user_metadata.privacy_version < 0.1 ||
+          !user.user_metadata.privacy_version) && <PrivacyModal />}
     </>
   );
 }

@@ -12,7 +12,9 @@ export type AutoCompleteVenueProps = {
   initialSearch?: string;
 };
 
-export default function AutoCompleteVenue({ initialSearch }: AutoCompleteVenueProps) {
+export default function AutoCompleteVenue({
+  initialSearch,
+}: AutoCompleteVenueProps) {
   const { supabase } = useSupabase();
   const [field, meta, helpers] = useField("venueId");
 

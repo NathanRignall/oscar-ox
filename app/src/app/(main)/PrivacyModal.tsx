@@ -30,7 +30,7 @@ export default function PrivacyModal() {
         router.refresh();
       });
     }
-  }
+  };
 
   return (
     <div className="fixed z-30 inset-0 overflow-y-auto">
@@ -43,7 +43,8 @@ export default function PrivacyModal() {
               New Privacy Policy
             </div>
             <p className="text-lg text-slate-600 mb-8">
-              We&apos;ve updated our privacy policy. Please review the new policy to continue using our services.
+              We&apos;ve updated our privacy policy. Please review the new
+              policy to continue using our services.
             </p>
 
             <div className="mb-8 max-h-[40vh] border-2 border-slate-200 rounded-lg overflow-y-scroll whitespace-normal px-8 py-4">
@@ -55,10 +56,9 @@ export default function PrivacyModal() {
             <Button variant="secondary" display="block" onClick={onSubmit}>
               Agree
             </Button>
-
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

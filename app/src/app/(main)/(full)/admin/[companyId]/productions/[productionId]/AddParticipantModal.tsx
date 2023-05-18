@@ -111,9 +111,7 @@ export const AddParticipantModal = ({
               <AutoCompleteEmail />
 
               {errors.profileId && touched.profileId && (
-                <p className="mt-2 text-sm text-red-600">
-                  {errors.profileId}
-                </p>
+                <p className="mt-2 text-sm text-red-600">{errors.profileId}</p>
               )}
             </div>
 
@@ -143,9 +141,7 @@ export const AddParticipantModal = ({
               </Field>
 
               {errors.categoryId && touched.categoryId && (
-                <p className="mt-2 text-sm text-red-600">
-                  {errors.categoryId}
-                </p>
+                <p className="mt-2 text-sm text-red-600">{errors.categoryId}</p>
               )}
             </div>
 

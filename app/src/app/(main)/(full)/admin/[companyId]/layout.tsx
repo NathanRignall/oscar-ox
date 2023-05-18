@@ -71,8 +71,9 @@ export default async function AdminLayout({
             {Links.map((link) => (
               <li key={link.href}>
                 <Link
-                  className={`px-4 py-3 block rounded-lg text-lg ${link.active ? "bg-slate-100" : ""
-                    }`}
+                  className={`px-4 py-3 block rounded-lg text-lg ${
+                    link.active ? "bg-slate-100" : ""
+                  }`}
                   href={`/admin/${encodeURIComponent(company.id)}/${link.href}`}
                 >
                   {link.text}

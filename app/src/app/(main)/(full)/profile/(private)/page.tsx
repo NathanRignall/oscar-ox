@@ -130,10 +130,7 @@ export default async function Account() {
         </div>
 
         <div className="sm:w-[150px] w-[200px] sm:p-0 pt-3 pb-3">
-          <ProfilePicture
-            src={`profiles/${profile.avatar_url}`}
-            edit={true}
-          />
+          <ProfilePicture src={`profiles/${profile.avatar_url}`} edit={true} />
         </div>
       </header>
 

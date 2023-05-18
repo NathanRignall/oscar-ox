@@ -9,11 +9,10 @@ export default async function Roles() {
       </header>
 
       <main className="max-w-3xl mx-auto">
-
         <article className="mt-8">
           <h2 className="font-bold text-3xl mt-3 mb-1">Privacy Policy</h2>
 
-          <PrivacyPolicy/>
+          <PrivacyPolicy />
         </article>
       </main>
     </>

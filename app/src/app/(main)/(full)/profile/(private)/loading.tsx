@@ -12,7 +12,6 @@ export default function Loading() {
 
             <div>
               <Button>View Public</Button>
-              <Button className="ml-2">Admin Panel</Button>
             </div>
           </div>
 

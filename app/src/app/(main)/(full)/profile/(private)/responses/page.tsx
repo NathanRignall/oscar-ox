@@ -33,10 +33,10 @@ export default async function Account() {
         message
       `
     )
-    .match({ profile_id: user?.id })
+    .match({ profile_id: user?.id });
 
   const responses = getArray(_responses).map((response) => {
-    const vacancy = getSingle(response.vacancy)
+    const vacancy = getSingle(response.vacancy);
     return {
       id: response.id,
       vacancy: {
@@ -45,8 +45,8 @@ export default async function Account() {
         title: vacancy.title,
       },
       message: response.message,
-    }
-  })
+    };
+  });
 
   return (
     <>
@@ -75,7 +75,7 @@ export default async function Account() {
                     {response.vacancy.title}
                   </h3>
                 </Link>
-                
+
                 <ul className="flex flex-wrap gap-2 mb-3">
                   <li>
                     <Tag
@@ -96,7 +96,6 @@ export default async function Account() {
             );
           })}
         </ul>
-
       </main>
     </>
   );

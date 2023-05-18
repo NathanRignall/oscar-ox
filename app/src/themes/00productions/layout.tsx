@@ -48,7 +48,10 @@ export default function Layout({ children, company }: LayoutProps) {
               </li>
 
               {company.pages.map((page) => (
-                <li key={page.id} className="flex-1 text-center hover:bg-gray-400 hover:text-white uppercase">
+                <li
+                  key={page.id}
+                  className="flex-1 text-center hover:bg-gray-400 hover:text-white uppercase"
+                >
                   <Link
                     href={`/companies/${encodeURIComponent(
                       company.slug

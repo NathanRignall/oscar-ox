@@ -89,7 +89,8 @@ export default async function Account() {
     },
   }));
 
-  const { data, error } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel()
+  const { data, error } =
+    await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
 
   return (
     <>
@@ -97,35 +98,21 @@ export default async function Account() {
         <h1 className="mb-3 text-5xl font-extrabold text-slate-900">
           Settings
         </h1>
-        <p className="mb-3 text-xl text-slate-600">
-          Profile Managament
-        </p>
+        <p className="mb-3 text-xl text-slate-600">Profile Managament</p>
       </header>
 
       <main className="max-w-3xl mx-auto">
-
         <section>
-          <h2 className="text-4xl font-bold text-slate-900">
-            Security
-          </h2>
+          <h2 className="text-4xl font-bold text-slate-900">Security</h2>
         </section>
-
-        <UpdatePasswordModal/>
-
+        <UpdatePasswordModal />
         <br />
-
         Change Email
-
         <br />
-
         Delete Account
-
         <br />
-
         Manage Subsciptions
-
         {JSON.stringify(data)}
-
       </main>
     </>
   );

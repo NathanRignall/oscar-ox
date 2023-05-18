@@ -14,7 +14,9 @@ export type AutoCompleteEmailProps = {
   initialSearch?: string;
 };
 
-export const AutoCompleteEmail = ({ initialSearch }: AutoCompleteEmailProps) => {
+export const AutoCompleteEmail = ({
+  initialSearch,
+}: AutoCompleteEmailProps) => {
   const { supabase } = useSupabase();
   const [field, meta, helpers] = useField("profileId");
 
@@ -25,7 +27,9 @@ export const AutoCompleteEmail = ({ initialSearch }: AutoCompleteEmailProps) => 
   const ref = useRef();
 
   const select = (index: number) => {
-    setSearch(`${optionsList[index].given_name} ${optionsList[index].family_name}`);
+    setSearch(
+      `${optionsList[index].given_name} ${optionsList[index].family_name}`
+    );
     helpers.setValue(optionsList[index].id);
     setShowOptions(false);
   };

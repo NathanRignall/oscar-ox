@@ -32,9 +32,9 @@ export default async function Admin() {
 
   const members = data
     ? data.map((item) => ({
-      role: item.role,
-      company: getSingle(item.company),
-    }))
+        role: item.role,
+        company: getSingle(item.company),
+      }))
     : [];
 
   return (
@@ -68,9 +68,7 @@ export default async function Admin() {
         </section>
       </main>
 
-      <div className="fixed bottom-0 right-0 m-8">
-
-      </div>
+      <div className="fixed bottom-0 right-0 m-8"></div>
     </>
   );
 }

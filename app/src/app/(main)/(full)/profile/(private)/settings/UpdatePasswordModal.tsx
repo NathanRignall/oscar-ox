@@ -19,23 +19,25 @@ export const UpdatePasswordModal = () => {
 
   interface FormValues {
     newPassword: string;
-    confirmPassword: string
+    confirmPassword: string;
   }
 
   const initialValues: FormValues = {
     newPassword: "",
-    confirmPassword: ""
+    confirmPassword: "",
   };
 
   const validationSchema = object({
     newPassword: string().required("Password is required"),
-    confirmPassword: string().required("Password is required").oneOf([ref('newPassword')], 'Passwords must match')
+    confirmPassword: string()
+      .required("Password is required")
+      .oneOf([ref("newPassword")], "Passwords must match"),
   });
 
-  const onSubmit = async (
-    values: FormValues,
-  ) => {
-    const { error } = await supabase.auth.updateUser({ password: values.newPassword })
+  const onSubmit = async (values: FormValues) => {
+    const { error } = await supabase.auth.updateUser({
+      password: values.newPassword,
+    });
 
     if (error) {
       setFormError(error.message);
@@ -47,7 +49,9 @@ export const UpdatePasswordModal = () => {
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen} button="Update Password">
-      <div className="text-3xl text-slate-900 font-bold mb-8">Update Password</div>
+      <div className="text-3xl text-slate-900 font-bold mb-8">
+        Update Password
+      </div>
 
       <Formik
         initialValues={initialValues}
@@ -67,7 +71,9 @@ export const UpdatePasswordModal = () => {
               />
 
               {errors.newPassword && touched.newPassword && (
-                <p className="mt-2 text-sm text-red-600">{errors.newPassword}</p>
+                <p className="mt-2 text-sm text-red-600">
+                  {errors.newPassword}
+                </p>
               )}
             </div>
 
@@ -82,7 +88,9 @@ export const UpdatePasswordModal = () => {
               />
 
               {errors.confirmPassword && touched.confirmPassword && (
-                <p className="mt-2 text-sm text-red-600">{errors.confirmPassword}</p>
+                <p className="mt-2 text-sm text-red-600">
+                  {errors.confirmPassword}
+                </p>
               )}
             </div>
 

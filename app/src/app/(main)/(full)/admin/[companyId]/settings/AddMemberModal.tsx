@@ -71,9 +71,7 @@ export const AddMemberModal = ({ companyId }: AddMemberModalProps) => {
               <AutoCompleteEmail />
 
               {errors.profileId && touched.profileId && (
-                <p className="mt-2 text-sm text-red-600">
-                  {errors.profileId}
-                </p>
+                <p className="mt-2 text-sm text-red-600">{errors.profileId}</p>
               )}
             </div>
 

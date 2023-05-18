@@ -211,8 +211,7 @@ export default async function Production({
                     </td>
 
                     <td className="px-4 text-right">
-                      <EditEventModal event={event} />
-                      {" "}
+                      <EditEventModal event={event} />{" "}
                       <RemoveEventModal
                         eventId={event.id}
                         time={time}
@@ -367,8 +366,7 @@ export default async function Production({
                   </td>
 
                   <td className="px-4 text-right">
-                    <EditParticipantModal participant={participant} />
-                    {" "}
+                    <EditParticipantModal participant={participant} />{" "}
                     <RemoveParticipantModal
                       participantId={participant.id}
                       name={`${participant.profile.given_name} ${participant.profile.family_name}`}

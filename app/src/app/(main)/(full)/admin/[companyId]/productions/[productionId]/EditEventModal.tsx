@@ -15,7 +15,7 @@ type Event = {
   venue: {
     id: string;
     title: string;
-  },
+  };
   start_time: string;
   end_time: string | null;
   ticket_link: string | null;
@@ -60,11 +60,13 @@ export const EditEventModal = ({ event }: EditEventModalProps) => {
   });
 
   const onSubmit = async (values: FormValues) => {
-    const { error } = await supabase.from("events").update({
-      venue_id: values.venueId,
-      start_time: values.start_time.toISOString(),
-      end_time: values.end_time.toISOString(),
-    })
+    const { error } = await supabase
+      .from("events")
+      .update({
+        venue_id: values.venueId,
+        start_time: values.start_time.toISOString(),
+        end_time: values.end_time.toISOString(),
+      })
       .match({ id: event.id });
 
     if (error) {
@@ -96,7 +98,7 @@ export const EditEventModal = ({ event }: EditEventModalProps) => {
         }: FormikProps<FormValues>) => (
           <Form>
             <div className="mb-4">
-              <AutoCompleteVenue initialSearch={event.venue.title}/>
+              <AutoCompleteVenue initialSearch={event.venue.title} />
 
               {errors.venueId && touched.venueId && (
                 <p className="mt-2 text-sm text-red-600">{errors.venueId}</p>
@@ -108,7 +110,9 @@ export const EditEventModal = ({ event }: EditEventModalProps) => {
                 id="datetime"
                 name="datetime"
                 selected={values.start_time}
-                onChange={(start_time) => setFieldValue("start_time", start_time)}
+                onChange={(start_time) =>
+                  setFieldValue("start_time", start_time)
+                }
                 showTimeSelect
                 timeFormat="HH:mm"
                 timeIntervals={15}

@@ -15,7 +15,12 @@ type MagicLoginFormProps = {
   setIsComplete: (isComplete: boolean) => void;
 };
 
-const MagicLoginForm = ({ setIsMagicLogin, setEmail, email, setIsComplete }: MagicLoginFormProps) => {
+const MagicLoginForm = ({
+  setIsMagicLogin,
+  setEmail,
+  email,
+  setIsComplete,
+}: MagicLoginFormProps) => {
   const { supabase } = useSupabase();
 
   const [formError, setFormError] = useState<string | null>(null);
@@ -32,9 +37,7 @@ const MagicLoginForm = ({ setIsMagicLogin, setEmail, email, setIsComplete }: Mag
     email: string().email("Invalid email").required("Email is required"),
   });
 
-  const onSubmit = async (
-    values: FormValues,
-  ) => {
+  const onSubmit = async (values: FormValues) => {
     console.log(values);
     const { error } = await supabase.auth.signInWithOtp({
       email: values.email,
@@ -51,7 +54,6 @@ const MagicLoginForm = ({ setIsMagicLogin, setEmail, email, setIsComplete }: Mag
     }
   };
 
-
   return (
     <Formik
       initialValues={initialValues}
@@ -62,7 +64,7 @@ const MagicLoginForm = ({ setIsMagicLogin, setEmail, email, setIsComplete }: Mag
         const onPasswordLogin = () => {
           setEmail(values.email);
           setIsMagicLogin(false);
-        }
+        };
 
         return (
           <Form className="h-64 w-full max-w-lg">
@@ -90,15 +92,10 @@ const MagicLoginForm = ({ setIsMagicLogin, setEmail, email, setIsComplete }: Mag
                 Login with Password
               </Button>
 
-              <Button
-                variant="secondary"
-                display="block"
-                type="submit"
-              >
+              <Button variant="secondary" display="block" type="submit">
                 Send Magic Link
               </Button>
             </div>
-
 
             <div className="text-center">
               {formError ? (
@@ -108,7 +105,7 @@ const MagicLoginForm = ({ setIsMagicLogin, setEmail, email, setIsComplete }: Mag
               )}
             </div>
           </Form>
-        )
+        );
       }}
     </Formik>
   );
@@ -120,7 +117,11 @@ type PasswordLoginFormProps = {
   email: string;
 };
 
-const PasswordLoginForm = ({ setIsMagicLogin, setEmail, email }: PasswordLoginFormProps) => {
+const PasswordLoginForm = ({
+  setIsMagicLogin,
+  setEmail,
+  email,
+}: PasswordLoginFormProps) => {
   const router = useRouter();
   const { supabase } = useSupabase();
 
@@ -141,9 +142,7 @@ const PasswordLoginForm = ({ setIsMagicLogin, setEmail, email }: PasswordLoginFo
     password: string().required("Password is required"),
   });
 
-  const onSubmit = async (
-    values: FormValues,
-  ) => {
+  const onSubmit = async (values: FormValues) => {
     const { error } = await supabase.auth.signInWithPassword({
       email: values.email,
       password: values.password,
@@ -166,7 +165,7 @@ const PasswordLoginForm = ({ setIsMagicLogin, setEmail, email }: PasswordLoginFo
         const onMagicLogin = () => {
           setEmail(values.email);
           setIsMagicLogin(true);
-        }
+        };
 
         return (
           <Form className="h-64 w-full max-w-lg relative">
@@ -207,15 +206,10 @@ const PasswordLoginForm = ({ setIsMagicLogin, setEmail, email }: PasswordLoginFo
             </div>
 
             <div className="flex mb-4">
-              <Button
-                variant="secondary"
-                display="block"
-                onClick={submitForm}
-              >
+              <Button variant="secondary" display="block" onClick={submitForm}>
                 Login with Password
               </Button>
             </div>
-
 
             <div className="text-center">
               <div className="text-sm font-medium ">
@@ -232,7 +226,7 @@ const PasswordLoginForm = ({ setIsMagicLogin, setEmail, email }: PasswordLoginFo
               )}
             </div>
           </Form>
-        )
+        );
       }}
     </Formik>
   );
@@ -258,10 +252,21 @@ export default function Login() {
         </div>
         {!isComplete ? (
           isMagicLogin ? (
-            <MagicLoginForm setIsMagicLogin={setIsMagicLogin} setEmail={setEmail} email={email} setIsComplete={setIsComplete} />
+            <MagicLoginForm
+              setIsMagicLogin={setIsMagicLogin}
+              setEmail={setEmail}
+              email={email}
+              setIsComplete={setIsComplete}
+            />
           ) : (
-            <PasswordLoginForm setIsMagicLogin={setIsMagicLogin} setEmail={setEmail} email={email} />
-          )) : (<div className="h-64 w-full max-w-sm text-center ">
+            <PasswordLoginForm
+              setIsMagicLogin={setIsMagicLogin}
+              setEmail={setEmail}
+              email={email}
+            />
+          )
+        ) : (
+          <div className="h-64 w-full max-w-sm text-center ">
             <div className="text-2xl">Check email for Magic Link</div>
             <div className="mt-10 text-lg font-medium">
               No email?{" "}
@@ -272,8 +277,8 @@ export default function Login() {
                 Retry
               </div>
             </div>
-          </div>)}
-
+          </div>
+        )}
       </div>
 
       <div className="flex items-center justify-center">

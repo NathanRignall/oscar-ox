@@ -28,13 +28,10 @@ const EmailLoginForm = ({ complete }: EmailLoginFormProps) => {
     email: string().email("Invalid email").required("Email is required"),
   });
 
-  const onSubmit = async (
-    values: FormValues,
-  ) => {
-    const { error } = await supabase.auth.resetPasswordForEmail(
-      values.email,
-      {redirectTo: "http://localhost:3000/auth/password-update"}
-    );
+  const onSubmit = async (values: FormValues) => {
+    const { error } = await supabase.auth.resetPasswordForEmail(values.email, {
+      redirectTo: "http://localhost:3000/auth/password-update",
+    });
 
     if (error) {
       setFormError(error.message);

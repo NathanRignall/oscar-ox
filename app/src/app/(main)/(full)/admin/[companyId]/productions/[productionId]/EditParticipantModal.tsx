@@ -20,11 +20,11 @@ type Participant = {
     given_name: string;
     family_name: string;
     email: string;
-  },
+  };
   category: {
     id: string;
     title: string;
-  },
+  };
   title: string;
 };
 
@@ -80,10 +80,13 @@ export const EditParticipantModal = ({
   });
 
   const onSubmit = async (values: FormValues) => {
-    const { error } = await supabase.from("participants").update({
-      title: values.title,
-      category_id: values.categoryId,
-    }).match({ id: participant.id });
+    const { error } = await supabase
+      .from("participants")
+      .update({
+        title: values.title,
+        category_id: values.categoryId,
+      })
+      .match({ id: participant.id });
 
     if (error) {
       setFormError(error.message);
@@ -141,9 +144,7 @@ export const EditParticipantModal = ({
               </Field>
 
               {errors.categoryId && touched.categoryId && (
-                <p className="mt-2 text-sm text-red-600">
-                  {errors.categoryId}
-                </p>
+                <p className="mt-2 text-sm text-red-600">{errors.categoryId}</p>
               )}
             </div>
 

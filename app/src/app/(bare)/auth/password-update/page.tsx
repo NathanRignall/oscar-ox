@@ -20,34 +20,35 @@ const EmailLoginForm = ({ complete }: EmailLoginFormProps) => {
 
   // wait 1 seconds before redirecting to login if no session
   useEffect(() => {
-     const timer = setTimeout(() => {
-        if (!session) {
-          router.push("/auth/login");
-        }
-      }, 1000);
-      return () => clearTimeout(timer);
+    const timer = setTimeout(() => {
+      if (!session) {
+        router.push("/auth/login");
+      }
+    }, 1000);
+    return () => clearTimeout(timer);
   }, [router, session]);
-
 
   interface FormValues {
     newPassword: string;
-    confirmPassword: string
+    confirmPassword: string;
   }
 
   const initialValues: FormValues = {
     newPassword: "",
-    confirmPassword: ""
+    confirmPassword: "",
   };
 
   const validationSchema = object({
     newPassword: string().required("Password is required"),
-    confirmPassword: string().required("Password is required").oneOf([ref('newPassword')], 'Passwords must match')
+    confirmPassword: string()
+      .required("Password is required")
+      .oneOf([ref("newPassword")], "Passwords must match"),
   });
 
-  const onSubmit = async (
-    values: FormValues,
-  ) => {
-    const { error } = await supabase.auth.updateUser({ password: values.newPassword })
+  const onSubmit = async (values: FormValues) => {
+    const { error } = await supabase.auth.updateUser({
+      password: values.newPassword,
+    });
 
     if (error) {
       setFormError(error.message);
@@ -91,7 +92,9 @@ const EmailLoginForm = ({ complete }: EmailLoginFormProps) => {
             />
 
             {errors.confirmPassword && touched.confirmPassword && (
-              <p className="mt-2 text-sm text-red-600">{errors.confirmPassword}</p>
+              <p className="mt-2 text-sm text-red-600">
+                {errors.confirmPassword}
+              </p>
             )}
           </div>
 

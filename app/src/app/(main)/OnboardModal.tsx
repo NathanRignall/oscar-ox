@@ -22,7 +22,10 @@ export type OnboardModalProps = {
   privacy: boolean;
 };
 
-export default function OnboardModal({ categories, privacy }: OnboardModalProps) {
+export default function OnboardModal({
+  categories,
+  privacy,
+}: OnboardModalProps) {
   const { supabase, session } = useSupabase();
 
   const router = useRouter();
@@ -41,7 +44,7 @@ export default function OnboardModal({ categories, privacy }: OnboardModalProps)
 
   const onSubmitPrivacy = async () => {
     setIsPrivacyAccepted(true);
-  }
+  };
 
   const onSubmitCategories = async (values: FormValues) => {
     // check if user is logged in
@@ -82,7 +85,6 @@ export default function OnboardModal({ categories, privacy }: OnboardModalProps)
     }
   };
 
-
   return (
     <div className="fixed z-30 inset-0 overflow-y-auto">
       <div className="flex items-center justify-center min-h-screen pt-5 px-5 sm:p-0">
@@ -94,24 +96,34 @@ export default function OnboardModal({ categories, privacy }: OnboardModalProps)
               Welcome to Oscar Ox!
             </div>
             <p className="text-lg text-slate-600 mb-8">
-              {!isPrivacyAccepted ? "Please review our privacy policy" : "Subscribe to vacancy notifcations to recieve emails"}
+              {!isPrivacyAccepted
+                ? "Please review our privacy policy"
+                : "Subscribe to vacancy notifcations to recieve emails"}
             </p>
 
             {privacy && !isPrivacyAccepted ? (
               <>
                 <div className="mb-8 max-h-[40vh] border-2 border-slate-200 rounded-lg overflow-y-scroll whitespace-normal px-8 py-4">
-
-                  <h2 className="font-bold text-xl mt-3 mb-1">Privacy Policy</h2>
+                  <h2 className="font-bold text-xl mt-3 mb-1">
+                    Privacy Policy
+                  </h2>
 
                   <PrivacyPolicy />
                 </div>
 
-                <Button variant="secondary" display="block" onClick={onSubmitPrivacy}>
+                <Button
+                  variant="secondary"
+                  display="block"
+                  onClick={onSubmitPrivacy}
+                >
                   Agree
                 </Button>
               </>
             ) : (
-              <Formik initialValues={initialValues} onSubmit={onSubmitCategories}>
+              <Formik
+                initialValues={initialValues}
+                onSubmit={onSubmitCategories}
+              >
                 {({ errors, touched, submitForm }: FormikProps<FormValues>) => (
                   <Form>
                     <div className="grid sm:grid-cols-3 grid-cols-2 gap-x-4 mb-8">
