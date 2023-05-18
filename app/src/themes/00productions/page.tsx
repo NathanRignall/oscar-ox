@@ -32,9 +32,7 @@ const components = (companyId: string) => {
     // @ts-expect-error
     Hero: (props) => <Hero {...props} companyId={companyId} />,
     // @ts-expect-error
-    OpenVacancies: (props) => (
-      <OpenVacancies {...props} companyId={companyId} />
-    ),
+    OpenVacancies: (props) => (<OpenVacancies {...props} companyId={companyId} />),
   };
 };
 

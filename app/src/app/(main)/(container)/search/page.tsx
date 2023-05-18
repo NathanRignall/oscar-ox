@@ -164,12 +164,10 @@ export default function Search() {
   const { supabase } = useSupabase();
 
   // only run when search is not rapidly changing
-  useEffect(() => { }, [search]);
-
   useEffect(() => {
     async function actionSearch() {
       try {
-        setLoading(true);
+        
 
         const { data } = await supabase.functions.invoke("search", {
           body: JSON.stringify({
@@ -188,9 +186,10 @@ export default function Search() {
       }
     }
 
-    const timeout = setTimeout(() => {
-      console.log(search);
-      if (search != "") actionSearch();
+    const timeout = setTimeout(async () => {
+      setLoading(true);
+      if (search != "") await actionSearch();
+      setLoading(false);
     }, 300);
 
     return () => clearTimeout(timeout);
