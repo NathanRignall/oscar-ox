@@ -84,12 +84,12 @@ export default async function AdminLayout({
 
           <ul className="px-3 py-4 border-b-2 border-slate-200 space-y-2">
             <li>
-              <Link className="px-4 py-1 block rounded-lg text-lg" href="/">
+              <Link className="px-4 py-1 block rounded-lg text-lg" href="/about/documentation">
                 Documentation
               </Link>
             </li>
             <li>
-              <Link className="px-4 py-1 block rounded-lg text-lg" href="/">
+              <Link className="px-4 py-1 block rounded-lg text-lg" href="/contact">
                 Help
               </Link>
             </li>

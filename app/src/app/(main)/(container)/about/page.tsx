@@ -24,6 +24,13 @@ export default async function About() {
           </Link>
         </section>
         <section className="mt-8">
+          <Link href={"/about/documentation"}>
+            <h2 className="text-4xl font-bold text-slate-900 underline">
+              Documentation
+            </h2>
+          </Link>
+        </section>
+        <section className="mt-8">
           <Link href={"/about/privacy"}>
             <h2 className="text-4xl font-bold text-slate-900 underline">
               Privacy
