@@ -394,7 +394,7 @@ export default function Search() {
   };
 
   return (
-    <>
+    <div className="container mx-auto md:py-6 md:px-8 py-6 px-6">
       <header className="text-center">
         <h1 className="mb-3 text-5xl font-extrabold text-slate-900">Search</h1>
         <p className="mb-3 text-xl text-slate-600 inline-block">
@@ -529,6 +529,6 @@ export default function Search() {
           </ul>
         </section>
       </main>
-    </>
+    </div>
   );
 }

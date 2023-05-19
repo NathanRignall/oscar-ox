@@ -189,7 +189,7 @@ export default async function Home({
   }
 
   return (
-    <>
+    <div className="container mx-auto md:py-6 md:px-8 py-6 px-6">
       <header className="mb-8">
         <h1 className="mb-3 text-5xl font-extrabold text-slate-900">
           Welcome to Oscar Ox
@@ -309,6 +309,6 @@ export default async function Home({
         {/* @ts-expect-error Server Component */}
         <Vacancies />
       </main>
-    </>
+    </div>
   );
 }

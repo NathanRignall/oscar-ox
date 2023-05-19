@@ -34,7 +34,7 @@ export default async function BareLayout({
   return (
     <>
       <Navbar loggedIn={user != null} />
-      <div className="grow">{children}</div>
+      {children}
 
       {user && !user.user_metadata.finished_onboarding && (
         <OnboardModal
@@ -50,8 +50,6 @@ export default async function BareLayout({
         user.user_metadata.finished_onboarding &&
         (user.user_metadata.privacy_version < 0.1 ||
           !user.user_metadata.privacy_version) && <PrivacyModal />}
-
-      <Footer />
     </>
   );
 }
