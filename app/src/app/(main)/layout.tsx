@@ -5,6 +5,7 @@ import { getArray } from "@/lib/supabase-type-convert";
 import { Navbar } from "@/components/client";
 import OnboardModal, { Category } from "./OnboardModal";
 import PrivacyModal from "./PrivacyModal";
+import { Footer } from "@/components/server";
 
 // do not cache this layout
 export const revalidate = 0;
@@ -49,6 +50,8 @@ export default async function BareLayout({
         user.user_metadata.finished_onboarding &&
         (user.user_metadata.privacy_version < 0.1 ||
           !user.user_metadata.privacy_version) && <PrivacyModal />}
+
+      <Footer />
     </>
   );
 }
