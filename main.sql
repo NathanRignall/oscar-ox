@@ -213,7 +213,7 @@ begin
 
   return new_company_id;
 end;
-$$ language plpgsql security definer;
+$$ language plpgsql security definer set search_path = public;
 
 GRANT execute ON FUNCTION public.create_company(slug text, name text, description text) TO authenticated;
 
@@ -240,9 +240,32 @@ $$
     return bind_permissions > 0;
   end;
 $$
-language plpgsql security definer;
+language plpgsql security definer set search_path = public;
 
 GRANT execute ON FUNCTION public.authorize_company_member(company_id uuid, profile_id uuid, role public.company_role) TO PUBLIC;
+
+-- update company function
+create function public.update_company(id uuid, slug text, name text, description text, main_colour text, is_public boolean)
+returns void as
+$$
+begin
+  if not authorize_company_member(update_company.id, auth.uid(), 'admin') then
+    raise exception 'User is not authorized to update company.';
+  end if;
+
+  update companies
+  set
+    slug = update_company.slug,
+    name = update_company.name,
+    description = update_company.description,
+    main_colour = update_company.main_colour,
+    is_public = update_company.is_public
+  where
+    companies.id = update_company.id;
+end;
+$$ language plpgsql security definer set search_path = public;
+
+GRANT execute ON FUNCTION public.update_company(id uuid, slug text, name text, description text, main_colour text, is_public boolean) TO authenticated;
 
 -- authorize company production member
 create function public.authorize_company_production_member(
@@ -268,7 +291,7 @@ $$
     return bind_permissions > 0;
   end;
 $$
-language plpgsql security definer;
+language plpgsql security definer set search_path = public;
 
 GRANT execute ON FUNCTION public.authorize_company_production_member(production_id uuid, profile_id uuid, role public.company_role) TO PUBLIC;
 
@@ -297,7 +320,7 @@ $$
     return bind_permissions > 0;
   end;
 $$
-language plpgsql security definer;
+language plpgsql security definer set search_path = public;
 
 GRANT execute ON FUNCTION public.authorize_company_participant_member(participant_id uuid, profile_id uuid, role public.company_role) TO PUBLIC;
 
@@ -325,7 +348,7 @@ $$
     return bind_permissions > 0;
   end;
 $$
-language plpgsql security definer;
+language plpgsql security definer set search_path = public;
 
 GRANT execute ON FUNCTION public.authorize_company_vacancy_member(vacancy_id uuid, profile_id uuid, role public.company_role) TO PUBLIC;
 
@@ -349,7 +372,7 @@ $$
     return bind_permissions > 0;
   end;
 $$
-language plpgsql security definer;
+language plpgsql security definer set search_path = public;
 
 GRANT execute ON FUNCTION public.authorize_company_public(company_id uuid) TO PUBLIC;
 
@@ -375,7 +398,7 @@ $$
     return bind_permissions > 0;
   end;
 $$
-language plpgsql security definer;
+language plpgsql security definer set search_path = public;
 
 GRANT execute ON FUNCTION public.authorize_production_public(production_id uuid) TO PUBLIC;
 
@@ -402,7 +425,7 @@ $$
     return bind_permissions > 0;
   end;
 $$
-language plpgsql security definer;
+language plpgsql security definer set search_path = public;
 
 GRANT execute ON FUNCTION public.authorize_participant_public(participant_id uuid) TO PUBLIC;
 
@@ -429,7 +452,7 @@ $$
     return bind_permissions > 0;
   end;
 $$
-language plpgsql security definer;
+language plpgsql security definer set search_path = public;
 
 GRANT execute ON FUNCTION public.authorize_vacancy_public(vacancy_id uuid) TO PUBLIC;
 
@@ -481,8 +504,6 @@ create policy "Company moderators can view their own company." on companies
   for select using (authorize_company_member(id, auth.uid(), 'moderator'));
 create policy "Company admins can view their own company." on companies
   for select using (authorize_company_member(id, auth.uid(), 'admin'));
-create policy "Company admins can update their own company." on companies
-  for update using (authorize_company_member(id, auth.uid(), 'admin'));
 
 alter table company_members
   enable row level security;

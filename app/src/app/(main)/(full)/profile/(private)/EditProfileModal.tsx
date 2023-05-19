@@ -69,10 +69,7 @@ export const EditProfileModal = ({
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
-        {({
-          errors,
-          touched,
-        }: FormikProps<FormValues>) => (
+        {({ errors, touched }: FormikProps<FormValues>) => (
           <Form>
             <div className="mb-4">
               <Field
@@ -87,9 +84,7 @@ export const EditProfileModal = ({
               />
 
               {errors.biography && touched.biography && (
-                <p className="mt-2 text-sm text-red-600">
-                  {errors.biography}
-                </p>
+                <p className="mt-2 text-sm text-red-600">{errors.biography}</p>
               )}
             </div>
 
@@ -105,9 +100,7 @@ export const EditProfileModal = ({
 
               <div className="text-center">
                 {formError ? (
-                  <p className="mt-2 text-sm text-red-600">
-                    {formError}
-                  </p>
+                  <p className="mt-2 text-sm text-red-600">{formError}</p>
                 ) : (
                   <div className="mt-2 h-5" />
                 )}

@@ -3,6 +3,8 @@ import { getArray, getSingle } from "@/lib/supabase-type-convert";
 import { Tag } from "@/components/ui";
 import { AddMemberModal } from "./AddMemberModal";
 import { DeleteMemberModal } from "./DeleteMemberModal";
+import { EditCompanyForm } from "./EditCompanyForm";
+import { notFound } from "next/navigation";
 
 // do not cache this page
 export const revalidate = 0;
@@ -14,6 +16,23 @@ export default async function Settings({
   params: { companyId: string };
 }) {
   const supabase = createServerClient();
+
+  const { data: company } = await supabase
+    .from("companies")
+    .select(
+      `
+      id,
+      slug,
+      name,
+      description,
+      main_colour,
+      is_public
+      `
+    )
+    .match({ id: params.companyId })
+    .single();
+
+  if (!company) notFound();
 
   const { data: _members } = await supabase
     .from("company_members")
@@ -43,12 +62,7 @@ export default async function Settings({
       <article className="mt-4">
         <h2 className="text-2xl font-bold text-slate-900 mb-4">Branding</h2>
 
-        <p>Company Name</p>
-        <p>Company Description</p>
-        <p>Company Slug</p>
-        <p>Main Colour</p>
-        <p>Is Public</p>
-        
+        <EditCompanyForm company={company} />
       </article>
 
       <article className="mt-4">

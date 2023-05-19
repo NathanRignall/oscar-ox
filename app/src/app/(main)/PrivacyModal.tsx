@@ -42,7 +42,7 @@ export default function PrivacyModal() {
             <div className="text-3xl text-slate-900 font-bold mb-1">
               New Privacy Policy
             </div>
-            <p className="text-lg text-slate-600 mb-8">
+            <p className="text-lg text-slate-600 mb-6">
               We&apos;ve updated our privacy policy. Please review the new
               policy to continue using our services.
             </p>

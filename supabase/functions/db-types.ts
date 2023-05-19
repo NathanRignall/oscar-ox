@@ -532,6 +532,17 @@ export interface Database {
         }
         Returns: string
       }
+      update_company: {
+        Args: {
+          id: string
+          slug: string
+          name: string
+          description: string
+          main_colour: string
+          is_public: boolean
+        }
+        Returns: undefined
+      }
     }
     Enums: {
       company_role: "admin" | "moderator"

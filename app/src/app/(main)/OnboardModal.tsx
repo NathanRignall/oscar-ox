@@ -95,7 +95,7 @@ export default function OnboardModal({
             <div className="text-3xl text-slate-900 font-bold mb-1">
               Welcome to Oscar Ox!
             </div>
-            <p className="text-lg text-slate-600 mb-8">
+            <p className="text-lg text-slate-600 mb-6">
               {!isPrivacyAccepted
                 ? "Please review our privacy policy"
                 : "Subscribe to vacancy notifcations to recieve emails"}
