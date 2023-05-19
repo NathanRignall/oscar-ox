@@ -6,13 +6,14 @@ import Image from "next/image";
 import { useSupabase } from "@/components/client";
 import { Button, Tag } from "@/components/ui";
 import { Database } from "@/lib/supabase-db-types";
+import clsx from "clsx";
 
 type CompaniesRecord = Database["public"]["Tables"]["companies"]["Row"];
 type ProductionsRecord = Database["public"]["Tables"]["productions"]["Row"] & {
   events: Database["public"]["Tables"]["events"]["Row"][] &
-  {
-    venue: Database["public"]["Tables"]["venues"]["Row"];
-  }[];
+    {
+      venue: Database["public"]["Tables"]["venues"]["Row"];
+    }[];
   company: Database["public"]["Tables"]["companies"]["Row"];
 };
 type ProfilesRecord = Database["public"]["Tables"]["profiles"]["Row"];
@@ -25,26 +26,42 @@ type VenuesRecord = Database["public"]["Tables"]["venues"]["Row"];
 type SearchRecord = {
   type: "company" | "production" | "profile" | "vacancy" | "venue";
   data:
-  | CompaniesRecord
-  | ProductionsRecord
-  | ProfilesRecord
-  | VacanciesRecord
-  | VenuesRecord;
+    | CompaniesRecord
+    | ProductionsRecord
+    | ProfilesRecord
+    | VacanciesRecord
+    | VenuesRecord;
 };
 
-const Company = ({ company }: { company: CompaniesRecord }) => (
+const Company = ({
+  company,
+  loading,
+}: {
+  company: CompaniesRecord;
+  loading: boolean;
+}) => (
   <li className=" bg-white rounded-lg border-2 border-slate-200 flex">
     <div className="p-6 flex-grow">
-      <Link href={`/companies/${company.slug}`}>
-        <h2 className="text-lg font-bold text-slate-900 underline">
-          {company.name}
-        </h2>
-      </Link>
+      {!loading ? (
+        <Link href={`/companies/${company.slug}`}>
+          <h2 className="text-lg font-bold text-slate-900 underline">
+            {company.name}
+          </h2>
+        </Link>
+      ) : (
+        <div className="h-7 w-1/2 bg-slate-300 rounded-md mb-2 animate-pulse" />
+      )}
     </div>
   </li>
 );
 
-const Production = ({ production }: { production: ProductionsRecord }) => {
+const Production = ({
+  production,
+  loading,
+}: {
+  production: ProductionsRecord;
+  loading: boolean;
+}) => {
   let timeMessage = "";
 
   // get the total number of events
@@ -89,69 +106,117 @@ const Production = ({ production }: { production: ProductionsRecord }) => {
   return (
     <li className=" bg-white rounded-lg border-2 border-slate-200 flex sm:col-span-2">
       <div className="p-6 flex-grow">
-        <Link href={`/productions/${production.id}`}>
-          <h2 className="text-lg font-bold text-slate-900 underline mb-2">
-            {production.title}
-          </h2>
-        </Link>
-        <p className="text-sm text-slate-600 mb-2 ">{timeMessage}</p>
+        {!loading ? (
+          <Link href={`/productions/${production.id}`}>
+            <h2 className="text-lg font-bold text-slate-900 underline mb-2">
+              {production.title}
+            </h2>
+          </Link>
+        ) : (
+          <div className="h-7 w-1/2 bg-slate-300 rounded-md mb-2 animate-pulse" />
+        )}
+        {!loading ? (
+          <p className="text-sm text-slate-600 mb-2 ">{timeMessage}</p>
+        ) : (
+          <div className="h-5 w-3/4 bg-slate-200 rounded-md animate-pulse mb-2" />
+        )}
 
-        <ul className="flex flex-wrap gap-2 mb-3">
-          <li>
-            <Tag
-              text={production.company.name}
-              href={`/companies/${encodeURIComponent(production.company.slug)}`}
-              color={production.company.main_colour}
-              size="sm"
-            />
-          </li>
-        </ul>
+        {!loading ? (
+          <ul className="flex flex-wrap gap-2">
+            <li>
+              <Tag
+                text={production.company.name}
+                href={`/companies/${encodeURIComponent(
+                  production.company.slug
+                )}`}
+                color={production.company.main_colour}
+                size="sm"
+              />
+            </li>
+          </ul>
+        ) : (
+          <div className="h-[25px] w-1/4 bg-slate-200 rounded-md animate-pulse" />
+        )}
       </div>
 
-      <div className="h-full aspect-1 relative bg-slate-300 rounded-r-md overflow-hidden">
-        <Image
-          alt=""
-          src={`profiles/${production.id || "default.jpg"}`}
-          className={"duration-200 ease-in-out rounded-r-md"}
-          fill
-          priority
-        />
+      <div
+        className={clsx(
+          "h-full aspect-1 relative bg-slate-300 rounded-r-md overflow-hidden",
+          loading && "animate-pulse"
+        )}
+      >
+        {!loading && (
+          <Image
+            alt=""
+            src={`profiles/${production.id || "default.jpg"}`}
+            className="duration-200 ease-in-out rounded-r-md"
+            fill
+            priority
+          />
+        )}
       </div>
     </li>
   );
 };
 
-const Profile = ({ profile }: { profile: ProfilesRecord }) => (
-  <li className=" bg-white rounded-lg border-2 border-slate-200 flex">
-    <div className="h-full aspect-1 relative bg-slate-300 rounded-l-md overflow-hidden">
-      <Image
-        alt=""
-        src={`profiles/${profile.avatar_url || "default.jpg"}`}
-        className={"duration-200 ease-in-out rounded-l-md"}
-        fill
-        priority
-      />
+const Profile = ({
+  profile,
+  loading,
+}: {
+  profile: ProfilesRecord;
+  loading: boolean;
+}) => (
+  <li className="bg-white rounded-lg border-2 border-slate-200 flex">
+    <div
+      className={clsx(
+        "h-full aspect-1 relative bg-slate-300 rounded-l-md overflow-hidden",
+        loading && "animate-pulse"
+      )}
+    >
+      {!loading && (
+        <Image
+          alt=""
+          src={`profiles/${profile.avatar_url || "default.jpg"}`}
+          className={"duration-200 ease-in-out rounded-l-md"}
+          fill
+          priority
+        />
+      )}
     </div>
 
-    <div className="p-6">
-      <Link href={`/profiles/${profile.id}`}>
-        <h2 className="text-lg font-bold text-slate-900 underline">
-          {profile.given_name} {profile.family_name}
-        </h2>
-      </Link>
+    <div className="p-6 grow">
+      {!loading ? (
+        <Link href={`/profiles/${profile.id}`}>
+          <h2 className="text-lg font-bold text-slate-900 underline">
+            {profile.given_name} {profile.family_name}
+          </h2>
+        </Link>
+      ) : (
+        <div className="h-7 w-2/3 bg-slate-300 rounded-md animate-pulse" />
+      )}
 
-      <p className="text-sm text-slate-600 truncate">{profile.biography}</p>
+      {!loading ? (
+        <p className="text-sm text-slate-600 truncate">{profile.biography}</p>
+      ) : (
+        <div className="h-4 w-3/4 bg-slate-200 rounded-md animate-pulse mt-1" />
+      )}
     </div>
   </li>
 );
 
-const Vacancy = ({ vacancy }: { vacancy: VacanciesRecord }) => {
+const Vacancy = ({
+  vacancy,
+  loading,
+}: {
+  vacancy: VacanciesRecord;
+  loading: boolean;
+}) => {
   const responseMessageType =
     vacancy.response_type == "email"
       ? "by email"
       : vacancy.response_type == "phone"
-        ? "by phone"
-        : "on platform";
+      ? "by phone"
+      : "on platform";
   let responseMessage = `Please respond to this vacancy ${responseMessageType}`;
 
   if (vacancy.response_deadline) {
@@ -176,65 +241,100 @@ const Vacancy = ({ vacancy }: { vacancy: VacanciesRecord }) => {
 
   return (
     <li className="bg-white rounded-lg border-2 border-slate-200 p-6 sm:col-span-2">
-      <Link
-        href={`/companies/${vacancy.company.slug}#${vacancy.id}`}
-        scroll={false}
-      >
-        <h3 className="text-lg font-bold text-slate-900 underline mb-2">
-          {vacancy.title}
-        </h3>
-      </Link>
+      {!loading ? (
+        <Link
+          href={`/companies/${vacancy.company.slug}#${vacancy.id}`}
+          scroll={false}
+        >
+          <h3 className="text-lg font-bold text-slate-900 underline mb-2">
+            {vacancy.title}
+          </h3>
+        </Link>
+      ) : (
+        <div className="h-7 w-1/2 bg-slate-300 rounded-md mb-2 animate-pulse" />
+      )}
 
-      <p className="text-sm text-slate-600 mb-2 ">{responseMessage}</p>
+      {!loading ? (
+        <p className="text-sm text-slate-600 mb-2 ">{responseMessage}</p>
+      ) : (
+        <div className="h-5 w-1/3 bg-slate-200 rounded-md animate-pulse mb-2" />
+      )}
 
-      <ul className="flex flex-wrap gap-2 mb-3">
-        {vacancy.categories.map((category) => (
-          <li key={category.id}>
+      {!loading ? (
+        <ul className="flex flex-wrap gap-2 mb-2">
+          {vacancy.categories.map((category) => (
+            <li key={category.id}>
+              <Tag
+                text={category.title}
+                href={`/search?category=${encodeURIComponent(category.id)}`}
+                variant="secondary"
+                size="sm"
+              />
+            </li>
+          ))}
+
+          <li>
             <Tag
-              text={category.title}
-              href={`/search?category=${encodeURIComponent(category.id)}`}
-              variant="secondary"
+              text={vacancy.company.name}
+              href={`/companies/${encodeURIComponent(vacancy.company.slug)}`}
+              color={vacancy.company.main_colour}
               size="sm"
             />
           </li>
-        ))}
+        </ul>
+      ) : (
+        <div className="h-[25px] w-1/4 bg-slate-200 rounded-md animate-pulse mb-2" />
+      )}
 
-        <li>
-          <Tag
-            text={vacancy.company.name}
-            href={`/companies/${encodeURIComponent(vacancy.company.slug)}`}
-            color={vacancy.company.main_colour}
-            size="sm"
-          />
-        </li>
-      </ul>
-
-      <p className="text-sm text-slate-600 mb-2 line-clamp-3">
-        {vacancy.content}
-      </p>
+      {!loading ? (
+        <p className="text-sm text-slate-600 truncate">{vacancy.content}</p>
+      ) : (
+        <div className="h-5 w-3/4 bg-slate-200 rounded-md animate-pulse" />
+      )}
     </li>
   );
 };
 
-const Venue = ({ venue }: { venue: VenuesRecord }) => (
+const Venue = ({
+  venue,
+  loading,
+}: {
+  venue: VenuesRecord;
+  loading: boolean;
+}) => (
   <li className=" bg-white rounded-lg border-2 border-slate-200 flex">
     <div className="p-6 flex-grow">
-      <Link href={`/about/venues/${venue.slug}`}>
-        <h2 className="text-lg font-bold text-slate-900 underline">
-          {venue.title}
-        </h2>
-      </Link>
-      <p className="text-sm text-slate-600 ">{venue.location}</p>
+      {!loading ? (
+        <Link href={`/about/venues/${venue.slug}`}>
+          <h2 className="text-lg font-bold text-slate-900 underline">
+            {venue.title}
+          </h2>
+        </Link>
+      ) : (
+        <div className="h-7 w-2/3 bg-slate-300 rounded-md animate-pulse" />
+      )}
+      {!loading ? (
+        <p className="text-sm text-slate-600 ">{venue.location}</p>
+      ) : (
+        <div className="h-4 w-3/4 bg-slate-200 rounded-md animate-pulse mt-1" />
+      )}
     </div>
 
-    <div className="h-full aspect-1 relative bg-slate-300 rounded-r-md overflow-hidden">
-      <Image
-        alt=""
-        src={`media/venues/${venue.image_url}`}
-        className={"duration-200 ease-in-out rounded-r-md"}
-        fill
-        priority
-      />
+    <div
+      className={clsx(
+        "h-full aspect-1 relative bg-slate-300 rounded-r-md overflow-hidden",
+        loading && "animate-pulse"
+      )}
+    >
+      {!loading && (
+        <Image
+          alt=""
+          src={`media/venues/${venue.image_url}`}
+          className={"duration-200 ease-in-out rounded-r-md"}
+          fill
+          priority
+        />
+      )}
     </div>
   </li>
 );
@@ -251,6 +351,13 @@ export default function Search() {
 
   useEffect(() => {
     async function actionSearch() {
+      if (search == "") {
+        setSearchResponse([]);
+        setLoading(false);
+        return;
+      }
+
+      setLoading(true);
       try {
         const { data } = await supabase.functions.invoke("search", {
           body: JSON.stringify({
@@ -261,18 +368,18 @@ export default function Search() {
 
         const response = data as SearchRecord[];
 
-        if (response.length > 0) setSearchResponse(response);
+        if (response.length > 0) {
+          setSearchResponse(response);
+          setLoading(false);
+        }
       } catch (error) {
         console.log(error);
-      } finally {
         setLoading(false);
       }
     }
 
     const timeout = setTimeout(async () => {
-      setLoading(true);
-      if (search != "") await actionSearch();
-      setLoading(false);
+      actionSearch();
     }, 100);
 
     return () => clearTimeout(timeout);
@@ -295,11 +402,46 @@ export default function Search() {
         </p>
 
         <div className="flex flex-wrap justify-center space-x-3">
-          <Button className="mb-2" id="companies" onClick={event => onClick(event.target.id)} active={types.includes("companies")}>Companies</Button>
-          <Button className="mb-2" id="productions" onClick={event => onClick(event.target.id)} active={types.includes("productions")}>Productions</Button>
-          <Button className="mb-2" id="profiles" onClick={event => onClick(event.target.id)} active={types.includes("profiles")}>Profiles</Button>
-          <Button className="mb-2" id="vacancies" onClick={event => onClick(event.target.id)} active={types.includes("vacancies")}>Vacancies</Button>
-          <Button className="mb-2" id="venues" onClick={event => onClick(event.target.id)} active={types.includes("venues")}>Venues</Button>
+          <Button
+            className="mb-2"
+            id="companies"
+            onClick={(event) => onClick(event.target.id)}
+            active={types.includes("companies")}
+          >
+            Companies
+          </Button>
+          <Button
+            className="mb-2"
+            id="productions"
+            onClick={(event) => onClick(event.target.id)}
+            active={types.includes("productions")}
+          >
+            Productions
+          </Button>
+          <Button
+            className="mb-2"
+            id="profiles"
+            onClick={(event) => onClick(event.target.id)}
+            active={types.includes("profiles")}
+          >
+            Profiles
+          </Button>
+          <Button
+            className="mb-2"
+            id="vacancies"
+            onClick={(event) => onClick(event.target.id)}
+            active={types.includes("vacancies")}
+          >
+            Vacancies
+          </Button>
+          <Button
+            className="mb-2"
+            id="venues"
+            onClick={(event) => onClick(event.target.id)}
+            active={types.includes("venues")}
+          >
+            Venues
+          </Button>
         </div>
       </header>
 
@@ -345,6 +487,7 @@ export default function Search() {
                     <Company
                       key={record.data.id}
                       company={record.data as CompaniesRecord}
+                      loading={loading}
                     />
                   );
                 case "production":
@@ -352,6 +495,7 @@ export default function Search() {
                     <Production
                       key={record.data.id}
                       production={record.data as ProductionsRecord}
+                      loading={loading}
                     />
                   );
                 case "profile":
@@ -359,6 +503,7 @@ export default function Search() {
                     <Profile
                       key={record.data.id}
                       profile={record.data as ProfilesRecord}
+                      loading={loading}
                     />
                   );
                 case "venue":
@@ -366,6 +511,7 @@ export default function Search() {
                     <Venue
                       key={record.data.id}
                       venue={record.data as VenuesRecord}
+                      loading={loading}
                     />
                   );
                 case "vacancy":
@@ -373,6 +519,7 @@ export default function Search() {
                     <Vacancy
                       key={record.data.id}
                       vacancy={record.data as VacanciesRecord}
+                      loading={loading}
                     />
                   );
                 default:
