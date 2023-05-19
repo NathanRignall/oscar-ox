@@ -1,3 +1,3 @@
 import "use-server";
 
-export * from "./Footer"
+export * from "./Footer";

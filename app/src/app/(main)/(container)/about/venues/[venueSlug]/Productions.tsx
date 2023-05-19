@@ -5,7 +5,7 @@ import { createServerClient } from "@/lib/supabase-server";
 import { Tag } from "@/components/ui";
 
 export type ProductionsProps = {
-  venueId: string
+  venueId: string;
 };
 
 export default async function Productions({ venueId }: ProductionsProps) {
@@ -54,14 +54,10 @@ export default async function Productions({ venueId }: ProductionsProps) {
 
   return (
     <article className="mt-8">
-      <h2 className="text-3xl font-bold text-slate-900 mb-4">
-        What&apos;s On
-      </h2>
+      <h2 className="text-3xl font-bold text-slate-900 mb-4">What&apos;s On</h2>
 
       <ul className="grid sm:grid-cols-2 gap-4">
-
         {productions.map((production) => {
-
           let timeMessage = "";
 
           // get the total number of events
@@ -104,7 +100,10 @@ export default async function Productions({ venueId }: ProductionsProps) {
           }
 
           return (
-            <li key={production.id} className="bg-white rounded-lg border-2 border-slate-200 flex sm:col-span-2">
+            <li
+              key={production.id}
+              className="bg-white rounded-lg border-2 border-slate-200 flex sm:col-span-2"
+            >
               <div className="p-6 flex-grow">
                 <Link href={`/productions/${production.id}`}>
                   <h3 className="text-lg font-bold text-slate-900 underline mb-2">
@@ -117,7 +116,9 @@ export default async function Productions({ venueId }: ProductionsProps) {
                   <li>
                     <Tag
                       text={production.company.name}
-                      href={`/companies/${encodeURIComponent(production.company.slug)}`}
+                      href={`/companies/${encodeURIComponent(
+                        production.company.slug
+                      )}`}
                       color={production.company.main_colour}
                       size="sm"
                     />
@@ -135,12 +136,9 @@ export default async function Productions({ venueId }: ProductionsProps) {
                 />
               </div>
             </li>
-          )
+          );
         })}
       </ul>
     </article>
   );
 }
-
-
-

@@ -1,5 +1,4 @@
-
-import { AdminCollapse } from './AdminCollapse';
+import { AdminCollapse } from "./AdminCollapse";
 
 // Page
 export default async function Roles() {

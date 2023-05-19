@@ -59,9 +59,7 @@ const Collapse = ({
       </h2>
       <div
         id={`collapse-body-${id}`}
-        className={clsx(
-          !(active == id) && "hidden"
-        )}
+        className={clsx(!(active == id) && "hidden")}
         aria-labelledby={`collapse-heading-${id}`}
       >
         <div
@@ -73,29 +71,34 @@ const Collapse = ({
           {children}
         </div>
       </div>
-    </>)
+    </>
+  );
 };
-
 
 export const AdminCollapse = () => {
   const [active, setActive] = useState<string>("companies");
 
   return (
     <div>
-      <Collapse id="companies" title="Companies" active={active} setActive={setActive} first>
+      <Collapse
+        id="companies"
+        title="Companies"
+        active={active}
+        setActive={setActive}
+        first
+      >
         <p className="text-slate-600">
-          Any user can create a proudction company. This can be done in
-          the user profile admin panel by clicking the &quot;Create
-          Company&quot; button, this will create a production company with
-          the user as an admin member. The user can then add other users
-          to the production company.
+          Any user can create a proudction company. This can be done in the user
+          profile admin panel by clicking the &quot;Create Company&quot; button,
+          this will create a production company with the user as an admin
+          member. The user can then add other users to the production company.
         </p>
 
         <br />
 
         <p className="text-slate-600">
-          The production company can then be used to create productions
-          with events/participants and vacancies.
+          The production company can then be used to create productions with
+          events/participants and vacancies.
         </p>
 
         <br />
@@ -103,62 +106,82 @@ export const AdminCollapse = () => {
         <p className="text-slate-600">
           To publish any production, event, participant or vacancy the
           production company must first be varified. This can be done by
-          clicking the &quot;Verify Company&quot; button in the company
-          settings panel. This will send a request to the admin team to
-          varify the company. Production companies will be automatically
-          verified if they contain a user with an ox.ac.uk email address.
+          clicking the &quot;Verify Company&quot; button in the company settings
+          panel. This will send a request to the admin team to varify the
+          company. Production companies will be automatically verified if they
+          contain a user with an ox.ac.uk email address.
         </p>
       </Collapse>
 
-      <Collapse id="productions" title="Productions" active={active} setActive={setActive}>
+      <Collapse
+        id="productions"
+        title="Productions"
+        active={active}
+        setActive={setActive}
+      >
         <p className="text-slate-600">
           Admin members of a production company can create productions.
-          Productions can be created by clicking the &quot;Create Production&quot;
-          button in the company&apos;s production page.
+          Productions can be created by clicking the &quot;Create
+          Production&quot; button in the company&apos;s production page.
         </p>
 
         <br />
 
         <p className="text-slate-600">
-          For a production to be public it must be published, once you are
-          happy with the production you can publish by toggling the
-          &quot;Published&quot; switch in the specific production&apos;s settings panel.
+          For a production to be public it must be published, once you are happy
+          with the production you can publish by toggling the
+          &quot;Published&quot; switch in the specific production&apos;s
+          settings panel.
         </p>
       </Collapse>
 
-      <Collapse id="events" title="Events" active={active} setActive={setActive}>
+      <Collapse
+        id="events"
+        title="Events"
+        active={active}
+        setActive={setActive}
+      >
         <p className="text-slate-600">
-          A production can contain multiple events. Events can be created
-          by clicking the &quot;Add Event&quot; button in the specific production&apos;s
-          page. Events must have a start date/time and optionally an end
-          date/time along with a venue. Currently the platform has a list
-          of venues that can be selected from, if the venue you require is
-          not in the list please contact the admin team.
+          A production can contain multiple events. Events can be created by
+          clicking the &quot;Add Event&quot; button in the specific
+          production&apos;s page. Events must have a start date/time and
+          optionally an end date/time along with a venue. Currently the platform
+          has a list of venues that can be selected from, if the venue you
+          require is not in the list please contact the admin team.
         </p>
 
         <br />
 
         <p className="text-slate-600">
-          The events created are visible on the main Oscar Ox calendar
-          page only when the production is published and company is
-          verified.
+          The events created are visible on the main Oscar Ox calendar page only
+          when the production is published and company is verified.
         </p>
       </Collapse>
 
-      <Collapse id="participants" title="Participants" active={active} setActive={setActive}>
+      <Collapse
+        id="participants"
+        title="Participants"
+        active={active}
+        setActive={setActive}
+      >
         <p className="text-slate-600">
-          A production can contain multiple participants. Participants can
-          be created by clicking the &quot;Add Participant&quot; button in the
+          A production can contain multiple participants. Participants can be
+          created by clicking the &quot;Add Participant&quot; button in the
           specific production&apos;s page. Participants must link to a
-          registered user, contain a role title and belong to a category
-          e.g. Crew.
+          registered user, contain a role title and belong to a category e.g.
+          Crew.
         </p>
       </Collapse>
 
-      <Collapse id="vacancies" title="Vacancies" active={active} setActive={setActive}>
+      <Collapse
+        id="vacancies"
+        title="Vacancies"
+        active={active}
+        setActive={setActive}
+      >
         <p className="text-slate-600">
-          A production can contain multiple vacancies. Vacancies can be
-          created by clicking the &quot;Add Vacancy&quot; button in the specific
+          A production can contain multiple vacancies. Vacancies can be created
+          by clicking the &quot;Add Vacancy&quot; button in the specific
           production&apos;s page. Vacancies must contain a title, description
           and belong to a category e.g. Crew.
         </p>
@@ -168,9 +191,15 @@ export const AdminCollapse = () => {
         <p className="text-slate-600">In order</p>
       </Collapse>
 
-      <Collapse id="pages" title="Pages" active={active} setActive={setActive} last>
+      <Collapse
+        id="pages"
+        title="Pages"
+        active={active}
+        setActive={setActive}
+        last
+      >
         <p className="text-slate-600">Some</p>
       </Collapse>
     </div>
-  )
-}
+  );
+};
