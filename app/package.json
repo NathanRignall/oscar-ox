@@ -24,7 +24,7 @@
     "font-color-contrast": "^11.1.0",
     "formik": "^2.2.9",
     "leaflet": "^1.9.3",
-    "next": "^13.4.3",
+    "next": "13.4.1",
     "next-mdx-remote": "^4.4.1",
     "react": "^18.2.0",
     "react-datepicker": "^4.11.0",
