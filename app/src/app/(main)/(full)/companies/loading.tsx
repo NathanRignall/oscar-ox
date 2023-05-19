@@ -37,9 +37,6 @@ export default async function Loading() {
         <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
           <div className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg bg-slate-300 animate-pulse" />
           <div className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg bg-slate-300 animate-pulse" />
-          <div className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg bg-slate-300 animate-pulse" />
-          <div className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg bg-slate-300 animate-pulse" />
-          <div className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg bg-slate-300 animate-pulse" />
         </section>
       </main>
     </div>

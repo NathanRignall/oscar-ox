@@ -40,10 +40,7 @@ export const CompaniesList = ({ _companies }: CompaniesListProps) => {
           main_colour
           `
           )
-          .textSearch("name", search, {
-            type: "websearch",
-            config: "english",
-          });
+          .ilike("name", `%${search}%`);
 
         const formatedData = getArray(data);
 
