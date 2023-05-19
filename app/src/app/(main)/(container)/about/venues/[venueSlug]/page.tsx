@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { createServerClient } from "@/lib/supabase-server";
-import { MDXRemote } from "next-mdx-remote/rsc";
 import dynamic from "next/dynamic";
+import { createServerClient } from "@/lib/supabase-server";
+import Productions from "./Productions";
 
 const MapWithNoSSR = dynamic(() => import("../Map"), {
   ssr: false,
@@ -65,6 +65,9 @@ export default async function Venue({
             zoom={15}
           />
         </div>
+
+        {/* @ts-expect-error Server Component */}
+        <Productions venueId={venue.id} />
       </main>
     </>
   );
