@@ -21,22 +21,16 @@ export const AddCompanyModal = () => {
   };
 
   interface FormValues {
-    slug: string;
     name: string;
     description: string;
   }
 
   const initialValues: FormValues = {
-    slug: "",
     name: "",
     description: "",
   };
 
   const validationSchema = object({
-    slug: string()
-      .min(3, "Must be at least 3 characters")
-      .matches(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Must be a valid url")
-      .required("Url is Required"),
     name: string()
       .min(3, "Must be at least 3 characters")
       .required("Name is Required"),
@@ -45,9 +39,16 @@ export const AddCompanyModal = () => {
       .required("Description is Required"),
   });
 
+  const generateSlug = (name: string) => {
+    return name
+      .replace(/[^a-zA-Z0-9 ]/g, "")
+      .replace(/\s+/g, "-")
+      .toLowerCase();
+  };
+
   const onSubmit = async (values: FormValues) => {
     const { error } = await supabase.rpc("create_company", {
-      slug: values.slug,
+      slug: generateSlug(values.name),
       name: values.name,
       description: values.description,
     });
@@ -130,26 +131,10 @@ export const AddCompanyModal = () => {
 
                       <div className="mb-4">
                         <Field
-                          id="slug"
-                          type="text"
-                          name="slug"
-                          placeholder="Company URL.."
-                          className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
-                        />
-
-                        {errors.slug && touched.slug && (
-                          <p className="mt-2 text-sm text-red-600">
-                            {errors.slug}
-                          </p>
-                        )}
-                      </div>
-
-                      <div className="mb-4">
-                        <Field
                           component="textarea"
                           id="description"
                           type="text"
-                          rows={5}
+                          rows={3}
                           name="description"
                           autoComplete="description"
                           placeholder="Company description..."

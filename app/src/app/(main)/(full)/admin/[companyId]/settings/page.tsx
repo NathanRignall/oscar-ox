@@ -40,7 +40,18 @@ export default async function Settings({
     <>
       <h1 className="text-4xl font-bold text-slate-900">Settings</h1>
 
-      <section className="mt-4">
+      <article className="mt-4">
+        <h2 className="text-2xl font-bold text-slate-900 mb-4">Branding</h2>
+
+        <p>Company Name</p>
+        <p>Company Description</p>
+        <p>Company Slug</p>
+        <p>Main Colour</p>
+        <p>Is Public</p>
+        
+      </article>
+
+      <article className="mt-4">
         <h2 className="text-2xl font-bold text-slate-900 mb-4">Members</h2>
 
         <AddMemberModal companyId={params.companyId} />
@@ -109,7 +120,7 @@ export default async function Settings({
             </tbody>
           </table>
         </div>
-      </section>
+      </article>
     </>
   );
 }

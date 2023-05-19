@@ -94,7 +94,7 @@ export default async function AdminLayout({
             <li>
               <Link
                 className="px-4 py-1 block rounded-lg text-lg"
-                href="/contact"
+                href="/about/contact"
               >
                 Help
               </Link>
