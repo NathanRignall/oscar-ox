@@ -5,7 +5,9 @@ import { getArray, getSingle } from "../type-convert.ts";
 
 interface Payload {
   search: string;
+  types: string[];
 }
+
 export const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers":
@@ -17,8 +19,7 @@ serve(async (req) => {
     return new Response("ok", { headers: corsHeaders });
   }
 
-  const payload: Payload = await req.json();
-  const search = payload.search;
+  const { search, types }: Payload = await req.json();
 
   try {
     // connect to supabase
@@ -202,14 +203,23 @@ serve(async (req) => {
       }));
     };
 
-    // asynvrounously get all the data and then combine it
-    const data = [
-      ...(await getCompanies()),
-      ...(await getProuctions()),
-      ...(await getProfiles()),
-      ...(await getVacancies()),
-      ...(await getVenues()),
-    ];
+    // get all the data
+    const data =
+      types.length > 0
+        ? [
+            ...(types.includes("companies") ? await getCompanies() : []),
+            ...(types.includes("productions") ? await getProuctions() : []),
+            ...(types.includes("profiles") ? await getProfiles() : []),
+            ...(types.includes("vacancies") ? await getVacancies() : []),
+            ...(types.includes("venues") ? await getVenues() : []),
+          ]
+        : [
+            ...(await getCompanies()),
+            ...(await getProuctions()),
+            ...(await getProfiles()),
+            ...(await getVacancies()),
+            ...(await getVenues()),
+          ];
 
     // sort by most exact match to search term
     data.sort((a, b) => {

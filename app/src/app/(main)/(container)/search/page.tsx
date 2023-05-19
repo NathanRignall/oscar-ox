@@ -10,9 +10,9 @@ import { Database } from "@/lib/supabase-db-types";
 type CompaniesRecord = Database["public"]["Tables"]["companies"]["Row"];
 type ProductionsRecord = Database["public"]["Tables"]["productions"]["Row"] & {
   events: Database["public"]["Tables"]["events"]["Row"][] &
-    {
-      venue: Database["public"]["Tables"]["venues"]["Row"];
-    }[];
+  {
+    venue: Database["public"]["Tables"]["venues"]["Row"];
+  }[];
   company: Database["public"]["Tables"]["companies"]["Row"];
 };
 type ProfilesRecord = Database["public"]["Tables"]["profiles"]["Row"];
@@ -25,11 +25,11 @@ type VenuesRecord = Database["public"]["Tables"]["venues"]["Row"];
 type SearchRecord = {
   type: "company" | "production" | "profile" | "vacancy" | "venue";
   data:
-    | CompaniesRecord
-    | ProductionsRecord
-    | ProfilesRecord
-    | VacanciesRecord
-    | VenuesRecord;
+  | CompaniesRecord
+  | ProductionsRecord
+  | ProfilesRecord
+  | VacanciesRecord
+  | VenuesRecord;
 };
 
 const Company = ({ company }: { company: CompaniesRecord }) => (
@@ -107,6 +107,16 @@ const Production = ({ production }: { production: ProductionsRecord }) => {
           </li>
         </ul>
       </div>
+
+      <div className="h-full aspect-1 relative bg-slate-300 rounded-r-md overflow-hidden">
+        <Image
+          alt=""
+          src={`profiles/${production.id || "default.jpg"}`}
+          className={"duration-200 ease-in-out rounded-r-md"}
+          fill
+          priority
+        />
+      </div>
     </li>
   );
 };
@@ -140,8 +150,8 @@ const Vacancy = ({ vacancy }: { vacancy: VacanciesRecord }) => {
     vacancy.response_type == "email"
       ? "by email"
       : vacancy.response_type == "phone"
-      ? "by phone"
-      : "on platform";
+        ? "by phone"
+        : "on platform";
   let responseMessage = `Please respond to this vacancy ${responseMessageType}`;
 
   if (vacancy.response_deadline) {
@@ -231,6 +241,7 @@ const Venue = ({ venue }: { venue: VenuesRecord }) => (
 
 // Page
 export default function Search() {
+  const [types, setTypes] = useState<string[]>([]);
   const [searchResponse, setSearchResponse] = useState<SearchRecord[]>([]);
 
   const [loading, setLoading] = useState(false);
@@ -244,11 +255,11 @@ export default function Search() {
         const { data } = await supabase.functions.invoke("search", {
           body: JSON.stringify({
             search: search,
+            types: types,
           }),
         });
 
         const response = data as SearchRecord[];
-        console.log("request");
 
         if (response.length > 0) setSearchResponse(response);
       } catch (error) {
@@ -265,7 +276,15 @@ export default function Search() {
     }, 100);
 
     return () => clearTimeout(timeout);
-  }, [supabase, search]);
+  }, [supabase, types, search]);
+
+  const onClick = (id: string) => {
+    if (types.includes(id)) {
+      setTypes(types.filter((filter) => filter != id));
+    } else {
+      setTypes([...types, id]);
+    }
+  };
 
   return (
     <>
@@ -276,11 +295,11 @@ export default function Search() {
         </p>
 
         <div className="flex flex-wrap justify-center space-x-3">
-          <Button className="mb-2">Companies</Button>
-          <Button className="mb-2">Productions</Button>
-          <Button className="mb-2">Profiles</Button>
-          <Button className="mb-2">Vacancies</Button>
-          <Button className="mb-2">Venues</Button>
+          <Button className="mb-2" id="companies" onClick={event => onClick(event.target.id)} active={types.includes("companies")}>Companies</Button>
+          <Button className="mb-2" id="productions" onClick={event => onClick(event.target.id)} active={types.includes("productions")}>Productions</Button>
+          <Button className="mb-2" id="profiles" onClick={event => onClick(event.target.id)} active={types.includes("profiles")}>Profiles</Button>
+          <Button className="mb-2" id="vacancies" onClick={event => onClick(event.target.id)} active={types.includes("vacancies")}>Vacancies</Button>
+          <Button className="mb-2" id="venues" onClick={event => onClick(event.target.id)} active={types.includes("venues")}>Venues</Button>
         </div>
       </header>
 
