@@ -9,28 +9,36 @@ import { Database } from "@/lib/supabase-db-types";
 
 type CompaniesRecord = Database["public"]["Tables"]["companies"]["Row"];
 type ProductionsRecord = Database["public"]["Tables"]["productions"]["Row"] & {
-  events: Database["public"]["Tables"]["events"]["Row"][] & {
-    venue: Database["public"]["Tables"]["venues"]["Row"];
-  }[];
+  events: Database["public"]["Tables"]["events"]["Row"][] &
+    {
+      venue: Database["public"]["Tables"]["venues"]["Row"];
+    }[];
   company: Database["public"]["Tables"]["companies"]["Row"];
 };
 type ProfilesRecord = Database["public"]["Tables"]["profiles"]["Row"];
 type VacanciesRecord = Database["public"]["Tables"]["vacancies"]["Row"] & {
   company: Database["public"]["Tables"]["companies"]["Row"];
   categories: Database["public"]["Tables"]["categories"]["Row"][];
-}
+};
 type VenuesRecord = Database["public"]["Tables"]["venues"]["Row"];
 
 type SearchRecord = {
   type: "company" | "production" | "profile" | "vacancy" | "venue";
-  data: CompaniesRecord | ProductionsRecord | ProfilesRecord | VacanciesRecord | VenuesRecord;
+  data:
+    | CompaniesRecord
+    | ProductionsRecord
+    | ProfilesRecord
+    | VacanciesRecord
+    | VenuesRecord;
 };
 
 const Company = ({ company }: { company: CompaniesRecord }) => (
   <li className=" bg-white rounded-lg border-2 border-slate-200 flex">
     <div className="p-6 flex-grow">
       <Link href={`/companies/${company.slug}`}>
-        <h2 className="text-lg font-bold text-slate-900 underline">{company.name}</h2>
+        <h2 className="text-lg font-bold text-slate-900 underline">
+          {company.name}
+        </h2>
       </Link>
     </div>
   </li>
@@ -78,12 +86,13 @@ const Production = ({ production }: { production: ProductionsRecord }) => {
     timeMessage = `${startDate} - ${endDate} - ${firstEvent.venue.title}`;
   }
 
-
   return (
     <li className=" bg-white rounded-lg border-2 border-slate-200 flex sm:col-span-2">
       <div className="p-6 flex-grow">
         <Link href={`/productions/${production.id}`}>
-          <h2 className="text-lg font-bold text-slate-900 underline mb-2">{production.title}</h2>
+          <h2 className="text-lg font-bold text-slate-900 underline mb-2">
+            {production.title}
+          </h2>
         </Link>
         <p className="text-sm text-slate-600 mb-2 ">{timeMessage}</p>
 
@@ -99,7 +108,7 @@ const Production = ({ production }: { production: ProductionsRecord }) => {
         </ul>
       </div>
     </li>
-  )
+  );
 };
 
 const Profile = ({ profile }: { profile: ProfilesRecord }) => (
@@ -131,8 +140,8 @@ const Vacancy = ({ vacancy }: { vacancy: VacanciesRecord }) => {
     vacancy.response_type == "email"
       ? "by email"
       : vacancy.response_type == "phone"
-        ? "by phone"
-        : "on platform";
+      ? "by phone"
+      : "on platform";
   let responseMessage = `Please respond to this vacancy ${responseMessageType}`;
 
   if (vacancy.response_deadline) {
@@ -157,7 +166,10 @@ const Vacancy = ({ vacancy }: { vacancy: VacanciesRecord }) => {
 
   return (
     <li className="bg-white rounded-lg border-2 border-slate-200 p-6 sm:col-span-2">
-      <Link href={`/companies/${vacancy.company.slug}#${vacancy.id}`} scroll={false}>
+      <Link
+        href={`/companies/${vacancy.company.slug}#${vacancy.id}`}
+        scroll={false}
+      >
         <h3 className="text-lg font-bold text-slate-900 underline mb-2">
           {vacancy.title}
         </h3>
@@ -191,14 +203,16 @@ const Vacancy = ({ vacancy }: { vacancy: VacanciesRecord }) => {
         {vacancy.content}
       </p>
     </li>
-  )
+  );
 };
 
 const Venue = ({ venue }: { venue: VenuesRecord }) => (
   <li className=" bg-white rounded-lg border-2 border-slate-200 flex">
     <div className="p-6 flex-grow">
       <Link href={`/about/venues/${venue.slug}`}>
-        <h2 className="text-lg font-bold text-slate-900 underline">{venue.title}</h2>
+        <h2 className="text-lg font-bold text-slate-900 underline">
+          {venue.title}
+        </h2>
       </Link>
       <p className="text-sm text-slate-600 ">{venue.location}</p>
     </div>
@@ -227,8 +241,6 @@ export default function Search() {
   useEffect(() => {
     async function actionSearch() {
       try {
-
-
         const { data } = await supabase.functions.invoke("search", {
           body: JSON.stringify({
             search: search,
@@ -310,15 +322,40 @@ export default function Search() {
             {searchResponse.map((record) => {
               switch (record.type) {
                 case "company":
-                  return <Company key={record.data.id} company={record.data as CompaniesRecord} />;
+                  return (
+                    <Company
+                      key={record.data.id}
+                      company={record.data as CompaniesRecord}
+                    />
+                  );
                 case "production":
-                  return <Production key={record.data.id} production={record.data as ProductionsRecord} />;
+                  return (
+                    <Production
+                      key={record.data.id}
+                      production={record.data as ProductionsRecord}
+                    />
+                  );
                 case "profile":
-                  return <Profile key={record.data.id} profile={record.data as ProfilesRecord} />;
+                  return (
+                    <Profile
+                      key={record.data.id}
+                      profile={record.data as ProfilesRecord}
+                    />
+                  );
                 case "venue":
-                  return <Venue key={record.data.id} venue={record.data as VenuesRecord} />;
+                  return (
+                    <Venue
+                      key={record.data.id}
+                      venue={record.data as VenuesRecord}
+                    />
+                  );
                 case "vacancy":
-                  return <Vacancy key={record.data.id} vacancy={record.data as VacanciesRecord} />;
+                  return (
+                    <Vacancy
+                      key={record.data.id}
+                      vacancy={record.data as VacanciesRecord}
+                    />
+                  );
                 default:
                   return <li>Unknown</li>;
               }
