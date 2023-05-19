@@ -201,12 +201,12 @@ export default async function Home({
 
       <main>
         <div className="sm:flex justify-between w-full mb-4">
-          <nav className="flex px-5 py-3 text-gray-700 border-2 border-slate-200 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700">
+          <nav className="flex px-5 py-3 text-gray-700 border-2 border-slate-200 rounded-lg bg-white">
             <ol className="inline-flex items-center space-x-1 md:space-x-3">
               <li>
                 <Link href={`/?date=${previousDay.toISOString().slice(0, 10)}`}>
                   <div className="flex items-center">
-                    <span className="mr-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">
+                    <span className="mr-1 text-sm font-medium text-gray-500 md:ml-2">
                       Back
                     </span>
                     <svg
@@ -248,7 +248,7 @@ export default async function Home({
                         clipRule="evenodd"
                       ></path>
                     </svg>
-                    <span className="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">
+                    <span className="ml-1 text-sm font-medium text-gray-500 md:ml-2">
                       Next
                     </span>
                   </div>
