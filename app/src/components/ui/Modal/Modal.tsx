@@ -7,6 +7,7 @@ export type ModalProps = {
   button?: string;
   buttonSize?: "sm" | "md" | "lg";
   size?: "sm" | "md" | "lg";
+  className?: string;
   children: React.ReactNode;
 };
 
@@ -16,6 +17,7 @@ export const Modal = ({
   button,
   buttonSize = "md",
   size = "md",
+  className,
   children,
 }: ModalProps) => {
   const toggleModal = () => {
@@ -31,7 +33,7 @@ export const Modal = ({
       ) : (
         <button
           type="button"
-          className="text-slate-900 bg-white border-2 border-slate-200 hover:bg-slate-200 hover:border-slate-400 rounded-lg text-sm p-1.5 inline-block ml-4"
+          className={clsx("text-slate-900 bg-white border-2 border-slate-200 hover:bg-slate-200 hover:border-slate-400 rounded-lg text-sm p-1", className)}
           data-modal-hide="defaultModal"
           onClick={toggleModal}
         >

@@ -141,7 +141,7 @@ export default async function Production({
 
         <div className="sm:flex">
           <div className="flex-1">
-            <p className="mb-3 text-xl text-slate-600 inline-block">
+            <p className="mb-3 text-lg text-slate-600 inline-block">
               {production.description}{" "}
             </p>
             <EditProductionModal

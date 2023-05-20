@@ -9,9 +9,9 @@ import { Button, Modal } from "@/components/ui";
 
 type EditProductionModalProps = {
   productionId: string;
-  title?: string | null;
-  description?: string | null;
-  is_published?: boolean | null;
+  title: string;
+  description: string;
+  is_published: boolean;
 };
 
 export const EditProductionModal = ({
@@ -39,9 +39,9 @@ export const EditProductionModal = ({
   }
 
   const initialValues: FormValues = {
-    title: title || "",
-    description: description || "",
-    is_published: is_published || false,
+    title: title,
+    description: description,
+    is_published: is_published,
   };
 
   const validationSchema = object({
@@ -54,7 +54,7 @@ export const EditProductionModal = ({
   const onSubmit = async (values: FormValues) => {
     const { error } = await supabase
       .from("productions")
-      .update({ title: values.title, description: values.description })
+      .update({ title: values.title, description: values.description, is_published: values.is_published })
       .match({ id: productionId });
 
     if (error) {
@@ -70,7 +70,7 @@ export const EditProductionModal = ({
   };
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
-      <div className="text-3xl text-slate-900 font-bold mb-8">
+      <div className="text-3xl text-slate-900 font-bold mb-6">
         Edit production
       </div>
 
@@ -82,6 +82,12 @@ export const EditProductionModal = ({
         {({ errors, touched }: FormikProps<FormValues>) => (
           <Form>
             <div className="mb-4">
+              <label
+                htmlFor="title"
+                className="block mb-2 text-sm font-medium text-gray-600"
+              >
+                Production Title
+              </label>
               <Field
                 id="title"
                 type="text"
@@ -96,6 +102,12 @@ export const EditProductionModal = ({
             </div>
 
             <div className="mb-4">
+              <label
+                htmlFor="description"
+                className="block mb-2 text-sm font-medium text-gray-600"
+              >
+                Production Description
+              </label>
               <Field
                 component="textarea"
                 id="description"
@@ -113,13 +125,20 @@ export const EditProductionModal = ({
               )}
             </div>
 
-            <label className="relative inline-flex items-center mb-10 cursor-pointer">
-              <input type="checkbox" value="" className="sr-only peer" />
-              <div className="w-11 h-6 bg-slate-200 rounded-full peer  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-slate-800"></div>
-              <span className="ml-3 text-md font-medium text-slate-900">
-                Published
-              </span>
-            </label>
+            <div className="mb-4">
+              <label className="relative inline-flex items-center cursor-pointer">
+                <Field
+                  id="is_published"
+                  type="checkbox"
+                  name="is_published"
+                  className="sr-only peer"
+                />
+                <div className="w-11 h-6 bg-slate-200 rounded-full peer  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-slate-800"></div>
+                <span className="ml-3 text-sm font-medium text-slate-600">
+                  Published
+                </span>
+              </label>
+            </div>
 
             <div className="mb-6">
               <Button variant="secondary" display="block" type="submit">
