@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createServerClient } from "@/lib/supabase-server";
 import { notFound } from "next/navigation";
+import { getSingle } from "@/lib/supabase-type-convert";
 
 // do not cache this page
 export const revalidate = 0;
@@ -29,17 +30,22 @@ export default async function AdminLayout({
   } = await supabase.auth.getUser();
   if (!user) redirect("/auth/login");
 
-  const { data: company } = await supabase
-    .from("companies")
+  const { data: _company_members } = await supabase
+    .from("company_members")
     .select(
       `
-    id,
-    name
-    `
-    )
-    .match({ id: params.companyId })
-    .single();
+      company:companies (
+        id,
+        name
+      ),
+      role
+      `
+    ).match({ profile_id: user.id }).single();
 
+  if (!_company_members) redirect("/auth/login");
+
+  const company = getSingle(_company_members.company);
+  
   if (!company) notFound();
 
   return (

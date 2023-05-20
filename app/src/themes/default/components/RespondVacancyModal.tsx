@@ -93,7 +93,7 @@ export const RespondVacancyModal = ({
             </div>
 
             <div className="mb-6">
-              <Button variant="secondary" display="block" type="submit">
+              <Button variant="secondary" display="block" type="submit" disabled={session==null}>
                 Respond
               </Button>
 
