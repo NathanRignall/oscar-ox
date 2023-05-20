@@ -48,6 +48,7 @@ export default function AutoCompleteVenue({
     setSearch(text);
     getOptions();
     helpers.setValue(null);
+    helpers.setTouched(true);
 
     setCursor(-1);
     if (!showOptions) {
@@ -106,7 +107,14 @@ export default function AutoCompleteVenue({
     // @ts-ignore
     <div className="relative w-full " ref={ref}>
       <div className="w-full">
+        <label
+          htmlFor="venue"
+          className="block mb-2 text-sm font-medium text-gray-600"
+        >
+          Existing Venue
+        </label>
         <input
+          id="venue"
           type="text"
           className="w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
           placeholder="Search..."

@@ -63,7 +63,7 @@ export const AddEventModal = ({ productionId }: AddEventModalProps) => {
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen} button="Add Event">
-      <div className="text-3xl text-slate-900 font-bold mb-8">Add Event</div>
+      <div className="text-3xl text-slate-900 font-bold mb-6">Add Event</div>
 
       <Formik
         initialValues={initialValues}
@@ -86,6 +86,12 @@ export const AddEventModal = ({ productionId }: AddEventModalProps) => {
             </div>
 
             <div className="mb-4">
+              <label
+                htmlFor="datetime"
+                className="block mb-2 text-sm font-medium text-gray-600"
+              >
+                Start Time
+              </label>
               <DatePicker
                 id="datetime"
                 name="datetime"

@@ -54,7 +54,11 @@ export const EditProductionModal = ({
   const onSubmit = async (values: FormValues) => {
     const { error } = await supabase
       .from("productions")
-      .update({ title: values.title, description: values.description, is_published: values.is_published })
+      .update({
+        title: values.title,
+        description: values.description,
+        is_published: values.is_published,
+      })
       .match({ id: productionId });
 
     if (error) {
@@ -114,7 +118,6 @@ export const EditProductionModal = ({
                 type="text"
                 rows={4}
                 name="description"
-                autoComplete="description"
                 placeholder="Description..."
                 className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
               />

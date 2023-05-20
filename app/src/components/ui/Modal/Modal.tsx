@@ -33,7 +33,10 @@ export const Modal = ({
       ) : (
         <button
           type="button"
-          className={clsx("text-slate-900 bg-white border-2 border-slate-200 hover:bg-slate-200 hover:border-slate-400 rounded-lg text-sm p-1", className)}
+          className={clsx(
+            "text-slate-900 bg-white border-2 border-slate-200 hover:bg-slate-200 hover:border-slate-400 rounded-lg text-sm p-1",
+            className
+          )}
           data-modal-hide="defaultModal"
           onClick={toggleModal}
         >

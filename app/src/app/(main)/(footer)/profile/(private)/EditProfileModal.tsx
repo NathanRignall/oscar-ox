@@ -72,14 +72,19 @@ export const EditProfileModal = ({
         {({ errors, touched }: FormikProps<FormValues>) => (
           <Form>
             <div className="mb-4">
+              <label
+                htmlFor="biography"
+                className="block mb-2 text-sm font-medium text-gray-600"
+              >
+                Personal Biography
+              </label>
               <Field
                 component="textarea"
                 id="biography"
                 type="text"
                 rows={1}
                 name="biography"
-                autoComplete="biography"
-                placeholder="Your personal biography..."
+                placeholder="Biography..."
                 className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
               />
 

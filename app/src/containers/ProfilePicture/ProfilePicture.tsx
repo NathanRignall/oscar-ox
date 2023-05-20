@@ -19,7 +19,11 @@ export function ProfilePicture({ src, edit = false, onClick }: ProfilePicture) {
         height={150}
         priority
       />
-      {edit && <div className="w-full h-full"><EditProfilePictureModal /></div>}
+      {edit && (
+        <div className="w-full h-full">
+          <EditProfilePictureModal />
+        </div>
+      )}
     </div>
   );
 }

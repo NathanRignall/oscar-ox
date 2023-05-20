@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useSupabase } from "@/components/client";
 import { object, string, ref } from "yup";
 import { FormikProps, Formik, Field, Form } from "formik";
@@ -49,7 +48,7 @@ export const UpdatePasswordModal = () => {
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen} button="Update Password">
-      <div className="text-3xl text-slate-900 font-bold mb-8">
+      <div className="text-3xl text-slate-900 font-bold mb-6">
         Update Password
       </div>
 
@@ -61,12 +60,18 @@ export const UpdatePasswordModal = () => {
         {({ errors, touched }: FormikProps<FormValues>) => (
           <Form>
             <div className="mb-4">
+              <label
+                htmlFor="newPassword"
+                className="block mb-2 text-sm font-medium text-gray-600"
+              >
+                New Password
+              </label>
               <Field
                 id="newPassword"
                 type="password"
                 name="newPassword"
                 autoComplete="new-password"
-                placeholder="New Password..."
+                placeholder="Password..."
                 className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
               />
 
@@ -78,12 +83,18 @@ export const UpdatePasswordModal = () => {
             </div>
 
             <div className="mb-4">
+              <label
+                htmlFor="confirmPassword"
+                className="block mb-2 text-sm font-medium text-gray-600"
+              >
+                Confirm Password
+              </label>
               <Field
                 id="confirmPassword"
                 type="password"
                 name="confirmPassword"
                 autoComplete="new-password"
-                placeholder="Confirm Password..."
+                placeholder="Password..."
                 className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
               />
 

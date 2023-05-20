@@ -66,7 +66,7 @@ export const RespondVacancyModal = ({
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen} button="Respond">
-      <div className="text-3xl text-slate-900 font-bold mb-8">
+      <div className="text-3xl text-slate-900 font-bold mb-6">
         Respond to Vacancy
       </div>
 
@@ -78,6 +78,12 @@ export const RespondVacancyModal = ({
         {({ errors, touched }: FormikProps<FormValues>) => (
           <Form>
             <div className="mb-4">
+              <label
+                htmlFor="description"
+                className="block mb-2 text-sm font-medium text-gray-600"
+              >
+                Response Message
+              </label>
               <Field
                 component="textarea"
                 id="message"

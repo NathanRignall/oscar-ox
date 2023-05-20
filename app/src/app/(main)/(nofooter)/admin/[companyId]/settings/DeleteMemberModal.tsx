@@ -3,7 +3,6 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { useSupabase } from "@/components/client";
-import { object, string } from "yup";
 import { Button, Modal } from "@/components/ui";
 
 type DeleteMemberModalProps = {
@@ -30,20 +29,6 @@ export const DeleteMemberModal = ({
   const toggleModal = () => {
     setIsOpen(!isOpen);
   };
-
-  interface FormValues {
-    profileId: string;
-    role: "admin" | "moderator";
-  }
-
-  const initialValues: FormValues = {
-    profileId: "",
-    role: "admin",
-  };
-
-  const validationSchema = object({
-    profileId: string().required("Vaid user is required"),
-  });
 
   const onSubmit = async () => {
     const { error } = await supabase

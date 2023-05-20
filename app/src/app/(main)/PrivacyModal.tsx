@@ -56,6 +56,14 @@ export default function PrivacyModal() {
             <Button variant="secondary" display="block" onClick={onSubmit}>
               Agree
             </Button>
+
+            <div className="text-center">
+              {formError ? (
+                <p className="mt-2 text-sm text-red-600">{formError}</p>
+              ) : (
+                <div className="mt-2 h-5" />
+              )}
+            </div>
           </div>
         </div>
       </div>

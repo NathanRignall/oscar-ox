@@ -62,7 +62,7 @@ export const AddProductionModal = ({ company_id }: AddProductionModalProps) => {
   };
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen} button="Add Production">
-      <div className="text-3xl text-slate-900 font-bold mb-8">
+      <div className="text-3xl text-slate-900 font-bold mb-6">
         Add Production
       </div>
 
@@ -74,12 +74,17 @@ export const AddProductionModal = ({ company_id }: AddProductionModalProps) => {
         {({ errors, touched }: FormikProps<FormValues>) => (
           <Form>
             <div className="mb-4">
+              <label
+                htmlFor="title"
+                className="block mb-2 text-sm font-medium text-gray-600"
+              >
+                Company Title
+              </label>
               <Field
                 id="title"
                 type="text"
                 name="title"
-                autoComplete="title"
-                placeholder="Production title.."
+                placeholder="Title.."
                 className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
               />
 
@@ -89,14 +94,19 @@ export const AddProductionModal = ({ company_id }: AddProductionModalProps) => {
             </div>
 
             <div className="mb-4">
+              <label
+                htmlFor="description"
+                className="block mb-2 text-sm font-medium text-gray-600"
+              >
+                Company Description
+              </label>
               <Field
                 component="textarea"
                 id="description"
                 type="text"
-                rows={5}
+                rows={3}
                 name="description"
-                autoComplete="description"
-                placeholder="Production description..."
+                placeholder="Description..."
                 className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
               />
               {errors.description && touched.description && (

@@ -73,22 +73,22 @@ export const AddParticipantModal = ({
     isInvite: boolean(),
     title: string().required("Title is required"),
     categoryId: string().required("Category is required"),
-    profileId: string().when('isInvite', {
+    profileId: string().when("isInvite", {
       is: true,
       then: (schema) => schema.notRequired(),
       otherwise: (schema) => schema.required("Valid person is required"),
     }),
-    givenName: string().when('isInvite', {
+    givenName: string().when("isInvite", {
       is: true,
       then: (schema) => schema.required("Given name is required"),
       otherwise: (schema) => schema.notRequired(),
     }),
-    familyName: string().when('isInvite', {
+    familyName: string().when("isInvite", {
       is: true,
       then: (schema) => schema.required("Family name is required"),
       otherwise: (schema) => schema.notRequired(),
     }),
-    email: string().when('isInvite', {
+    email: string().when("isInvite", {
       is: true,
       then: (schema) => schema.required("Email is required"),
       otherwise: (schema) => schema.notRequired(),
@@ -96,7 +96,6 @@ export const AddParticipantModal = ({
   });
 
   const onSubmit = async (values: FormValues) => {
-
     if (values.isInvite) {
       const { error } = await supabase.functions.invoke("invite-add-user", {
         body: JSON.stringify({
@@ -109,7 +108,7 @@ export const AddParticipantModal = ({
             production_id: productionId,
             category_id: values.categoryId,
             title: values.title,
-          }
+          },
         }),
       });
 
@@ -123,7 +122,6 @@ export const AddParticipantModal = ({
           router.refresh();
         });
       }
-
     } else {
       const { error } = await supabase.from("participants").insert({
         profile_id: values.profileId,
@@ -156,13 +154,8 @@ export const AddParticipantModal = ({
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
-        {({
-          errors,
-          touched,
-          values,
-        }: FormikProps<FormValues>) => (
+        {({ errors, touched, values }: FormikProps<FormValues>) => (
           <Form>
-
             <div className="mb-4">
               <label
                 htmlFor="title"
@@ -174,7 +167,6 @@ export const AddParticipantModal = ({
                 id="title"
                 type="text"
                 name="title"
-                autoComplete="title"
                 placeholder="Title.."
                 className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
               />
@@ -198,13 +190,14 @@ export const AddParticipantModal = ({
                       id="givenName"
                       type="text"
                       name="givenName"
-                      autoComplete="given-name"
                       placeholder="First Name..."
                       className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
                     />
 
                     {errors.givenName && touched.givenName && (
-                      <p className="mt-2 text-sm text-red-600">{errors.givenName}</p>
+                      <p className="mt-2 text-sm text-red-600">
+                        {errors.givenName}
+                      </p>
                     )}
                   </div>
 
@@ -219,13 +212,14 @@ export const AddParticipantModal = ({
                       id="familyName"
                       type="text"
                       name="familyName"
-                      autoComplete="family-name"
                       placeholder="Last Name..."
                       className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
                     />
 
                     {errors.familyName && touched.familyName && (
-                      <p className="mt-2 text-sm text-red-600">{errors.familyName}</p>
+                      <p className="mt-2 text-sm text-red-600">
+                        {errors.familyName}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -241,7 +235,6 @@ export const AddParticipantModal = ({
                     id="email"
                     type="email"
                     name="email"
-                    autoComplete="email"
                     placeholder="Email Address..."
                     className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
                   />
@@ -256,9 +249,12 @@ export const AddParticipantModal = ({
                 <AutoCompleteEmail />
 
                 {errors.profileId && touched.profileId && (
-                  <p className="mt-2 text-sm text-red-600">{errors.profileId}</p>
+                  <p className="mt-2 text-sm text-red-600">
+                    {errors.profileId}
+                  </p>
                 )}
-              </div>)}
+              </div>
+            )}
 
             <div className="mb-4">
               <label className="relative inline-flex items-center cursor-pointer">

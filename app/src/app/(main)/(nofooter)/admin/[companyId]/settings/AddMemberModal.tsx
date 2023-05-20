@@ -58,7 +58,7 @@ export const AddMemberModal = ({ companyId }: AddMemberModalProps) => {
   };
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen} button="Add Member">
-      <div className="text-3xl text-slate-900 font-bold mb-8">Add Member</div>
+      <div className="text-3xl text-slate-900 font-bold mb-6">Add Member</div>
 
       <Formik
         initialValues={initialValues}

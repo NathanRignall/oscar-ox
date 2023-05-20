@@ -102,7 +102,7 @@ export const EditParticipantModal = ({
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen} button="Edit" buttonSize="sm">
-      <div className="text-3xl text-slate-900 font-bold mb-8">
+      <div className="text-3xl text-slate-900 font-bold mb-6">
         Edit Participant
       </div>
 
@@ -111,19 +111,19 @@ export const EditParticipantModal = ({
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
-        {({
-          errors,
-          touched,
-          values,
-          setFieldValue,
-        }: FormikProps<FormValues>) => (
+        {({ errors, touched }: FormikProps<FormValues>) => (
           <Form>
             <div className="mb-4">
+              <label
+                htmlFor="title"
+                className="block mb-2 text-sm font-medium text-gray-600"
+              >
+                Role Title
+              </label>
               <Field
                 id="title"
                 type="text"
                 name="title"
-                autoComplete="title"
                 placeholder="Title.."
                 className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
               />
