@@ -30,21 +30,26 @@ export default async function AdminLayout({
   } = await supabase.auth.getUser();
   if (!user) redirect("/auth/login");
 
-  const { data: _company_members } = await supabase
+  // get company using company_members
+  const { data: company_members } = await supabase
     .from("company_members")
     .select(
       `
       company:companies (
         id,
-        name
+        slug,
+        name,
+        main_colour,
+        is_public,
+        is_verified
       ),
       role
       `
-    ).match({ profile_id: user.id }).single();
+    ).match({ company_id: params.companyId, profile_id: user.id}).single();
+    
+  if (!company_members) notFound();
 
-  if (!_company_members) redirect("/auth/login");
-
-  const company = getSingle(_company_members.company);
+  const company = getSingle(company_members.company);
   
   if (!company) notFound();
 
