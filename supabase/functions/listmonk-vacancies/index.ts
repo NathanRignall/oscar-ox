@@ -72,7 +72,7 @@ serve(async (req) => {
         method: "POST",
         headers,
         body: JSON.stringify({
-          name: `Vacancy ${payload.record.id}`,
+          name: `Vacancy - ${payload.record.id}`,
           subject: "Vacancy: " + payload.record.title,
           lists: listIds,
           type: "regular",
@@ -99,7 +99,7 @@ serve(async (req) => {
 
     return new Response("none");
   } catch (error) {
-    console.log(error);
-    return new Response("error");
+    console.error(error);
+    return new Response("Internal Server Error", { status: 500 });
   }
 });

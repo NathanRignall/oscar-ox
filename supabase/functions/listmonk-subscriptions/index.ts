@@ -137,7 +137,7 @@ serve(async (req) => {
 
     return new Response("none");
   } catch (error) {
-    console.log(error);
-    return new Response("error");
+    console.error(error);
+    return new Response("Internal Server Error", { status: 500 });
   }
 });

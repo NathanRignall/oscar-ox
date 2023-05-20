@@ -79,6 +79,7 @@ create table public.companies (
   main_colour text not null default '#000000',
   theme public.page_theme not null default 'default',
   is_public boolean not null default true,
+  is_verified boolean not null default false,
   inserted_at timestamp with time zone default timezone('utc'::text, now()) not null,
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null
 );

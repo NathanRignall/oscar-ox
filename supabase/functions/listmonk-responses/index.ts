@@ -96,6 +96,6 @@ serve(async (req) => {
     return new Response("none");
   } catch (error) {
     console.error(error);
-    return new Response("error");
+    return new Response("Internal Server Error", { status: 500 });
   }
 });

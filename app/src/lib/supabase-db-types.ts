@@ -60,6 +60,7 @@ export interface Database {
           id: string
           inserted_at: string
           is_public: boolean
+          is_verified: boolean
           main_colour: string
           name: string
           slug: string
@@ -71,6 +72,7 @@ export interface Database {
           id?: string
           inserted_at?: string
           is_public?: boolean
+          is_verified?: boolean
           main_colour?: string
           name: string
           slug: string
@@ -82,6 +84,7 @@ export interface Database {
           id?: string
           inserted_at?: string
           is_public?: boolean
+          is_verified?: boolean
           main_colour?: string
           name?: string
           slug?: string

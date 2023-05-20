@@ -1,14 +1,14 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { Database } from "../db-types.ts";
 
-type CategoryRecord = Database["public"]["Tables"]["categories"]["Row"];
+type CompanyRecord = Database["public"]["Tables"]["companies"]["Row"];
 
 interface WebhookPayload {
   type: "INSERT" | "UPDATE" | "DELETE";
   table: string;
-  record: CategoryRecord;
+  record: CompanyRecord;
   schema: string;
-  old_record: null | CategoryRecord;
+  old_record: null | CompanyRecord;
 }
 
 const api = Deno.env.get("LISTMONK_API");
@@ -23,16 +23,17 @@ serve(async (req) => {
 
   try {
     if (payload.type === "INSERT") {
-      const { id: uuid, title } = payload.record;
+      const { id: uuid, name } = payload.record;
 
+      // create a new list
       await fetch(`${api}/lists`, {
         method: "POST",
         headers,
         body: JSON.stringify({
-          name: `category-${uuid}`,
+          name: `company-${uuid}`,
           type: "private",
           optin: "single",
-          description: `Category: ${title}`,
+          description: `Category: ${name}`,
         }),
       });
 
@@ -48,7 +49,7 @@ serve(async (req) => {
 
       // get the list id
       const listResponse = await fetch(
-        `${api}/lists?query=category-${uuid}&page=1&per_page=1`,
+        `${api}/lists?query=company-${uuid}&page=1&per_page=1`,
         {
           method: "GET",
           headers,

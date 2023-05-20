@@ -45,6 +45,6 @@ serve(async (req) => {
     return new Response("done");
   } catch (error) {
     console.error(error);
-    return new Response(error.message, { status: 500 });
+    return new Response("Internal Server Error", { status: 500 });
   }
 });
