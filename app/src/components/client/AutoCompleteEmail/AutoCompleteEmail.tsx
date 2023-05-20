@@ -54,6 +54,7 @@ export const AutoCompleteEmail = ({
     setSearch(text);
     getOptions();
     helpers.setValue(null);
+    helpers.setTouched(true);
 
     setCursor(-1);
     if (!showOptions) {
@@ -112,7 +113,14 @@ export const AutoCompleteEmail = ({
     // @ts-ignore
     <div className="relative w-full " ref={ref}>
       <div className="w-full">
+        <label
+          htmlFor="profile"
+          className="block mb-2 text-sm font-medium text-gray-600"
+        >
+          User
+        </label>
         <input
+          id="profile"
           type="text"
           className="w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
           placeholder="Search..."

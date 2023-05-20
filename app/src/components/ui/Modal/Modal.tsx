@@ -66,7 +66,7 @@ export const Modal = ({
                 size === "lg" && "max-w-3xl"
               )}
             >
-              <div className="px-10 py-8">
+              <div className="px-6 py-6 sm:px-10 sm:py-8">
                 <div className="flex items-end justify-between rounded-t mb-4">
                   <button
                     type="button"
