@@ -45,12 +45,14 @@ export default async function AdminLayout({
       ),
       role
       `
-    ).match({ company_id: params.companyId, profile_id: user.id}).single();
-    
+    )
+    .match({ company_id: params.companyId, profile_id: user.id })
+    .single();
+
   if (!company_members) notFound();
 
   const company = getSingle(company_members.company);
-  
+
   if (!company) notFound();
 
   return (

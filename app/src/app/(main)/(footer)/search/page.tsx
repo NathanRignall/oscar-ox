@@ -287,7 +287,9 @@ const Vacancy = ({
       )}
 
       {!loading ? (
-        <p className="text-sm text-slate-600 line-clamp-2 sm:line-clamp-1">{vacancy.content}</p>
+        <p className="text-sm text-slate-600 line-clamp-2 sm:line-clamp-1">
+          {vacancy.content}
+        </p>
       ) : (
         <div className="h-5 w-3/4 bg-slate-200 rounded-md animate-pulse" />
       )}
