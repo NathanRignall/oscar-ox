@@ -54,9 +54,9 @@ export default async function Vacancies({
       <section className="mt-4">
         <NewVacancyButton companyId={params.companyId} />
 
-        <div className="mt-4 border-2 border-slate-200 rounded-lg overflow-hidden">
-          <table className="w-full text-left divide-y-2 divide-gray-200">
-            <thead className="text-xs font-semibold text-slate-500 bg-slate-50 uppercase">
+        <div className="mt-4 border-2 rounded-lg overflow-hidden border-slate-200 dark:border-slate-600">
+          <table className="w-full text-left divide-y-2 divide-slate-200 dark:divide-slate-600">
+            <thead className="text-xs font-semibold uppercase text-slate-500 bg-slate-50 dark:text-slate-200 dark:bg-slate-700">
               <tr>
                 <th scope="col" className="px-4 py-4">
                   Title
@@ -76,12 +76,12 @@ export default async function Vacancies({
               </tr>
             </thead>
 
-            <tbody className="divide-y-2 divide-solid divide-slate-200">
+            <tbody className="divide-y-2 divide-solid divide-slate-200 dark:divide-slate-600">
               {vacancies.map((vacancy) => (
-                <tr key={vacancy.id} className="bg-white hover:bg-gray-50">
+                <tr key={vacancy.id} className="bg-white hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-900">
                   <th
                     scope="row"
-                    className="px-4 py-4 font-bold text-gray-900 whitespace-nowrap underline"
+                    className="px-4 py-4 font-bold whitespace-nowrap underline text-slate-900 dark:text-white"
                   >
                     <Link
                       href={`/admin/${params.companyId}/vacancies/${vacancy.id}`}
@@ -90,7 +90,7 @@ export default async function Vacancies({
                     </Link>
                   </th>
 
-                  <td className="px-4 py-4 text-gray-500 whitespace-nowrap">
+                  <td className="px-4 py-4 whitespace-nowrap text-slate-500 dark:text-slate-300">
                     {new Date(vacancy.inserted_at).toLocaleDateString("en-GB", {
                       year: "numeric",
                       month: "short",
@@ -98,11 +98,11 @@ export default async function Vacancies({
                     })}
                   </td>
 
-                  <td className="px-4 py-4 text-gray-500">
+                  <td className="px-4 py-4 text-slate-500 dark:text-slate-300">
                     {vacancy.responses}
                   </td>
 
-                  <td className="px-4 py-4 text-gray-500 whitespace-nowrap space-x-1">
+                  <td className="px-4 py-4 whitespace-nowrap space-x-1 text-slate-500 dark:text-slate-300">
                     {vacancy.categories.map((category) => (
                       <Tag
                         key={category.id}

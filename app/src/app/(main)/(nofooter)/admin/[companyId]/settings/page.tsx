@@ -70,9 +70,9 @@ export default async function Settings({
 
         <AddMemberModal companyId={params.companyId} />
 
-        <div className="mt-4 border-2 border-slate-200 rounded-lg overflow-hidden">
-          <table className="w-full text-left divide-y-2 divide-gray-200">
-            <thead className="text-xs font-semibold text-slate-500 bg-slate-50 uppercase">
+        <div className="mt-4 border-2 rounded-lg overflow-hidden border-slate-200 dark:border-slate-600">
+          <table className="w-full text-left divide-y-2 divide-slate-200 dark:divide-slate-600">
+            <thead className="text-xs font-semibold uppercase text-slate-500 bg-slate-50 dark:text-slate-200 dark:bg-slate-700">
               <tr>
                 <th scope="col" className="px-4 py-4">
                   Name
@@ -92,18 +92,18 @@ export default async function Settings({
               </tr>
             </thead>
 
-            <tbody className="divide-y-2 divide-solid divide-slate-200">
+            <tbody className="divide-y-2 divide-solid divide-slate-200 dark:divide-slate-600">
               {members.map((member) => (
-                <tr key={member.user.id} className="bg-white hover:bg-slate-50">
-                  <th scope="row" className="px-4 py-4 whitespace-nowrap">
+                <tr key={member.user.id} className="bg-white hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-900">
+                <th scope="row" className="px-4 py-4 whitespace-nowrap text-slate-900 dark:text-white">
                     {`${member.user.given_name} ${member.user.family_name}`}
                   </th>
 
-                  <td className="px-4 py-4 whitespace-nowrap">
+                  <td className="px-4 py-4 whitespace-nowrap text-slate-900 dark:text-white">
                     {member.user.email}
                   </td>
 
-                  <td className="px-4 py-4 text-gray-500 whitespace-nowrap">
+                  <td className="px-4 py-4 whitespace-nowrap text-slate-500 dark:text-slate-300">
                     {new Date(member.user.inserted_at).toLocaleDateString(
                       "en-GB",
                       {
