@@ -29,25 +29,25 @@ const Event = ({
     <Link href={href}>
       <div
         className={clsx(
-          variant == "red" && "bg-red-100 border-red-900",
-          variant == "orange" && "bg-orange-100 border-orange-900",
-          variant == "yellow" && "bg-yellow-100 border-yellow-900",
-          variant == "green" && "bg-green-100 border-green-900",
-          variant == "blue" && "bg-blue-100 border-blue-900",
-          variant == "pink" && "bg-pink-100 border-pink-900",
-          variant == "purple" && "bg-purple-100 border-purple-900",
+          variant == "red" && "bg-red-100 border-red-900 dark:bg-red-900 dark:border-red-100 ",
+          variant == "orange" && "bg-orange-100 border-orange-900 dark:bg-orange-900 dark:border-orange-100",
+          variant == "yellow" && "bg-yellow-100 border-yellow-900 dark:bg-yellow-900 dark:border-yellow-100",
+          variant == "green" && "bg-green-100 border-green-900 dark:bg-green-900 dark:border-green-100",
+          variant == "blue" && "bg-blue-100 border-blue-900 dark:bg-blue-900 dark:border-blue-100",
+          variant == "pink" && "bg-pink-100 border-pink-900 dark:bg-pink-900 dark:border-pink-100",
+          variant == "purple" && "bg-purple-100 border-purple-900 dark:bg-purple-900 dark:border-purple-100",
           "rounded-lg border-l-[3px]  px-3 py-1 mb-3"
         )}
       >
         <p
           className={clsx(
-            variant == "red" && "text-red-900",
-            variant == "orange" && "text-orange-900",
-            variant == "yellow" && "text-yellow-900",
-            variant == "green" && "text-green-900",
-            variant == "blue" && "text-blue-900",
-            variant == "pink" && "text-pink-900",
-            variant == "purple" && "text-purple-900",
+            variant == "red" && "text-red-900 dark:text-red-100 ",
+            variant == "orange" && "text-orange-900 dark:text-orange-100",
+            variant == "yellow" && "text-yellow-900 dark:text-yellow-100",
+            variant == "green" && "text-green-900 dark:text-green-100",
+            variant == "blue" && "text-blue-900 dark:text-blue-100",
+            variant == "pink" && "text-pink-900 dark:text-pink-100",
+            variant == "purple" && "text-purple-900 dark:text-purple-100",
             "text-xs font-bold"
           )}
         >
@@ -55,13 +55,13 @@ const Event = ({
         </p>
         <p
           className={clsx(
-            variant == "red" && "text-red-900",
-            variant == "orange" && "text-orange-900",
-            variant == "yellow" && "text-yellow-900",
-            variant == "green" && "text-green-900",
-            variant == "blue" && "text-blue-900",
-            variant == "pink" && "text-pink-900",
-            variant == "purple" && "text-purple-900",
+            variant == "red" && "text-red-900 dark:text-red-100 ",
+            variant == "orange" && "text-orange-900 dark:text-orange-100",
+            variant == "yellow" && "text-yellow-900 dark:text-yellow-100",
+            variant == "green" && "text-green-900 dark:text-green-100",
+            variant == "blue" && "text-blue-900 dark:text-blue-100",
+            variant == "pink" && "text-pink-900 dark:text-pink-100",
+            variant == "purple" && "text-purple-900 dark:text-purple-100",
             " text-sm font-medium"
           )}
         >
@@ -69,13 +69,13 @@ const Event = ({
         </p>
         <p
           className={clsx(
-            variant == "red" && "text-red-800",
-            variant == "orange" && "text-orange-800",
-            variant == "yellow" && "text-yellow-800",
-            variant == "green" && "text-green-800",
-            variant == "blue" && "text-blue-800",
-            variant == "pink" && "text-pink-800",
-            variant == "purple" && "text-purple-800",
+            variant == "red" && "text-red-800 dark:text-red-200",
+            variant == "orange" && "text-orange-800 dark:text-orange-200",
+            variant == "yellow" && "text-yellow-800 dark:text-yellow-200",
+            variant == "green" && "text-green-800 dark:text-green-200",
+            variant == "blue" && "text-blue-800 dark:text-blue-200",
+            variant == "pink" && "text-pink-800 dark:text-pink-200",
+            variant == "purple" && "text-purple-800 dark:text-purple-200",
             "text-xs font-base"
           )}
         >
@@ -230,17 +230,17 @@ export const Calendar = () => {
   return (
     <>
       <div className="flex sm:justify-between justify-center w-full mb-4">
-        <nav className="flex px-5 py-3 text-gray-700 border-2 border-slate-200 rounded-lg bg-white">
+        <nav className="flex px-5 py-3 border-2 rounded-lg text-gray-700 bg-white border-slate-200 dark:text-slate-200 dark:bg-slate-800 dark:border-slate-600">
           <ol className="inline-flex items-center space-x-1 md:space-x-3">
             <li>
               <button className="flex items-center" onClick={
                 () => moveDay(-1)
               }>
-                <span className="mr-1 text-sm font-medium text-gray-500 md:ml-2">
+                <span className="mr-1 text-sm font-medium md:ml-2 text-slate-500 dark:text-slate-400">
                   Back
                 </span>
                 <svg
-                  className="w-6 h-6 text-gray-400"
+                  className="w-6 h-6 text-slate-400 dark:text-slate-300"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   transform="rotate(-180)"
@@ -268,7 +268,7 @@ export const Calendar = () => {
                 () => moveDay(1)
               }>
                 <svg
-                  className="w-6 h-6 text-gray-400"
+                  className="w-6 h-6 text-slate-400 dark:text-slate-300"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -279,7 +279,7 @@ export const Calendar = () => {
                     clipRule="evenodd"
                   ></path>
                 </svg>
-                <span className="ml-1 text-sm font-medium text-gray-500 md:ml-2">
+                <span className="ml-1 text-sm font-medium md:ml-2 text-slate-500 dark:text-slate-400">
                   Next
                 </span>
               </button>
@@ -288,7 +288,7 @@ export const Calendar = () => {
         </nav>
       </div >
 
-      <div className="bg-white rounded-lg border-2 border-slate-200 w-full overflow-hidden min-h-[400px]">
+      <div className="rounded-lg border-2 w-full overflow-hidden min-h-[400px] bg-white border-slate-200 dark:bg-slate-800 dark:border-slate-600">
         <div className="grid grid-cols-1 lg:grid-cols-7">
           {days.map((dayEvents, index) => {
             const day = new Date(thisWeek);
@@ -297,13 +297,13 @@ export const Calendar = () => {
 
             return (
               <div key={index}>
-                <div className="bg-slate-50 border-b-2 border-slate-200 px-4 py-4">
-                  <p className="text-slate-500 text-xs font-semibold uppercase">
+                <div className="border-b-2  px-4 py-4 bg-slate-50 border-slate-200 dark:bg-slate-700 dark:border-slate-600">
+                  <p className="text-xs font-semibold uppercase text-slate-500 dark:text-slate-400">
                     {day.toLocaleDateString("en-GB", {
                       weekday: "short",
                     })}
                   </p>
-                  <p className="text-slate-900 text-sm font-semibold uppercase">
+                  <p className=" text-sm font-semibold uppercase text-slate-900 dark:text-white">
                     {day.toLocaleDateString("en-GB", {
                       day: "numeric",
                       month: "short",
