@@ -10,7 +10,7 @@ export type ProfilePicture = {
 
 export function ProfilePicture({ src, edit = false, onClick }: ProfilePicture) {
   return (
-    <div className="w-full aspect-w-1 aspect-h-1 bg-slate-300 rounded-lg overflow-hidden">
+    <div className="w-full aspect-w-1 aspect-h-1 rounded-lg overflow-hidden bg-slate-300 dark:bg-slate-700">
       <Image
         alt=""
         src={src}

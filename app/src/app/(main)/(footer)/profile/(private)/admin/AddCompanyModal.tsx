@@ -66,7 +66,7 @@ export const AddCompanyModal = () => {
   };
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen} button="Create Company">
-      <div className="text-3xl text-slate-900 font-bold mb-6">
+      <div className="text-3xl font-bold mb-6 text-slate-900 dark:text-white">
         Create production company
       </div>
 
@@ -80,7 +80,7 @@ export const AddCompanyModal = () => {
             <div className="mb-4">
               <label
                 htmlFor="name"
-                className="block mb-2 text-sm font-medium text-gray-600"
+                className="block mb-2 text-sm font-medium text-gray-600 dark:text-slate-300"
               >
                 Company Name
               </label>
@@ -88,19 +88,19 @@ export const AddCompanyModal = () => {
                 id="name"
                 type="text"
                 name="name"
-                placeholder="Nname.."
-                className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
+                placeholder="Name.."
+                className="relative block w-full rounded-md border-2 px-4 py-3 text-md text-slate-900 placeholder-slate-400 border-slate-200 dark:text-white dark:bg-slate-800 dark:placeholder-slate-300 dark:border-slate-600"
               />
 
               {errors.name && touched.name && (
-                <p className="mt-2 text-sm text-red-600">{errors.name}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-300">{errors.name}</p>
               )}
             </div>
 
             <div className="mb-4">
               <label
                 htmlFor="description"
-                className="block mb-2 text-sm font-medium text-gray-600"
+                className="block mb-2 text-sm font-medium text-gray-600 dark:text-slate-300"
               >
                 Company Description
               </label>
@@ -111,10 +111,10 @@ export const AddCompanyModal = () => {
                 rows={3}
                 name="description"
                 placeholder="Description..."
-                className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
+                className="relative block w-full rounded-md border-2 px-4 py-3 text-md text-slate-900 placeholder-slate-400 border-slate-200 dark:text-white dark:bg-slate-800 dark:placeholder-slate-300 dark:border-slate-600"
               />
               {errors.description && touched.description && (
-                <p className="mt-2 text-sm text-red-600">
+                <p className="mt-2 text-sm text-red-600 dark:text-red-300">
                   {errors.description}
                 </p>
               )}
@@ -127,7 +127,7 @@ export const AddCompanyModal = () => {
 
               <div className="text-center">
                 {formError ? (
-                  <p className="mt-2 text-sm text-red-600">{formError}</p>
+                  <p className="mt-2 text-sm text-red-600 dark:text-red-300">{formError}</p>
                 ) : (
                   <div className="mt-2 h-5" />
                 )}

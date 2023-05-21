@@ -66,7 +66,7 @@ export const RespondVacancyModal = ({
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen} button="Respond">
-      <div className="text-3xl text-slate-900 font-bold mb-6">
+      <div className="text-3xl font-bold mb-6 text-slate-900 dark:text-white">
         Respond to Vacancy
       </div>
 
@@ -80,7 +80,7 @@ export const RespondVacancyModal = ({
             <div className="mb-4">
               <label
                 htmlFor="description"
-                className="block mb-2 text-sm font-medium text-gray-600"
+                className="block mb-2 text-sm font-medium text-gray-600 dark:text-slate-300"
               >
                 Response Message
               </label>
@@ -91,10 +91,11 @@ export const RespondVacancyModal = ({
                 rows={5}
                 name="message"
                 placeholder="Message..."
-                className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
+                className="relative block w-full rounded-md border-2 px-4 py-3 text-md text-slate-900 placeholder-slate-400 border-slate-200 dark:text-white dark:bg-slate-800 dark:placeholder-slate-300 dark:border-slate-600"
               />
+
               {errors.message && touched.message && (
-                <p className="mt-2 text-sm text-red-600">{errors.message}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-300">{errors.message}</p>
               )}
             </div>
 
@@ -110,7 +111,7 @@ export const RespondVacancyModal = ({
 
               <div className="text-center">
                 {formError ? (
-                  <p className="mt-2 text-sm text-red-600">{formError}</p>
+                  <p className="mt-2 text-sm text-red-600 dark:text-red-300">{formError}</p>
                 ) : (
                   <div className="mt-2 h-5" />
                 )}
