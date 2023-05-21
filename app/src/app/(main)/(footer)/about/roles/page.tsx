@@ -48,7 +48,7 @@ export default async function Roles() {
               <div className="h-full aspect-1 relative rounded-r-md overflow-hidden bg-slate-300 dark:bg-slate-600">
                 <Image
                   alt=""
-                  src={`media/roles/${role.image_url}`}
+                  src={`media/roles/${role.image_url || "default.jpg"}`}
                   className={"duration-200 ease-in-out rounded-r-md"}
                   fill
                 />
