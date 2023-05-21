@@ -26,17 +26,16 @@ export default async function Loading() {
           <input
             type="text"
             id="simple-search"
-            className="w-full rounded-lg border-2 border-slate-200 pl-10 pr-4 py-3 text-md text-slate-900 placeholder-slate-400"
+            className="w-full rounded-lg border-2  pl-10 pr-4 py-3 text-md text-slate-900 placeholder-slate-400 border-slate-200 dark:text-white dark:bg-slate-800 dark:placeholder-slate-300 dark:border-slate-600"
             placeholder="Search Companies"
-            required
           />
         </div>
       </form>
 
       <main>
         <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
-          <div className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg bg-slate-300 animate-pulse" />
-          <div className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg bg-slate-300 animate-pulse" />
+          <div className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg animate-pulse bg-slate-300 dark:bg-slate-600" />
+          <div className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg animate-pulse bg-slate-300 dark:bg-slate-600" />
         </section>
       </main>
     </div>

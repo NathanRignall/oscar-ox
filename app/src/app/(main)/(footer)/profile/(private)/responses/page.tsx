@@ -51,10 +51,10 @@ export default async function Account() {
   return (
     <>
       <header className="max-w-3xl mx-auto mb-8">
-        <h1 className="mb-3 text-5xl font-extrabold text-slate-900">
+        <h1 className="mb-3 text-5xl font-extrabold text-slate-900 dark:text-white">
           Responses
         </h1>
-        <p className="mb-3 text-xl text-slate-600">
+        <p className="mb-3 text-xl text-slate-600 dark:text-slate-300">
           Your Responses to Vacancies
         </p>
       </header>
@@ -65,13 +65,13 @@ export default async function Account() {
             return (
               <li
                 key={response.id}
-                className=" bg-white rounded-lg border-2 border-slate-200 p-6"
+                className="rounded-lg border-2 p-6 bg-white border-slate-200 dark:bg-slate-800 dark:border-slate-600"
               >
                 <Link
                   href={`/companies/${response.vacancy.company.slug}#${response.vacancy.id}`}
                   scroll={false}
                 >
-                  <h3 className="text-lg font-bold text-slate-900 underline mb-2">
+                  <h3 className="text-lg font-bold underline mb-2 text-slate-900 dark:text-white">
                     {response.vacancy.title}
                   </h3>
                 </Link>
@@ -89,7 +89,7 @@ export default async function Account() {
                   </li>
                 </ul>
 
-                <p className="text-sm text-slate-600 mb-2 line-clamp-3">
+                <p className="text-sm mb-2 line-clamp-3 text-slate-600 dark:text-slate-300">
                   {response.message}
                 </p>
               </li>

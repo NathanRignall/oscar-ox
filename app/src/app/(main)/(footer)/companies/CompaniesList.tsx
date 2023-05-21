@@ -70,7 +70,7 @@ export const CompaniesList = ({ _companies }: CompaniesListProps) => {
           <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
             <svg
               aria-hidden="true"
-              className="w-5 h-5 text-slate-900"
+              className="w-5 h-5 text-slate-900 dark:text-white"
               fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +85,7 @@ export const CompaniesList = ({ _companies }: CompaniesListProps) => {
           <input
             type="text"
             id="simple-search"
-            className="w-full rounded-lg border-2 border-slate-200 pl-10 pr-4 py-3 text-md text-slate-900 placeholder-slate-400"
+            className="w-full rounded-lg border-2  pl-10 pr-4 py-3 text-md text-slate-900 placeholder-slate-400 border-slate-200 dark:text-white dark:bg-slate-800 dark:placeholder-slate-300 dark:border-slate-600"
             placeholder="Search Companies"
             required
             onChange={(e) => setSearch(e.target.value)}
@@ -117,8 +117,8 @@ export const CompaniesList = ({ _companies }: CompaniesListProps) => {
           </section>
         ) : (
           <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
-            <div className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg bg-slate-300 animate-pulse" />
-            <div className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg bg-slate-300 animate-pulse" />
+            <div className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg animate-pulse bg-slate-300 dark:bg-slate-600" />
+            <div className="p-4 aspect-[4/5] flex items-center justify-center shadow-lg animate-pulse bg-slate-300 dark:bg-slate-600" />
           </section>
         )}
       </main>

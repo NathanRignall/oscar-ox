@@ -36,7 +36,7 @@ const Collapse = ({
           className={clsx(
             first && "rounded-t-xl",
             !(active == id) && last && "rounded-b-xl border-b-2",
-            "flex items-center justify-between w-full p-5 font-medium text-left text-slate-900 bg-white border-2 border-b-0 border-slate-200 focus:ring-4 focus:ring-blue-300 hover:bg-slate-100"
+            "flex items-center justify-between w-full p-5 font-medium text-left border-2 border-b-0 text-slate-900 bg-white border-slate-200 hover:bg-slate-100 dark:text-white dark:bg-slate-800 dark:border-slate-600 dark:hover:bg-slate-700"
           )}
           aria-expanded="false"
           aria-controls={`collapse-body-${id}`}
@@ -65,7 +65,7 @@ const Collapse = ({
         <div
           className={clsx(
             last && "rounded-b-xl border-b-2",
-            "p-5 border-2 border-b-0 border-slate-200"
+            "p-5 border-2 border-b-0 border-slate-200 dark:border-slate-600"
           )}
         >
           {children}
@@ -87,7 +87,7 @@ export const AdminCollapse = () => {
         setActive={setActive}
         first
       >
-        <p className="text-slate-600">
+        <p className="text-slate-600 dark:text-slate-300">
           Any user can create a proudction company. This can be done in the user
           profile admin panel by clicking the &quot;Create Company&quot; button,
           this will create a production company with the user as an admin
@@ -96,14 +96,14 @@ export const AdminCollapse = () => {
 
         <br />
 
-        <p className="text-slate-600">
+        <p className="text-slate-600 dark:text-slate-300">
           The production company can then be used to create productions with
           events/participants and vacancies.
         </p>
 
         <br />
 
-        <p className="text-slate-600">
+        <p className="text-slate-600 dark:text-slate-300">
           To publish any production, event, participant or vacancy the
           production company must first be varified. This can be done by
           clicking the &quot;Verify Company&quot; button in the company settings
@@ -119,7 +119,7 @@ export const AdminCollapse = () => {
         active={active}
         setActive={setActive}
       >
-        <p className="text-slate-600">
+        <p className="text-slate-600 dark:text-slate-300">
           Admin members of a production company can create productions.
           Productions can be created by clicking the &quot;Create
           Production&quot; button in the company&apos;s production page.
@@ -127,7 +127,7 @@ export const AdminCollapse = () => {
 
         <br />
 
-        <p className="text-slate-600">
+        <p className="text-slate-600 dark:text-slate-300">
           For a production to be public it must be published, once you are happy
           with the production you can publish by toggling the
           &quot;Published&quot; switch in the specific production&apos;s
@@ -141,7 +141,7 @@ export const AdminCollapse = () => {
         active={active}
         setActive={setActive}
       >
-        <p className="text-slate-600">
+        <p className="text-slate-600 dark:text-slate-300">
           A production can contain multiple events. Events can be created by
           clicking the &quot;Add Event&quot; button in the specific
           production&apos;s page. Events must have a start date/time and
@@ -152,7 +152,7 @@ export const AdminCollapse = () => {
 
         <br />
 
-        <p className="text-slate-600">
+        <p className="text-slate-600 dark:text-slate-300">
           The events created are visible on the main Oscar Ox calendar page only
           when the production is published and company is verified.
         </p>
@@ -164,7 +164,7 @@ export const AdminCollapse = () => {
         active={active}
         setActive={setActive}
       >
-        <p className="text-slate-600">
+        <p className="text-slate-600 dark:text-slate-300">
           A production can contain multiple participants. Participants can be
           created by clicking the &quot;Add Participant&quot; button in the
           specific production&apos;s page. Participants must link to a
@@ -179,7 +179,7 @@ export const AdminCollapse = () => {
         active={active}
         setActive={setActive}
       >
-        <p className="text-slate-600">
+        <p className="text-slate-600 dark:text-slate-300">
           A production can contain multiple vacancies. Vacancies can be created
           by clicking the &quot;Add Vacancy&quot; button in the specific
           production&apos;s page. Vacancies must contain a title, description
@@ -188,7 +188,7 @@ export const AdminCollapse = () => {
 
         <br />
 
-        <p className="text-slate-600">In order</p>
+        <p className="text-slate-600 dark:text-slate-300">In order</p>
       </Collapse>
 
       <Collapse
@@ -198,7 +198,7 @@ export const AdminCollapse = () => {
         setActive={setActive}
         last
       >
-        <p className="text-slate-600">Some</p>
+        <p className="text-slate-600 dark:text-slate-300">Some</p>
       </Collapse>
     </div>
   );

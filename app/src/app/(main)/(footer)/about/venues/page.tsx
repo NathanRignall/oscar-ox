@@ -29,29 +29,29 @@ export default async function Venues() {
   return (
     <>
       <header className="flex max-w-3xl mx-auto mb-8">
-        <h1 className="text-4xl font-bold text-slate-900">Venues</h1>
+        <h1 className="text-4xl font-bold text-slate-900 dark:text-white">Venues</h1>
       </header>
 
       <main className="max-w-3xl mx-auto">
-        <div className="w-full aspect-[2/1] bg-slate-600 rounded-md overflow-hidden">
+        <div className="w-full aspect-[2/1] rounded-md overflow-hiddenbg-slate-700 dark:bg-slate-600">
           <MapWithNoSSR points={venues} />
         </div>
         <ul className="mt-8 grid sm:grid-cols-2 gap-4">
           {venues.map((venue) => (
             <li
               key={venue.id}
-              className=" bg-white rounded-lg border-2 border-slate-200 flex"
+              className=" rounded-lg border-2  flex bg-white border-slate-200 dark:bg-slate-800 dark:border-slate-600"
             >
               <div className="p-6 flex-grow">
                 <Link href={`/about/venues/${venue.slug}`}>
-                  <h2 className="text-lg font-bold text-slate-900 underline">
+                  <h2 className="text-lg font-bold underline text-slate-900 dark:text-white">
                     {venue.title}
                   </h2>
                 </Link>
-                <p className="text-sm text-slate-600 ">{venue.location}</p>
+                <p className="text-sm text-slate-600 dark:text-slate-300">{venue.location}</p>
               </div>
 
-              <div className="h-full aspect-1 relative bg-slate-300 rounded-r-md overflow-hidden">
+              <div className="h-full aspect-1 relative rounded-r-md overflow-hidden bg-slate-300 dark:bg-slate-600">
                 <Image
                   alt=""
                   src={`media/venues/${venue.image_url}`}
