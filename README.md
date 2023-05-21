@@ -12,12 +12,12 @@ Start supabase with ```supabase start```
 
 Create an .env.local file in the client root directory and add the following variables:
     
-    ``` 
-    NEXT_PUBLIC_STAGE=dev
-    NEXT_PUBLIC_URL=http://localhost:3000
-    NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-    NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-    ```
+``` 
+NEXT_PUBLIC_STAGE=dev
+NEXT_PUBLIC_URL=http://localhost:3000
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
 
 Start the frontend with ```npm run dev```
 
