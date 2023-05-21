@@ -91,7 +91,7 @@ export const EditCompanyForm = ({ company }: EditCompanyFormProps) => {
             <div className="grow">
               <label
                 htmlFor="name"
-                className="block mb-2 text-sm font-medium text-gray-600"
+                className="block mb-2 text-sm font-medium text-gray-600 dark:text-slate-300"
               >
                 Company Name
               </label>
@@ -100,7 +100,7 @@ export const EditCompanyForm = ({ company }: EditCompanyFormProps) => {
                 type="text"
                 name="name"
                 placeholder="Company Name..."
-                className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
+                className="relative block w-full rounded-md border-2 px-4 py-3 text-md text-slate-900 placeholder-slate-400 border-slate-200 dark:text-white dark:bg-slate-800 dark:placeholder-slate-300 dark:border-slate-600"
               />
 
               {errors.name && touched.name && (
@@ -110,7 +110,7 @@ export const EditCompanyForm = ({ company }: EditCompanyFormProps) => {
             <div className="grow">
               <label
                 htmlFor="slug"
-                className="block mb-2 text-sm font-medium text-gray-600"
+                className="block mb-2 text-sm font-medium text-gray-600 dark:text-slate-300"
               >
                 Slug
               </label>
@@ -119,7 +119,7 @@ export const EditCompanyForm = ({ company }: EditCompanyFormProps) => {
                 type="text"
                 name="slug"
                 placeholder="Slug..."
-                className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
+                className="relative block w-full rounded-md border-2 px-4 py-3 text-md text-slate-900 placeholder-slate-400 border-slate-200 dark:text-white dark:bg-slate-800 dark:placeholder-slate-300 dark:border-slate-600"
               />
               {errors.slug && touched.slug && (
                 <p className="mt-2 text-sm text-red-600">{errors.slug}</p>
@@ -130,7 +130,7 @@ export const EditCompanyForm = ({ company }: EditCompanyFormProps) => {
           <div className="mb-4">
             <label
               htmlFor="description"
-              className="block mb-2 text-sm font-medium text-gray-600"
+              className="block mb-2 text-sm font-medium text-gray-600 dark:text-slate-300"
             >
               Description
             </label>
@@ -141,7 +141,7 @@ export const EditCompanyForm = ({ company }: EditCompanyFormProps) => {
               rows={2}
               name="description"
               placeholder="Description..."
-              className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
+              className="relative block w-full rounded-md border-2 px-4 py-3 text-md text-slate-900 placeholder-slate-400 border-slate-200 dark:text-white dark:bg-slate-800 dark:placeholder-slate-300 dark:border-slate-600"
             />
             {errors.description && touched.description && (
               <p className="mt-2 text-sm text-red-600">{errors.description}</p>
@@ -151,7 +151,7 @@ export const EditCompanyForm = ({ company }: EditCompanyFormProps) => {
           <div className="mb-4">
             <label
               htmlFor="main_colour"
-              className="block mb-2 text-sm font-medium text-gray-600"
+              className="block mb-2 text-sm font-medium text-gray-600 dark:text-slate-300"
             >
               Main Colour
             </label>
@@ -160,7 +160,7 @@ export const EditCompanyForm = ({ company }: EditCompanyFormProps) => {
               type="text"
               name="main_colour"
               placeholder="Company main_colour..."
-              className="relative block rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
+              className="relative block rounded-md border-2 px-4 py-3 text-md text-slate-900 placeholder-slate-400 border-slate-200 dark:text-white dark:bg-slate-800 dark:placeholder-slate-300 dark:border-slate-600"
             />
             {errors.main_colour && touched.main_colour && (
               <p className="mt-2 text-sm text-red-600">{errors.main_colour}</p>
@@ -175,8 +175,8 @@ export const EditCompanyForm = ({ company }: EditCompanyFormProps) => {
                 name="is_public"
                 className="sr-only peer"
               />
-              <div className="w-11 h-6 bg-slate-200 rounded-full peer  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-slate-800"></div>
-              <span className="ml-3 text-sm font-medium text-slate-600">
+              <div className="w-11 h-6 bg-slate-200 dark:bg-slate-700 rounded-full peer  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-slate-800 dark:peer-checked:bg-slate-400"></div>
+              <span className="ml-3 text-sm font-medium text-slate-600 dark:text-slate-300">
                 Public
               </span>
             </label>

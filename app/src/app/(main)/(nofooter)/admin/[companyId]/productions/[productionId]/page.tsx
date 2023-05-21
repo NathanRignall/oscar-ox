@@ -111,7 +111,7 @@ export default async function Production({
     <>
       <header>
         <div className="flex items-center">
-          <h1 className="flex items-center text-4xl font-bold text-slate-900 mb-3">
+          <h1 className="flex items-center text-4xl font-bold mb-3 text-slate-900 dark:text-white">
             <Link href={`/admin/${params.companyId}/productions`}>
               <svg
                 className="h-5 w-5 mr-4"
@@ -141,7 +141,7 @@ export default async function Production({
 
         <div className="sm:flex">
           <div className="flex-1">
-            <p className="mb-3 text-lg text-slate-600 inline-block">
+            <p className="mb-3 text-lg inline-block text-slate-600 dark:text-slate-300">
               {production.description}{" "}
             </p>
             <EditProductionModal
@@ -152,7 +152,7 @@ export default async function Production({
             />
           </div>
 
-          <div className="h-full aspect-1 relative bg-slate-300 rounded-md overflow-hidden min-w-[200px]">
+          <div className="h-full aspect-1 relative  rounded-md overflow-hidden min-w-[200px] bg-slate-300 dark:bg-slate-700">
             <Image
               alt=""
               src={`media/companies/${params.companyId}/productions/${params.productionId}/main.jpeg`}

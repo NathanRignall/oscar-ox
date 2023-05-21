@@ -63,7 +63,7 @@ export const AddEventModal = ({ productionId }: AddEventModalProps) => {
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen} button="Add Event">
-      <div className="text-3xl text-slate-900 font-bold mb-6">Add Event</div>
+      <div className="text-3xl font-bold mb-6 text-slate-900 dark:text-white">Add Event</div>
 
       <Formik
         initialValues={initialValues}
@@ -81,14 +81,14 @@ export const AddEventModal = ({ productionId }: AddEventModalProps) => {
               <AutoCompleteVenue />
 
               {errors.venueId && touched.venueId && (
-                <p className="mt-2 text-sm text-red-600">{errors.venueId}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-300">{errors.venueId}</p>
               )}
             </div>
 
             <div className="mb-4">
               <label
                 htmlFor="datetime"
-                className="block mb-2 text-sm font-medium text-gray-600"
+                className="block mb-2 text-sm font-medium text-slate-600 dark:text-slate-300"
               >
                 Start Time
               </label>
@@ -101,11 +101,11 @@ export const AddEventModal = ({ productionId }: AddEventModalProps) => {
                 timeFormat="HH:mm"
                 timeIntervals={15}
                 dateFormat="MM/dd/yyyy HH:mm"
-                className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
+                className="relative block w-full rounded-md border-2 px-4 py-3 text-md text-slate-900 placeholder-slate-400 border-slate-200 dark:text-white dark:bg-slate-800 dark:placeholder-slate-300 dark:border-slate-600"
               />
 
               {errors.datetime && touched.datetime && (
-                <p className="mt-2 text-sm text-red-600">null</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-300">null</p>
               )}
             </div>
 
@@ -116,7 +116,7 @@ export const AddEventModal = ({ productionId }: AddEventModalProps) => {
 
               <div className="text-center">
                 {formError ? (
-                  <p className="mt-2 text-sm text-red-600">{formError}</p>
+                  <p className="mt-2 text-sm text-red-600 dark:text-red-300">{formError}</p>
                 ) : (
                   <div className="mt-2 h-5" />
                 )}

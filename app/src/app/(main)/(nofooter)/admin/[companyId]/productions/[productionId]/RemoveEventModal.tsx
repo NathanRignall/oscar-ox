@@ -51,14 +51,14 @@ export const RemoveEventModal = ({
       button="Remove"
       buttonSize="sm"
     >
-      <div className="text-3xl text-slate-900 font-bold mb-1">Remove Event</div>
+      <div className="text-3xl font-bold mb-1 text-slate-900 dark:text-white">Remove Event</div>
 
-      <p className="text-lg text-slate-600 mb-6">
+      <p className="text-lg mb-6 text-slate-600 dark:text-slate-300">
         You are about to remove a event from the production. Are you sure you
         would like to continue?
       </p>
 
-      <p className="text-lg text-slate-600 mb-6 italic">
+      <p className="text-lg mb-6 italic text-slate-600 dark:text-slate-300">
         {time} - {venue}
       </p>
 
@@ -69,7 +69,7 @@ export const RemoveEventModal = ({
 
         <div className="text-center">
           {formError ? (
-            <p className="mt-2 text-sm text-red-600">{formError}</p>
+            <p className="mt-2 text-sm text-red-600 dark:text-red-300">{formError}</p>
           ) : (
             <div className="mt-2 h-5" />
           )}

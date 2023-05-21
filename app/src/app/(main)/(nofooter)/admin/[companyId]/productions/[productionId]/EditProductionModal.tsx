@@ -74,7 +74,7 @@ export const EditProductionModal = ({
   };
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
-      <div className="text-3xl text-slate-900 font-bold mb-6">
+      <div className="text-3xl font-bold mb-6 text-slate-900 dark:text-white">
         Edit production
       </div>
 
@@ -88,7 +88,7 @@ export const EditProductionModal = ({
             <div className="mb-4">
               <label
                 htmlFor="title"
-                className="block mb-2 text-sm font-medium text-gray-600"
+                className="block mb-2 text-sm font-medium text-slate-600 dark:text-slate-300"
               >
                 Production Title
               </label>
@@ -97,18 +97,18 @@ export const EditProductionModal = ({
                 type="text"
                 name="title"
                 placeholder="Title..."
-                className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
+                className="relative block w-full rounded-md border-2 px-4 py-3 text-md text-slate-900 placeholder-slate-400 border-slate-200 dark:text-white dark:bg-slate-800 dark:placeholder-slate-300 dark:border-slate-600"
               />
 
               {errors.title && touched.title && (
-                <p className="mt-2 text-sm text-red-600">{errors.title}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-300">{errors.title}</p>
               )}
             </div>
 
             <div className="mb-4">
               <label
                 htmlFor="description"
-                className="block mb-2 text-sm font-medium text-gray-600"
+                className="block mb-2 text-sm font-medium text-slate-600 dark:text-slate-300"
               >
                 Production Description
               </label>
@@ -119,10 +119,11 @@ export const EditProductionModal = ({
                 rows={4}
                 name="description"
                 placeholder="Description..."
-                className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
+                className="relative block w-full rounded-md border-2 px-4 py-3 text-md text-slate-900 placeholder-slate-400 border-slate-200 dark:text-white dark:bg-slate-800 dark:placeholder-slate-300 dark:border-slate-600"
               />
+
               {errors.description && touched.description && (
-                <p className="mt-2 text-sm text-red-600">
+                <p className="mt-2 text-sm text-red-600 dark:text-red-300">
                   {errors.description}
                 </p>
               )}
@@ -136,8 +137,8 @@ export const EditProductionModal = ({
                   name="is_published"
                   className="sr-only peer"
                 />
-                <div className="w-11 h-6 bg-slate-200 rounded-full peer  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-slate-800"></div>
-                <span className="ml-3 text-sm font-medium text-slate-600">
+                <div className="w-11 h-6 bg-slate-200 dark:bg-slate-700 rounded-full peer  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-slate-800 dark:peer-checked:bg-slate-400"></div>
+              <span className="ml-3 text-sm font-medium text-slate-600 dark:text-slate-300">
                   Published
                 </span>
               </label>
@@ -150,7 +151,7 @@ export const EditProductionModal = ({
 
               <div className="text-center">
                 {formError ? (
-                  <p className="mt-2 text-sm text-red-600">{formError}</p>
+                  <p className="mt-2 text-sm text-red-600 dark:text-red-300">{formError}</p>
                 ) : (
                   <div className="mt-2 h-5" />
                 )}

@@ -74,7 +74,7 @@ export const EditProfileModal = ({
             <div className="mb-4">
               <label
                 htmlFor="biography"
-                className="block mb-2 text-sm font-medium text-gray-600 dark:text-slate-300"
+                className="block mb-2 text-sm font-medium text-slate-600 dark:text-slate-300"
               >
                 Personal Biography
               </label>
