@@ -168,7 +168,9 @@ export default async function Productions({ venueId }: ProductionsProps) {
                 className="rounded-lg border-2 flex sm:col-span-2 bg-white border-slate-200 dark:bg-slate-800 dark:border-slate-600"
               >
                 <div className="p-6 flex-grow">
-                  <Link href={`/companies/${production.company.slug}/production/${production.id}`}>
+                  <Link
+                    href={`/companies/${production.company.slug}/production/${production.id}`}
+                  >
                     <h3 className="text-lg font-bold underline mb-2 text-slate-900 dark:text-white">
                       {production.title}
                     </h3>

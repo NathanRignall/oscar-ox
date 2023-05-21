@@ -76,7 +76,7 @@ export default async function Production({
       id: vacancy.id,
       title: vacancy.title,
       is_open: vacancy.is_open,
-      is_published: vacancy.is_published
+      is_published: vacancy.is_published,
     })),
     participants: getArray(_production.participants).map((participant) => ({
       id: participant.id,
@@ -94,18 +94,20 @@ export default async function Production({
       family_name: string;
     };
     title: string;
-  }
+  };
 
   type Category = {
     id: string;
     title: string;
     participants: Participant[];
-  }
+  };
 
   const categories: Category[] = [];
 
   production.participants.forEach((participant) => {
-    const category = categories.find((category) => category.id === participant.category.id);
+    const category = categories.find(
+      (category) => category.id === participant.category.id
+    );
 
     if (category) {
       category.participants.push(participant);
@@ -120,7 +122,6 @@ export default async function Production({
 
   return (
     <article>
-
       <div className="sm:flex mb-8">
         <div className="flex-1">
           <h2 className="mb-1 text-4xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
@@ -130,11 +131,13 @@ export default async function Production({
           {production.events.length > 0 && (
             <ul className="flex flex-col">
               {production.events.map((event) => {
-                const time = new Date(event.start_time).toLocaleTimeString("en-GB", {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })
-                  + " - " + new Date(event.start_time).toLocaleDateString("en-GB", {
+                const time =
+                  new Date(event.start_time).toLocaleTimeString("en-GB", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  }) +
+                  " - " +
+                  new Date(event.start_time).toLocaleDateString("en-GB", {
                     year: "numeric",
                     month: "long",
                     day: "numeric",
@@ -142,12 +145,17 @@ export default async function Production({
 
                 return (
                   <li key={event.id} className="block">
-                    <p className="text-lg text-slate-600 dark:text-slate-300">{time} - <Link className="underline" href={`/about/venues/${event.venue.slug}`}>
-                      {event.venue.title}
-                    </Link>
+                    <p className="text-lg text-slate-600 dark:text-slate-300">
+                      {time} -{" "}
+                      <Link
+                        className="underline"
+                        href={`/about/venues/${event.venue.slug}`}
+                      >
+                        {event.venue.title}
+                      </Link>
                     </p>
                   </li>
-                )
+                );
               })}
             </ul>
           )}
@@ -171,7 +179,6 @@ export default async function Production({
         {production.description}
       </p>
 
-
       {categories.length > 0 && (
         <div className="mb-8">
           <h3 className="mb-3 text-3xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
@@ -180,7 +187,10 @@ export default async function Production({
 
           <ul className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
             {categories.map((category) => (
-              <li key={category.id} className="rounded-lg border-2 p-6 bg-white border-slate-200 dark:bg-slate-800 dark:border-slate-600">
+              <li
+                key={category.id}
+                className="rounded-lg border-2 p-6 bg-white border-slate-200 dark:bg-slate-800 dark:border-slate-600"
+              >
                 <h4 className="mb-1 text-2xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">
                   {category.title}
                 </h4>
@@ -188,9 +198,16 @@ export default async function Production({
                 <ul className="flex flex-col">
                   {category.participants.map((participant) => (
                     <li key={participant.id} className="block">
-                      <p className="text-md text-slate-600 dark:text-slate-300">{participant.title} - <Link href={`/profile/${participant.profile.id}`} className="underline">
-                          {participant.profile.given_name} {participant.profile.family_name}
-                        </Link></p>
+                      <p className="text-md text-slate-600 dark:text-slate-300">
+                        {participant.title} -{" "}
+                        <Link
+                          href={`/profile/${participant.profile.id}`}
+                          className="underline"
+                        >
+                          {participant.profile.given_name}{" "}
+                          {participant.profile.family_name}
+                        </Link>
+                      </p>
                     </li>
                   ))}
                 </ul>
@@ -199,9 +216,6 @@ export default async function Production({
           </ul>
         </div>
       )}
-
-
     </article>
-  )
-
+  );
 }

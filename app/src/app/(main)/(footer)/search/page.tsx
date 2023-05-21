@@ -104,7 +104,10 @@ const Production = ({
       <div className="p-6 flex-grow">
         {!loading ? (
           <div className="flex flex-col sm:flex-row mb-2 space-y-1 sm:space-y-0">
-            <Link href={`/companies/${production.company.slug}/production/${production.id}`} className="grow">
+            <Link
+              href={`/companies/${production.company.slug}/production/${production.id}`}
+              className="grow"
+            >
               <h2 className="text-lg font-bold underline text-slate-900 dark:text-white">
                 {production.title}
               </h2>

@@ -146,7 +146,9 @@ export default async function Account({
                     key={participant.id}
                     className="rounded-lg border-2 p-6 bg-white border-slate-200 dark:bg-slate-800 dark:border-slate-600"
                   >
-                    <Link href={`/companies/${participant.production.company.slug}/production/${participant.production.id}`}>
+                    <Link
+                      href={`/companies/${participant.production.company.slug}/production/${participant.production.id}`}
+                    >
                       <p className="text-xl font-bold uppercase text-slate-900 dark:text-white">
                         {new Date(
                           participant.production.event.start_time
@@ -159,7 +161,8 @@ export default async function Account({
                         {participant.production.title}
                       </h3>
                       <p className="text-sm text-slate-600 dark:text-slate-300">
-                        {participant.title} - {participant.production.event.venue}
+                        {participant.title} -{" "}
+                        {participant.production.event.venue}
                       </p>
                     </Link>
                   </li>

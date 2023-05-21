@@ -28,7 +28,8 @@ export default async function Pages({
       is_public,
       is_verified
       `
-    ).match({ id: params.companyId })
+    )
+    .match({ id: params.companyId })
     .single();
 
   if (!company) notFound();
@@ -115,28 +116,21 @@ export default async function Pages({
       </h1>
 
       <ul className="flex flex-wrap gap-2 mb-3">
+        {company.is_verified && (
+          <li>
+            <Tag text="Verified" variant="blue" />
+          </li>
+        )}
 
-        {
-          company.is_verified && (
-            <li>
-              <Tag text="Verified" variant="blue" />
-            </li>
-          )
-        }
-
-
-        {
-          company.is_public ? (
-            <li>
-              <Tag text="Public" variant="green" />
-            </li>
-          ) : (
-            <li>
-              <Tag text="Private" variant="red" />
-            </li>
-          )
-        }
-
+        {company.is_public ? (
+          <li>
+            <Tag text="Public" variant="green" />
+          </li>
+        ) : (
+          <li>
+            <Tag text="Private" variant="red" />
+          </li>
+        )}
       </ul>
 
       <p className="mb-3 text-xl text-slate-600 dark:text-slate-300">
@@ -177,10 +171,9 @@ export default async function Pages({
                     scope="row"
                     className="px-4 py-4 whitespace-nowrap underline text-slate-900 dark:text-white"
                   >
-                    <Link
-                      href={`/profile/${response.profile.id}`}
-                    >
-                      {response.profile.given_name} {response.profile.family_name}
+                    <Link href={`/profile/${response.profile.id}`}>
+                      {response.profile.given_name}{" "}
+                      {response.profile.family_name}
                     </Link>
                   </th>
 
@@ -200,7 +193,9 @@ export default async function Pages({
                   </td>
 
                   <td className="px-4 py-4 text-right whitespace-nowrap underline font-semibold text-slate-900 dark:text-white">
-                    <Link href={`/admin/${params.companyId}/vacancies/${response.vacancy.id}#${response.id}`}>
+                    <Link
+                      href={`/admin/${params.companyId}/vacancies/${response.vacancy.id}#${response.id}`}
+                    >
                       {response.vacancy.title}
                     </Link>
                   </td>

@@ -164,7 +164,10 @@ export default async function Production({
               priority
             />
             <div className="w-full h-full">
-              <EditPictureModal companyId={params.companyId} productionId={params.productionId} />
+              <EditPictureModal
+                companyId={params.companyId}
+                productionId={params.productionId}
+              />
             </div>
           </div>
         </div>

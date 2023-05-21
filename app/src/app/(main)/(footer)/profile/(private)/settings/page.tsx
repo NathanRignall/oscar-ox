@@ -50,48 +50,6 @@ export default async function Account() {
     tags: getArray(_profile.tags).map((tag) => getSingle(tag.company)),
   };
 
-  const { data: _participants } = await supabase
-    .from("participants")
-    .select(
-      `
-      id,
-      title,
-      production:productions (
-        id,
-        title,
-        events:events (
-          id,
-          start_time,
-          venue:venues(
-            id, 
-            title
-          )
-        )
-      )
-    `
-    )
-    .match({ profile_id: user?.id });
-
-  const participants = getArray(_participants).map((participant: any) => ({
-    id: participant.id,
-    title: participant.title,
-    production: {
-      id: getSingle(participant.production).id,
-      title: getSingle(participant.production).title,
-      event: {
-        id: getSingle(getSingle(participant.production).events).id,
-        start_time: getSingle(getSingle(participant.production).events)
-          .start_time,
-        venue: getSingle(
-          getSingle(getSingle(participant.production).events).venue
-        ).title,
-      },
-    },
-  }));
-
-  const { data, error } =
-    await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
-
   return (
     <>
       <header className="max-w-3xl mx-auto mb-8">
@@ -105,18 +63,11 @@ export default async function Account() {
 
       <main className="max-w-3xl mx-auto">
         <section>
-          <h2 className="text-4xl font-bold text-slate-900 dark:text-white">
+          <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">
             Security
           </h2>
+          <UpdatePasswordModal />
         </section>
-        <UpdatePasswordModal />
-        <br />
-        Change Email
-        <br />
-        Delete Account
-        <br />
-        Manage Subsciptions
-        {JSON.stringify(data)}
       </main>
     </>
   );
