@@ -26,7 +26,7 @@ const NavbarLink = ({ href, text, active }: NavbarLinkProps) => {
         href={href}
         className={clsx(
           active && "underline underline-offset-4 decoration-2",
-          "block px-3 py-2 text-lg font-medium text-slate-900 border-2 border-white hover:bg-slate-200 hover:border-slate-400 rounded-md"
+          "block px-3 py-2 text-lg font-medium border-2 rounded-md text-slate-900 border-transparent hover:bg-slate-200 hover:border-slate-400 dark:text-white dark:hover:bg-slate-900 dark:hover:border-slate-700"
         )}
       >
         {text}
@@ -58,10 +58,10 @@ export const Navbar = ({ loggedIn }: NavbarProps) => {
 
   return (
     <>
-      <nav className="z-40 bg-white border-b-2 border-slate-200">
+      <nav className="z-40 border-b-2 bg-white border-slate-200 dark:bg-slate-800 dark:border-slate-600">
         <div className="max-w-7xl flex flex-wrap items-center justify-between mx-auto px-4 py-3 md:px-6 md:py-2 lg:px-8 h-16 md:h-20">
           <Link href="/" className="flex items-center">
-            <span className="self-center text-3xl md:text-4xl font-bold whitespace-nowrap text-slate-900">
+            <span className="self-center text-3xl md:text-4xl font-bold whitespace-nowrap text-slate-900 dark:text-white">
               Oscar Ox
             </span>
             <div className="ml-2">
@@ -80,7 +80,7 @@ export const Navbar = ({ loggedIn }: NavbarProps) => {
           <button
             data-collapse-toggle="navbar-default"
             type="button"
-            className="inline-flex items-center p-2 ml-3 text-sm border-2 text-slate-500 border-slate-200 rounded-lg md:hidden"
+            className="inline-flex items-center p-2 ml-3 text-sm border-2 rounded-lg md:hidden text-slate-500 border-slate-200 dark:text-slate-300 dark:border-slate-600"
             aria-controls="navbar-default"
             aria-expanded="false"
             onClick={toggleShow}
@@ -108,7 +108,7 @@ export const Navbar = ({ loggedIn }: NavbarProps) => {
             )}
             id="navbar-default"
           >
-            <ul className="font-medium flex flex-col md:flex-row p-4 md:p-0 mt-4 md:mt-0 border-2 md:border-0 border-slate-200 rounded-lg bg-white md:space-x-2 space-y-1 md:space-y-0">
+            <ul className="font-medium flex flex-col md:flex-row p-4 md:p-0 mt-4 md:mt-0 border-2 md:border-0 rounded-lg  md:space-x-2 space-y-1 md:space-y-0 bg-white border-slate-200 dark:bg-slate-800 dark:border-slate-600">
               {links.map((link) => (
                 <NavbarLink
                   key={link.href}
@@ -122,7 +122,7 @@ export const Navbar = ({ loggedIn }: NavbarProps) => {
                 <li>
                   <Link
                     href="/profile"
-                    className="block rounded-md px-3 py-2 text-lg font-medium text-slate-900 bg-slate-100 border-2 border-slate-100 hover:bg-slate-200 hover:border-slate-400"
+                    className="block rounded-md px-3 py-2 text-lg font-medium text-slate-900 bg-slate-100 border-2 border-slate-100 hover:bg-slate-200 hover:border-slate-400 dark:text-white dark:bg-slate-700 dark:border-slate-500 dark:hover:bg-slate-900 dark:hover:border-slate-700"
                   >
                     Profile
                   </Link>
@@ -131,7 +131,7 @@ export const Navbar = ({ loggedIn }: NavbarProps) => {
                 <li>
                   <Link
                     href="/auth/login"
-                    className="block rounded-md px-3 py-2 text-lg font-medium text-slate-900 bg-white border-2 border-slate-200 hover:bg-slate-200 hover:border-slate-400"
+                    className="block rounded-md px-3 py-2 text-lg font-medium text-slate-900 bg-white border-2 border-slate-200 hover:bg-slate-200 hover:border-slate-400 dark:text-white dark:bg-slate-700 dark:border-slate-500 dark:hover:bg-slate-900 dark:hover:border-slate-700"
                   >
                     Login
                   </Link>
