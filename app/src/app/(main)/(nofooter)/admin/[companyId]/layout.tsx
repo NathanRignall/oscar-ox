@@ -80,7 +80,7 @@ export default async function AdminLayout({
             {company.name}
           </h2>
 
-          <ul className="flex-1 px-3 py-4 border-b-2 space-y-2 border-slate-200 dark:border-slate-600">
+          <ul className=" px-3 py-4 border-b-2 space-y-2 border-slate-200 dark:border-slate-600">
             {Links.map((link) => (
               <li key={link.href}>
                 <Link

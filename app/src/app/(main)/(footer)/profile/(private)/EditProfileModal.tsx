@@ -59,7 +59,7 @@ export const EditProfileModal = ({
   };
 
   return (
-    <Modal isOpen={isOpen} setIsOpen={setIsOpen} size="sm">
+    <Modal isOpen={isOpen} setIsOpen={setIsOpen} size="sm" className="ml-2">
       <div className="text-3xl font-bold mb-6 text-slate-900 dark:text-white">
         Edit Biography
       </div>

@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { createServerClient } from "@/lib/supabase-server";
 import { getArray, getSingle } from "@/lib/supabase-type-convert";
 import { Tag } from "@/components/ui";
@@ -56,6 +57,10 @@ export default async function Account({
       production:productions (
         id,
         title,
+        company:companies (
+          id,
+          slug
+        ),
         events:events (
           id,
           start_time,
@@ -75,6 +80,7 @@ export default async function Account({
     production: {
       id: getSingle(participant.production).id,
       title: getSingle(participant.production).title,
+      company: getSingle(getSingle(participant.production).company),
       event: {
         id: getSingle(getSingle(participant.production).events).id,
         start_time: getSingle(getSingle(participant.production).events)
@@ -140,20 +146,22 @@ export default async function Account({
                     key={participant.id}
                     className="rounded-lg border-2 p-6 bg-white border-slate-200 dark:bg-slate-800 dark:border-slate-600"
                   >
-                    <p className="text-xl font-bold uppercase text-slate-900 dark:text-white">
-                      {new Date(
-                        participant.production.event.start_time
-                      ).toLocaleString("default", { month: "long" })}{" "}
-                      {new Date(
-                        participant.production.event.start_time
-                      ).toLocaleString("default", { year: "numeric" })}
-                    </p>
-                    <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-                      {participant.production.title}
-                    </h3>
-                    <p className="text-sm text-slate-600 dark:text-slate-300">
-                      {participant.title} - {participant.production.event.venue}
-                    </p>
+                    <Link href={`/companies/${participant.production.company.slug}/production/${participant.production.id}`}>
+                      <p className="text-xl font-bold uppercase text-slate-900 dark:text-white">
+                        {new Date(
+                          participant.production.event.start_time
+                        ).toLocaleString("default", { month: "long" })}{" "}
+                        {new Date(
+                          participant.production.event.start_time
+                        ).toLocaleString("default", { year: "numeric" })}
+                      </p>
+                      <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+                        {participant.production.title}
+                      </h3>
+                      <p className="text-sm text-slate-600 dark:text-slate-300">
+                        {participant.title} - {participant.production.event.venue}
+                      </p>
+                    </Link>
                   </li>
                 ))}
               </ul>

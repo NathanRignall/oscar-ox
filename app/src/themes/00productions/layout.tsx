@@ -18,8 +18,8 @@ export default function Layout({ children, company }: LayoutProps) {
           <div className="flex flex-row">
             <Image
               src="media/themes/00productions/logo.png"
-              width={150}
-              height={150}
+              width={100}
+              height={100}
               alt="00 Productions Logo"
             />
             <div className="flex flex-col justify-center ml-2">
