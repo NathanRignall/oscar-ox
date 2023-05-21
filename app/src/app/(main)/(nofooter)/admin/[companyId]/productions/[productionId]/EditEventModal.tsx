@@ -55,8 +55,6 @@ export const EditEventModal = ({ event }: EditEventModalProps) => {
   const validationSchema = object({
     venueId: string().required("Valid venue is required"),
     start_time: date().required("Valid start time is required"),
-    end_time: date(),
-    ticket_link: string(),
   });
 
   const onSubmit = async (values: FormValues) => {
@@ -64,8 +62,7 @@ export const EditEventModal = ({ event }: EditEventModalProps) => {
       .from("events")
       .update({
         venue_id: values.venueId,
-        start_time: values.start_time.toISOString(),
-        end_time: values.end_time.toISOString(),
+        start_time: values.start_time.toISOString()
       })
       .match({ id: event.id });
 
