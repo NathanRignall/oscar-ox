@@ -9,6 +9,10 @@
       "path": "app"
     },
     {
+      "mail": "mail",
+      "path": "mail"
+    },
+    {
       "name": "supabase-functions",
       "path": "supabase/functions"
     }
@@ -17,6 +21,7 @@
     "files.exclude": {
       "node_modules/": true,
       "app/": true,
+      "mail/": true,
       "supabase/functions/": true
     },
     "deno.importMap": "./supabase/functions/import_map.json"
