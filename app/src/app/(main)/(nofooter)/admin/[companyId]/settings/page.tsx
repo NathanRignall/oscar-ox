@@ -57,16 +57,16 @@ export default async function Settings({
 
   return (
     <>
-      <h1 className="text-4xl font-bold text-slate-900">Settings</h1>
+      <h1 className="text-4xl font-bold text-slate-900 dark:text-white">Settings</h1>
 
       <article className="mt-4">
-        <h2 className="text-2xl font-bold text-slate-900 mb-4">Branding</h2>
+        <h2 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white">Branding</h2>
 
         <EditCompanyForm company={company} />
       </article>
 
       <article className="mt-4">
-        <h2 className="text-2xl font-bold text-slate-900 mb-4">Members</h2>
+        <h2 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white">Members</h2>
 
         <AddMemberModal companyId={params.companyId} />
 

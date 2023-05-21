@@ -30,7 +30,7 @@ export default async function Pages({
 
   return (
     <>
-      <h1 className="text-4xl font-bold text-slate-900">Pages</h1>
+      <h1 className="text-4xl font-bold text-slate-900 dark:text-white">Pages</h1>
 
       <section className="mt-4">
         <div className="mt-4 border-2 border-slate-200 rounded-lg overflow-hidden">

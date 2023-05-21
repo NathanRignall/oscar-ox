@@ -46,7 +46,7 @@ export default async function Productions({
 
   return (
     <>
-      <h1 className="text-4xl font-bold text-slate-900">Productions</h1>
+      <h1 className="text-4xl font-bold text-slate-900 dark:text-white">Productions</h1>
 
       <section className="mt-4">
         <AddProductionModal company_id={params.companyId} />

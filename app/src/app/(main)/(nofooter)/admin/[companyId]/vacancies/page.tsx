@@ -49,7 +49,7 @@ export default async function Vacancies({
 
   return (
     <>
-      <h1 className="text-4xl font-bold text-slate-900">Vacancies</h1>
+      <h1 className="text-4xl font-bold text-slate-900 dark:text-white">Vacancies</h1>
 
       <section className="mt-4">
         <NewVacancyButton companyId={params.companyId} />

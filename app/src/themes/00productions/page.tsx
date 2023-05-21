@@ -38,7 +38,7 @@ const components = (companyId: string) => {
 
 export default function Page({ companyId, source }: PageProps) {
   return (
-    <div>
+    <div className="text-slate-900 dark:text-white">
       {/* @ts-expect-error */}
       <MDXRemote source={source} components={components(companyId)} />
     </div>
