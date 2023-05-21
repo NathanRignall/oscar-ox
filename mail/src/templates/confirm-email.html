@@ -1,0 +1,51 @@
+---
+title: "Confirm your email address"
+preheader: "Please confirm your email address in order to activate your account."
+bodyClass: bg-slate-50
+---
+
+<x-main>
+  <div class="bg-slate-50 sm:px-4 font-sans">
+    <table align="center">
+      <tr>
+        <td class="w-[552px] max-w-full">
+          <div class="my-10 sm:my-8 text-center">
+            <a class="text-5xl font-extrabold text-slate-900 [text-decoration:none]" href="https://ox.nlr.app">Oscar Ox</a>
+          </div>
+
+          <table class="w-full">
+            <tr>
+              <td class="p-12 sm:px-6 text-base text-slate-600 bg-white rounded-lg border-solid border-slate-200 border-2">
+                <h1 class="m-0 mb-6 text-2xl sm:leading-8 text-black font-semibold">
+                  Hello,
+                </h1>
+
+                <p class="m-0 leading-6">
+                  Please confirm your email address by clicking the button below:
+                </p>
+
+                <x-spacer height="24px" />
+
+                <x-button href="{{ .ConfirmationURL }}">
+                  Confirm email address &rarr;
+                </x-button>
+
+                <x-divider space-y="32px" class="bg-slate-200" />
+
+                <p class="m-0">
+                  If you didn't sign up for Oscar Ox, you can safely ignore this email.
+                  <br>
+                  <br>
+                  Thanks, <br />Oscar Ox
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr role="separator">
+        <td class="leading-12">&zwj;</td>
+      </tr>
+    </table>
+  </div>
+</x-main>
