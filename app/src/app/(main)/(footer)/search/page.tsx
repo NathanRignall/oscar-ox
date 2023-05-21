@@ -151,7 +151,7 @@ const Production = ({
         {!loading && (
           <Image
             alt=""
-            src={`profiles/${production.id || "default.jpg"}`}
+            src={`media/companies/${production.company.id}/images/${production.image_url}`}
             className="duration-200 ease-in-out rounded-b-md sm:rounded-bl-none sm:rounded-r-md"
             fill
             priority

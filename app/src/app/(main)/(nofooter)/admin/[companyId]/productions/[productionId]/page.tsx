@@ -13,6 +13,7 @@ import { NewVacancyButton } from "../../vacancies/NewVacancyButton";
 import { AddParticipantModal } from "./AddParticipantModal";
 import { EditParticipantModal } from "./EditParticipantModal";
 import { RemoveParticipantModal } from "./RemoveParticipantModal";
+import { EditPictureModal } from "./EditPictureModal";
 
 // do not cache this page
 export const revalidate = 0;
@@ -32,6 +33,7 @@ export default async function Production({
       id,
       title,
       description,
+      image_url,
       is_published,
       events(
         id,
@@ -82,6 +84,7 @@ export default async function Production({
     id: _production.id,
     title: _production.title,
     description: _production.description,
+    image_url: _production.image_url,
     is_published: _production.is_published,
     events: getArray(_production.events).map((event) => ({
       id: event.id,
@@ -155,11 +158,14 @@ export default async function Production({
           <div className="h-full aspect-1 relative  rounded-md overflow-hidden min-w-[200px] bg-slate-300 dark:bg-slate-700">
             <Image
               alt=""
-              src={`media/companies/${params.companyId}/productions/${params.productionId}/main.jpeg`}
+              src={`media/companies/${params.companyId}/images/${production.image_url}`}
               className={"duration-200 ease-in-out rounded-lg"}
               fill
               priority
             />
+            <div className="w-full h-full">
+              <EditPictureModal companyId={params.companyId} productionId={params.productionId} />
+            </div>
           </div>
         </div>
       </header>

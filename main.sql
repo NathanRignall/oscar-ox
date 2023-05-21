@@ -100,6 +100,7 @@ create table public.productions (
   company_id uuid references public.companies on delete cascade not null,
   title text not null,
   description text not null,
+  image_url text,
   is_published boolean not null default false,
   inserted_at timestamp with time zone default timezone('utc'::text, now()) not null,
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null
@@ -647,8 +648,14 @@ create policy "Anyone can view a profile" on storage.objects
 create policy "Anyone authenticated can insert a profile" on storage.objects
   for insert with check ((bucket_id = 'profiles') AND (auth.role() = 'authenticated'));
 
--- create a bucket for pictures
-insert into storage.buckets (id, name) values ('pictures', 'pictures');
+-- create a bucket for media
+insert into storage.buckets (id, name) values ('media', 'media');
 
-create policy "Anyone can view a picture" on storage.objects 
-  for select using ( bucket_id = 'pictures' );
+create policy "Anyone can view a piece of meida" on storage.objects 
+  for select using ( bucket_id = 'media' );
+
+create policy "Company admins can insert media" on storage.objects
+  for insert with check ((bucket_id = 'media') AND 
+  (auth.role() = 'authenticated') AND 
+  (storage.foldername(name))[1] = 'companies' AND 
+  (authorize_company_member((storage.foldername(name))[2]::uuid, auth.uid(), 'admin')));

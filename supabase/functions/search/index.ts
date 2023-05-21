@@ -65,6 +65,7 @@ serve(async (req) => {
           id,
           title,
           description,
+          image_url,
           is_published,
           events(
             id,
@@ -97,6 +98,7 @@ serve(async (req) => {
           id: production.id,
           title: production.title,
           description: production.description,
+          image_url: production.image_url,
           is_published: production.is_published,
           events: getArray(production.events).map((event) => ({
             id: event.id,
@@ -221,6 +223,14 @@ serve(async (req) => {
             ...(await getVenues()),
           ];
 
+    // jumble the data
+    for (let i = data.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * i);
+      const temp = data[i];
+      data[i] = data[j];
+      data[j] = temp;
+    }
+    
     // sort by most exact match to search term
     data.sort((a, b) => {
       const aName = a.data.name || a.data.title || a.data.given_name;

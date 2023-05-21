@@ -224,6 +224,7 @@ export interface Database {
           company_id: string
           description: string
           id: string
+          image_url: string | null
           inserted_at: string
           is_published: boolean
           title: string
@@ -233,6 +234,7 @@ export interface Database {
           company_id: string
           description: string
           id?: string
+          image_url?: string | null
           inserted_at?: string
           is_published?: boolean
           title: string
@@ -242,6 +244,7 @@ export interface Database {
           company_id?: string
           description?: string
           id?: string
+          image_url?: string | null
           inserted_at?: string
           is_published?: boolean
           title?: string
