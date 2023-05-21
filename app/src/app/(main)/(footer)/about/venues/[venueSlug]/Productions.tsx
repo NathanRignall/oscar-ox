@@ -26,6 +26,7 @@ export default async function Productions({ venueId }: ProductionsProps) {
           name,
           main_colour
         ),
+        image_url,
         title
       ),
       venue: venues (
@@ -46,6 +47,7 @@ export default async function Productions({ venueId }: ProductionsProps) {
         id: production.id,
         company: getSingle(production.company),
         title: production.title,
+        image_url: production.image_url,
       },
       venue: getSingle(event.venue),
       start_time: event.start_time,
@@ -61,6 +63,7 @@ export default async function Productions({ venueId }: ProductionsProps) {
       main_colour: string;
     };
     title: string;
+    image_url: string | null;
     events: {
       id: string;
       venue: {
@@ -91,6 +94,7 @@ export default async function Productions({ venueId }: ProductionsProps) {
         id: event.production.id,
         company: event.production.company,
         title: event.production.title,
+        image_url: event.production.image_url,
         events: [
           {
             id: event.id,
@@ -164,8 +168,8 @@ export default async function Productions({ venueId }: ProductionsProps) {
                 className="rounded-lg border-2 flex sm:col-span-2 bg-white border-slate-200 dark:bg-slate-800 dark:border-slate-600"
               >
                 <div className="p-6 flex-grow">
-                  <Link href={`/productions/${production.id}`}>
-                    <h3 className="text-lg font-boldunderline mb-2 text-slate-900 dark:text-white">
+                  <Link href={`/companies/${production.company.slug}/production/${production.id}`}>
+                    <h3 className="text-lg font-bold underline mb-2 text-slate-900 dark:text-white">
                       {production.title}
                     </h3>
                   </Link>
@@ -190,7 +194,7 @@ export default async function Productions({ venueId }: ProductionsProps) {
                 <div className="h-full aspect-1 relative rounded-r-md overflow-hidden bg-slate-300 dark:bg-slate-600">
                   <Image
                     alt=""
-                    src={`profiles/${production.id || "default.jpg"}`}
+                    src={`media/companies/${production.company.id}/images/${production.image_url}`}
                     className={"duration-200 ease-in-out rounded-r-md"}
                     fill
                     priority

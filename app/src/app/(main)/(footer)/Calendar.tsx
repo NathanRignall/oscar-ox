@@ -328,7 +328,7 @@ export const Calendar = () => {
                         variant={
                           coloursMap.get(event.production.id) || "purple"
                         }
-                        href={`/companies/${event.production.company.slug}`}
+                        href={`/companies/${event.production.company.slug}/production/${event.production.id}`}
                       />
                     );
                   })}
