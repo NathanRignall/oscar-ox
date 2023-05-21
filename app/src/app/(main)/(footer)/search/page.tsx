@@ -11,9 +11,9 @@ import clsx from "clsx";
 type CompaniesRecord = Database["public"]["Tables"]["companies"]["Row"];
 type ProductionsRecord = Database["public"]["Tables"]["productions"]["Row"] & {
   events: Database["public"]["Tables"]["events"]["Row"][] &
-    {
-      venue: Database["public"]["Tables"]["venues"]["Row"];
-    }[];
+  {
+    venue: Database["public"]["Tables"]["venues"]["Row"];
+  }[];
   company: Database["public"]["Tables"]["companies"]["Row"];
 };
 type ProfilesRecord = Database["public"]["Tables"]["profiles"]["Row"];
@@ -26,11 +26,11 @@ type VenuesRecord = Database["public"]["Tables"]["venues"]["Row"];
 type SearchRecord = {
   type: "company" | "production" | "profile" | "vacancy" | "venue";
   data:
-    | CompaniesRecord
-    | ProductionsRecord
-    | ProfilesRecord
-    | VacanciesRecord
-    | VenuesRecord;
+  | CompaniesRecord
+  | ProductionsRecord
+  | ProfilesRecord
+  | VacanciesRecord
+  | VenuesRecord;
 };
 
 const Company = ({
@@ -40,16 +40,16 @@ const Company = ({
   company: CompaniesRecord;
   loading: boolean;
 }) => (
-  <li className=" bg-white rounded-lg border-2 border-slate-200 flex">
+  <li className="rounded-lg border-2 flex bg-white border-slate-200 dark:bg-slate-800 dark:border-slate-600">
     <div className="p-6 flex-grow">
       {!loading ? (
         <Link href={`/companies/${company.slug}`}>
-          <h2 className="text-lg font-bold text-slate-900 underline">
+          <h2 className="text-lg font-bold underline text-slate-900 dark:text-white">
             {company.name}
           </h2>
         </Link>
       ) : (
-        <div className="h-7 w-1/2 bg-slate-300 rounded-md mb-2 animate-pulse" />
+        <div className="h-7 w-1/2 rounded-md animate-pulse bg-slate-300 dark:bg-slate-600" />
       )}
     </div>
   </li>
@@ -74,7 +74,6 @@ const Production = ({
     const startTime = new Date(event.start_time);
 
     timeMessage = `${startTime.toLocaleDateString("en-GB", {
-      weekday: "long",
       year: "numeric",
       month: "long",
       day: "numeric",
@@ -88,13 +87,10 @@ const Production = ({
     const endTime = new Date(lastEvent.start_time);
 
     const startDate = startTime.toLocaleDateString("en-GB", {
-      weekday: "long",
-      year: "numeric",
       month: "long",
       day: "numeric",
     });
     const endDate = endTime.toLocaleDateString("en-GB", {
-      weekday: "long",
       year: "numeric",
       month: "long",
       day: "numeric",
@@ -104,21 +100,26 @@ const Production = ({
   }
 
   return (
-    <li className=" bg-white rounded-lg border-2 border-slate-200 flex sm:col-span-2">
+    <li className="rounded-lg border-2 flex flex-col sm:flex-row lg:col-span-2 bg-white border-slate-200 dark:bg-slate-800 dark:border-slate-600">
       <div className="p-6 flex-grow">
         {!loading ? (
-          <Link href={`/productions/${production.id}`}>
-            <h2 className="text-lg font-bold text-slate-900 underline mb-2">
-              {production.title}
-            </h2>
-          </Link>
+          <div className="flex flex-col sm:flex-row mb-2 space-y-1 sm:space-y-0">
+            <Link href={`/productions/${production.id}`} className="grow">
+              <h2 className="text-lg font-bold underline text-slate-900 dark:text-white">
+                {production.title}
+              </h2>
+            </Link>
+            <div>
+              <Tag text="Production" variant="primary" size="sm" />
+            </div>
+          </div>
         ) : (
-          <div className="h-7 w-1/2 bg-slate-300 rounded-md mb-2 animate-pulse" />
+          <div className="h-7 w-1/2 rounded-md mb-2 animate-puls bg-slate-300 dark:bg-slate-600" />
         )}
         {!loading ? (
-          <p className="text-sm text-slate-600 mb-2 ">{timeMessage}</p>
+          <p className="text-sm mb-2 text-slate-600 dark:text-slate-300">{timeMessage}</p>
         ) : (
-          <div className="h-5 w-3/4 bg-slate-200 rounded-md animate-pulse mb-2" />
+          <div className="h-5 w-3/4 rounded-md animate-pulse mb-2 bg-slate-200 dark:bg-slate-700" />
         )}
 
         {!loading ? (
@@ -135,13 +136,13 @@ const Production = ({
             </li>
           </ul>
         ) : (
-          <div className="h-[25px] w-1/4 bg-slate-200 rounded-md animate-pulse" />
+          <div className="h-[25px] w-1/4 rounded-md animate-pulse bg-slate-200 dark:bg-slate-700" />
         )}
       </div>
 
       <div
         className={clsx(
-          "h-full aspect-1 relative bg-slate-300 rounded-r-md overflow-hidden",
+          "h-full aspect-1 relative rounded-b-md sm:rounded-bl-none sm:rounded-r-md overflow-hidden bg-slate-300 dark:bg-slate-700",
           loading && "animate-pulse"
         )}
       >
@@ -149,7 +150,7 @@ const Production = ({
           <Image
             alt=""
             src={`profiles/${production.id || "default.jpg"}`}
-            className="duration-200 ease-in-out rounded-r-md"
+            className="duration-200 ease-in-out rounded-b-md sm:rounded-bl-none sm:rounded-r-md"
             fill
             priority
           />
@@ -166,10 +167,10 @@ const Profile = ({
   profile: ProfilesRecord;
   loading: boolean;
 }) => (
-  <li className="bg-white rounded-lg border-2 border-slate-200 flex">
+  <li className="rounded-lg border-2 flex bg-white border-slate-200 dark:bg-slate-800 dark:border-slate-600">
     <div
       className={clsx(
-        "h-full aspect-1 relative bg-slate-300 rounded-l-md overflow-hidden",
+        "h-full aspect-1 relative rounded-l-md overflow-hidden bg-slate-300 dark:bg-slate-700",
         loading && "animate-pulse"
       )}
     >
@@ -186,19 +187,24 @@ const Profile = ({
 
     <div className="p-6 grow">
       {!loading ? (
-        <Link href={`/profiles/${profile.id}`}>
-          <h2 className="text-lg font-bold text-slate-900 underline">
-            {profile.given_name} {profile.family_name}
-          </h2>
-        </Link>
+        <div className="flex">
+          <Link href={`/profile/${profile.id}`} className="grow">
+            <h2 className="text-lg font-bold underline text-slate-900 dark:text-white">
+              {profile.given_name} {profile.family_name}
+            </h2>
+          </Link>
+          <div>
+            <Tag text="Profile" variant="primary" size="sm" />
+          </div>
+        </div>
       ) : (
-        <div className="h-7 w-2/3 bg-slate-300 rounded-md animate-pulse" />
+        <div className="h-7 w-2/3 rounded-md animate-pulse bg-slate-300 dark:bg-slate-600" />
       )}
 
       {!loading ? (
-        <p className="text-sm text-slate-600 truncate">{profile.biography}</p>
+        <p className="text-sm truncate text-slate-600 dark:text-slate-300">{profile.biography}</p>
       ) : (
-        <div className="h-4 w-3/4 bg-slate-200 rounded-md animate-pulse mt-1" />
+        <div className="h-4 w-3/4 rounded-md animate-pulse mt-1 bg-slate-200 dark:bg-slate-700" />
       )}
     </div>
   </li>
@@ -215,8 +221,8 @@ const Vacancy = ({
     vacancy.response_type == "email"
       ? "by email"
       : vacancy.response_type == "phone"
-      ? "by phone"
-      : "on platform";
+        ? "by phone"
+        : "on platform";
   let responseMessage = `Please respond to this vacancy ${responseMessageType}`;
 
   if (vacancy.response_deadline) {
@@ -240,24 +246,30 @@ const Vacancy = ({
   }
 
   return (
-    <li className="bg-white rounded-lg border-2 border-slate-200 p-6 sm:col-span-2">
+    <li className="rounded-lg border-2 p-6 lg:col-span-2 bg-white border-slate-200 dark:bg-slate-800 dark:border-slate-600">
       {!loading ? (
-        <Link
-          href={`/companies/${vacancy.company.slug}#${vacancy.id}`}
-          scroll={false}
-        >
-          <h3 className="text-lg font-bold text-slate-900 underline mb-2">
-            {vacancy.title}
-          </h3>
-        </Link>
+        <div className="flex">
+          <Link
+            href={`/companies/${vacancy.company.slug}#${vacancy.id}`}
+            scroll={false}
+            className="grow"
+          >
+            <h3 className="text-lg font-bold underline mb-2 text-slate-900 dark:text-white">
+              {vacancy.title}
+            </h3>
+          </Link>
+          <div>
+            <Tag text="Vacancy" variant="primary" size="sm" />
+          </div>
+        </div>
       ) : (
-        <div className="h-7 w-1/2 bg-slate-300 rounded-md mb-2 animate-pulse" />
+        <div className="h-7 w-1/2 rounded-md mb-2 animate-pulse bg-slate-300 dark:bg-slate-600" />
       )}
 
       {!loading ? (
-        <p className="text-sm text-slate-600 mb-2 ">{responseMessage}</p>
+        <p className="text-sm mb-2 text-slate-600 dark:text-slate-300">{responseMessage}</p>
       ) : (
-        <div className="h-5 w-1/3 bg-slate-200 rounded-md animate-pulse mb-2" />
+        <div className="h-5 w-1/3rounded-md animate-pulse mb-2 bg-slate-200 dark:bg-slate-700" />
       )}
 
       {!loading ? (
@@ -283,15 +295,15 @@ const Vacancy = ({
           </li>
         </ul>
       ) : (
-        <div className="h-[25px] w-1/4 bg-slate-200 rounded-md animate-pulse mb-2" />
+        <div className="h-[25px] w-1/4 rounded-md animate-pulse mb-2 bg-slate-200 dark:bg-slate-700" />
       )}
 
       {!loading ? (
-        <p className="text-sm text-slate-600 line-clamp-2 sm:line-clamp-1">
+        <p className="text-sm line-clamp-2 sm:line-clamp-1 text-slate-600 dark:text-slate-300">
           {vacancy.content}
         </p>
       ) : (
-        <div className="h-5 w-3/4 bg-slate-200 rounded-md animate-pulse" />
+        <div className="h-5 w-3/4 rounded-md animate-pulse bg-slate-200 dark:bg-slate-700" />
       )}
     </li>
   );
@@ -304,27 +316,32 @@ const Venue = ({
   venue: VenuesRecord;
   loading: boolean;
 }) => (
-  <li className=" bg-white rounded-lg border-2 border-slate-200 flex">
+  <li className="rounded-lg border-2 flex bg-white border-slate-200 dark:bg-slate-800 dark:border-slate-600">
     <div className="p-6 flex-grow">
       {!loading ? (
-        <Link href={`/about/venues/${venue.slug}`}>
-          <h2 className="text-lg font-bold text-slate-900 underline">
-            {venue.title}
-          </h2>
-        </Link>
+        <div className="flex flex-col sm:flex-row mb-2 space-y-1 sm:space-y-0">
+          <Link href={`/about/venues/${venue.slug}`} className="grow">
+            <h2 className="text-lg font-bold underline text-slate-900 dark:text-white">
+              {venue.title}
+            </h2>
+          </Link>
+          <div>
+            <Tag text="Venue" variant="primary" size="sm" />
+          </div>
+        </div>
       ) : (
-        <div className="h-7 w-2/3 bg-slate-300 rounded-md animate-pulse" />
+        <div className="h-7 w-2/3 rounded-md animate-pulse bg-slate-300 dark:bg-slate-600" />
       )}
       {!loading ? (
-        <p className="text-sm text-slate-600 ">{venue.location}</p>
+        <p className="text-sm text-slate-600 dark:text-slate-300">{venue.location}</p>
       ) : (
-        <div className="h-4 w-3/4 bg-slate-200 rounded-md animate-pulse mt-1" />
+        <div className="h-4 w-3/4 rounded-md animate-pulse mt-1 bg-slate-200 dark:bg-slate-700" />
       )}
     </div>
 
     <div
       className={clsx(
-        "h-full aspect-1 relative bg-slate-300 rounded-r-md overflow-hidden",
+        "h-full aspect-1 relative rounded-r-md overflow-hidden bg-slate-300 dark:bg-slate-700",
         loading && "animate-pulse"
       )}
     >
@@ -398,8 +415,8 @@ export default function Search() {
   return (
     <div className="container mx-auto md:py-6 md:px-8 py-6 px-6">
       <header className="text-center">
-        <h1 className="mb-3 text-5xl font-extrabold text-slate-900">Search</h1>
-        <p className="mb-3 text-xl text-slate-600 inline-block">
+        <h1 className="mb-3 text-5xl font-extrabold text-slate-900 dark:text-white">Search</h1>
+        <p className="mb-3 text-xl inline-block text-slate-600 dark:text-slate-300">
           Search for filter anything
         </p>
 
@@ -447,7 +464,7 @@ export default function Search() {
         </div>
       </header>
 
-      <main className="max-w-3xl mx-auto">
+      <main className="max-w-5xl mx-auto">
         <section className="mt-6">
           <form className="flex justify-center w-full">
             <label htmlFor="simple-search" className="sr-only">
@@ -458,7 +475,7 @@ export default function Search() {
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <svg
                   aria-hidden="true"
-                  className="w-5 h-5 text-slate-900"
+                  className="w-5 h-5 text-slate-900 dark:text-white"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -473,7 +490,7 @@ export default function Search() {
               <input
                 type="text"
                 id="simple-search"
-                className="w-full rounded-lg border-2 border-slate-200 pl-10 pr-4 py-3 text-md text-slate-900 placeholder-slate-400"
+                className="w-full rounded-lg border-2 pl-10 pr-4 py-3 text-md text-slate-900 placeholder-slate-400 border-slate-200 dark:text-white dark:bg-slate-800 dark:placeholder-slate-300 dark:border-slate-600"
                 placeholder="Search Companies"
                 required
                 onChange={(e) => setSearch(e.target.value)}
@@ -481,7 +498,7 @@ export default function Search() {
             </div>
           </form>
 
-          <ul className="mt-8 grid grid-flow-row-dense sm:grid-cols-2 gap-4">
+          <ul className="mt-8 grid grid-flow-row-dense lg:grid-cols-2 gap-4">
             {searchResponse.map((record) => {
               switch (record.type) {
                 case "company":
