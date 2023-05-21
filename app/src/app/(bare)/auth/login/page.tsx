@@ -75,11 +75,11 @@ const MagicLoginForm = ({
                 name="email"
                 autoComplete="email"
                 placeholder="Email Address"
-                className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
+                className="relative block w-full rounded-md border-2 px-4 py-3 text-md text-slate-900 placeholder-slate-400 border-slate-200 dark:text-white dark:bg-slate-800 dark:placeholder-slate-300 dark:border-slate-600"
               />
 
               {errors.email && touched.email && (
-                <p className="mt-2 text-sm text-red-600">{errors.email}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-300">{errors.email}</p>
               )}
             </div>
 
@@ -99,7 +99,7 @@ const MagicLoginForm = ({
 
             <div className="text-center">
               {formError ? (
-                <p className="mt-2 text-sm text-red-600">{formError}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-300">{formError}</p>
               ) : (
                 <div className="mt-2 h-5" />
               )}
@@ -182,11 +182,11 @@ const PasswordLoginForm = ({
                 name="email"
                 autoComplete="email"
                 placeholder="Email Address"
-                className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
+                className="relative block w-full rounded-md border-2 px-4 py-3 text-md text-slate-900 placeholder-slate-400 border-slate-200 dark:text-white dark:bg-slate-800 dark:placeholder-slate-300 dark:border-slate-600"
               />
 
               {errors.email && touched.email && (
-                <p className="mt-2 text-sm text-red-600">{errors.email}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-300">{errors.email}</p>
               )}
             </div>
 
@@ -197,11 +197,11 @@ const PasswordLoginForm = ({
                 name="password"
                 autoComplete="password"
                 placeholder="Password"
-                className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
+                className="relative block w-full rounded-md border-2 px-4 py-3 text-md text-slate-900 placeholder-slate-400 border-slate-200 dark:text-white dark:bg-slate-800 dark:placeholder-slate-300 dark:border-slate-600"
               />
 
               {errors.password && touched.password && (
-                <p className="mt-2 text-sm text-red-600">{errors.password}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-300">{errors.password}</p>
               )}
             </div>
 
@@ -212,17 +212,17 @@ const PasswordLoginForm = ({
             </div>
 
             <div className="text-center">
-              <div className="text-sm font-medium ">
+              <div className="text-sm font-medium text-slate-900 dark:text-white">
                 Forgot Password?{" "}
                 <Link
                   href="/auth/password-reset"
-                  className="underline hover:text-slate-700"
+                  className="underline hover:text-slate-700 dark:hover:text-slate-300"
                 >
                   Reset
                 </Link>
               </div>
               {formError && (
-                <p className="mt-2 text-sm text-red-600">{formError}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-300">{formError}</p>
               )}
             </div>
           </Form>
@@ -244,10 +244,10 @@ export default function Login() {
   return (
     <>
       <div className="flex flex-1 flex-col items-center justify-center pt-12 pb-16">
-        <div className="mb-2.5 text-5xl font-bold text-slate-900 ">
+        <div className="mb-2.5 text-5xl font-bold text-slate-900 dark:text-white">
           <Link href="/">Oscar Ox</Link>
         </div>
-        <div className="mb-8 text-lg font-medium text-slate-600 ">
+        <div className="mb-8 text-lg font-medium text-slate-600 dark:text-slate-300">
           Authenticate
         </div>
         {!isComplete ? (
@@ -266,12 +266,12 @@ export default function Login() {
             />
           )
         ) : (
-          <div className="h-64 w-full max-w-sm text-center ">
+          <div className="h-64 w-full max-w-sm text-center text-slate-900 dark:text-white">
             <div className="text-2xl">Check email for Magic Link</div>
             <div className="mt-10 text-lg font-medium">
               No email?{" "}
               <div
-                className="inline cursor-pointer underline hover:text-slate-700"
+                className="inline cursor-pointer underline hover:text-slate-700 dark:hover:text-slate-300"
                 onClick={retryComplete}
               >
                 Retry
@@ -282,11 +282,11 @@ export default function Login() {
       </div>
 
       <div className="flex items-center justify-center">
-        <div className="text-lg font-medium ">
+        <div className="text-lg font-medium text-slate-900 dark:text-white">
           No Account?{" "}
           <Link
             href="/auth/register"
-            className="underline hover:text-slate-700"
+            className="underline hover:text-slate-700 dark:hover:text-slate-300"
           >
             Register
           </Link>

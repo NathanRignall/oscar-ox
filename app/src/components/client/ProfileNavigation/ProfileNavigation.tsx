@@ -10,53 +10,17 @@ interface ProfileNavigationLinkProps {
   active: boolean;
 }
 
-const ProfileNavigationLink = ({
-  href,
-  text,
-  active,
-}: ProfileNavigationLinkProps) => {
-  return (
-    <li className="grow">
-      <Link
-        href={href}
-        className="inline-flex items-center justify-center w-full px-5 py-3 text-sm font-medium  border-2 bg-white text-slate-900 border-slate-200 hover:bg-slate-200 hover:border-slate-400 rounded-lg"
-      >
-        {text}
-        <svg
-          aria-hidden="true"
-          className="w-4 h-4 mr-2 fill-current"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fillRule="evenodd"
-            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
-            clipRule="evenodd"
-          ></path>
-        </svg>
-      </Link>
-    </li>
-  );
-};
-
-const links = [
-  { href: "/profile", text: "Profile" },
-  { href: "/profile/settings", text: "Settings" },
-  { href: "/profile/responses", text: "Responses" },
-];
-
 export const ProfileNavigation = () => {
   const pathname = usePathname();
   return (
     <div className="xl:absolute mb-6 max-w-3xl mx-auto">
-      <ul className="xl:w-48 w-full rounded-lg block sm:flex xl:block justify-between overflow-hidden bg-white">
+      <ul className="xl:w-48 w-full rounded-lg block sm:flex xl:block justify-between overflow-hidden bg-white dark:bg-slate-700">
         <li className="grow">
           <Link
             href="/profile"
             className={clsx(
-              "/profile" == pathname && "bg-slate-200",
-              "inline-flex items-center w-full px-5 py-3 text-sm font-medium border-t-2 border-b border-x-2 sm:border-y-2 sm:border-l-2 sm:border-r xl:border-t-2 xl:border-b xl:border-x-2 text-slate-900 border-slate-200 hover:bg-slate-200 hover:border-slate-400 rounded-b-none rounded-lg sm:rounded-none sm:rounded-l-lg xl:rounded-b-none xl:rounded-lg"
+              "/profile" == pathname && "bg-slate-200 dark:bg-slate-600",
+              "inline-flex items-center w-full px-5 py-3 text-sm font-medium border-t-2 border-b border-x-2 sm:border-y-2 sm:border-l-2 sm:border-r xl:border-t-2 xl:border-b xl:border-x-2 rounded-b-none rounded-lg sm:rounded-none sm:rounded-l-lg xl:rounded-b-none xl:rounded-lg text-slate-900 border-slate-200 hover:bg-slate-200 hover:border-slate-400 dark:text-white dark:border-slate-500 dark:hover:bg-slate-900 dark:hover:border-slate-700"
             )}
           >
             <svg
@@ -79,8 +43,8 @@ export const ProfileNavigation = () => {
           <Link
             href="/profile/responses"
             className={clsx(
-              "/profile/responses" == pathname && "bg-slate-200",
-              "inline-flex items-center w-full px-5 py-3 text-sm font-medium border-y border-x-2 sm:border-y-2 sm:border-x xl:border-y xl:border-x-2 text-slate-900 border-slate-200 hover:bg-slate-200 hover:border-slate-400"
+              "/profile/responses" == pathname && "bg-slate-200 dark:bg-slate-600",
+              "inline-flex items-center w-full px-5 py-3 text-sm font-medium border-y border-x-2 sm:border-y-2 sm:border-x xl:border-y xl:border-x-2 text-slate-900 border-slate-200 hover:bg-slate-200 hover:border-slate-400 dark:text-white dark:border-slate-500 dark:hover:bg-slate-900 dark:hover:border-slate-700"
             )}
           >
             <svg
@@ -105,8 +69,8 @@ export const ProfileNavigation = () => {
           <Link
             href="/profile/settings"
             className={clsx(
-              "/profile/settings" == pathname && "bg-slate-200",
-              "inline-flex items-center w-full px-5 py-3 text-sm font-medium border-y border-x-2 sm:border-y-2 sm:border-x xl:border-y xl:border-x-2 text-slate-900 border-slate-200 hover:bg-slate-200 hover:border-slate-400"
+              "/profile/settings" == pathname && "bg-slate-200 dark:bg-slate-600",
+              "inline-flex items-center w-full px-5 py-3 text-sm font-medium border-y border-x-2 sm:border-y-2 sm:border-x xl:border-y xl:border-x-2 text-slate-900 border-slate-200 hover:bg-slate-200 hover:border-slate-400 dark:text-white dark:border-slate-500 dark:hover:bg-slate-900 dark:hover:border-slate-700"
             )}
           >
             <svg
@@ -131,8 +95,8 @@ export const ProfileNavigation = () => {
           <Link
             href="/profile/admin"
             className={clsx(
-              "/profile/admin" == pathname && "bg-slate-200",
-              "inline-flex items-center w-full px-5 py-3 text-sm font-medium border-t border-b-2 border-x-2 sm:border-y-2 sm:border-l sm:border-r-2 xl:border-t xl:border-b-2 xl:border-x-2 text-slate-900 border-slate-200 hover:bg-slate-200 hover:border-slate-400 rounded-t-none rounded-lg sm:rounded-none sm:rounded-r-lg xl:rounded-t-none xl:rounded-lg"
+              "/profile/admin" == pathname && "bg-slate-200 dark:bg-slate-600",
+              "inline-flex items-center w-full px-5 py-3 text-sm font-medium border-t border-b-2 border-x-2 sm:border-y-2 sm:border-l sm:border-r-2 xl:border-t xl:border-b-2 xl:border-x-2 rounded-t-none rounded-lg sm:rounded-none sm:rounded-r-lg xl:rounded-t-none xl:rounded-lg text-slate-900 border-slate-200 hover:bg-slate-200 hover:border-slate-400 dark:text-white dark:border-slate-500 dark:hover:bg-slate-900 dark:hover:border-slate-700"
             )}
           >
             <svg

@@ -40,9 +40,9 @@ export default async function Admin() {
   return (
     <>
       <header className="max-w-3xl mx-auto mb-4">
-        <h1 className="mb-3 text-5xl font-extrabold text-slate-900">Admin</h1>
+        <h1 className="mb-3 text-5xl font-extrabold text-slate-900 dark:text-white">Admin</h1>
 
-        <p className="mb-3 text-xl text-slate-600">
+        <p className="mb-3 text-xl text-slate-600 dark:text-slate-300">
           Your Companies to Configure
         </p>
       </header>
@@ -55,10 +55,10 @@ export default async function Admin() {
             {members.map((member) => (
               <li
                 key={member.company.id}
-                className="text-center bg-white rounded-lg border-2 border-slate-200 py-5 px-4"
+                className="text-center rounded-lg border-2 py-5 px-4 bg-white border-slate-200 dark:bg-slate-800 dark:border-slate-600"
               >
                 <Link href={`/admin/${encodeURIComponent(member.company.id)}`}>
-                  <h2 className="text-lg font-bold text-slate-900 underline">
+                  <h2 className="text-lg font-bold underline text-slate-900 dark:text-white">
                     {member.company.name}
                   </h2>
                 </Link>

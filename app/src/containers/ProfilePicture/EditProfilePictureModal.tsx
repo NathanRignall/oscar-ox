@@ -91,7 +91,7 @@ export const EditProfilePictureModal = ({
       setIsOpen={setIsOpen}
       className="absolute bottom-2 right-2"
     >
-      <div className="text-3xl text-slate-900 font-bold mb-6">
+      <div className="text-3xl font-bold mb-6 text-slate-900 dark:text-white">
         Edit profile picture
       </div>
       <form>
@@ -100,7 +100,7 @@ export const EditProfilePictureModal = ({
         <div className="mb-4">
           {file ? (
             <div className="max-w-[400px] mx-auto">
-              <div className="aspect-w-1 aspect-h-1 bg-slate-300 rounded-lg overflow-hidden">
+              <div className="aspect-w-1 aspect-h-1 rounded-lg overflow-hidden bg-slate-300 dark:bg-slate-700">
                 <Image
                   src={URL.createObjectURL(file)}
                   alt="profile picture"
@@ -120,12 +120,12 @@ export const EditProfilePictureModal = ({
           ) : (
             <label
               htmlFor="dropzone-file"
-              className="max-w-[400px] mx-auto flex flex-col items-center justify-center w-full h-64 border-2 border-slate-200 border-dashed rounded-lg cursor-pointer bg-slate-50"
+              className="max-w-[400px] mx-auto flex flex-col items-center justify-center w-full h-64 border-2  border-dashed rounded-lg cursor-pointer bg-slate-50 border-slate-200 dark:bg-slate-800 dark:border-slate-600"
             >
               <div className="flex flex-col items-center justify-center pt-5 pb-6">
                 <svg
                   aria-hidden="true"
-                  className="w-10 h-10 mb-3 text-slate-600"
+                  className="w-10 h-10 mb-3 text-slate-600 dark:text-slate-300"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -138,10 +138,10 @@ export const EditProfilePictureModal = ({
                     d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
                   ></path>
                 </svg>
-                <p className="mb-2 text-sm text-slate-600">
+                <p className="mb-2 text-sm text-slate-600 dark:text-slate-300">
                   <span className="font-semibold">Click to upload</span>
                 </p>
-                <p className="text-xs text-slate-600">
+                <p className="text-xs text-slate-600 dark:text-slate-300">
                   PNG, JPG or JPEG (MAX. 20MB)
                 </p>
               </div>
@@ -169,7 +169,7 @@ export const EditProfilePictureModal = ({
 
           <div className="text-center">
             {error ? (
-              <p className="mt-2 text-sm text-red-600">{error}</p>
+              <p className="mt-2 text-sm text-red-600 dark:text-red-300">{error}</p>
             ) : (
               <div className="mt-2 h-5" />
             )}

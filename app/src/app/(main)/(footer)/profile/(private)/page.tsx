@@ -95,11 +95,11 @@ export default async function Account() {
     <>
       <header className="sm:flex max-w-3xl mx-auto mb-8">
         <div className="flex-1">
-          <h1 className="mb-1 text-5xl sm:text-6xl font-extrabold text-slate-900">
+          <h1 className="mb-1 text-5xl sm:text-6xl font-extrabold text-slate-900 dark:text-white">
             {`${profile.given_name} ${profile.family_name}`}
           </h1>
           <div className="mb-3">
-            <p className="text-xl text-slate-600 inline-block">
+            <p className="text-xl inline-block text-slate-600 dark:text-slate-300">
               {profile.biography ? profile.biography : "No biography yet."}
             </p>
             <EditProfileModal
@@ -139,12 +139,12 @@ export default async function Account() {
           <section>
             <div className="sm:flex justify-between items-center">
               <div>
-                <h2 className="text-4xl font-bold text-slate-900">
+                <h2 className="text-4xl font-bold text-slate-900 dark:text-white">
                   Productions
                 </h2>
               </div>
               <div>
-                <p className="text-2xl font-normal text-slate-600">
+                <p className="text-2xl font-normal text-slate-600 dark:text-white">
                   {participants.length} Involvements
                 </p>
               </div>
@@ -154,9 +154,9 @@ export default async function Account() {
               {participants.map((participant) => (
                 <li
                   key={participant.id}
-                  className=" bg-white rounded-lg border-2 border-slate-200 p-6"
+                  className=" rounded-lg border-2 p-6 bg-white border-slate-200 dark:bg-slate-800 dark:border-slate-600"
                 >
-                  <p className="text-xl font-bold text-slate-900 uppercase">
+                  <p className="text-xl font-bold uppercase text-slate-900 dark:text-white">
                     {new Date(
                       participant.production.event.start_time
                     ).toLocaleString("default", { month: "long" })}{" "}
@@ -164,10 +164,10 @@ export default async function Account() {
                       participant.production.event.start_time
                     ).toLocaleString("default", { year: "numeric" })}
                   </p>
-                  <h3 className="text-lg font-bold text-slate-900">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white">
                     {participant.production.title}
                   </h3>
-                  <p className="text-sm text-slate-600 ">
+                  <p className="text-sm text-slate-600 dark:text-slate-300">
                     {participant.title} - {participant.production.event.venue}
                   </p>
                 </li>

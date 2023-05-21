@@ -58,8 +58,8 @@ export default async function AdminLayout({
   return (
     <div className="flex h-full">
       <aside className="flex-none w-64 h-full">
-        <div className="flex flex-col overflow-y-auto bg-white border-r-2 border-slate-200 h-full">
-          <h2 className="flex items-center text-lg px-7 py-6 border-b-2 border-slate-200">
+        <div className="flex flex-col overflow-y-auto border-r-2 h-full bg-white border-slate-200 dark:bg-slate-800 dark:border-slate-600">
+          <h2 className="flex items-center text-lg px-7 py-6 border-b-2 text-slate-900 border-slate-200 dark:text-white dark:border-slate-600">
             <Link href={`/profile/admin`}>
               <svg
                 className="h-3 w-3 mr-2"
@@ -80,11 +80,11 @@ export default async function AdminLayout({
             {company.name}
           </h2>
 
-          <ul className="flex-1 px-3 py-4 border-b-2 border-slate-200 space-y-2">
+          <ul className="flex-1 px-3 py-4 border-b-2 space-y-2 border-slate-200 dark:border-slate-600">
             {Links.map((link) => (
               <li key={link.href}>
                 <Link
-                  className={`px-4 py-3 block rounded-lg text-lg ${
+                  className={`px-4 py-3 block rounded-lg text-lg text-slate-900 dark:text-white "${
                     link.active ? "bg-slate-100" : ""
                   }`}
                   href={`/admin/${encodeURIComponent(company.id)}/${link.href}`}
@@ -95,10 +95,10 @@ export default async function AdminLayout({
             ))}
           </ul>
 
-          <ul className="px-3 py-4 border-b-2 border-slate-200 space-y-2">
+          <ul className="px-3 py-4 border-b-2 space-y-2 border-slate-200 dark:border-slate-600">
             <li>
               <Link
-                className="px-4 py-1 block rounded-lg text-lg"
+                className="px-4 py-1 block rounded-lg text-lg text-slate-900 dark:text-white"
                 href="/about/documentation"
               >
                 Documentation
@@ -106,7 +106,7 @@ export default async function AdminLayout({
             </li>
             <li>
               <Link
-                className="px-4 py-1 block rounded-lg text-lg"
+                className="px-4 py-1 block rounded-lg text-lg text-slate-900 dark:text-white"
                 href="/about/contact"
               >
                 Help

@@ -58,7 +58,7 @@ export const AddMemberModal = ({ companyId }: AddMemberModalProps) => {
   };
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen} button="Add Member">
-      <div className="text-3xl text-slate-900 font-bold mb-6">Add Member</div>
+      <div className="text-3xl font-bold mb-6 text-slate-900 dark:text-white">Add Member</div>
 
       <Formik
         initialValues={initialValues}
@@ -71,7 +71,7 @@ export const AddMemberModal = ({ companyId }: AddMemberModalProps) => {
               <AutoCompleteEmail />
 
               {errors.profileId && touched.profileId && (
-                <p className="mt-2 text-sm text-red-600">{errors.profileId}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-300">{errors.profileId}</p>
               )}
             </div>
 
@@ -89,7 +89,7 @@ export const AddMemberModal = ({ companyId }: AddMemberModalProps) => {
 
               <div className="text-center">
                 {formError ? (
-                  <p className="mt-2 text-sm text-red-600">{formError}</p>
+                  <p className="mt-2 text-sm text-red-600 dark:text-red-300">{formError}</p>
                 ) : (
                   <div className="mt-2 h-5" />
                 )}

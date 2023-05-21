@@ -106,10 +106,10 @@ export default async function Productions({ venueId }: ProductionsProps) {
 
   return (
     <article className="mt-8">
-      <h2 className="text-3xl font-bold text-slate-900 mb-4">What&apos;s On</h2>
+      <h2 className="text-3xl font-bold mb-4 text-slate-900 dark:text-white">What&apos;s On</h2>
 
       {productions.length == 0 ? (
-        <p className="text-slate-600">No productions found.</p>
+        <p className="text-slate-600 dark:text-slate-300">No productions found.</p>
       ) : (
         <ul className="grid sm:grid-cols-2 gap-4">
           {productions.map((production) => {
@@ -157,15 +157,15 @@ export default async function Productions({ venueId }: ProductionsProps) {
             return (
               <li
                 key={production.id}
-                className="bg-white rounded-lg border-2 border-slate-200 flex sm:col-span-2"
+                className="rounded-lg border-2 flex sm:col-span-2 bg-white border-slate-200 dark:bg-slate-800 dark:border-slate-600"
               >
                 <div className="p-6 flex-grow">
                   <Link href={`/productions/${production.id}`}>
-                    <h3 className="text-lg font-bold text-slate-900 underline mb-2">
+                    <h3 className="text-lg font-boldunderline mb-2 text-slate-900 dark:text-white">
                       {production.title}
                     </h3>
                   </Link>
-                  <p className="text-sm text-slate-600 mb-2 ">{timeMessage}</p>
+                  <p className="text-sm mb-2 text-slate-600 dark:text-slate-300">{timeMessage}</p>
 
                   <ul className="flex flex-wrap gap-2 mb-3">
                     <li>
@@ -181,7 +181,7 @@ export default async function Productions({ venueId }: ProductionsProps) {
                   </ul>
                 </div>
 
-                <div className="h-full aspect-1 relative bg-slate-300 rounded-r-md overflow-hidden">
+                <div className="h-full aspect-1 relative rounded-r-md overflow-hidden bg-slate-300 dark:bg-slate-600">
                   <Image
                     alt=""
                     src={`profiles/${production.id || "default.jpg"}`}

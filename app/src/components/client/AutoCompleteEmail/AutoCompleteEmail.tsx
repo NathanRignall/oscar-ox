@@ -115,14 +115,14 @@ export const AutoCompleteEmail = ({
       <div className="w-full">
         <label
           htmlFor="profile"
-          className="block mb-2 text-sm font-medium text-gray-600"
+          className="block mb-2 text-sm font-medium text-gray-600 dark:text-slate-300"
         >
           User
         </label>
         <input
           id="profile"
           type="text"
-          className="w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
+          className="w-full rounded-md border-2 px-4 py-3 text-md text-slate-900 placeholder-slate-400 border-slate-200 dark:text-white dark:bg-slate-800 dark:placeholder-slate-300 dark:border-slate-600"
           placeholder="Search..."
           value={search}
           onChange={(e) => handleChange(e.target.value)}
@@ -134,12 +134,12 @@ export const AutoCompleteEmail = ({
       <ul
         className={clsx(
           !showOptions && "hidden",
-          "absolute rounded-md border-2 border-slate-200 bg-white select-none mt-1 z-50 shadow-lg"
+          "absolute rounded-md border-2 select-none mt-1 z-50 shadow-lg bg-white border-slate-200 dark:bg-slate-800 dark:border-slate-600"
         )}
       >
         {optionsList.length > 0 ? (
           optionsList.map((option, index, array) => {
-            let className = "px-4 hover:bg-gray-100 ";
+            let className = "px-4 text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 hover:cursor-pointer ";
 
             if (index === 0) className += "pt-3 pb-3 rounded-t-md";
             else if (index === array.length)
@@ -163,7 +163,7 @@ export const AutoCompleteEmail = ({
             );
           })
         ) : (
-          <li className="px-4 py-3 text-gray-500">No results</li>
+          <li className="px-4 py-3 text-gray-500 dark:text-slate-300">No results</li>
         )}
       </ul>
     </div>

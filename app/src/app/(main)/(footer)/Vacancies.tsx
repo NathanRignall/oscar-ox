@@ -57,10 +57,10 @@ export default async function Vacancies() {
     <section className="mt-8">
       <div className="sm:flex justify-between items-center">
         <div>
-          <h2 className="text-4xl font-bold text-slate-900">Vacancies</h2>
+          <h2 className="text-4xl font-bold text-slate-900 dark:text-white">Vacancies</h2>
         </div>
         <div>
-          <p className="text-2xl font-normal text-slate-600">
+          <p className="text-2xl font-normal text-slate-600 dark:text-slate-300">
             {vacancies.length} Open
           </p>
         </div>
@@ -98,18 +98,18 @@ export default async function Vacancies() {
           return (
             <li
               key={vacancy.id}
-              className=" bg-white rounded-lg border-2 border-slate-200 p-6"
+              className="rounded-lg border-2 p-6 bg-white border-slate-200 dark:bg-slate-800 dark:border-slate-600"
             >
               <Link
                 href={`/companies/${vacancy.company.slug}#${vacancy.id}`}
                 scroll={false}
               >
-                <h3 className="text-lg font-bold text-slate-900 underline mb-2">
+                <h3 className="text-lg font-bold underline mb-2 text-slate-900 dark:text-white">
                   {vacancy.title}
                 </h3>
               </Link>
 
-              <p className="text-sm text-slate-600 mb-2 ">{responseMessage}</p>
+              <p className="text-sm mb-2 text-slate-600 dark:text-slate-300">{responseMessage}</p>
 
               <ul className="flex flex-wrap gap-2 mb-3">
                 {vacancy.categories.map((category) => (
@@ -137,7 +137,7 @@ export default async function Vacancies() {
                 </li>
               </ul>
 
-              <p className="text-sm text-slate-600 mb-2 line-clamp-3">
+              <p className="text-sm mb-2 line-clamp-3 text-slate-600 dark:text-slate-300">
                 {vacancy.content}
               </p>
             </li>

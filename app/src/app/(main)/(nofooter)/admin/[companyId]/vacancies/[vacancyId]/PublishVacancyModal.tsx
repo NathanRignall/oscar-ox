@@ -91,15 +91,15 @@ export const PublishVacancyModal = ({
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen} button="Publish">
-      <div className="text-3xl text-slate-900 font-bold mb-1">
+      <div className="text-3xl font-bold mb-1 text-slate-900 dark:text-white">
         Publish Vacancy
       </div>
 
-      <p className="text-lg text-slate-600 mb-6">
+      <p className="text-lg mb-6 text-slate-600 dark:text-slate-300">
         You are about to publish this vacancy. Are you sure you want to proceed?
       </p>
 
-      <p className="text-2xl text-slate-900 font-semibold mb-1">{title}</p>
+      <p className="text-2xl font-semibold mb-1 text-slate-900 dark:text-white">{title}</p>
 
       {categories.length != 0 ? (
         <ul className="flex flex-wrap gap-2 mb-3">
@@ -115,10 +115,10 @@ export const PublishVacancyModal = ({
           ))}
         </ul>
       ) : (
-        <p className="mt-2 text-sm text-slate-600">No categories</p>
+        <p className="my-2 text-sm text-slate-600 dark:text-slate-300">No categories</p>
       )}
 
-      <div className="mb-4 px-6 py-4 bg-white rounded-md border-slate-200 border-2">
+      <div className="mb-4 px-6 py-4 rounded-md border-2 bg-white border-slate-200 dark:bg-[#0d1117] dark:border-slate-600">
         <MDEditor source={content || ""} />
       </div>
 

@@ -67,7 +67,7 @@ export default async function Production({
     <>
       <header>
         <div className="flex items-center">
-          <h1 className="flex items-center text-4xl font-bold text-slate-900">
+          <h1 className="flex items-center text-4xl font-bold text-slate-900 dark:text-white">
             <Link href={`/admin/${params.companyId}/vacancies`}>
               <svg
                 className="h-5 w-5 mr-4"
@@ -95,25 +95,25 @@ export default async function Production({
       </section>
 
       <section className="mt-4">
-        <h2 className="text-2xl font-bold text-slate-900">Responses</h2>
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Responses</h2>
 
         <ul className="mt-4 grid 2xl:grid-cols-2 gap-4">
           {vacnacy.responses.map((response) => (
             <li
               key={response.id}
-              className="bg-white rounded-lg border-2 border-slate-200 p-6"
+              className=" rounded-lg border-2 p-6 bg-white border-slate-200 dark:bg-slate-800 dark:border-slate-600"
             >
               <Link href={`/profile/${response.profile.id}`} scroll={false}>
-                <h3 className="text-lg font-bold text-slate-900 underline mb-1">
+                <h3 className="text-lg font-bold underline mb-1 text-slate-900 dark:text-white">
                   {`${response.profile.given_name} ${response.profile.family_name}`}
                 </h3>
               </Link>
 
-              <p className="text-sm text-slate-600 mb-1 ">
+              <p className="text-sm mb-1 text-slate-600 dark:text-slate-300">
                 {response.profile.email}
               </p>
 
-              <p className="text-sm text-slate-600">{response.message}</p>
+              <p className="text-sm text-slate-600 dark:text-slate-300">{response.message}</p>
             </li>
           ))}
         </ul>

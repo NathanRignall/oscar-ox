@@ -23,9 +23,9 @@ export const ButtonLink = ({
       className={clsx(
         className,
         variant === "primary" &&
-          "text-slate-900 bg-white border-slate-200 hover:bg-slate-200 hover:border-slate-400",
+          "text-slate-900 bg-white border-slate-200 hover:bg-slate-200 hover:border-slate-400 dark:text-white dark:bg-slate-700 dark:border-slate-500 dark:hover:bg-slate-900 dark:hover:border-slate-700",
         variant === "secondary" &&
-          "text-white bg-slate-900 border-slate-700 hover:bg-slate-700 hover:border-slate-500",
+          "text-white bg-slate-900 border-slate-700 hover:bg-slate-700 hover:border-slate-500 dark:text-white dark:bg-slate-700 dark:border-slate-500 dark:hover:bg-slate-900 dark:hover:border-slate-700",
         display == "inline" && "inline-block",
         display == "block" && "block",
         size === "sm" && "text-xs px-3 py-2",

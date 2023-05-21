@@ -4,12 +4,12 @@ export default function Loading() {
       <div className="container mx-auto md:py-6 md:px-8 py-6 px-6">
         <header className="sm:flex max-w-3xl mx-auto mb-8">
           <div className="flex-1">
-            <div className="mb-3 bg-slate-300 rounded-lg sm:h-[60px] h-12 animate-pulse max-w-[400px]"></div>
-            <div className="mb-3 bg-slate-200 rounded-lg h-7 animate-pulse max-w-[350px]"></div>
+            <div className="mb-3 rounded-lg sm:h-[60px] h-12 animate-pulse max-w-[400px] bg-slate-300 dark:bg-slate-700"></div>
+            <div className="mb-3 rounded-lg h-7 animate-pulse max-w-[350px] bg-slate-200 dark:bg-slate-600"></div>
           </div>
 
           <div className="sm:w-[150px] w-[200px]">
-            <div className="bg-slate-200 rounded-lg animate-pulse w-full aspect-w-1 aspect-h-1"></div>
+            <div className="rounded-lg animate-pulse w-full aspect-w-1 aspect-h-1 bg-slate-200 dark:bg-slate-700"></div>
           </div>
         </header>
 
@@ -17,21 +17,21 @@ export default function Loading() {
           <section>
             <div className="sm:flex justify-between items-center">
               <div>
-                <h2 className="text-4xl font-bold text-slate-900">
+                <h2 className="text-4xl font-bold text-slate-900 dark:text-white">
                   Productions
                 </h2>
               </div>
               <div>
-                <p className="text-2xl font-normal text-slate-600">
+                <p className="text-2xl font-normal text-slate-600 dark:text-slate-300">
                   Involvements
                 </p>
               </div>
             </div>
 
             <ul className="mt-4 grid sm:grid-cols-2 gap-4">
-              <li className="bg-slate-200 rounded-lg h-32 animate-pulse"></li>
-              <li className="bg-slate-200 rounded-lg h-32 animate-pulse"></li>
-              <li className="bg-slate-200 rounded-lg h-32 animate-pulse"></li>
+              <li className="rounded-lg h-32 animate-pulse bg-slate-200 dark:bg-slate-700"></li>
+              <li className="rounded-lg h-32 animate-pulse bg-slate-200 dark:bg-slate-700"></li>
+              <li className="rounded-lg h-32 animate-pulse bg-slate-200 dark:bg-slate-700"></li>
             </ul>
           </section>
         </main>

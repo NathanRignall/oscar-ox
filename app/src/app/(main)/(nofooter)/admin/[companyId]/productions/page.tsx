@@ -46,14 +46,14 @@ export default async function Productions({
 
   return (
     <>
-      <h1 className="text-4xl font-bold text-slate-900">Productions</h1>
+      <h1 className="text-4xl font-bold text-slate-900 dark:text-white">Productions</h1>
 
       <section className="mt-4">
         <AddProductionModal company_id={params.companyId} />
 
-        <div className="mt-4 border-2 border-slate-200 rounded-lg overflow-hidden">
-          <table className="w-full text-left divide-y-2 divide-gray-200">
-            <thead className="text-xs font-semibold text-slate-500 bg-slate-50 uppercase">
+        <div className="mt-4 border-2 rounded-lg overflow-hidden border-slate-200 dark:border-slate-600">
+          <table className="w-full text-left divide-y-2 divide-slate-200 dark:divide-slate-600">
+            <thead className="text-xs font-semibold uppercase text-slate-500 bg-slate-50 dark:text-slate-200 dark:bg-slate-700">
               <tr>
                 <th scope="col" className="px-4 py-4">
                   Name
@@ -73,12 +73,12 @@ export default async function Productions({
               </tr>
             </thead>
 
-            <tbody className="divide-y-2 divide-solid divide-slate-200">
+            <tbody className="divide-y-2 divide-solid divide-slate-200 dark:divide-slate-600">
               {productions.map((item) => (
-                <tr key={item.id} className="bg-white hover:bg-slate-50">
+                <tr key={item.id} className="bg-white hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-900">
                   <th
                     scope="row"
-                    className="px-4 py-4 font-bold text-slate-900 whitespace-nowrap underline"
+                    className="px-4 py-4 font-bold whitespace-nowrap underline text-slate-900 dark:text-white"
                   >
                     <Link
                       href={`/admin/${params.companyId}/productions/${item.id}`}
@@ -88,19 +88,19 @@ export default async function Productions({
                   </th>
 
                   <td className="px-4 py-4 max-w-sm whitespace-nowrap">
-                    <p className="text-sm text-slate-500 truncate">
+                    <p className="text-sm truncate text-slate-500 dark:text-slate-300">
                       {item.description}
                     </p>
                   </td>
 
                   <td className="px-4 py-4 whitespace-nowrap">
-                    <span className="text-sm text-slate-500">
+                    <span className="text-sm text-slate-500 dark:text-slate-300">
                       {item.events}
                     </span>
                   </td>
 
                   <td className="px-4 py-4 whitespace-nowrap">
-                    <span className="text-sm text-slate-500">
+                    <span className="text-sm text-slate-500 dark:text-slate-300">
                       {item.vacancies}
                     </span>
                   </td>

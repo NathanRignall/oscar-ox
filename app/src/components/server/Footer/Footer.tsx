@@ -3,11 +3,11 @@ import { Tag } from "@/components/ui";
 
 export const Footer = () => {
   return (
-    <footer className="bg-white rounded-lg shadow">
+    <footer className="border-t-2 bg-white border-slate-200 dark:bg-slate-800 dark:border-slate-600">
       <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
         <div className="sm:flex sm:items-center sm:justify-between">
           <Link href="/" className="flex items-center">
-            <span className="self-center text-2xl md:text-4xl font-bold whitespace-nowrap text-slate-900">
+            <span className="self-center text-2xl md:text-4xl font-bold whitespace-nowrap text-slate-900 dark:text-white">
               Oscar Ox
             </span>
             <div className="ml-2">
@@ -22,7 +22,7 @@ export const Footer = () => {
               )}
             </div>
           </Link>
-          <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-slate-500 sm:mb-0 ">
+          <ul className="flex flex-wrap items-center mb-6 text-sm font-medium sm:mb-0 text-slate-500 dark:text-slate-400">
             <li>
               <Link href="/about" className="mr-4 hover:underline md:mr-6 ">
                 About
@@ -51,8 +51,8 @@ export const Footer = () => {
             </li>
           </ul>
         </div>
-        <hr className="my-6 border-slate-200 sm:mx-auto lg:my-8" />
-        <span className="block text-sm text-slate-500 sm:text-center">
+        <hr className="my-6 sm:mx-auto lg:my-8 border-slate-200 dark:border-slate-500" />
+        <span className="block text-sm sm:text-center text-slate-500 dark:text-slate-400">
           © 2023{" "}
           <Link href="/" className="hover:underline">
             Oscar Ox

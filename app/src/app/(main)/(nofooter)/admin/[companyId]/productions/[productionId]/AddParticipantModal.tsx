@@ -145,7 +145,7 @@ export const AddParticipantModal = ({
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen} button="Add Participant">
-      <div className="text-3xl text-slate-900 font-bold mb-6">
+      <div className="text-3xl font-bold mb-6 text-slate-900 dark:text-white">
         Add Participant
       </div>
 
@@ -159,7 +159,7 @@ export const AddParticipantModal = ({
             <div className="mb-4">
               <label
                 htmlFor="title"
-                className="block mb-2 text-sm font-medium text-gray-600"
+                className="block mb-2 text-sm font-medium text-slate-600 dark:text-slate-300"
               >
                 Role Title
               </label>
@@ -168,11 +168,11 @@ export const AddParticipantModal = ({
                 type="text"
                 name="title"
                 placeholder="Title.."
-                className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
+                className="relative block w-full rounded-md border-2 px-4 py-3 text-md text-slate-900 placeholder-slate-400 border-slate-200 dark:text-white dark:bg-slate-800 dark:placeholder-slate-300 dark:border-slate-600"
               />
 
               {errors.title && touched.title && (
-                <p className="mt-2 text-sm text-red-600">{errors.title}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-300">{errors.title}</p>
               )}
             </div>
 
@@ -182,7 +182,7 @@ export const AddParticipantModal = ({
                   <div className="grow">
                     <label
                       htmlFor="givenName"
-                      className="block mb-2 text-sm font-medium text-gray-600"
+                      className="block mb-2 text-sm font-medium text-slate-600 dark:text-slate-300"
                     >
                       First Name
                     </label>
@@ -191,11 +191,11 @@ export const AddParticipantModal = ({
                       type="text"
                       name="givenName"
                       placeholder="First Name..."
-                      className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
+                      className="relative block w-full rounded-md border-2 px-4 py-3 text-md text-slate-900 placeholder-slate-400 border-slate-200 dark:text-white dark:bg-slate-800 dark:placeholder-slate-300 dark:border-slate-600"
                     />
 
                     {errors.givenName && touched.givenName && (
-                      <p className="mt-2 text-sm text-red-600">
+                      <p className="mt-2 text-sm text-red-600 dark:text-red-300">
                         {errors.givenName}
                       </p>
                     )}
@@ -204,7 +204,7 @@ export const AddParticipantModal = ({
                   <div className="grow">
                     <label
                       htmlFor="familyName"
-                      className="block mb-2 text-sm font-medium text-gray-600"
+                      className="block mb-2 text-sm font-medium text-slate-600 dark:text-slate-300"
                     >
                       Last Name
                     </label>
@@ -213,11 +213,11 @@ export const AddParticipantModal = ({
                       type="text"
                       name="familyName"
                       placeholder="Last Name..."
-                      className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
+                      className="relative block w-full rounded-md border-2 px-4 py-3 text-md text-slate-900 placeholder-slate-400 border-slate-200 dark:text-white dark:bg-slate-800 dark:placeholder-slate-300 dark:border-slate-600"
                     />
 
                     {errors.familyName && touched.familyName && (
-                      <p className="mt-2 text-sm text-red-600">
+                      <p className="mt-2 text-sm text-red-600 dark:text-red-300">
                         {errors.familyName}
                       </p>
                     )}
@@ -227,7 +227,7 @@ export const AddParticipantModal = ({
                 <div className="mb-4">
                   <label
                     htmlFor="email"
-                    className="block mb-2 text-sm font-medium text-gray-600"
+                    className="block mb-2 text-sm font-medium text-slate-600 dark:text-slate-300"
                   >
                     Email
                   </label>
@@ -236,11 +236,11 @@ export const AddParticipantModal = ({
                     type="email"
                     name="email"
                     placeholder="Email Address..."
-                    className="relative block w-full rounded-md border-2 border-slate-200 px-4 py-3 text-md text-slate-900 placeholder-slate-400"
+                    className="relative block w-full rounded-md border-2 px-4 py-3 text-md text-slate-900 placeholder-slate-400 border-slate-200 dark:text-white dark:bg-slate-800 dark:placeholder-slate-300 dark:border-slate-600"
                   />
 
                   {errors.email && touched.email && (
-                    <p className="mt-2 text-sm text-red-600">{errors.email}</p>
+                    <p className="mt-2 text-sm text-red-600 dark:text-red-300">{errors.email}</p>
                   )}
                 </div>
               </>
@@ -249,7 +249,7 @@ export const AddParticipantModal = ({
                 <AutoCompleteEmail />
 
                 {errors.profileId && touched.profileId && (
-                  <p className="mt-2 text-sm text-red-600">
+                  <p className="mt-2 text-sm text-red-600 dark:text-red-300">
                     {errors.profileId}
                   </p>
                 )}
@@ -264,8 +264,8 @@ export const AddParticipantModal = ({
                   name="isInvite"
                   className="sr-only peer"
                 />
-                <div className="w-11 h-6 bg-slate-200 rounded-full peer  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-slate-800"></div>
-                <span className="ml-3 text-sm font-medium text-slate-600">
+                <div className="w-11 h-6 bg-slate-200 dark:bg-slate-700 rounded-full peer  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-slate-800 dark:peer-checked:bg-slate-400"></div>
+                <span className="ml-3 text-sm font-medium text-slate-600 dark:text-slate-300">
                   Invite
                 </span>
               </label>
@@ -282,7 +282,7 @@ export const AddParticipantModal = ({
               </Field>
 
               {errors.categoryId && touched.categoryId && (
-                <p className="mt-2 text-sm text-red-600">{errors.categoryId}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-300">{errors.categoryId}</p>
               )}
             </div>
 
@@ -293,7 +293,7 @@ export const AddParticipantModal = ({
 
               <div className="text-center">
                 {formError ? (
-                  <p className="mt-2 text-sm text-red-600">{formError}</p>
+                  <p className="mt-2 text-sm text-red-600 dark:text-red-300">{formError}</p>
                 ) : (
                   <div className="mt-2 h-5" />
                 )}

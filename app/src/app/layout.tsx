@@ -29,7 +29,7 @@ export default async function RootLayout({
     <html lang="en">
       <head />
 
-      <body className="bg-slate-50 h-screen flex flex-col">
+      <body className="bg-slate-50 dark:bg-slate-900 h-screen flex flex-col">
         <SupabaseProvider session={session}>
           <SupabaseListener serverAccessToken={session?.access_token} />
           {children}

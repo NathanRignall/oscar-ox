@@ -113,13 +113,13 @@ export const Editor = ({ vacancy }: EditorProps) => {
           </div>
 
           <div className="mb-4">
-            <div className="px-6 py-4 bg-white rounded-md">
+            <div className="px-6 py-4 rounded-md border-2 text-slate-900 bg-white border-slate-200 dark:text-white dark:bg-slate-800 dark:border-slate-600">
               <h2 className="text-xl font-semibold">{vacancy.title}</h2>
             </div>
           </div>
 
           <div className="mb-4">
-            <div className="px-6 py-4 bg-white rounded-md">
+            <div className="px-6 py-4 rounded-md border-2 bg-white border-slate-200  dark:bg-[#0d1117] dark:border-slate-600">
               <MDPreview source={content} />
             </div>
           </div>
@@ -131,7 +131,7 @@ export const Editor = ({ vacancy }: EditorProps) => {
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="block w-full rounded-md border-2 border-slate-200 px-5 py-3 text-sm text-slate-900 placeholder-slate-400"
+              className="relative block w-full rounded-md border-2 px-4 py-3 text-md text-slate-900 placeholder-slate-400 border-slate-200 dark:text-white dark:bg-slate-800 dark:placeholder-slate-300 dark:border-slate-600"
             />
           </div>
 
@@ -157,8 +157,8 @@ export const Editor = ({ vacancy }: EditorProps) => {
                         );
                     }}
                   />
-                  <div className="w-11 h-6 bg-slate-200 rounded-full peer  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-slate-800"></div>
-                  <span className="ml-3 text-md font-medium text-slate-900">
+                  <div className="w-11 h-6 bg-slate-200 dark:bg-slate-700 rounded-full peer  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-slate-800 dark:peer-checked:bg-slate-400"></div>
+                  <span className="ml-3 text-sm font-medium text-slate-600 dark:text-slate-300">
                     {category.title}
                   </span>
                 </label>

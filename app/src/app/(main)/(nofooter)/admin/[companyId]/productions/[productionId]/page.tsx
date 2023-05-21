@@ -111,7 +111,7 @@ export default async function Production({
     <>
       <header>
         <div className="flex items-center">
-          <h1 className="flex items-center text-4xl font-bold text-slate-900 mb-3">
+          <h1 className="flex items-center text-4xl font-bold mb-3 text-slate-900 dark:text-white">
             <Link href={`/admin/${params.companyId}/productions`}>
               <svg
                 className="h-5 w-5 mr-4"
@@ -141,7 +141,7 @@ export default async function Production({
 
         <div className="sm:flex">
           <div className="flex-1">
-            <p className="mb-3 text-lg text-slate-600 inline-block">
+            <p className="mb-3 text-lg inline-block text-slate-600 dark:text-slate-300">
               {production.description}{" "}
             </p>
             <EditProductionModal
@@ -152,7 +152,7 @@ export default async function Production({
             />
           </div>
 
-          <div className="h-full aspect-1 relative bg-slate-300 rounded-md overflow-hidden min-w-[200px]">
+          <div className="h-full aspect-1 relative  rounded-md overflow-hidden min-w-[200px] bg-slate-300 dark:bg-slate-700">
             <Image
               alt=""
               src={`media/companies/${params.companyId}/productions/${params.productionId}/main.jpeg`}
@@ -169,9 +169,9 @@ export default async function Production({
 
         <AddEventModal productionId={params.productionId} />
 
-        <div className="mt-4 border-2 border-slate-200 rounded-lg overflow-hidden">
-          <table className="w-full text-left divide-y-2 divide-gray-200">
-            <thead className="text-xs font-semibold text-gray-500 bg-slate-50 uppercase">
+        <div className="mt-4 border-2 rounded-lg overflow-hidden border-slate-200 dark:border-slate-600">
+          <table className="w-full text-left divide-y-2 divide-slate-200 dark:divide-slate-600">
+            <thead className="text-xs font-semibold uppercase text-slate-500 bg-slate-50 dark:text-slate-200 dark:bg-slate-700">
               <tr>
                 <th scope="col" className="px-4 py-4">
                   Start
@@ -185,7 +185,7 @@ export default async function Production({
               </tr>
             </thead>
 
-            <tbody className="divide-y-2 divide-solid divide-slate-200">
+            <tbody className="divide-y-2 divide-slate-200 dark:divide-slate-600">
               {production.events.map((event) => {
                 const time =
                   new Date(event.start_time).toLocaleDateString("en-GB", {
@@ -199,14 +199,14 @@ export default async function Production({
                     minute: "2-digit",
                   });
                 return (
-                  <tr key={event.id} className="bg-white hover:bg-gray-50">
+                  <tr key={event.id} className="bg-white hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-900">
                     <th
                       scope="row"
-                      className="px-4 py-4 font-medium text-gray-900"
+                      className="px-4 py-4 font-medium text-gray-900 dark:text-white"
                     >
                       {time}
                     </th>
-                    <td className="px-4 py-4 text-gray-500">
+                    <td className="px-4 py-4 text-gray-500 dark:text-slate-300">
                       {event.venue.title}
                     </td>
 
@@ -236,9 +236,9 @@ export default async function Production({
           productionId={params.productionId}
         />
 
-        <div className="mt-4 border-2 border-slate-200 rounded-lg overflow-hidden">
-          <table className="w-full text-left divide-y-2 divide-gray-200">
-            <thead className="text-xs font-semibold text-gray-500 bg-slate-50 uppercase">
+        <div className="mt-4 border-2 rounded-lg overflow-hidden border-slate-200 dark:border-slate-600">
+          <table className="w-full text-left divide-y-2 divide-slate-200 dark:divide-slate-600">
+            <thead className="text-xs font-semibold uppercase text-slate-500 bg-slate-50 dark:text-slate-200 dark:bg-slate-700">
               <tr>
                 <th scope="col" className="px-4 py-4">
                   Title
@@ -258,12 +258,12 @@ export default async function Production({
               </tr>
             </thead>
 
-            <tbody className="divide-y-2 divide-solid divide-slate-200">
+            <tbody className="divide-y-2 divide-solid divide-slate-200 dark:divide-slate-600">
               {production.vacancies.map((vacancy) => (
-                <tr key={vacancy.id} className="bg-white hover:bg-gray-50">
+                <tr key={vacancy.id} className="bg-white hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-900">
                   <th
                     scope="row"
-                    className="px-4 py-4 font-bold text-gray-900 whitespace-nowrap underline"
+                    className="px-4 py-4 font-bold whitespace-nowrap underline text-gray-900 dark:text-white"
                   >
                     <Link
                       href={`/admin/${params.companyId}/vacancies/${vacancy.id}`}
@@ -272,7 +272,7 @@ export default async function Production({
                     </Link>
                   </th>
 
-                  <td className="px-4 py-4 text-gray-500 whitespace-nowrap">
+                  <td className="px-4 py-4 whitespace-nowrap text-gray-500 dark:text-slate-300">
                     {new Date(vacancy.inserted_at).toLocaleDateString("en-GB", {
                       year: "numeric",
                       month: "short",
@@ -280,11 +280,11 @@ export default async function Production({
                     })}
                   </td>
 
-                  <td className="px-4 py-4 text-gray-500">
+                  <td className="px-4 py-4 text-gray-500 dark:text-slate-300">
                     {vacancy.responses}
                   </td>
 
-                  <td className="px-4 py-4 text-gray-500 whitespace-nowrap space-x-1">
+                  <td className="px-4 py-4 whitespace-nowrap space-x-1 text-gray-500 dark:text-slate-300">
                     {vacancy.categories.map((category) => (
                       <Tag
                         key={category.id}
@@ -314,9 +314,9 @@ export default async function Production({
 
         <AddParticipantModal productionId={params.productionId} />
 
-        <div className="mt-4 border-2 border-slate-200 rounded-lg overflow-hidden">
-          <table className="w-full text-left divide-y-2 divide-gray-200">
-            <thead className="text-xs font-semibold text-gray-500 bg-slate-50 uppercase">
+        <div className="mt-4 border-2 rounded-lg overflow-hidden border-slate-200 dark:border-slate-600">
+          <table className="w-full text-left divide-y-2 divide-slate-200 dark:divide-slate-600">
+            <thead className="text-xs font-semibold uppercase text-slate-500 bg-slate-50 dark:text-slate-200 dark:bg-slate-700">
               <tr>
                 <th scope="col" className="px-4 py-4">
                   Name
@@ -336,25 +336,25 @@ export default async function Production({
               </tr>
             </thead>
 
-            <tbody className="divide-y-2 divide-solid divide-slate-200">
+            <tbody className="divide-y-2 divide-solid divide-slate-200 dark:divide-slate-600">
               {production.participants.map((participant) => (
-                <tr key={participant.id} className="bg-white hover:bg-gray-50">
+                <tr key={participant.id} className="bg-white hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-900">
                   <th
                     scope="row"
-                    className="px-4 py-4 font-bold text-gray-900 whitespace-nowrap"
+                    className="px-4 py-4 font-boldwhitespace-nowrap text-slate-900 dark:text-white"
                   >
                     {`${participant.profile.given_name} ${participant.profile.family_name}`}
                   </th>
 
-                  <td className="px-4 py-4 text-gray-500 whitespace-nowrap">
+                  <td className="px-4 py-4 whitespace-nowrap text-gray-500 dark:text-slate-300">
                     {participant.profile.email}
                   </td>
 
-                  <td className="px-4 py-4 text-gray-500">
+                  <td className="px-4 py-4 text-gray-500 dark:text-slate-300">
                     {participant.title}
                   </td>
 
-                  <td className="px-4 py-4 text-gray-500 whitespace-nowrap space-x-1">
+                  <td className="px-4 py-4 whitespace-nowrap space-x-1 text-gray-500 dark:text-slate-300">
                     {participant.category && (
                       <Tag
                         key={participant.category.id}

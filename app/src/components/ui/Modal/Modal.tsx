@@ -34,7 +34,7 @@ export const Modal = ({
         <button
           type="button"
           className={clsx(
-            "text-slate-900 bg-white border-2 border-slate-200 hover:bg-slate-200 hover:border-slate-400 rounded-lg text-sm p-1",
+            "rounded-lg text-sm p-1 text-slate-900 bg-white border-2 border-slate-200 hover:bg-slate-200 hover:border-slate-400 dark:text-white dark:bg-slate-700 dark:border-slate-500 dark:hover:bg-slate-900 dark:hover:border-slate-700",
             className
           )}
           data-modal-hide="defaultModal"
@@ -65,7 +65,7 @@ export const Modal = ({
 
             <div
               className={clsx(
-                "bg-white rounded-lg overflow-hidden z-40 w-full",
+                "rounded-lg overflow-hidden z-40 w-full bg-white dark:bg-slate-900",
                 size === "sm" && "max-w-lg",
                 size === "md" && "max-w-2xl",
                 size === "lg" && "max-w-3xl"
@@ -75,7 +75,7 @@ export const Modal = ({
                 <div className="flex items-end justify-between rounded-t mb-4">
                   <button
                     type="button"
-                    className="text-slate-400 bg-transparent hover:bg-slate-200 hover:text-slate-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center "
+                    className="rounded-lg text-sm p-1.5 ml-auto inline-flex items-center text-slate-400 bg-transparent hover:bg-slate-200 hover:text-slate-900 dark:text-slate-500 dark:hover:bg-slate-700 dark:hover:text-white"
                     data-modal-hide="defaultModal"
                     onClick={toggleModal}
                   >

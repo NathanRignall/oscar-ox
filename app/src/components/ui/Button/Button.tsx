@@ -41,10 +41,10 @@ export const Button = ({
         active && variant === "secondary" && "bg-slate-700 border-slate-500",
         !active &&
           variant === "primary" &&
-          "text-slate-900 bg-white border-slate-200 hover:bg-slate-200 hover:border-slate-400",
+          "text-slate-900 bg-white border-slate-200 hover:bg-slate-200 hover:border-slate-400 dark:text-white dark:bg-slate-700 dark:border-slate-500 dark:hover:bg-slate-900 dark:hover:border-slate-700",
         !active &&
           variant === "secondary" &&
-          "text-white bg-slate-900 border-slate-700 hover:bg-slate-700 hover:border-slate-500",
+          "text-white bg-slate-900 border-slate-700 hover:bg-slate-700 hover:border-slate-500 dark:text-white dark:bg-slate-700 dark:border-slate-500 dark:hover:bg-slate-900 dark:hover:border-slate-700",
         "font-medium rounded-lg border-2"
       )}
       onClick={onClick}
