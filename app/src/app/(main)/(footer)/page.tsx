@@ -16,8 +16,8 @@ export default async function Home() {
 
       <main>
         {/* render as client component to avoid date issues for now */}
-        <Calendar/>
-        
+        <Calendar />
+
         {/* @ts-expect-error Server Component */}
         <Vacancies />
       </main>

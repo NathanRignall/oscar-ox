@@ -63,7 +63,9 @@ export const AddEventModal = ({ productionId }: AddEventModalProps) => {
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen} button="Add Event">
-      <div className="text-3xl font-bold mb-6 text-slate-900 dark:text-white">Add Event</div>
+      <div className="text-3xl font-bold mb-6 text-slate-900 dark:text-white">
+        Add Event
+      </div>
 
       <Formik
         initialValues={initialValues}
@@ -81,7 +83,9 @@ export const AddEventModal = ({ productionId }: AddEventModalProps) => {
               <AutoCompleteVenue />
 
               {errors.venueId && touched.venueId && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-300">{errors.venueId}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-300">
+                  {errors.venueId}
+                </p>
               )}
             </div>
 
@@ -105,7 +109,9 @@ export const AddEventModal = ({ productionId }: AddEventModalProps) => {
               />
 
               {errors.datetime && touched.datetime && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-300">null</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-300">
+                  null
+                </p>
               )}
             </div>
 
@@ -116,7 +122,9 @@ export const AddEventModal = ({ productionId }: AddEventModalProps) => {
 
               <div className="text-center">
                 {formError ? (
-                  <p className="mt-2 text-sm text-red-600 dark:text-red-300">{formError}</p>
+                  <p className="mt-2 text-sm text-red-600 dark:text-red-300">
+                    {formError}
+                  </p>
                 ) : (
                   <div className="mt-2 h-5" />
                 )}

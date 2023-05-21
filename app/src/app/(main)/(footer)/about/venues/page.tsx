@@ -29,7 +29,9 @@ export default async function Venues() {
   return (
     <>
       <header className="flex max-w-3xl mx-auto mb-8">
-        <h1 className="text-4xl font-bold text-slate-900 dark:text-white">Venues</h1>
+        <h1 className="text-4xl font-bold text-slate-900 dark:text-white">
+          Venues
+        </h1>
       </header>
 
       <main className="max-w-3xl mx-auto">
@@ -48,7 +50,9 @@ export default async function Venues() {
                     {venue.title}
                   </h2>
                 </Link>
-                <p className="text-sm text-slate-600 dark:text-slate-300">{venue.location}</p>
+                <p className="text-sm text-slate-600 dark:text-slate-300">
+                  {venue.location}
+                </p>
               </div>
 
               <div className="h-full aspect-1 relative rounded-r-md overflow-hidden bg-slate-300 dark:bg-slate-600">

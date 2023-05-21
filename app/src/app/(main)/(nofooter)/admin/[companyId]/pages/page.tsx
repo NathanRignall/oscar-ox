@@ -30,7 +30,9 @@ export default async function Pages({
 
   return (
     <>
-      <h1 className="text-4xl font-bold text-slate-900 dark:text-white">Pages</h1>
+      <h1 className="text-4xl font-bold text-slate-900 dark:text-white">
+        Pages
+      </h1>
 
       <section className="mt-4">
         <div className="mt-4 border-2 rounded-lg overflow-hidden border-slate-200 dark:border-slate-600">
@@ -51,8 +53,11 @@ export default async function Pages({
 
             <tbody className="divide-y-2 divide-solid divide-slate-200 dark:divide-slate-600">
               {pages.map((page) => (
-                <tr key={page.id} className="bg-white hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-900">
-                <th
+                <tr
+                  key={page.id}
+                  className="bg-white hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-900"
+                >
+                  <th
                     scope="row"
                     className="px-4 py-4 font-bold whitespace-nowrap underline text-gray-900 dark:text-white"
                   >
@@ -61,7 +66,9 @@ export default async function Pages({
                     </Link>
                   </th>
 
-                  <td className="px-4 py-4 whitespace-nowrap text-slate-500 dark:text-slate-300">/{page.slug}</td>
+                  <td className="px-4 py-4 whitespace-nowrap text-slate-500 dark:text-slate-300">
+                    /{page.slug}
+                  </td>
 
                   <td className="px-4 text-right whitespace-nowrap">
                     {page.is_published ? (

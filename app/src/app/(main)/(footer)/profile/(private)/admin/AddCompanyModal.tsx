@@ -93,7 +93,9 @@ export const AddCompanyModal = () => {
               />
 
               {errors.name && touched.name && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-300">{errors.name}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-300">
+                  {errors.name}
+                </p>
               )}
             </div>
 
@@ -127,7 +129,9 @@ export const AddCompanyModal = () => {
 
               <div className="text-center">
                 {formError ? (
-                  <p className="mt-2 text-sm text-red-600 dark:text-red-300">{formError}</p>
+                  <p className="mt-2 text-sm text-red-600 dark:text-red-300">
+                    {formError}
+                  </p>
                 ) : (
                   <div className="mt-2 h-5" />
                 )}

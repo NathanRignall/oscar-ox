@@ -74,10 +74,12 @@ const EmailLoginForm = ({ complete }: EmailLoginFormProps) => {
               autoComplete="new-password"
               placeholder="New Password..."
               className="relative block w-full rounded-md border-2 px-4 py-3 text-md text-slate-900 placeholder-slate-400 border-slate-200 dark:text-white dark:bg-slate-800 dark:placeholder-slate-300 dark:border-slate-600"
-              />
+            />
 
             {errors.newPassword && touched.newPassword && (
-              <p className="mt-2 text-sm text-red-600 dark:text-red-300">{errors.newPassword}</p>
+              <p className="mt-2 text-sm text-red-600 dark:text-red-300">
+                {errors.newPassword}
+              </p>
             )}
           </div>
 
@@ -89,7 +91,7 @@ const EmailLoginForm = ({ complete }: EmailLoginFormProps) => {
               autoComplete="new-password"
               placeholder="Confirm Password..."
               className="relative block w-full rounded-md border-2 px-4 py-3 text-md text-slate-900 placeholder-slate-400 border-slate-200 dark:text-white dark:bg-slate-800 dark:placeholder-slate-300 dark:border-slate-600"
-              />
+            />
 
             {errors.confirmPassword && touched.confirmPassword && (
               <p className="mt-2 text-sm text-red-600 dark:text-red-300">
@@ -110,7 +112,9 @@ const EmailLoginForm = ({ complete }: EmailLoginFormProps) => {
 
           <div className="text-center">
             {formError ? (
-              <p className="mt-2 text-sm text-red-600 dark:text-red-300">{formError}</p>
+              <p className="mt-2 text-sm text-red-600 dark:text-red-300">
+                {formError}
+              </p>
             ) : (
               <div className="mt-2 h-5" />
             )}

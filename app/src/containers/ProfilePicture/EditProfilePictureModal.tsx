@@ -169,7 +169,9 @@ export const EditProfilePictureModal = ({
 
           <div className="text-center">
             {error ? (
-              <p className="mt-2 text-sm text-red-600 dark:text-red-300">{error}</p>
+              <p className="mt-2 text-sm text-red-600 dark:text-red-300">
+                {error}
+              </p>
             ) : (
               <div className="mt-2 h-5" />
             )}

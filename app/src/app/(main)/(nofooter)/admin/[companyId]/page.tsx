@@ -16,7 +16,9 @@ export default async function Pages({
 
   return (
     <>
-      <h1 className="text-4xl font-bold text-slate-900 dark:text-white">Home</h1>
+      <h1 className="text-4xl font-bold text-slate-900 dark:text-white">
+        Home
+      </h1>
     </>
   );
 }

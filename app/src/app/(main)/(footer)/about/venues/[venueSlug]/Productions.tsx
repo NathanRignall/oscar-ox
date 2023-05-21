@@ -106,10 +106,14 @@ export default async function Productions({ venueId }: ProductionsProps) {
 
   return (
     <article className="mt-8">
-      <h2 className="text-3xl font-bold mb-4 text-slate-900 dark:text-white">What&apos;s On</h2>
+      <h2 className="text-3xl font-bold mb-4 text-slate-900 dark:text-white">
+        What&apos;s On
+      </h2>
 
       {productions.length == 0 ? (
-        <p className="text-slate-600 dark:text-slate-300">No productions found.</p>
+        <p className="text-slate-600 dark:text-slate-300">
+          No productions found.
+        </p>
       ) : (
         <ul className="grid sm:grid-cols-2 gap-4">
           {productions.map((production) => {
@@ -165,7 +169,9 @@ export default async function Productions({ venueId }: ProductionsProps) {
                       {production.title}
                     </h3>
                   </Link>
-                  <p className="text-sm mb-2 text-slate-600 dark:text-slate-300">{timeMessage}</p>
+                  <p className="text-sm mb-2 text-slate-600 dark:text-slate-300">
+                    {timeMessage}
+                  </p>
 
                   <ul className="flex flex-wrap gap-2 mb-3">
                     <li>

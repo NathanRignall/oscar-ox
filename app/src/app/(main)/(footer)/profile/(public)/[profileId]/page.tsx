@@ -90,7 +90,7 @@ export default async function Account({
     <>
       <div className="container mx-auto md:py-6 md:px-8 py-6 px-6">
         <header className="sm:flex max-w-3xl mx-auto mb-8">
-          <div className="flex-1"> 
+          <div className="flex-1">
             <h1 className="mb-1 text-5xl sm:text-6xl font-extrabold text-slate-900 dark:text-white">
               {`${profile.given_name} ${profile.family_name}`}
             </h1>

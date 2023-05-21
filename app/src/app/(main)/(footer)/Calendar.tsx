@@ -6,7 +6,14 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getArray, getSingle } from "@/lib/supabase-type-convert";
 
-type ColourVariant = "red" | "orange" | "yellow" | "green" | "blue" | "pink" | "purple";
+type ColourVariant =
+  | "red"
+  | "orange"
+  | "yellow"
+  | "green"
+  | "blue"
+  | "pink"
+  | "purple";
 
 // event component props
 type EventProps = {
@@ -18,24 +25,25 @@ type EventProps = {
 };
 
 // event component
-const Event = ({
-  title,
-  time,
-  location,
-  variant,
-  href,
-}: EventProps) => {
+const Event = ({ title, time, location, variant, href }: EventProps) => {
   return (
     <Link href={href}>
       <div
         className={clsx(
-          variant == "red" && "bg-red-100 border-red-900 dark:bg-red-900 dark:border-red-100 ",
-          variant == "orange" && "bg-orange-100 border-orange-900 dark:bg-orange-900 dark:border-orange-100",
-          variant == "yellow" && "bg-yellow-100 border-yellow-900 dark:bg-yellow-900 dark:border-yellow-100",
-          variant == "green" && "bg-green-100 border-green-900 dark:bg-green-900 dark:border-green-100",
-          variant == "blue" && "bg-blue-100 border-blue-900 dark:bg-blue-900 dark:border-blue-100",
-          variant == "pink" && "bg-pink-100 border-pink-900 dark:bg-pink-900 dark:border-pink-100",
-          variant == "purple" && "bg-purple-100 border-purple-900 dark:bg-purple-900 dark:border-purple-100",
+          variant == "red" &&
+            "bg-red-100 border-red-900 dark:bg-red-900 dark:border-red-100 ",
+          variant == "orange" &&
+            "bg-orange-100 border-orange-900 dark:bg-orange-900 dark:border-orange-100",
+          variant == "yellow" &&
+            "bg-yellow-100 border-yellow-900 dark:bg-yellow-900 dark:border-yellow-100",
+          variant == "green" &&
+            "bg-green-100 border-green-900 dark:bg-green-900 dark:border-green-100",
+          variant == "blue" &&
+            "bg-blue-100 border-blue-900 dark:bg-blue-900 dark:border-blue-100",
+          variant == "pink" &&
+            "bg-pink-100 border-pink-900 dark:bg-pink-900 dark:border-pink-100",
+          variant == "purple" &&
+            "bg-purple-100 border-purple-900 dark:bg-purple-900 dark:border-purple-100",
           "rounded-lg border-l-[3px]  px-3 py-1 mb-3"
         )}
       >
@@ -102,8 +110,7 @@ type Day = {
   };
   start_time: string;
   end_time: string | null;
-}[]
-
+}[];
 
 export const Calendar = () => {
   const { supabase } = useSupabase();
@@ -120,9 +127,10 @@ export const Calendar = () => {
     return date;
   });
 
-
   const [days, setDays] = useState<Day[]>([]);
-  const [coloursMap, setColoursMap] = useState<Map<string, ColourVariant>>(new Map<string, ColourVariant>());
+  const [coloursMap, setColoursMap] = useState<Map<string, ColourVariant>>(
+    new Map<string, ColourVariant>()
+  );
 
   const moveDay = (days: number) => {
     setThisWeek((thisWeek) => {
@@ -136,7 +144,7 @@ export const Calendar = () => {
       date.setDate(date.getDate() + days);
       return date;
     });
-  }
+  };
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -221,11 +229,10 @@ export const Calendar = () => {
       // set the state
       setDays(days);
       setColoursMap(coloursMap);
-    }
+    };
 
     fetchEvents();
   }, [supabase, thisWeek, nextWeek]);
-
 
   return (
     <>
@@ -233,9 +240,7 @@ export const Calendar = () => {
         <nav className="flex px-5 py-3 border-2 rounded-lg text-gray-700 bg-white border-slate-200 dark:text-slate-200 dark:bg-slate-800 dark:border-slate-600">
           <ol className="inline-flex items-center space-x-1 md:space-x-3">
             <li>
-              <button className="flex items-center" onClick={
-                () => moveDay(-1)
-              }>
+              <button className="flex items-center" onClick={() => moveDay(-1)}>
                 <span className="mr-1 text-sm font-medium md:ml-2 text-slate-500 dark:text-slate-400">
                   Back
                 </span>
@@ -264,9 +269,7 @@ export const Calendar = () => {
               </div>
             </li>
             <li>
-              <button className="flex items-center" onClick={
-                () => moveDay(1)
-              }>
+              <button className="flex items-center" onClick={() => moveDay(1)}>
                 <svg
                   className="w-6 h-6 text-slate-400 dark:text-slate-300"
                   fill="currentColor"
@@ -286,7 +289,7 @@ export const Calendar = () => {
             </li>
           </ol>
         </nav>
-      </div >
+      </div>
 
       <div className="rounded-lg border-2 w-full overflow-hidden min-h-[400px] bg-white border-slate-200 dark:bg-slate-800 dark:border-slate-600">
         <div className="grid grid-cols-1 lg:grid-cols-7">
@@ -322,7 +325,9 @@ export const Calendar = () => {
                           minute: "2-digit",
                         })}
                         location={event.venue.title}
-                        variant={coloursMap.get(event.production.id) || "purple"}
+                        variant={
+                          coloursMap.get(event.production.id) || "purple"
+                        }
                         href={`/companies/${event.production.company.slug}`}
                       />
                     );
@@ -334,5 +339,5 @@ export const Calendar = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};

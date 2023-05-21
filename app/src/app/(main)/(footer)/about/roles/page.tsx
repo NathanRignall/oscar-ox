@@ -22,7 +22,9 @@ export default async function Roles() {
   return (
     <>
       <header className="flex max-w-3xl mx-auto mb-8">
-        <h1 className="text-4xl font-bold text-slate-900 dark:text-white">Roles</h1>
+        <h1 className="text-4xl font-bold text-slate-900 dark:text-white">
+          Roles
+        </h1>
       </header>
 
       <main className="max-w-3xl mx-auto">
@@ -38,7 +40,9 @@ export default async function Roles() {
                     {role.title}
                   </h2>
                 </Link>
-                <p className="text-sm text-slate-600 dark:text-slate-300">{role.description}</p>
+                <p className="text-sm text-slate-600 dark:text-slate-300">
+                  {role.description}
+                </p>
               </div>
 
               <div className="h-full aspect-1 relative rounded-r-md overflow-hidden bg-slate-300 dark:bg-slate-600">

@@ -89,7 +89,9 @@ export const AddProductionModal = ({ company_id }: AddProductionModalProps) => {
               />
 
               {errors.title && touched.title && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-300">{errors.title}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-300">
+                  {errors.title}
+                </p>
               )}
             </div>
 
@@ -108,7 +110,7 @@ export const AddProductionModal = ({ company_id }: AddProductionModalProps) => {
                 name="description"
                 placeholder="Description..."
                 className="relative block w-full rounded-md border-2 px-4 py-3 text-md text-slate-900 placeholder-slate-400 border-slate-200 dark:text-white dark:bg-slate-800 dark:placeholder-slate-300 dark:border-slate-600"
-            />
+              />
               {errors.description && touched.description && (
                 <p className="mt-2 text-sm text-red-600 dark:text-red-300">
                   {errors.description}

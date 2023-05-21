@@ -199,7 +199,10 @@ export default async function Production({
                     minute: "2-digit",
                   });
                 return (
-                  <tr key={event.id} className="bg-white hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-900">
+                  <tr
+                    key={event.id}
+                    className="bg-white hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-900"
+                  >
                     <th
                       scope="row"
                       className="px-4 py-4 font-medium text-gray-900 dark:text-white"
@@ -260,7 +263,10 @@ export default async function Production({
 
             <tbody className="divide-y-2 divide-solid divide-slate-200 dark:divide-slate-600">
               {production.vacancies.map((vacancy) => (
-                <tr key={vacancy.id} className="bg-white hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-900">
+                <tr
+                  key={vacancy.id}
+                  className="bg-white hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-900"
+                >
                   <th
                     scope="row"
                     className="px-4 py-4 font-bold whitespace-nowrap underline text-gray-900 dark:text-white"
@@ -338,7 +344,10 @@ export default async function Production({
 
             <tbody className="divide-y-2 divide-solid divide-slate-200 dark:divide-slate-600">
               {production.participants.map((participant) => (
-                <tr key={participant.id} className="bg-white hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-900">
+                <tr
+                  key={participant.id}
+                  className="bg-white hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-900"
+                >
                   <th
                     scope="row"
                     className="px-4 py-4 font-boldwhitespace-nowrap text-slate-900 dark:text-white"

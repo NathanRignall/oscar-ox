@@ -83,7 +83,9 @@ export const EditEventModal = ({ event }: EditEventModalProps) => {
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen} button="Edit" buttonSize="sm">
-      <div className="text-3xl font-bold mb-6 text-slate-900 dark:text-white">Edit Event</div>
+      <div className="text-3xl font-bold mb-6 text-slate-900 dark:text-white">
+        Edit Event
+      </div>
 
       <Formik
         initialValues={initialValues}
@@ -101,7 +103,9 @@ export const EditEventModal = ({ event }: EditEventModalProps) => {
               <AutoCompleteVenue initialSearch={event.venue.title} />
 
               {errors.venueId && touched.venueId && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-300">{errors.venueId}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-300">
+                  {errors.venueId}
+                </p>
               )}
             </div>
 
@@ -127,7 +131,9 @@ export const EditEventModal = ({ event }: EditEventModalProps) => {
               />
 
               {errors.start_time && touched.start_time && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-300">null</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-300">
+                  null
+                </p>
               )}
             </div>
 
@@ -138,7 +144,9 @@ export const EditEventModal = ({ event }: EditEventModalProps) => {
 
               <div className="text-center">
                 {formError ? (
-                  <p className="mt-2 text-sm text-red-600 dark:text-red-300">{formError}</p>
+                  <p className="mt-2 text-sm text-red-600 dark:text-red-300">
+                    {formError}
+                  </p>
                 ) : (
                   <div className="mt-2 h-5" />
                 )}

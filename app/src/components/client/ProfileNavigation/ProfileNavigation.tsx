@@ -43,7 +43,8 @@ export const ProfileNavigation = () => {
           <Link
             href="/profile/responses"
             className={clsx(
-              "/profile/responses" == pathname && "bg-slate-200 dark:bg-slate-600",
+              "/profile/responses" == pathname &&
+                "bg-slate-200 dark:bg-slate-600",
               "inline-flex items-center w-full px-5 py-3 text-sm font-medium border-y border-x-2 sm:border-y-2 sm:border-x xl:border-y xl:border-x-2 text-slate-900 border-slate-200 hover:bg-slate-200 hover:border-slate-400 dark:text-white dark:border-slate-500 dark:hover:bg-slate-900 dark:hover:border-slate-700"
             )}
           >
@@ -69,7 +70,8 @@ export const ProfileNavigation = () => {
           <Link
             href="/profile/settings"
             className={clsx(
-              "/profile/settings" == pathname && "bg-slate-200 dark:bg-slate-600",
+              "/profile/settings" == pathname &&
+                "bg-slate-200 dark:bg-slate-600",
               "inline-flex items-center w-full px-5 py-3 text-sm font-medium border-y border-x-2 sm:border-y-2 sm:border-x xl:border-y xl:border-x-2 text-slate-900 border-slate-200 hover:bg-slate-200 hover:border-slate-400 dark:text-white dark:border-slate-500 dark:hover:bg-slate-900 dark:hover:border-slate-700"
             )}
           >

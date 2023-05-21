@@ -37,13 +37,17 @@ export default async function Venue({
   return (
     <>
       <header className="flex max-w-3xl mx-auto mb-8">
-        <h1 className="text-4xl font-bold text-slate-900 dark:text-white">{venue.title}</h1>
+        <h1 className="text-4xl font-bold text-slate-900 dark:text-white">
+          {venue.title}
+        </h1>
       </header>
 
       <main className="max-w-3xl mx-auto">
         <div className="sm:flex sm:space-x-4 mb-4">
           <div className="basis-2/3">
-            <p className="text-slate-600 dark:text-slate-300">{venue.description}</p>
+            <p className="text-slate-600 dark:text-slate-300">
+              {venue.description}
+            </p>
           </div>
           <div className="relative basis-1/3">
             <div className="relative aspect-1 rounded-md overflow-hidden bg-slate-300 dark:bg-slate-700">

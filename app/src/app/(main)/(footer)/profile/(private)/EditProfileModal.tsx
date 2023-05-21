@@ -89,7 +89,9 @@ export const EditProfileModal = ({
               />
 
               {errors.biography && touched.biography && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-300">{errors.biography}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-300">
+                  {errors.biography}
+                </p>
               )}
             </div>
 
@@ -105,7 +107,9 @@ export const EditProfileModal = ({
 
               <div className="text-center">
                 {formError ? (
-                  <p className="mt-2 text-sm text-red-600 darl:text-red-300">{formError}</p>
+                  <p className="mt-2 text-sm text-red-600 darl:text-red-300">
+                    {formError}
+                  </p>
                 ) : (
                   <div className="mt-2 h-5" />
                 )}

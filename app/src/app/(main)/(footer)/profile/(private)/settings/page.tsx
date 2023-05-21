@@ -98,12 +98,16 @@ export default async function Account() {
         <h1 className="mb-3 text-5xl font-extrabold text-slate-900 dark:text-white">
           Settings
         </h1>
-        <p className="mb-3 text-xl text-slate-600 dark:text-slate-300">Profile Managament</p>
+        <p className="mb-3 text-xl text-slate-600 dark:text-slate-300">
+          Profile Managament
+        </p>
       </header>
 
       <main className="max-w-3xl mx-auto">
         <section>
-          <h2 className="text-4xl font-bold text-slate-900 dark:text-white">Security</h2>
+          <h2 className="text-4xl font-bold text-slate-900 dark:text-white">
+            Security
+          </h2>
         </section>
         <UpdatePasswordModal />
         <br />

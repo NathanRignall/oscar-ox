@@ -79,7 +79,9 @@ const MagicLoginForm = ({
               />
 
               {errors.email && touched.email && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-300">{errors.email}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-300">
+                  {errors.email}
+                </p>
               )}
             </div>
 
@@ -99,7 +101,9 @@ const MagicLoginForm = ({
 
             <div className="text-center">
               {formError ? (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-300">{formError}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-300">
+                  {formError}
+                </p>
               ) : (
                 <div className="mt-2 h-5" />
               )}
@@ -186,7 +190,9 @@ const PasswordLoginForm = ({
               />
 
               {errors.email && touched.email && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-300">{errors.email}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-300">
+                  {errors.email}
+                </p>
               )}
             </div>
 
@@ -201,7 +207,9 @@ const PasswordLoginForm = ({
               />
 
               {errors.password && touched.password && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-300">{errors.password}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-300">
+                  {errors.password}
+                </p>
               )}
             </div>
 
@@ -222,7 +230,9 @@ const PasswordLoginForm = ({
                 </Link>
               </div>
               {formError && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-300">{formError}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-300">
+                  {formError}
+                </p>
               )}
             </div>
           </Form>

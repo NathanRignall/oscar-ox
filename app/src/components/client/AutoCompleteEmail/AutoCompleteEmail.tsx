@@ -139,7 +139,8 @@ export const AutoCompleteEmail = ({
       >
         {optionsList.length > 0 ? (
           optionsList.map((option, index, array) => {
-            let className = "px-4 text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 hover:cursor-pointer ";
+            let className =
+              "px-4 text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 hover:cursor-pointer ";
 
             if (index === 0) className += "pt-3 pb-3 rounded-t-md";
             else if (index === array.length)
@@ -163,7 +164,9 @@ export const AutoCompleteEmail = ({
             );
           })
         ) : (
-          <li className="px-4 py-3 text-gray-500 dark:text-slate-300">No results</li>
+          <li className="px-4 py-3 text-gray-500 dark:text-slate-300">
+            No results
+          </li>
         )}
       </ul>
     </div>

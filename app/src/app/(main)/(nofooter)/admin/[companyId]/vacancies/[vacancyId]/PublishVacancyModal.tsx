@@ -99,7 +99,9 @@ export const PublishVacancyModal = ({
         You are about to publish this vacancy. Are you sure you want to proceed?
       </p>
 
-      <p className="text-2xl font-semibold mb-1 text-slate-900 dark:text-white">{title}</p>
+      <p className="text-2xl font-semibold mb-1 text-slate-900 dark:text-white">
+        {title}
+      </p>
 
       {categories.length != 0 ? (
         <ul className="flex flex-wrap gap-2 mb-3">
@@ -115,7 +117,9 @@ export const PublishVacancyModal = ({
           ))}
         </ul>
       ) : (
-        <p className="my-2 text-sm text-slate-600 dark:text-slate-300">No categories</p>
+        <p className="my-2 text-sm text-slate-600 dark:text-slate-300">
+          No categories
+        </p>
       )}
 
       <div className="mb-4 px-6 py-4 rounded-md border-2 bg-white border-slate-200 dark:bg-[#0d1117] dark:border-slate-600">

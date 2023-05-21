@@ -59,7 +59,9 @@ export default async function Vacancies({ companyId }: { companyId: string }) {
     <section className="mt-8">
       <div className="sm:flex justify-between items-center">
         <div>
-          <h2 className="text-4xl font-bold text-slate-900 dark:text-white">Open Vacancies</h2>
+          <h2 className="text-4xl font-bold text-slate-900 dark:text-white">
+            Open Vacancies
+          </h2>
         </div>
         <div>
           <p className="text-2xl font-normal text-slate-600 dark:text-slate-300">
@@ -109,7 +111,9 @@ export default async function Vacancies({ companyId }: { companyId: string }) {
                 </h3>
               </Link>
 
-              <p className="text-sm mb-2 text-slate-600 dark:text-slate-300">{responseMessage}</p>
+              <p className="text-sm mb-2 text-slate-600 dark:text-slate-300">
+                {responseMessage}
+              </p>
 
               <ul className="flex flex-wrap gap-2 mb-3">
                 {vacancy.categories.map((category) => (
@@ -137,7 +141,9 @@ export default async function Vacancies({ companyId }: { companyId: string }) {
                 </li>
               </ul>
 
-              <p className="text-sm mb-4 text-slate-600 dark:text-slate-300">{vacancy.content}</p>
+              <p className="text-sm mb-4 text-slate-600 dark:text-slate-300">
+                {vacancy.content}
+              </p>
 
               <div className="flex mb-2 space-x-2">
                 {vacancy.response_type == "platform" && (

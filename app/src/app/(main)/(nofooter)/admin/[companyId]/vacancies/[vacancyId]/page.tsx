@@ -95,7 +95,9 @@ export default async function Production({
       </section>
 
       <section className="mt-4">
-        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Responses</h2>
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+          Responses
+        </h2>
 
         <ul className="mt-4 grid 2xl:grid-cols-2 gap-4">
           {vacnacy.responses.map((response) => (
@@ -113,7 +115,9 @@ export default async function Production({
                 {response.profile.email}
               </p>
 
-              <p className="text-sm text-slate-600 dark:text-slate-300">{response.message}</p>
+              <p className="text-sm text-slate-600 dark:text-slate-300">
+                {response.message}
+              </p>
             </li>
           ))}
         </ul>

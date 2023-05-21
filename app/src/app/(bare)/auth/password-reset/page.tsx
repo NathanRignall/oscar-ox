@@ -57,10 +57,12 @@ const EmailLoginForm = ({ complete }: EmailLoginFormProps) => {
               autoComplete="email"
               placeholder="Email Address..."
               className="relative block w-full rounded-md border-2 px-4 py-3 text-md text-slate-900 placeholder-slate-400 border-slate-200 dark:text-white dark:bg-slate-800 dark:placeholder-slate-300 dark:border-slate-600"
-              />
+            />
 
             {errors.email && touched.email && (
-              <p className="mt-2 text-sm text-red-600 dark:text-red-300">{errors.email}</p>
+              <p className="mt-2 text-sm text-red-600 dark:text-red-300">
+                {errors.email}
+              </p>
             )}
           </div>
 
@@ -75,7 +77,9 @@ const EmailLoginForm = ({ complete }: EmailLoginFormProps) => {
 
           <div className="text-center">
             {formError ? (
-              <p className="mt-2 text-sm text-red-600 dark:text-red-300">{formError}</p>
+              <p className="mt-2 text-sm text-red-600 dark:text-red-300">
+                {formError}
+              </p>
             ) : (
               <div className="mt-2 h-5" />
             )}

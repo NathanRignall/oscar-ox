@@ -46,7 +46,9 @@ export default async function Productions({
 
   return (
     <>
-      <h1 className="text-4xl font-bold text-slate-900 dark:text-white">Productions</h1>
+      <h1 className="text-4xl font-bold text-slate-900 dark:text-white">
+        Productions
+      </h1>
 
       <section className="mt-4">
         <AddProductionModal company_id={params.companyId} />
@@ -75,7 +77,10 @@ export default async function Productions({
 
             <tbody className="divide-y-2 divide-solid divide-slate-200 dark:divide-slate-600">
               {productions.map((item) => (
-                <tr key={item.id} className="bg-white hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-900">
+                <tr
+                  key={item.id}
+                  className="bg-white hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-900"
+                >
                   <th
                     scope="row"
                     className="px-4 py-4 font-bold whitespace-nowrap underline text-slate-900 dark:text-white"

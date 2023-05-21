@@ -117,7 +117,9 @@ export const PrivacyPolicy = () => {
         to prevent unauthorised access.
       </p>
 
-      <h3 className="font-bold text-lg mt-3 mb-1 dark:text-white">Access to information</h3>
+      <h3 className="font-bold text-lg mt-3 mb-1 dark:text-white">
+        Access to information
+      </h3>
 
       <p className="text-slate-600 dark:text-slate-300">
         You have the right under the Data Protection Act to access the
@@ -125,7 +127,9 @@ export const PrivacyPolicy = () => {
         please send your request to data@ox.nlr.app.
       </p>
 
-      <h3 className="font-bold text-lg mt-3 mb-1 dark:text-white">Third Party Links</h3>
+      <h3 className="font-bold text-lg mt-3 mb-1 dark:text-white">
+        Third Party Links
+      </h3>
 
       <p className="text-slate-600 dark:text-slate-300">
         Our site may, from time to time, contain links to and from the third

@@ -11,9 +11,9 @@ import clsx from "clsx";
 type CompaniesRecord = Database["public"]["Tables"]["companies"]["Row"];
 type ProductionsRecord = Database["public"]["Tables"]["productions"]["Row"] & {
   events: Database["public"]["Tables"]["events"]["Row"][] &
-  {
-    venue: Database["public"]["Tables"]["venues"]["Row"];
-  }[];
+    {
+      venue: Database["public"]["Tables"]["venues"]["Row"];
+    }[];
   company: Database["public"]["Tables"]["companies"]["Row"];
 };
 type ProfilesRecord = Database["public"]["Tables"]["profiles"]["Row"];
@@ -26,11 +26,11 @@ type VenuesRecord = Database["public"]["Tables"]["venues"]["Row"];
 type SearchRecord = {
   type: "company" | "production" | "profile" | "vacancy" | "venue";
   data:
-  | CompaniesRecord
-  | ProductionsRecord
-  | ProfilesRecord
-  | VacanciesRecord
-  | VenuesRecord;
+    | CompaniesRecord
+    | ProductionsRecord
+    | ProfilesRecord
+    | VacanciesRecord
+    | VenuesRecord;
 };
 
 const Company = ({
@@ -117,7 +117,9 @@ const Production = ({
           <div className="h-7 w-1/2 rounded-md mb-2 animate-puls bg-slate-300 dark:bg-slate-600" />
         )}
         {!loading ? (
-          <p className="text-sm mb-2 text-slate-600 dark:text-slate-300">{timeMessage}</p>
+          <p className="text-sm mb-2 text-slate-600 dark:text-slate-300">
+            {timeMessage}
+          </p>
         ) : (
           <div className="h-5 w-3/4 rounded-md animate-pulse mb-2 bg-slate-200 dark:bg-slate-700" />
         )}
@@ -202,7 +204,9 @@ const Profile = ({
       )}
 
       {!loading ? (
-        <p className="text-sm truncate text-slate-600 dark:text-slate-300">{profile.biography}</p>
+        <p className="text-sm truncate text-slate-600 dark:text-slate-300">
+          {profile.biography}
+        </p>
       ) : (
         <div className="h-4 w-3/4 rounded-md animate-pulse mt-1 bg-slate-200 dark:bg-slate-700" />
       )}
@@ -221,8 +225,8 @@ const Vacancy = ({
     vacancy.response_type == "email"
       ? "by email"
       : vacancy.response_type == "phone"
-        ? "by phone"
-        : "on platform";
+      ? "by phone"
+      : "on platform";
   let responseMessage = `Please respond to this vacancy ${responseMessageType}`;
 
   if (vacancy.response_deadline) {
@@ -267,7 +271,9 @@ const Vacancy = ({
       )}
 
       {!loading ? (
-        <p className="text-sm mb-2 text-slate-600 dark:text-slate-300">{responseMessage}</p>
+        <p className="text-sm mb-2 text-slate-600 dark:text-slate-300">
+          {responseMessage}
+        </p>
       ) : (
         <div className="h-5 w-1/3rounded-md animate-pulse mb-2 bg-slate-200 dark:bg-slate-700" />
       )}
@@ -333,7 +339,9 @@ const Venue = ({
         <div className="h-7 w-2/3 rounded-md animate-pulse bg-slate-300 dark:bg-slate-600" />
       )}
       {!loading ? (
-        <p className="text-sm text-slate-600 dark:text-slate-300">{venue.location}</p>
+        <p className="text-sm text-slate-600 dark:text-slate-300">
+          {venue.location}
+        </p>
       ) : (
         <div className="h-4 w-3/4 rounded-md animate-pulse mt-1 bg-slate-200 dark:bg-slate-700" />
       )}
@@ -415,7 +423,9 @@ export default function Search() {
   return (
     <div className="container mx-auto md:py-6 md:px-8 py-6 px-6">
       <header className="text-center">
-        <h1 className="mb-3 text-5xl font-extrabold text-slate-900 dark:text-white">Search</h1>
+        <h1 className="mb-3 text-5xl font-extrabold text-slate-900 dark:text-white">
+          Search
+        </h1>
         <p className="mb-3 text-xl inline-block text-slate-600 dark:text-slate-300">
           Search for filter anything
         </p>

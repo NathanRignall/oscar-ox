@@ -40,7 +40,9 @@ export default async function Admin() {
   return (
     <>
       <header className="max-w-3xl mx-auto mb-4">
-        <h1 className="mb-3 text-5xl font-extrabold text-slate-900 dark:text-white">Admin</h1>
+        <h1 className="mb-3 text-5xl font-extrabold text-slate-900 dark:text-white">
+          Admin
+        </h1>
 
         <p className="mb-3 text-xl text-slate-600 dark:text-slate-300">
           Your Companies to Configure

@@ -57,16 +57,22 @@ export default async function Settings({
 
   return (
     <>
-      <h1 className="text-4xl font-bold text-slate-900 dark:text-white">Settings</h1>
+      <h1 className="text-4xl font-bold text-slate-900 dark:text-white">
+        Settings
+      </h1>
 
       <article className="mt-4">
-        <h2 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white">Branding</h2>
+        <h2 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white">
+          Branding
+        </h2>
 
         <EditCompanyForm company={company} />
       </article>
 
       <article className="mt-4">
-        <h2 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white">Members</h2>
+        <h2 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white">
+          Members
+        </h2>
 
         <AddMemberModal companyId={params.companyId} />
 
@@ -94,8 +100,14 @@ export default async function Settings({
 
             <tbody className="divide-y-2 divide-solid divide-slate-200 dark:divide-slate-600">
               {members.map((member) => (
-                <tr key={member.user.id} className="bg-white hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-900">
-                <th scope="row" className="px-4 py-4 whitespace-nowrap text-slate-900 dark:text-white">
+                <tr
+                  key={member.user.id}
+                  className="bg-white hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-900"
+                >
+                  <th
+                    scope="row"
+                    className="px-4 py-4 whitespace-nowrap text-slate-900 dark:text-white"
+                  >
                     {`${member.user.given_name} ${member.user.family_name}`}
                   </th>
 

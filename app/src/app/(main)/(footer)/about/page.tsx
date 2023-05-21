@@ -5,7 +5,9 @@ export default async function About() {
   return (
     <>
       <header className="flex max-w-3xl mx-auto mb-8">
-        <h1 className="text-5xl font-extrabold text-slate-900 dark:text-white">About</h1>
+        <h1 className="text-5xl font-extrabold text-slate-900 dark:text-white">
+          About
+        </h1>
       </header>
 
       <main className="max-w-3xl mx-auto">
