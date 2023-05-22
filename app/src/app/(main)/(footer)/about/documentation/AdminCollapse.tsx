@@ -188,7 +188,21 @@ export const AdminCollapse = () => {
 
         <br />
 
-        <p className="text-slate-600 dark:text-slate-300">In order</p>
+        <p className="text-slate-600 dark:text-slate-300">
+          Upon creation of a vacancy an email will be sent to all users who have
+          subscribed to the category of the vacancy. Users can subscribe to
+          when creating/editing their profile.
+        </p>
+
+        <br />
+
+        <p className="text-slate-600 dark:text-slate-300">
+          To publish a vacancy the production compnany must be verified. This
+          can be done by clicking the &quot;Verify Company&quot; button in the
+          company settings panel. This will send a request to the admin team to
+          varify the company. Production companies will be automatically
+          verified if they contain a user with an ox.ac.uk email address.
+        </p>
       </Collapse>
 
       <Collapse
@@ -198,7 +212,9 @@ export const AdminCollapse = () => {
         setActive={setActive}
         last
       >
-        <p className="text-slate-600 dark:text-slate-300">Some</p>
+        <p className="text-slate-600 dark:text-slate-300">
+          Feature coming soon...
+        </p>
       </Collapse>
     </div>
   );

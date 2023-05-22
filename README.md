@@ -10,6 +10,8 @@ Finally you will also need to have the [Supabase CLI](https://supabase.io/docs/g
 
 Start supabase with ```supabase start```
 
+Initialise the database with ```supabase db reset```
+
 Create an .env.local file in the client root directory and add the following variables:
     
 ``` 
@@ -21,3 +23,6 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 
 Start the frontend with ```npm run dev```
 
+As the development server is running, you can now visit [http://localhost:3000](http://localhost:3000) from your browser.
+
+To access emails sent by the app, visit [http://localhost:54324](http://localhost:54324) from your browser.
