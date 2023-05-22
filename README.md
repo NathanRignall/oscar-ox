@@ -21,8 +21,12 @@ NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
-Start the frontend with ```npm run dev```
+Install dependencies with ```npm install```
 
-As the development server is running, you can now visit [http://localhost:3000](http://localhost:3000) from your browser.
+Build the frontend with ```npm run build```
+
+Start the server with ```npm run start```
+
+As the server is running, you can now visit [http://localhost:3000](http://localhost:3000) from your browser.
 
 To access emails sent by the app, visit [http://localhost:54324](http://localhost:54324) from your browser.
